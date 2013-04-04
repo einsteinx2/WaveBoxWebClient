@@ -1,0 +1,12 @@
+<table id='albumList' class="listTable">
+	<tr>
+		<td class="listTable">Album Name</td>
+		<td class="listTable">Year</td>
+	</tr>
+	<% for(var i = 0; i < albums.length; i++) { %>
+	<tr>
+		<td class="listTable"><a href="#" class="albumListItem" id="<%= 'a' + albums[i].albumId %>"><%= albums[i].albumName %></a></td>
+		<td class="listTable"><a href="#" class="albumListItem" id="<%= 'a' + albums[i].albumId %>"><%= albums[i].releaseYear %></a></td>
+	</tr>
+<% } %>
+</table>

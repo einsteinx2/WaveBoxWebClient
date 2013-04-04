@@ -1,0 +1,5 @@
+<tbody id="playQueueList">
+<% for(var i = 0; i < playlist.length; i++) { %>
+	<%= playQueueCellTemplate.render({itemName: playlist[i].songName, index: i}) %>
+ <% } %>
+ </tbody>

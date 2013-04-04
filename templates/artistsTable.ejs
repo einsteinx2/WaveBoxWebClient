@@ -1,0 +1,10 @@
+<table id='artistList' class="listTable">
+	<tr>
+		<td class="listTable">Artist</td>
+	</tr>
+	<% for(var i = 0; i < artists.length; i++) { %>
+	<tr>
+		<td class="listTable"><a href="#" class="artistListItem" id="<%= 'a' + artists[i].artistId %>"><%= artists[i].artistName %></a></td>
+	</tr>
+<% } %>
+</table>
