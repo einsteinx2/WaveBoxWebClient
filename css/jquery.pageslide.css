@@ -1,0 +1,223 @@
+
+
+       #content {
+			width:100%;
+            margin: 0;
+			padding:0px;
+			top:0px;
+			position:absolute;
+			z-index:999;
+        }
+            #content h1 { color: #333; line-height: 1em; }
+            #content ul { padding-left: 0; list-style: none; }
+                #content ul li {  }
+
+       		#MenuColumn { display: none;
+			background-color:#dadada;
+			height:100%;
+			z-index:1 }
+      
+			
+			#Playlist { display: none;
+			background-color:#dadada;
+			height:100%;
+			z-index:1 }
+
+
+    #pageslide {
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    z-index: -1;
+    width: 220px;
+    padding: 0px;
+    background-color: #5e5e5e;
+    color: #757575;
+}
+
+#HeaderBar{
+	width:100%;
+	color:#545454;
+	font-weight:800;
+	font-size:18px;
+	}
+	
+.Logo{
+	background-image:url(../img/logo.png);
+	background-position:center;
+	background-size:56px 16px;
+	background-repeat:no-repeat;
+	}
+
+.CenterBar{
+	background-color:#d1d1d1;
+	padding: 20px 0;
+	height:18px;
+	position:fixed;
+	
+
+	}
+.Sidebars{
+	background-color:#c4c4c4;
+	padding: 20px 0;
+	height:18px;
+	text-align:center;
+	}
+
+.PlaylistIcon{
+	background-image:url(../img/playlist.png);
+	background-position:center;
+	background-size:23px auto;
+	background-repeat:no-repeat;
+	}
+.MenuIcon{
+	background-image:url(../img/menu.png);
+	background-position:center;
+	background-size:19px auto;
+	background-repeat:no-repeat;
+	}	
+
+#ContentWindow{
+	height:1000px;
+	width:100%;
+	margin-top:58px;
+	position:fixed;
+	background-color:#e8e8e8;
+	}
+	
+.Cell{
+	height:50px;
+	width:100%;
+	clear:both;
+	overflow:hidden;
+	}
+	
+li.ContentSort{
+	color: #757575;
+	font-weight: 600;
+	font-size: 14px;
+	float: left;
+	padding: 16px 0 0 23px;
+	}
+ul#ContentSort {
+	float: left;
+	margin: 0px;
+	overflow: hidden;
+	height: 50px;
+	vertical-align: middle;
+	padding: 0px;
+}
+	
+li.ContentSort a { 
+	color:#757575;	
+	}	
+li.ContentSort a:hover{
+	color:#3c3c3c;		
+	}
+	
+.active{
+	color:#1f1f1f !important;
+	border-bottom: 2px #2f2f2f solid;
+	}	
+
+li.ContentView{
+	color:#757575;
+	font-weight:600;
+	font-size:14px;
+	float:left;
+	padding: 10px 0 0 0;			
+	}		
+			
+ul#ContentView {
+float: right;
+padding: 0px;
+margin: 0px;
+}
+	
+	
+.AlbumSortIcon{
+	background-image:url(../img/AlbumView.png);
+	background-position:center;
+	background-size:19px auto;
+	background-repeat:no-repeat;
+	}
+	
+.DirectoryViewIcon{
+	background-image:url(../img/ListView.png);
+	background-position:center;
+	background-size:19px auto;
+	background-repeat:no-repeat;
+	}	
+
+.ListViewIcon{
+	background-image:url(../img/DirectoryView.png);
+	background-position:center;
+	background-size:19px auto;
+	background-repeat:no-repeat;
+	}
+	
+	
+	
+#contentWrapper{
+position:fixed;
+top:108px; bottom:0px; left:0; right:0;
+max-width:100%;
+padding: 0 20px;
+box-sizing: border-box;
+max-height:9000px;
+min-width:320px;
+}	
+
+#wrapperWrapper
+{
+
+}
+	
+#contentScroller {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+
+}	
+	
+<!-- Avoid Content Resizing on iPad when sidebar reveals  -->	
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+#contentWrapper{
+min-width:768px;
+}
+
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+
+#contentWrapper{
+min-width:1024px;
+}
+}
+
+<!-- Album View -->
+
+#AlbumPanel{
+	height:160px;
+	width:120px;
+	padding:10px;
+	background-color:#00F;
+	}
+	
+.AlbumArt{
+	height:120px;
+	width:120px;
+	background-color:#333;
+	}
+.AlbumTitle{
+	font-size:18px;
+	
+	}
+.AlbumArtist{
+	font-size:14px	
+	}	
+	
+	
