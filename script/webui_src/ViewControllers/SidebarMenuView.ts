@@ -113,9 +113,6 @@ class SidebarMenuView extends Backbone.View
         			model: item
         		})
 
-        		console.log(item);
-
-        		//this.$el.append('<li class="SidebarIcons ' + item.get("cssClass") + '"><a href="#">' + item.get("name") + '</a></li>');
         		this.$el.append(itemView.render().el);
         	});
         });

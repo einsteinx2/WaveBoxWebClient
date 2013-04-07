@@ -137,7 +137,6 @@ var SidebarMenuView = (function (_super) {
                 var itemView = new SidebarMenuItemView({
                     model: item
                 });
-                console.log(item);
                 _this.$el.append(itemView.render().el);
             });
         });
@@ -145,12 +144,81 @@ var SidebarMenuView = (function (_super) {
     };
     return SidebarMenuView;
 })(Backbone.View);
+var Album = (function (_super) {
+    __extends(Album, _super);
+    function Album() {
+        _super.apply(this, arguments);
+
+    }
+    return Album;
+})(Backbone.Model);
+var AlbumList = (function (_super) {
+    __extends(AlbumList, _super);
+    function AlbumList() {
+        _super.apply(this, arguments);
+
+        this.model = Album;
+    }
+    return AlbumList;
+})(Backbone.Collection);
+var AlbumView = (function (_super) {
+    __extends(AlbumView, _super);
+    function AlbumView(options) {
+        this.tagName = "li";
+        _super.call(this, options);
+        this.template = _.template($('#AlbumView_cover-template').html());
+    }
+    AlbumView.prototype.render = function () {
+        this.$el.addClass("AlbumContainer");
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    };
+    return AlbumView;
+})(Backbone.View);
+var AlbumListView = (function (_super) {
+    __extends(AlbumListView, _super);
+    function AlbumListView() {
+        this.tagName = "ul";
+        _super.call(this);
+        this.displayType = "cover";
+    }
+    AlbumListView.prototype.render = function () {
+        var _this = this;
+        this.$el.empty();
+        this.$el.attr("id", "AlbumView");
+        this.albumList.each(function (album) {
+            console.log(album);
+            var albumView = new AlbumView({
+                model: album
+            });
+            _this.$el.append(albumView.render().el);
+        });
+        return this;
+    };
+    return AlbumListView;
+})(Backbone.View);
 var ApplicationView = (function (_super) {
     __extends(ApplicationView, _super);
     function ApplicationView() {
         _super.call(this);
         this.sidebarMenu = new SidebarMenuView();
         this.sidebarMenu.render();
+        this.albumList = new AlbumListView();
+        var albums = new Array(30);
+        for(var i = 1; i < 31; i++) {
+            albums[i - 1] = {
+                artistId: i,
+                artistName: "Test Artist " + i,
+                albumId: i,
+                albumName: "Test Album " + i,
+                releaseYear: 2013,
+                artId: i,
+                artUrl: "art/" + i + ".jpg",
+                numberOfSongs: i
+            };
+        }
+        this.albumList.albumList = new AlbumList(albums);
+        $("#contentScroller").append(this.albumList.render().el);
     }
     return ApplicationView;
 })(Backbone.View);
