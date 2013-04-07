@@ -25,9 +25,8 @@ class AlbumListView extends Backbone.View
         this.$el.attr("id", "AlbumView");
 
         // Add the albums to the DOM
-        this.albumList.each((album : Album) => {
-            console.log(album);
-
+        this.albumList.each((album : Album) => 
+        {
             var albumView = new AlbumView({model: album});
             this.$el.append(albumView.render().el);
         });

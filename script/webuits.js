@@ -187,7 +187,6 @@ var AlbumListView = (function (_super) {
         this.$el.empty();
         this.$el.attr("id", "AlbumView");
         this.albumList.each(function (album) {
-            console.log(album);
             var albumView = new AlbumView({
                 model: album
             });
@@ -196,6 +195,69 @@ var AlbumListView = (function (_super) {
         return this;
     };
     return AlbumListView;
+})(Backbone.View);
+var MediaItem = (function (_super) {
+    __extends(MediaItem, _super);
+    function MediaItem() {
+        _super.apply(this, arguments);
+
+    }
+    MediaItem.prototype.formatDuration = function () {
+        var minutes = Math.floor(this.duration / 60);
+        var seconds = Math.floor(this.duration % 60);
+        return minutes + ":" + seconds;
+    };
+    return MediaItem;
+})(Backbone.Model);
+var Song = (function (_super) {
+    __extends(Song, _super);
+    function Song() {
+        _super.apply(this, arguments);
+
+    }
+    return Song;
+})(MediaItem);
+var PlayQueueList = (function (_super) {
+    __extends(PlayQueueList, _super);
+    function PlayQueueList() {
+        _super.apply(this, arguments);
+
+        this.model = Song;
+    }
+    return PlayQueueList;
+})(Backbone.Collection);
+var PlayQueueItemView = (function (_super) {
+    __extends(PlayQueueItemView, _super);
+    function PlayQueueItemView(options) {
+        _super.call(this, options);
+        this.template = _.template($('#PlayQueueItemView-template').html());
+    }
+    PlayQueueItemView.prototype.render = function () {
+        this.$el.addClass("QueueList");
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    };
+    return PlayQueueItemView;
+})(Backbone.View);
+var PlayQueueView = (function (_super) {
+    __extends(PlayQueueView, _super);
+    function PlayQueueView() {
+        _super.call(this);
+        this.setElement($("#QueueScroller"), true);
+    }
+    PlayQueueView.prototype.render = function () {
+        var _this = this;
+        this.$el.empty();
+        this.playQueueList.each(function (item) {
+            console.log(item);
+            var itemView = new PlayQueueItemView({
+                model: item
+            });
+            _this.$el.append(itemView.render().el);
+        });
+        return this;
+    };
+    return PlayQueueView;
 })(Backbone.View);
 var ApplicationView = (function (_super) {
     __extends(ApplicationView, _super);
@@ -219,6 +281,18 @@ var ApplicationView = (function (_super) {
         }
         this.albumList.albumList = new AlbumList(albums);
         $("#contentScroller").append(this.albumList.render().el);
+        this.playQueue = new PlayQueueView();
+        var items = new Array(20);
+        for(var i = 0; i < 20; i++) {
+            items[i] = {
+                songName: "Test Song " + i,
+                artistName: "Test Artist " + i,
+                albumName: "Test Album " + i,
+                duration: i
+            };
+        }
+        this.playQueue.playQueueList = new PlayQueueList(items);
+        this.playQueue.render();
     }
     return ApplicationView;
 })(Backbone.View);

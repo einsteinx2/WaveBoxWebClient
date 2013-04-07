@@ -1,558 +1,206 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<title>Wave</title>
-<!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width works properly and doesn't allow children to blow up the viewport width-->
-<meta name="apple-mobile-web-app-title" content="Wave">
-<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Wave</title>
 
-<!-- iPhone -->
-<link rel="apple-touch-icon-precomposed"
-      sizes="57x57"
-      href="img/iOS/57.png">
-      
-<link href="img/iOS/iPhone.png"
-      media="(device-width: 320px) and (device-height: 480px)
-         and (-webkit-device-pixel-ratio: 1)"
-      rel="apple-touch-startup-image">
+    <!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width 
+        works properly and doesn't allow children to blow up the viewport width-->
+    <meta name="apple-mobile-web-app-title" content="Wave">
+    <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-<!-- iPhone (Retina) -->
-<link rel="apple-touch-icon-precomposed"
-      sizes="72x72"
-      href="img/iOS/72.png">
+    <!-- iPhone -->
+    <link rel="apple-touch-icon-precomposed" 
+        sizes="57x57" 
+        href="img/iOS/57.png">  
+    <link href="img/iOS/iPhone.png" 
+        media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" 
+        rel="apple-touch-startup-image">
 
-<link href="img/iOS/iPhoneRetina.png"
-      media="(device-width: 320px) and (device-height: 480px)
-         and (-webkit-device-pixel-ratio: 2)"
-      rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/iOS/72.png">
+    <link href="img/iOS/iPhoneRetina.png"
+          media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
 
-<!-- iPhone 5 -->
+    <!-- iPhone 5 -->
+    <link href="img/iOS/iPhone5.png"
+          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
 
-<link href="img/iOS/iPhone5.png"
-      media="(device-width: 320px) and (device-height: 568px)
-         and (-webkit-device-pixel-ratio: 2)"
-      rel="apple-touch-startup-image">
+    <!-- iPad -->
+    <link rel="apple-touch-icon-precomposed"
+        sizes="114x114"
+        href="img/iOS/114.png">
+    <link href="img/iOS/iPadPortrait.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
+    <link href="img/iOS/iPadLandscape.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
 
-<!-- iPad -->
-<link rel="apple-touch-icon-precomposed"
-      sizes="114x114"
-      href="img/iOS/114.png">
-      
-<link href="img/iOS/iPadPortrait.png"
-      media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: portrait)
-         and (-webkit-device-pixel-ratio: 1)"
-      rel="apple-touch-startup-image">
-<link href="img/iOS/iPadLandscape.png"
-      media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: landscape)
-         and (-webkit-device-pixel-ratio: 1)"
-      rel="apple-touch-startup-image">
+    <!-- iPad (Retina) -->
+    <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="img/iOS/144.png">
+    <link href="img/iOS/iPadPortraitRetina.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+    <link href="img/iOS/iPadLandscapeRetina.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
 
-<!-- iPad (Retina) -->
-<link rel="apple-touch-icon-precomposed"
-      sizes="144x144"
-      href="img/iOS/144.png">
+    <!--[if lt IE 9]>
+    	<script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+    	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-<link href="img/iOS/iPadPortraitRetina.png"
-      media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: portrait)
-         and (-webkit-device-pixel-ratio: 2)"
-      rel="apple-touch-startup-image">
-<link href="img/iOS/iPadLandscapeRetina.png"
-      media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: landscape)
-         and (-webkit-device-pixel-ratio: 2)"
-      rel="apple-touch-startup-image">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/basic.css"/>
+    <link rel="stylesheet" type="text/css" href="css/effects.css"/>
+    <link rel="stylesheet" type="text/css" href="css/AlbumStyles.css"/>
+    <link rel="stylesheet" type="text/css" href="css/nav.css"/>
+    <link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
 
-<!--[if lt IE 9]>
-	<script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dropdown.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/backbone.localStorage.js"></script>
+    <script type="text/javascript" src="script/webuits.js"></script>
 
+    <script type="text/javascript">
+        // For mobile devices, include iscroll.js
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) 
+        {
+            document.write('<script type="application/javascript" src="js/iscroll.js"><\/script>');
+        }
 
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<link rel="stylesheet" type="text/css" href="css/basic.css"/>
-<link rel="stylesheet" type="text/css" href="css/effects.css"/>
-<link rel="stylesheet" type="text/css" href="css/AlbumStyles.css"/>
-<link rel="stylesheet" type="text/css" href="css/nav.css"/>
-<link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        // Helper (figure out a better place to put this)
+        Number.prototype.formatTime = function () 
+        {
+            var minutes = Math.floor(this / 60);
+            var seconds = Math.floor(this % 60);
+            if (seconds < 10) { seconds = "0" + seconds; }
+            return minutes + ':' + seconds;
+        }
 
-
-<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="js/jquery.dropdown.js"></script>
-<script type="text/javascript" src="js/underscore.js"></script>
-<script type="text/javascript" src="js/backbone.js"></script>
-<script type="text/javascript" src="js/backbone.localStorage.js"></script>
-<script type="text/javascript" src="script/webuits.js"></script>
-<script type="text/javascript">
-// Redirect iPhone/iPod visitors
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-document.write('<script type="application/javascript" src="js/iscroll.js"><\/script>') 
-	
-}
-		</script>
-<style>
-</style>
+	</script>
 </head>
+
 <body>
-<div id="content" class="animate">
-	<div id="HeaderBar" class="CenterBar">
-    <div id="unclickableHeader"></div>
-    <div id="unclickableHeaderAlbumView"></div>
-		<a href="#" class="first"><button class="MenuIcon FloatLeft HeaderMenuOption"></button></a>
-		<a href="#" class="second"><button class="PlaylistIcon FloatRight HeaderMenuOption"></button></a>
-		</span>
+    <div id="content" class="animate">
+
+        <!-- Header -->
+    	<div id="HeaderBar" class="CenterBar">
+            <div id="unclickableHeader"></div>
+            <div id="unclickableHeaderAlbumView"></div>
+            <a href="#" class="first"><button class="MenuIcon FloatLeft HeaderMenuOption"></button></a>
+            <a href="#" class="second"><button class="PlaylistIcon FloatRight HeaderMenuOption"></button></a>
         </div>
-	<div id="ContentWindow">
+	   
+        <!-- Content -->
+        <div id="ContentWindow">
+
         <!-- Album Popup -->
+        <div id="unclickable"></div>
 
-<!-- Album Popup -->
-        <div id="unclickable"> </div>
-        <div id="unclickableAlbumView" > </div>
-<div id="contentWrapper" class="animate">
-<div id="contentScroller">
-
-
-	<div class="Cell">
-<div id="SearchCell">
-
-<form class="form-search">
-<input type="text" class="searchcell" placeholder="Search">
-</form> 
-</div>
-	<nav>
-		<ul id="ContentView">
-			<li class="ContentView"><a href="#"><button class="AlbumSortIcon"></button></a></li>
-			<li class="ContentView"><a href="#"><button class="DirectoryViewIcon"></button></a></li>
-			<li class="ContentView"><a href="#"><button class="FilterIcon"></button></a></li>
-       	</ul>
- 	</nav>
-	</div> 
-    
-
-
-
-
-
-					</div>
+        <div id="unclickableAlbumView"></div>
+            <div id="contentWrapper" class="animate">
+                <div id="contentScroller">
+                    <div class="Cell">
+                        <div id="SearchCell">
+                            <form class="form-search">
+                                <input type="text" class="searchcell" placeholder="Search">
+                            </form> 
+                        </div>
+                        <nav>
+                            <ul id="ContentView">
+                                <li class="ContentView"><a href="#"><button class="AlbumSortIcon"></button></a></li>
+                                <li class="ContentView"><a href="#"><button class="DirectoryViewIcon"></button></a></li>
+                                <li class="ContentView"><a href="#"><button class="FilterIcon"></button></a></li>
+                            </ul>
+                        </nav>
+                    </div> 
 				</div>
 			</div>
 		</div>
+	</div>
     
-<!-- Menu -->    
+    <!-- Menu -->    
 	<div id="MenuColumn" class="MenuColumnFadeIn one animate">
 		<div id="HeaderBar" class="Sidebars sidebarBG">
-        <div id="LogoArea" class="Logo">
-			<!-- <form class="form-search">
-				<input type="text" class="search" placeholder="Search Everything">
-			</form>
-            -->
-        </div>
-	</div>
+            <div id="LogoArea" class="Logo">
+    			<!-- <form class="form-search">
+    				<input type="text" class="search" placeholder="Search Everything">
+    			</form>
+                -->
+            </div>
+    	</div>
 		<div id="SidebarMenu">
 	        <div id="SidebarMenuScroller">
             <ul id="SidebarMenuContent" class="SidebarMenu"></ul>
-            </div></div>
-	    </div>
-    </div>
-
-
-<!-- Filters -->
-
-<div id="Filter" class="PlaylistFadeIn one FilterAnimate">
-	<div id="FilterHeaderBar" class="FilterSidebars">Filters</div>
-	<div id="FilterList">
-	<div id="FilterScroller" class="scrollable">	
-
-        <ul id="Filters">
-        	<li class="FilterKeyword">
-            <form class="form-search">
-            <input type="text" class="FilterSearch" placeholder="Keywords">
-            </form>
-            </li>
-        	<li class="FilterSideBar FilterTitle">Browse</li>
-        	<li class="FilterSideBar Icons MusicIcons"><a href="#">Songs</a></li>
-        	<li class="FilterSideBar Icons ArtistsIcons"><a href="#">Artists</a></li>
-        	<li class="FilterSideBar current Icons AlbumsIcons" ><a href="#">Albums</a></li>
-        	<li id="HideBrowseOptions" class=" Icons MoreIcon"><a href="#">More!</a></li>
-        	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons GenresIcon"><a href="#">Genres</a></li>
-        	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons ComposerIcon"><a href="#">Composers</a></li>
-        	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons FolderIcon"><a href="#">Folders</a></li>
-        </ul>        
-        <ul id="Filters">
-        	<li class="FilterTitle">Order</li>
-        	<li class="FilterSideBar"><a href="#">Alphabetical</a></li>
-        	<li class="FilterSideBar"><a href="#">New Arrivals</a></li>
-        	<li class="current FilterSideBar"><a href="#">Most Popular</a></li>
-        	<li class="FilterSideBar"><a href="#">Recently Released</a></li>
-        </ul>
-        <ul id="Filters">
-        	<li class="FilterTitle">Rating</li>
-        	<li class="current FilterSideBar"><a href="#"><div class="Stars FiveStars"> </div></a></li>
-            <li class="FilterSideBar"><a href="#"><div class="Stars FourStars"> </div></a></li>
-            <li class="FilterSideBar"><a href="#"><div class="Stars ThreeStars"> </div></a></li>
-            <li class="FilterSideBar"><a href="#"><div class="Stars TwoStars"> </div></a></li>
-           	<li class="FilterSideBar"><a href="#"><div class="Stars OneStars"> </div></a></li>
-            <li class="FilterSideBar"><a href="#">No Rating</a></li>
-        </ul>                
-
-
-    </div>
+            </div>
+        </div>
 	</div>
-</div>
-</div>
 
-<!-- Playlist -->
-<div id="Playlist" class="PlaylistFadeIn one animate">
-	<div id="HeaderBar" class="Sidebars">
-		 Queue
-	</div>
-	<div id="QueueList">
-	<div id="QueueScroller" class="scrollable">	
-    
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
+    <!-- Filters -->
+    <div id="Filter" class="PlaylistFadeIn one FilterAnimate">
+    	<div id="FilterHeaderBar" class="FilterSidebars">Filters</div>
+    	<div id="FilterList">
+        	<div id="FilterScroller" class="scrollable">	
+                <ul id="Filters">
+                	<li class="FilterKeyword">
+                        <form class="form-search">
+                            <input type="text" class="FilterSearch" placeholder="Keywords">
+                        </form>
+                    </li>
+                	<li class="FilterSideBar FilterTitle">Browse</li>
+                	<li class="FilterSideBar Icons MusicIcons"><a href="#">Songs</a></li>
+                	<li class="FilterSideBar Icons ArtistsIcons"><a href="#">Artists</a></li>
+                	<li class="FilterSideBar current Icons AlbumsIcons" ><a href="#">Albums</a></li>
+                	<li id="HideBrowseOptions" class=" Icons MoreIcon"><a href="#">More!</a></li>
+                	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons GenresIcon"><a href="#">Genres</a></li>
+                	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons ComposerIcon"><a href="#">Composers</a></li>
+                	<li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons FolderIcon"><a href="#">Folders</a></li>
+                </ul>        
+                <ul id="Filters">
+                	<li class="FilterTitle">Order</li>
+                	<li class="FilterSideBar"><a href="#">Alphabetical</a></li>
+                	<li class="FilterSideBar"><a href="#">New Arrivals</a></li>
+                	<li class="current FilterSideBar"><a href="#">Most Popular</a></li>
+                	<li class="FilterSideBar"><a href="#">Recently Released</a></li>
+                </ul>
+                <ul id="Filters">
+                	<li class="FilterTitle">Rating</li>
+                	<li class="current FilterSideBar"><a href="#"><div class="Stars FiveStars"> </div></a></li>
+                    <li class="FilterSideBar"><a href="#"><div class="Stars FourStars"> </div></a></li>
+                    <li class="FilterSideBar"><a href="#"><div class="Stars ThreeStars"> </div></a></li>
+                    <li class="FilterSideBar"><a href="#"><div class="Stars TwoStars"> </div></a></li>
+                   	<li class="FilterSideBar"><a href="#"><div class="Stars OneStars"> </div></a></li>
+                    <li class="FilterSideBar"><a href="#">No Rating</a></li>
+                </ul>                
+            </div>
+    	</div>
     </div>
 
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
+    <!-- Play Queue -->
+    <div id="Playlist" class="PlaylistFadeIn one animate">
+    	<div id="HeaderBar" class="Sidebars">Queue</div>
+    	<div id="QueueList">
+            <div id="QueueScroller" class="scrollable"></div>
+        </div>
+    </div>
     </div>
 
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-    <div class="QueueList">
-    <div class="QueueSongName">Song</div>
-    <div class="QueueSongBand">Band</div>
-	<div class="QueueSongTime">3:21</div>
-    </div>
-
-
-    </div>
-	</div>
-</div>
-</div>
-
-
-
-<script>
-				/* Width Test */
-				 $("#HeaderBar").ready(function(){
-     			 resizeDiv();
- 				 });
-
-  				window.onresize = function(event) {
-      			resizeDiv();
-  				}
-
-  				function resizeDiv() {
-				muc = '124';
-				sbw = '220';	
-   			    vpw = $(window).width(); 
-      			vph = $(window).height();
-      			sdh = $("#QueueScroller").height();
-	      		mbh = $("#SidebarMenuScroller").height();
-      			$('#contentScroller').css({'width': vpw + 'px'});
-      			$('#unclickableHeader').css({'width': vpw - muc  + 'px'});
-      			$('#QueueScroller, #').css({'height': sdh  + 'px'});
-				$('#ContentFilter').css({'width': vpw-30  + 'px'});
-  				}
-				
-						
-				//* Cell Shadow & Link Disable *//
-
-				$(".MenuIcon").click(function(){
-					$('#content').css({'width': vpw - sbw  + 'px'});	
-					$('#content, #contentWrapper').toggleClass('MenuMargin');
-					$('#MenuColumn').toggleClass('displaySidebars');						
-					$("#unclickable, #unclickableHeader").fadeToggle(550); 
-				  	$('.AlbumContainerLink').addClass('disable');
-					$('#ContentFilter').removeClass('ContentFilterVisibility');
-				  });
-				
-				 $(".PlaylistIcon").click(function(){
-					$('#content').css({'width': vpw - sbw  + 'px'});
-					$('#content, #contentWrapper').toggleClass('PlaylistMargin');
-					$('#Playlist, #QueueList').toggleClass('displaySidebars');						
-					$("#unclickableHeader, #unclickable").fadeToggle(); 					 
-				  	$('.AlbumContainerLink').addClass('disable');
-					$('#ContentFilter').removeClass('ContentFilterVisibility');
-				  });
-				  
-				  $(".FilterIcon").click(function(){
-					$('#content').css({'width': vpw - sbw  + 'px'});
-					$('#content, #contentWrapper').toggleClass('FilterMargin');
-					$('#Filter, #FilterList').toggleClass('displaySidebars');						
-					$("#unclickableHeader, #unclickable").fadeToggle(); 					 
-				  	$('.AlbumContainerLink').addClass('disable');
-					$('#ContentFilter').removeClass('ContentFilterVisibility');
-					
-				  });
-
-				  $(".SidebarIcons, .FilterSideBar, #unclickable, #unclickableHeader").click(function(){
-					$('#content, #contentWrapper').removeClass('PlaylistMargin');
-					$('#content, #contentWrapper').removeClass('FilterMargin');					
-					$('#content, #contentWrapper').removeClass('MenuMargin');
-					$('#MenuColumn, #Playlist, #QueueList, #Filter').delay(1000).removeClass('displaySidebars');						
-					$("#unclickableHeader, #unclickable").fadeToggle(); 					 
-				  	$('.AlbumContainerLink').removeClass('disable');
-					$('.HideBrowseOptions').addClass('DisplayNone');
-					$("#HideBrowseOptions").removeClass('DisplayNone'); 					 
-				  });
-				  
-				 $("#HideBrowseOptions").click(function(){
-					$("#HideBrowseOptions").addClass('DisplayNone'); 					 
-					$('.HideBrowseOptions').removeClass('DisplayNone');
-				  });
-				  
-
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-				//* Cell Shadow & Link Disable *//
-				var header = $('.Cell');
-
-				$("#contentWrapper").scroll(function(e){
-					if(header.offset().top !== 0){
-						if(!header.hasClass('shadow')){
-							header.addClass('shadow');
-						}
-					}else{
-						header.removeClass('shadow');
-					}
-				});
-				var contentWrapper, QueueList, FilterList, SidebarMenu;
-				this.QueueList = new iScroll('QueueList',  {
-					snap: '.QueueList',
-					hScroll: false,
-					scrollbarClass: 'AllScrollbar',
-					});	
-				this.FilterList = new iScroll('FilterList',  {
-					snap: 'li',
-					hScroll: false,
-					scrollbarClass: 'AllScrollbar',
-					onBeforeScrollStart: function (e) {
-									var target = e.target;
-									while (target.nodeType != 1) target = target.parentNode;
-						
-									if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-										e.preventDefault();
-								},
-					});	
-				this.SidebarMenu = new iScroll('SidebarMenu', {
-					snap: '.SidebarIcons, span',
-					hScroll: false,
-					fadeScrollbar: true,
-					scrollbarClass: 'AllScrollbar',
-					});	
-				this.contentWrapper = new iScroll("contentWrapper", 
-				 { 
-					   snap: '.AlbumContainer, .Cell',
-        			   momentum: true, 
-					   hScroll: false,
-					   scrollbarClass: 'AllScrollbar',
-					   useTransform: false,
-					   onBeforeScrollStart: function (e) {
-									var target = e.target;
-									while (target.nodeType != 1) target = target.parentNode;
-						
-									if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-										e.preventDefault();
-								},
-					   onScrollMove: function() {
-						$('.AlbumContainerLink').addClass('disable');
-						$('.Center.Bar').addClass('LogoColored');
-					  	$(".nav li").removeClass("navDisplay");
-						$('#ContentFilter').removeClass('ContentFilterVisibility');
-					},	
-					 onScrollEnd : function(){
-						$('.AlbumContainerLink').removeClass('disable');
-						$('.Center.Bar').removeClass('LogoColored');						
-				   							 }
-				});
-				var header = $('#HeaderBar');
-					$("#contentScroller").scroll(function(e){
-						if(header.offset().top !== 0){
-							if(!header.hasClass('shadow')){
-								header.addClass('shadow');
-							}
-						}else{
-							header.removeClass('shadow');
-						}
-				});
-				$(".nav li , .closeNav").click(function () {
-					  $(".nav li").toggleClass("navDisplay");
-            	}); 
-		}
-		</script>
-
+    <!-- Tino's embedded script, moved to a separate file for organization (will eventually be moved into webuits.js) -->
+    <script type="text/javascript" src="tino.js"></script>
 
     <!-- Templates -->
-
     <script type="text/template" id="AlbumView_cover-template">
         <a href="#" class="AlbumContainerLink" onClick="window.location.reload()">
             <span class="AlbumArtwork" style=<%= '"background-image:url(' + artUrl + ')"' %>>         
@@ -565,6 +213,13 @@ document.write('<script type="application/javascript" src="js/iscroll.js"><\/scr
         </a>
     </script>
 
+    <script type="text/template" id="PlayQueueItemView-template">
+        <div class="QueueList">
+            <div class="QueueSongName"><%= songName %></div>
+            <div class="QueueSongBand"><%= artistName %></div>
+            <div class="QueueSongTime"><%= duration.formatTime() %></div>
+        </div>
+    </script>
 
 </body>
 </html>
