@@ -83,6 +83,10 @@
 
 <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.dropdown.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/backbone.js"></script>
+<script type="text/javascript" src="js/backbone.localStorage.js"></script>
+<script type="text/javascript" src="script/webuits.js"></script>
 <script type="text/javascript">
 // Redirect iPhone/iPod visitors
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
@@ -602,31 +606,13 @@ document.write('<script type="application/javascript" src="js/iscroll.js"><\/scr
 			</form>
             -->
         </div>
-		</div>
-		<div id="SidebarMenu">
-		<div id="SidebarMenuScroller">
-        <ul  class="SidebarMenu">
-        
-        <li class="SidebarIcons Cloud"><a href="#">HomePlex</a></li>
-        <li class="SidebarIcons Settings"><a href="#"></a></li>
-        <span>Browse</span>
-        <li class="SidebarIcons Music SidebarIconsActive"><a href="#">Music</a></li>
-        <li class="SidebarIcons Discover"><a href="#">Discover</a></li>
-        <li class="SidebarIcons Folder"><a href="#">Folder</a></li>
-        <span>Personlize</span> 
-        <li class="SidebarIcons Favorite"><a href="#">Favorite</a></li>               
-        <li class="SidebarIcons Playlist"><a href="#">Playlists</a></li>
-        <li class="SidebarIcons Playlist"><a href="#">Morning Drive</a></li>
-        <li class="SidebarIcons Playlist"><a href="#">Traffic Jam's</a></li>
-        <li class="SidebarIcons Playlist"><a href="#">Work Safe</a></li>
-        <li class="SidebarIcons Playlist"><a href="#">Saturday's Party</a></li>        
-        <li class="SidebarIcons Juke"><a href="#">Juke</a></li>
-        <span>Setting</span>
-        <li class="SidebarIcons Offline"><a href="#">Offline</a></li>
-        </ul>
-</div></div>
 	</div>
-</div>
+		<div id="SidebarMenu">
+	        <div id="SidebarMenuScroller">
+            <ul id="SidebarMenuContent" class="SidebarMenu"></ul>
+            </div></div>
+	    </div>
+    </div>
 
 
 <!-- Filters -->
@@ -1018,5 +1004,7 @@ document.write('<script type="application/javascript" src="js/iscroll.js"><\/scr
             	}); 
 		}
 		</script>
+
+
 </body>
 </html>
