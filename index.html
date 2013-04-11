@@ -200,7 +200,11 @@
 
 
 
+
+
     <!-- Templates -->
+
+    <!-- Album Cover Template -->
     <script type="text/template" id="AlbumView_cover-template">
         <a href="#" class="AlbumContainerLink" onClick="window.location.reload()">
             <span class="AlbumArtwork" style=<%= '"background-image:url(' + artUrl + ')"' %>>         
@@ -213,6 +217,20 @@
         </a>
     </script>
 
+    <!-- Artist Cover Template -->
+    <script type="text/template" id="ArtistView_cover-template">
+        <a href="#" class="AlbumContainerLink" onClick="window.location.reload()">
+            <span class="AlbumArtwork" style=<%= '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>>         
+                <div class="AlbumInfo">
+                    <div class="TrackCount"><%= 2 %> <span>Tracks</span></div>
+                </div>
+            </span>
+            <span class="AlbumTitle"><%= " " %></span>
+            <span class="ArtistName"><%= artistName %></span>
+        </a>
+    </script>
+
+    <!-- Play Queue Item Template -->
     <script type="text/template" id="PlayQueueItemView-template">
         <div class="QueueList">
             <div class="QueueSongName"><%= songName %></div>

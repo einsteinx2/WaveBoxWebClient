@@ -18,13 +18,24 @@ module ViewController
 
             // Default display type of cover
             this.displayType = "cover";
+
+            // Fetch the artists
+            this.artistList = new Collection.ArtistList();
+            this.artistList.on("all", this.render, this);
+            var temp = this.artistList;
+            this.artistList.fetch({ 
+                success: function () {
+                console.log(temp.models);
+            }});
         }
 
         render()
         {
+            console.log("ArtistListView render called");
+
             // Clear the view
             this.$el.empty();
-            this.$el.attr("id", "ArtistView");
+            this.$el.attr("id", "AlbumView");
 
             // Add the albums to the DOM
             this.artistList.each((artist : Model.Artist) => 

@@ -31,12 +31,15 @@ module Model
 				url:	this.API_ADDRESS + "login",
 				data:	"u=" + username + "&p=" + password,
 				success: (data) => {
-					if (data.error === null) {
+					if (data.error === null) 
+					{
 						this.SESSION_ID = data.sessionId;
 						console.log("sessionId: " + this.SESSION_ID);
 						localStorage.setItem("waveBoxSessionKey", data.sessionId);
 						callback.call(context, true);
-					} else {
+					}
+					else 
+					{
 						callback.call(context, false, data.error);
 					}
 				},
@@ -59,10 +62,13 @@ module Model
 					url:	this.API_ADDRESS + "status",
 					data:	"s=" + this.SESSION_ID,
 					success: (data) => {
-						if (data.error === null) {
+						if (data.error === null) 
+						{
 							console.log("sessionId is valid");
 							callback(true);
-						} else {
+						} 
+						else 
+						{
 							console.log("sessionId is NOT valid, error: " + data.error);
 							callback(false, data.error);
 						}
@@ -81,21 +87,24 @@ module Model
 			}
 		}
 
-		public static getArtistList(): any[] 
+		public static getArtistList(context: any, callback: any): void
 		{
-			var artists;
-
 			$.ajax({
 				url:	this.API_ADDRESS + "artists",
 				data:	"s=" + this.SESSION_ID,
 				success: (data) => {
-					artists = data.artists;
+					if (data.error === null) 
+					{
+						callback.call(context, true, data.artists);
+					} 
+					else 
+					{
+						callback.call(context, false, data.error);
+					}
 				},
-				async:	false,
+				async:	true,
 				type:	'POST'
 			});
-
-			return artists;
 		}
 
 		public static getArtistInfo(artistId: string): void 
@@ -265,9 +274,14 @@ module Model
 			return urlObj;
 		}
 
-		public static getSongArtUrl(song: any, size: string): string
+		public static getSongArtUrl(song: any, size?: string): string
 		{
-			var url = this.API_ADDRESS + "art" + "?" + "id=" + song.artId + "&" + "s=" + this.SESSION_ID, useSize;
+			return getArtUrl(song.artId, size);
+		}
+
+		public static getArtUrl(artId: number, size?: string)
+		{
+			var url = this.API_ADDRESS + "art" + "?" + "id=" + artId + "&" + "s=" + this.SESSION_ID, useSize;
 
 			if (size !== undefined) 
 			{

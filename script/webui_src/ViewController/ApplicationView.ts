@@ -36,7 +36,7 @@ module ViewController
                     console.log("[ApplicationView] Successful login!");
 
                     // Create the album list with some test data
-                    this.showAlbums();
+                    this.showArtists();
                 }
                 else
                 {
@@ -47,6 +47,8 @@ module ViewController
 
         createInterface()
         {
+            console.log("create interface");
+
             // Width test
             $("#HeaderBar").ready(this.resizeDiv);
 
@@ -128,6 +130,7 @@ module ViewController
 
         hideMenu()
         {
+            console.log("hideMenu called, isMenuShowing: " + this.isMenuShowing);
             if (this.isMenuShowing)
             {
                 this.toggleMenu();
@@ -136,6 +139,7 @@ module ViewController
 
         toggleMenu()
         {
+            console.log("toggle menu, isMenuShowing: " + this.isMenuShowing);
             $('#content').css({'width': vpw - sbw  + 'px'});    
             $('#content, #contentWrapper').toggleClass('MenuMargin');
             $('#MenuColumn').toggleClass('displaySidebars');                        
@@ -143,6 +147,7 @@ module ViewController
             $('.AlbumContainerLink').addClass('disable');
             $('#ContentFilter').removeClass('ContentFilterVisibility');
             this.isMenuShowing = !this.isMenuShowing;
+            console.log("toggle menu, isMenuShowing: " + this.isMenuShowing);
         }
 
         hidePlayQueue()
@@ -206,7 +211,14 @@ module ViewController
 
         showArtists()
         {
-            //alert("showing artists");
+            if (!this.artistList)
+            {
+                this.artistList = new ArtistListView();
+            }
+            
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.artistList.render().el);
+
             this.hideMenu();
         }
 

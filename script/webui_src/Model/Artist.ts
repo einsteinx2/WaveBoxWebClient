@@ -1,3 +1,5 @@
+/// <reference path="./ApiClient.ts"/>
+
 module Model
 {
     export class Artist extends Backbone.Model 

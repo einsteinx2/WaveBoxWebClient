@@ -38,7 +38,8 @@ module ViewController
             [
             	{
             		name: "Music", 
-            		cssClass: "Music"
+            		cssClass: "Music",
+                    action: "show:albums"
             	}, 
             	{
             		name: "Discover", 

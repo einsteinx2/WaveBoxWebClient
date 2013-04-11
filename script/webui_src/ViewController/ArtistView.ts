@@ -16,7 +16,7 @@ module ViewController
             super(options);
 
             // Cache the template function for a single item.
-            this.template = _.template($('#AlbumView_cover-template').html());
+            this.template = _.template($('#ArtistView_cover-template').html());
         }
 
         // Re-render the contents of the todo item.
@@ -26,7 +26,7 @@ module ViewController
             this.$el.addClass("AlbumContainer");
 
             // Create the album from the template
-            this.$el.html(this.template(this.model.toJSON()))
+            this.$el.html(this.template(this.model.toJSON()));
 
             // Return this for chaining
             return this;

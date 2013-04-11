@@ -91,7 +91,8 @@ var ViewController;
             this.browseSection = new Model.SidebarMenuSection([
                 {
                     name: "Music",
-                    cssClass: "Music"
+                    cssClass: "Music",
+                    action: "show:albums"
                 }, 
                 {
                     name: "Discover",
@@ -198,6 +199,314 @@ var Model;
     })(Backbone.Model);
     Model.Album = Album;    
 })(Model || (Model = {}));
+var Model;
+(function (Model) {
+    var Utils = (function () {
+        function Utils() { }
+        Utils.isRetina = function isRetina() {
+            return window.devicePixelRatio > 1 ? true : false;
+        }
+        return Utils;
+    })();
+    Model.Utils = Utils;    
+})(Model || (Model = {}));
+Array.prototype.shuffle = function () {
+    var temp, j, i = 0;
+    while(i < this.length) {
+        this[i].preShuffleIndex = i;
+        i++;
+    }
+    i = this.length;
+    while(--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[i];
+        this[i] = this[j];
+        this[j] = temp;
+        if(this.NowPlayingIndex === i) {
+            this.NowPlayingIndex = j;
+        } else {
+            if(this.NowPlayingIndex === j) {
+                this.NowPlayingIndex = i;
+            }
+        }
+    }
+    console.log("NowPlayingIndex is now: " + this.NowPlayingIndex);
+    return this;
+};
+var Model;
+(function (Model) {
+    var ApiClient = (function () {
+        function ApiClient() { }
+        ApiClient.API_ADDRESS = "/api/";
+        ApiClient.SESSION_ID = localStorage.getItem("waveBoxSessionKey");
+        ApiClient.itemCache = [];
+        ApiClient.cacheItem = function cacheItem(item) {
+            this.itemCache[parseInt(item.itemId, 10)] = item;
+        }
+        ApiClient.getCachedItem = function getCachedItem(itemId) {
+            return this.itemCache[parseInt(itemId, 10)];
+        }
+        ApiClient.logOut = function logOut() {
+            localStorage.clear();
+        }
+        ApiClient.authenticate = function authenticate(username, password, context, callback) {
+            var _this = this;
+            console.log("Calling authenticate");
+            $.ajax({
+                url: this.API_ADDRESS + "login",
+                data: "u=" + username + "&p=" + password,
+                success: function (data) {
+                    if(data.error === null) {
+                        _this.SESSION_ID = data.sessionId;
+                        console.log("sessionId: " + _this.SESSION_ID);
+                        localStorage.setItem("waveBoxSessionKey", data.sessionId);
+                        callback.call(context, true);
+                    } else {
+                        callback.call(context, false, data.error);
+                    }
+                },
+                error: function (XHR, textStatus, errorThrown) {
+                    console.log("authenticate failed error code: " + JSON.stringify(XHR));
+                    callback(false);
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.clientIsAuthenticated = function clientIsAuthenticated(callback) {
+            if(this.SESSION_ID !== undefined) {
+                console.log("Verifying sessionId");
+                $.ajax({
+                    url: this.API_ADDRESS + "status",
+                    data: "s=" + this.SESSION_ID,
+                    success: function (data) {
+                        if(data.error === null) {
+                            console.log("sessionId is valid");
+                            callback(true);
+                        } else {
+                            console.log("sessionId is NOT valid, error: " + data.error);
+                            callback(false, data.error);
+                        }
+                    },
+                    error: function (XHR, textStatus, errorThrown) {
+                        console.log("error checking session id: " + textStatus);
+                        callback(false);
+                    },
+                    async: true,
+                    type: 'POST'
+                });
+            } else {
+                callback(false);
+            }
+        }
+        ApiClient.getArtistList = function getArtistList(context, callback) {
+            $.ajax({
+                url: this.API_ADDRESS + "artists",
+                data: "s=" + this.SESSION_ID,
+                success: function (data) {
+                    if(data.error === null) {
+                        callback.call(context, true, data.artists);
+                    } else {
+                        callback.call(context, false, data.error);
+                    }
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.getArtistInfo = function getArtistInfo(artistId) {
+            var aId = "";
+            if(artistId !== undefined) {
+                aId = artistId;
+            } else {
+                console.log("artist id undefined");
+                $.publish("data/getArtistInfoDone", [
+                    undefined
+                ]);
+                return;
+            }
+            $.ajax({
+                url: this.API_ADDRESS + "artists/",
+                data: "s=" + this.SESSION_ID + "&id=" + aId,
+                success: function (data) {
+                    $.publish("data/getArtistInfoDone", [
+                        data
+                    ]);
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.getSongList = function getSongList(id, forItemType) {
+            var _this = this;
+            var songs, sId = "", call = "albums", url, i;
+            if(id === undefined || forItemType === undefined) {
+                $.publish("data/getSongListDone", [
+                    undefined
+                ]);
+                return;
+            } else {
+                if(forItemType === "songs") {
+                    call = "songs";
+                } else {
+                    if(call !== "albums") {
+                        $.publish("data/getSongListDone", [
+                            undefined
+                        ]);
+                        return;
+                    }
+                }
+                call += "/";
+                sId = id;
+            }
+            url = this.API_ADDRESS + call;
+            $.ajax({
+                url: url,
+                data: "s=" + this.SESSION_ID + "&id=" + sId,
+                success: function (data) {
+                    for(i = 0; i < data.songs.length; i++) {
+                        _this.cacheItem(data.songs[i]);
+                    }
+                    $.publish("data/getSongListDone", [
+                        data
+                    ]);
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.getFolder = function getFolder(folderId, recursive, callback) {
+            var _this = this;
+            var folder, url = this.API_ADDRESS + "folders", theData = "s=" + this.SESSION_ID, i;
+            if(folderId !== undefined) {
+                theData += "&id=" + folderId;
+            }
+            if(recursive === true) {
+                theData += "&recursiveMedia=1";
+            }
+            $.ajax({
+                url: this.API_ADDRESS + "folders",
+                data: theData,
+                success: function (data) {
+                    if(data.songs !== undefined) {
+                        for(i = 0; i < data.songs.length; i++) {
+                            _this.cacheItem(data.songs[i]);
+                        }
+                    }
+                    callback(true, data);
+                },
+                error: function (XHR, textStatus, errorThrown) {
+                    callback(false);
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.getSongInfo = function getSongInfo(songId) {
+            var _this = this;
+            var song, cached, url;
+            if(songId === undefined) {
+                return;
+            } else {
+                cached = this.getCachedItem(songId);
+                if(cached !== undefined) {
+                    $.publish("data/getSongInfoDone", [
+                        cached
+                    ]);
+                    return;
+                }
+            }
+            url = this.API_ADDRESS + "songs";
+            $.ajax({
+                url: url,
+                data: "s=" + this.SESSION_ID + "&id=" + songId,
+                success: function (data) {
+                    _this.cacheItem(data.songs[0]);
+                    $.publish("data/getSongInfoDone", [
+                        data.songs[0]
+                    ]);
+                },
+                async: false,
+                type: 'POST'
+            });
+        }
+        ApiClient.getSongStreamUrl = function getSongStreamUrl(songId) {
+            return this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + songId;
+        }
+        ApiClient.getSongUrlObject = function getSongUrlObject(song) {
+            var urlObj = {
+            };
+            if(song.fileType === 2) {
+                urlObj["mp3"] = this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + song.itemId;
+            } else {
+                urlObj["mp3"] = this.API_ADDRESS + "transcode?" + "s=" + this.SESSION_ID + "&id=" + song.itemId + "&transType=" + "MP3" + "&transQuality=" + "medium";
+            }
+            if(song.fileType === 4) {
+                urlObj["oga"] = this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + song.itemId;
+            } else {
+                urlObj["oga"] = this.API_ADDRESS + "transcode?" + "s=" + this.SESSION_ID + "&id=" + song.itemId + "&transType=" + "OGG" + "&transQuality=" + "medium";
+            }
+            console.log(urlObj);
+            return urlObj;
+        }
+        ApiClient.getSongArtUrl = function getSongArtUrl(song, size) {
+            return ApiClient.getArtUrl(song.artId, size);
+        }
+        ApiClient.getArtUrl = function getArtUrl(artId, size) {
+            var url = this.API_ADDRESS + "art" + "?" + "id=" + artId + "&" + "s=" + this.SESSION_ID, useSize;
+            if(size !== undefined) {
+                useSize = size;
+                if(Model.Utils.isRetina()) {
+                    useSize = parseFloat(size) * 2;
+                }
+                url += "&size=" + useSize;
+            }
+            return url;
+        }
+        ApiClient.lfmUpdateNowPlaying = function lfmUpdateNowPlaying(songId) {
+            var url = this.API_ADDRESS + "scrobble";
+            $.ajax({
+                url: url,
+                data: "s=" + this.SESSION_ID + "&id=" + songId + "&action=nowplaying",
+                success: function (data) {
+                    if(data.error === null) {
+                        console.log("Now playing update successful");
+                    } else {
+                        if(data.error === "LFMNotAuthenticated") {
+                            window.open(data.authUrl);
+                        } else {
+                            console.log(data.error);
+                        }
+                    }
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        ApiClient.lfmScrobbleTrack = function lfmScrobbleTrack(song, timestamp) {
+            var url = this.API_ADDRESS + "scrobble";
+            $.ajax({
+                url: url,
+                data: "s=" + this.SESSION_ID + "&event=" + song.itemId + "," + timestamp + "&action=submit",
+                success: function (data) {
+                    if(data.error === null) {
+                        console.log("Scrobble successful (" + song.songName + ")");
+                    } else {
+                        if(data.error === "LFMNotAuthenticated") {
+                            window.open(data.authUrl);
+                        } else {
+                            console.log(data.error);
+                        }
+                    }
+                },
+                async: true,
+                type: 'POST'
+            });
+        }
+        return ApiClient;
+    })();
+    Model.ApiClient = ApiClient;    
+})(Model || (Model = {}));
 var Collection;
 (function (Collection) {
     var ArtistList = (function (_super) {
@@ -207,6 +516,43 @@ var Collection;
 
             this.model = Model.Artist;
         }
+        ArtistList.prototype.sync = function (method, model, options) {
+            switch(method) {
+                case 'create': {
+                    break;
+
+                }
+                case 'update': {
+                    break;
+
+                }
+                case 'delete': {
+                    break;
+
+                }
+                case 'read': {
+                    Model.ApiClient.getArtistList(this, function (success, data) {
+                        console.log("success: " + success + "  data: " + JSON.stringify(data));
+                        if(success) {
+                            options.success(data);
+                        } else {
+                            options.error(data);
+                        }
+                    });
+                    break;
+
+                }
+                default: {
+                    console.error('Unknown method:', method);
+                    break;
+
+                }
+            }
+        };
+        ArtistList.prototype.parse = function (response, options) {
+            console.log("parse called, response: " + JSON.stringify(response));
+            return response;
+        };
         return ArtistList;
     })(Backbone.Collection);
     Collection.ArtistList = ArtistList;    
@@ -230,7 +576,7 @@ var ViewController;
         function ArtistView(options) {
             this.tagName = "li";
                 _super.call(this, options);
-            this.template = _.template($('#AlbumView_cover-template').html());
+            this.template = _.template($('#ArtistView_cover-template').html());
         }
         ArtistView.prototype.render = function () {
             this.$el.addClass("AlbumContainer");
@@ -249,11 +595,20 @@ var ViewController;
             this.tagName = "ul";
                 _super.call(this);
             this.displayType = "cover";
+            this.artistList = new Collection.ArtistList();
+            this.artistList.on("all", this.render, this);
+            var temp = this.artistList;
+            this.artistList.fetch({
+                success: function () {
+                    console.log(temp.models);
+                }
+            });
         }
         ArtistListView.prototype.render = function () {
             var _this = this;
+            console.log("ArtistListView render called");
             this.$el.empty();
-            this.$el.attr("id", "ArtistView");
+            this.$el.attr("id", "AlbumView");
             this.artistList.each(function (artist) {
                 var artistView = new ViewController.ArtistView({
                     model: artist
@@ -404,309 +759,6 @@ var ViewController;
     })(Backbone.View);
     ViewController.PlayQueueView = PlayQueueView;    
 })(ViewController || (ViewController = {}));
-var Model;
-(function (Model) {
-    var Utils = (function () {
-        function Utils() { }
-        Utils.isRetina = function isRetina() {
-            return window.devicePixelRatio > 1 ? true : false;
-        }
-        return Utils;
-    })();
-    Model.Utils = Utils;    
-})(Model || (Model = {}));
-Array.prototype.shuffle = function () {
-    var temp, j, i = 0;
-    while(i < this.length) {
-        this[i].preShuffleIndex = i;
-        i++;
-    }
-    i = this.length;
-    while(--i) {
-        j = Math.floor(Math.random() * (i + 1));
-        temp = this[i];
-        this[i] = this[j];
-        this[j] = temp;
-        if(this.NowPlayingIndex === i) {
-            this.NowPlayingIndex = j;
-        } else {
-            if(this.NowPlayingIndex === j) {
-                this.NowPlayingIndex = i;
-            }
-        }
-    }
-    console.log("NowPlayingIndex is now: " + this.NowPlayingIndex);
-    return this;
-};
-var Model;
-(function (Model) {
-    var ApiClient = (function () {
-        function ApiClient() { }
-        ApiClient.API_ADDRESS = "/api/";
-        ApiClient.SESSION_ID = localStorage.getItem("waveBoxSessionKey");
-        ApiClient.itemCache = [];
-        ApiClient.cacheItem = function cacheItem(item) {
-            this.itemCache[parseInt(item.itemId, 10)] = item;
-        }
-        ApiClient.getCachedItem = function getCachedItem(itemId) {
-            return this.itemCache[parseInt(itemId, 10)];
-        }
-        ApiClient.logOut = function logOut() {
-            localStorage.clear();
-        }
-        ApiClient.authenticate = function authenticate(username, password, context, callback) {
-            var _this = this;
-            console.log("Calling authenticate");
-            $.ajax({
-                url: this.API_ADDRESS + "login",
-                data: "u=" + username + "&p=" + password,
-                success: function (data) {
-                    if(data.error === null) {
-                        _this.SESSION_ID = data.sessionId;
-                        console.log("sessionId: " + _this.SESSION_ID);
-                        localStorage.setItem("waveBoxSessionKey", data.sessionId);
-                        callback.call(context, true);
-                    } else {
-                        callback.call(context, false, data.error);
-                    }
-                },
-                error: function (XHR, textStatus, errorThrown) {
-                    console.log("authenticate failed error code: " + JSON.stringify(XHR));
-                    callback(false);
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        ApiClient.clientIsAuthenticated = function clientIsAuthenticated(callback) {
-            if(this.SESSION_ID !== undefined) {
-                console.log("Verifying sessionId");
-                $.ajax({
-                    url: this.API_ADDRESS + "status",
-                    data: "s=" + this.SESSION_ID,
-                    success: function (data) {
-                        if(data.error === null) {
-                            console.log("sessionId is valid");
-                            callback(true);
-                        } else {
-                            console.log("sessionId is NOT valid, error: " + data.error);
-                            callback(false, data.error);
-                        }
-                    },
-                    error: function (XHR, textStatus, errorThrown) {
-                        console.log("error checking session id: " + textStatus);
-                        callback(false);
-                    },
-                    async: true,
-                    type: 'POST'
-                });
-            } else {
-                callback(false);
-            }
-        }
-        ApiClient.getArtistList = function getArtistList() {
-            var artists;
-            $.ajax({
-                url: this.API_ADDRESS + "artists",
-                data: "s=" + this.SESSION_ID,
-                success: function (data) {
-                    artists = data.artists;
-                },
-                async: false,
-                type: 'POST'
-            });
-            return artists;
-        }
-        ApiClient.getArtistInfo = function getArtistInfo(artistId) {
-            var aId = "";
-            if(artistId !== undefined) {
-                aId = artistId;
-            } else {
-                console.log("artist id undefined");
-                $.publish("data/getArtistInfoDone", [
-                    undefined
-                ]);
-                return;
-            }
-            $.ajax({
-                url: this.API_ADDRESS + "artists/",
-                data: "s=" + this.SESSION_ID + "&id=" + aId,
-                success: function (data) {
-                    $.publish("data/getArtistInfoDone", [
-                        data
-                    ]);
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        ApiClient.getSongList = function getSongList(id, forItemType) {
-            var _this = this;
-            var songs, sId = "", call = "albums", url, i;
-            if(id === undefined || forItemType === undefined) {
-                $.publish("data/getSongListDone", [
-                    undefined
-                ]);
-                return;
-            } else {
-                if(forItemType === "songs") {
-                    call = "songs";
-                } else {
-                    if(call !== "albums") {
-                        $.publish("data/getSongListDone", [
-                            undefined
-                        ]);
-                        return;
-                    }
-                }
-                call += "/";
-                sId = id;
-            }
-            url = this.API_ADDRESS + call;
-            $.ajax({
-                url: url,
-                data: "s=" + this.SESSION_ID + "&id=" + sId,
-                success: function (data) {
-                    for(i = 0; i < data.songs.length; i++) {
-                        _this.cacheItem(data.songs[i]);
-                    }
-                    $.publish("data/getSongListDone", [
-                        data
-                    ]);
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        ApiClient.getFolder = function getFolder(folderId, recursive, callback) {
-            var _this = this;
-            var folder, url = this.API_ADDRESS + "folders", theData = "s=" + this.SESSION_ID, i;
-            if(folderId !== undefined) {
-                theData += "&id=" + folderId;
-            }
-            if(recursive === true) {
-                theData += "&recursiveMedia=1";
-            }
-            $.ajax({
-                url: this.API_ADDRESS + "folders",
-                data: theData,
-                success: function (data) {
-                    if(data.songs !== undefined) {
-                        for(i = 0; i < data.songs.length; i++) {
-                            _this.cacheItem(data.songs[i]);
-                        }
-                    }
-                    callback(true, data);
-                },
-                error: function (XHR, textStatus, errorThrown) {
-                    callback(false);
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        ApiClient.getSongInfo = function getSongInfo(songId) {
-            var _this = this;
-            var song, cached, url;
-            if(songId === undefined) {
-                return;
-            } else {
-                cached = this.getCachedItem(songId);
-                if(cached !== undefined) {
-                    $.publish("data/getSongInfoDone", [
-                        cached
-                    ]);
-                    return;
-                }
-            }
-            url = this.API_ADDRESS + "songs";
-            $.ajax({
-                url: url,
-                data: "s=" + this.SESSION_ID + "&id=" + songId,
-                success: function (data) {
-                    _this.cacheItem(data.songs[0]);
-                    $.publish("data/getSongInfoDone", [
-                        data.songs[0]
-                    ]);
-                },
-                async: false,
-                type: 'POST'
-            });
-        }
-        ApiClient.getSongStreamUrl = function getSongStreamUrl(songId) {
-            return this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + songId;
-        }
-        ApiClient.getSongUrlObject = function getSongUrlObject(song) {
-            var urlObj = {
-            };
-            if(song.fileType === 2) {
-                urlObj["mp3"] = this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + song.itemId;
-            } else {
-                urlObj["mp3"] = this.API_ADDRESS + "transcode?" + "s=" + this.SESSION_ID + "&id=" + song.itemId + "&transType=" + "MP3" + "&transQuality=" + "medium";
-            }
-            if(song.fileType === 4) {
-                urlObj["oga"] = this.API_ADDRESS + "stream" + "?" + "s=" + this.SESSION_ID + "&id=" + song.itemId;
-            } else {
-                urlObj["oga"] = this.API_ADDRESS + "transcode?" + "s=" + this.SESSION_ID + "&id=" + song.itemId + "&transType=" + "OGG" + "&transQuality=" + "medium";
-            }
-            console.log(urlObj);
-            return urlObj;
-        }
-        ApiClient.getSongArtUrl = function getSongArtUrl(song, size) {
-            var url = this.API_ADDRESS + "art" + "?" + "id=" + song.artId + "&" + "s=" + this.SESSION_ID, useSize;
-            if(size !== undefined) {
-                useSize = size;
-                if(Model.Utils.isRetina()) {
-                    useSize = parseFloat(size) * 2;
-                }
-                url += "&size=" + useSize;
-            }
-            return url;
-        }
-        ApiClient.lfmUpdateNowPlaying = function lfmUpdateNowPlaying(songId) {
-            var url = this.API_ADDRESS + "scrobble";
-            $.ajax({
-                url: url,
-                data: "s=" + this.SESSION_ID + "&id=" + songId + "&action=nowplaying",
-                success: function (data) {
-                    if(data.error === null) {
-                        console.log("Now playing update successful");
-                    } else {
-                        if(data.error === "LFMNotAuthenticated") {
-                            window.open(data.authUrl);
-                        } else {
-                            console.log(data.error);
-                        }
-                    }
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        ApiClient.lfmScrobbleTrack = function lfmScrobbleTrack(song, timestamp) {
-            var url = this.API_ADDRESS + "scrobble";
-            $.ajax({
-                url: url,
-                data: "s=" + this.SESSION_ID + "&event=" + song.itemId + "," + timestamp + "&action=submit",
-                success: function (data) {
-                    if(data.error === null) {
-                        console.log("Scrobble successful (" + song.songName + ")");
-                    } else {
-                        if(data.error === "LFMNotAuthenticated") {
-                            window.open(data.authUrl);
-                        } else {
-                            console.log(data.error);
-                        }
-                    }
-                },
-                async: true,
-                type: 'POST'
-            });
-        }
-        return ApiClient;
-    })();
-    Model.ApiClient = ApiClient;    
-})(Model || (Model = {}));
 var ViewController;
 (function (ViewController) {
     var ApplicationView = (function (_super) {
@@ -720,13 +772,14 @@ var ViewController;
             Model.ApiClient.authenticate("test", "test", this, function (success, error) {
                 if(success) {
                     console.log("[ApplicationView] Successful login!");
-                    this.showAlbums();
+                    this.showArtists();
                 } else {
                     console.log("[ApplicationView] Login error: " + error);
                 }
             });
         };
         ApplicationView.prototype.createInterface = function () {
+            console.log("create interface");
             $("#HeaderBar").ready(this.resizeDiv);
             window.onresize = this.resizeDiv;
             $(".MenuIcon").click(this.toggleMenu);
@@ -793,11 +846,13 @@ var ViewController;
             }
         };
         ApplicationView.prototype.hideMenu = function () {
+            console.log("hideMenu called, isMenuShowing: " + this.isMenuShowing);
             if(this.isMenuShowing) {
                 this.toggleMenu();
             }
         };
         ApplicationView.prototype.toggleMenu = function () {
+            console.log("toggle menu, isMenuShowing: " + this.isMenuShowing);
             $('#content').css({
                 'width': vpw - sbw + 'px'
             });
@@ -807,6 +862,7 @@ var ViewController;
             $('.AlbumContainerLink').addClass('disable');
             $('#ContentFilter').removeClass('ContentFilterVisibility');
             this.isMenuShowing = !this.isMenuShowing;
+            console.log("toggle menu, isMenuShowing: " + this.isMenuShowing);
         };
         ApplicationView.prototype.hidePlayQueue = function () {
             if(this.isPlayQueueShowing) {
@@ -853,6 +909,11 @@ var ViewController;
             this.hideMenu();
         };
         ApplicationView.prototype.showArtists = function () {
+            if(!this.artistList) {
+                this.artistList = new ViewController.ArtistListView();
+            }
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.artistList.render().el);
             this.hideMenu();
         };
         ApplicationView.prototype.showAlbums = function () {
