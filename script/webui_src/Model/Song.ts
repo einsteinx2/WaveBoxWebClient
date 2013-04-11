@@ -1,6 +1,6 @@
 /// <reference path="MediaItem.ts"/>
 
-module DataModel
+module Model
 {
 	export class Song extends MediaItem
 	{

@@ -1,11 +1,11 @@
-/// <reference path="../DataModel/SidebarMenuItem.ts"/>
+/// <reference path="../Model/SidebarMenuItem.ts"/>
 
 module ViewController
 {
     // This represents an item in the sidebar menu view
     export class SidebarMenuItemView extends Backbone.View 
     {
-        model: DataModel.SidebarMenuItem;
+        model: Model.SidebarMenuItem;
 
         constructor(options?) 
         {

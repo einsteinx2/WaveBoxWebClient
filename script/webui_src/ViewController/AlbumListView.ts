@@ -1,4 +1,4 @@
-/// <reference path="../DataModel/AlbumList.ts"/>
+/// <reference path="../Collection/AlbumList.ts"/>
 /// <reference path="./AlbumView.ts"/>
 
 module ViewController
@@ -6,7 +6,7 @@ module ViewController
     // This represents the entire sidebar menu
     export class AlbumListView extends Backbone.View 
     {
-        albumList: DataModel.AlbumList;
+        albumList: Collection.AlbumList;
         displayType: string;
 
         constructor()
@@ -27,7 +27,7 @@ module ViewController
             this.$el.attr("id", "AlbumView");
 
             // Add the albums to the DOM
-            this.albumList.each((album : DataModel.Album) => 
+            this.albumList.each((album : Model.Album) => 
             {
                 var albumView = new AlbumView({model: album});
                 this.$el.append(albumView.render().el);

@@ -1,9 +1,12 @@
 /// <reference path="./SidebarMenuItem.ts"/>
 
-module DataModel
+module Model
 {
-    export class SidebarMenuItemList extends Backbone.Collection 
+    export class SidebarMenuSection extends Backbone.Collection 
     {
+        // The display name of the section
+        name: string;
+
         // Reference to this collection's model.
         model = SidebarMenuItem;
 

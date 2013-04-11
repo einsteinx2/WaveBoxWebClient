@@ -3,8 +3,8 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var DataModel;
-(function (DataModel) {
+var Model;
+(function (Model) {
     var SidebarMenuItem = (function (_super) {
         __extends(SidebarMenuItem, _super);
         function SidebarMenuItem() {
@@ -22,16 +22,16 @@ var DataModel;
         };
         return SidebarMenuItem;
     })(Backbone.Model);
-    DataModel.SidebarMenuItem = SidebarMenuItem;    
-})(DataModel || (DataModel = {}));
-var DataModel;
-(function (DataModel) {
+    Model.SidebarMenuItem = SidebarMenuItem;    
+})(Model || (Model = {}));
+var Model;
+(function (Model) {
     var SidebarMenuSection = (function (_super) {
         __extends(SidebarMenuSection, _super);
         function SidebarMenuSection() {
             _super.apply(this, arguments);
 
-            this.model = DataModel.SidebarMenuItem;
+            this.model = Model.SidebarMenuItem;
         }
         SidebarMenuSection.prototype.enabled = function () {
             return this.filter(function (item) {
@@ -43,8 +43,8 @@ var DataModel;
         };
         return SidebarMenuSection;
     })(Backbone.Collection);
-    DataModel.SidebarMenuSection = SidebarMenuSection;    
-})(DataModel || (DataModel = {}));
+    Model.SidebarMenuSection = SidebarMenuSection;    
+})(Model || (Model = {}));
 var ViewController;
 (function (ViewController) {
     var SidebarMenuItemView = (function (_super) {
@@ -70,7 +70,7 @@ var ViewController;
         function SidebarMenuView() {
                 _super.call(this);
             this.setElement($("#SidebarMenuContent"), true);
-            this.headerSection = new DataModel.SidebarMenuSection([
+            this.headerSection = new Model.SidebarMenuSection([
                 {
                     name: "HomePlex",
                     cssClass: "Cloud"
@@ -80,7 +80,7 @@ var ViewController;
                     cssClass: "Settings"
                 }
             ]);
-            this.browseSection = new DataModel.SidebarMenuSection([
+            this.browseSection = new Model.SidebarMenuSection([
                 {
                     name: "Music",
                     cssClass: "Music"
@@ -95,7 +95,7 @@ var ViewController;
                 }
             ]);
             this.browseSection.name = "Browse";
-            this.personalizeSection = new DataModel.SidebarMenuSection([
+            this.personalizeSection = new Model.SidebarMenuSection([
                 {
                     name: "Favorite",
                     cssClass: "Favorite"
@@ -126,7 +126,7 @@ var ViewController;
                 }
             ]);
             this.personalizeSection.name = "Personlize";
-            this.settingsSection = new DataModel.SidebarMenuSection([
+            this.settingsSection = new Model.SidebarMenuSection([
                 {
                     name: "Offline",
                     cssClass: "Offline"
@@ -160,8 +160,8 @@ var ViewController;
     })(Backbone.View);
     ViewController.SidebarMenuView = SidebarMenuView;    
 })(ViewController || (ViewController = {}));
-var DataModel;
-(function (DataModel) {
+var Model;
+(function (Model) {
     var Album = (function (_super) {
         __extends(Album, _super);
         function Album() {
@@ -170,21 +170,21 @@ var DataModel;
         }
         return Album;
     })(Backbone.Model);
-    DataModel.Album = Album;    
-})(DataModel || (DataModel = {}));
-var DataModel;
-(function (DataModel) {
+    Model.Album = Album;    
+})(Model || (Model = {}));
+var Collection;
+(function (Collection) {
     var AlbumList = (function (_super) {
         __extends(AlbumList, _super);
         function AlbumList() {
             _super.apply(this, arguments);
 
-            this.model = DataModel.Album;
+            this.model = Model.Album;
         }
         return AlbumList;
     })(Backbone.Collection);
-    DataModel.AlbumList = AlbumList;    
-})(DataModel || (DataModel = {}));
+    Collection.AlbumList = AlbumList;    
+})(Collection || (Collection = {}));
 var ViewController;
 (function (ViewController) {
     var AlbumView = (function (_super) {
@@ -228,8 +228,8 @@ var ViewController;
     })(Backbone.View);
     ViewController.AlbumListView = AlbumListView;    
 })(ViewController || (ViewController = {}));
-var DataModel;
-(function (DataModel) {
+var Model;
+(function (Model) {
     var MediaItem = (function (_super) {
         __extends(MediaItem, _super);
         function MediaItem() {
@@ -243,10 +243,10 @@ var DataModel;
         };
         return MediaItem;
     })(Backbone.Model);
-    DataModel.MediaItem = MediaItem;    
-})(DataModel || (DataModel = {}));
-var DataModel;
-(function (DataModel) {
+    Model.MediaItem = MediaItem;    
+})(Model || (Model = {}));
+var Model;
+(function (Model) {
     var Song = (function (_super) {
         __extends(Song, _super);
         function Song() {
@@ -254,22 +254,9 @@ var DataModel;
 
         }
         return Song;
-    })(DataModel.MediaItem);
-    DataModel.Song = Song;    
-})(DataModel || (DataModel = {}));
-var DataModel;
-(function (DataModel) {
-    var PlayQueueList = (function (_super) {
-        __extends(PlayQueueList, _super);
-        function PlayQueueList() {
-            _super.apply(this, arguments);
-
-            this.model = DataModel.Song;
-        }
-        return PlayQueueList;
-    })(Backbone.Collection);
-    DataModel.PlayQueueList = PlayQueueList;    
-})(DataModel || (DataModel = {}));
+    })(Model.MediaItem);
+    Model.Song = Song;    
+})(Model || (Model = {}));
 var ViewController;
 (function (ViewController) {
     var PlayQueueItemView = (function (_super) {
@@ -311,6 +298,19 @@ var ViewController;
     })(Backbone.View);
     ViewController.PlayQueueView = PlayQueueView;    
 })(ViewController || (ViewController = {}));
+var Collection;
+(function (Collection) {
+    var PlayQueueList = (function (_super) {
+        __extends(PlayQueueList, _super);
+        function PlayQueueList() {
+            _super.apply(this, arguments);
+
+            this.model = Model.Song;
+        }
+        return PlayQueueList;
+    })(Backbone.Collection);
+    Collection.PlayQueueList = PlayQueueList;    
+})(Collection || (Collection = {}));
 var ViewController;
 (function (ViewController) {
     var ApplicationView = (function (_super) {
@@ -333,7 +333,7 @@ var ViewController;
                     numberOfSongs: i
                 };
             }
-            this.albumList.albumList = new DataModel.AlbumList(albums);
+            this.albumList.albumList = new Collection.AlbumList(albums);
             $("#contentScroller").append(this.albumList.render().el);
             this.playQueue = new ViewController.PlayQueueView();
             var items = new Array(20);
@@ -345,7 +345,7 @@ var ViewController;
                     duration: i
                 };
             }
-            this.playQueue.playQueueList = new DataModel.PlayQueueList(items);
+            this.playQueue.playQueueList = new Collection.PlayQueueList(items);
             this.playQueue.render();
         }
         return ApplicationView;

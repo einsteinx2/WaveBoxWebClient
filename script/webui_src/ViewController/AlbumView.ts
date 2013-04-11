@@ -1,11 +1,11 @@
-/// <reference path="../DataModel/Album.ts"/>
+/// <reference path="../Model/Album.ts"/>
 
 module ViewController
 {
     // This represents an item in the sidebar menu view
     export class AlbumView extends Backbone.View 
     {
-        model: DataModel.Album;
+        model: Model.Album;
         template: (data: any) => string;
 
         constructor(options?) 

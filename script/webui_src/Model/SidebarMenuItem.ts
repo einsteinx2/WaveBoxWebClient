@@ -1,4 +1,4 @@
-module DataModel
+module Model
 {
     export class SidebarMenuItem extends Backbone.Model 
     {

@@ -1,4 +1,4 @@
-/// <reference path="../DataModel/SidebarMenuSection.ts"/>
+/// <reference path="../Model/SidebarMenuSection.ts"/>
 /// <reference path="./SidebarMenuItemView.ts"/>
 
 module ViewController
@@ -6,12 +6,12 @@ module ViewController
     // This represents the entire sidebar menu
     export class SidebarMenuView extends Backbone.View 
     {
-        headerSection: DataModel.SidebarMenuSection;
-        browseSection: DataModel.SidebarMenuSection;
-        personalizeSection: DataModel.SidebarMenuSection;
-        settingsSection: DataModel.SidebarMenuSection;
+        headerSection: Model.SidebarMenuSection;
+        browseSection: Model.SidebarMenuSection;
+        personalizeSection: Model.SidebarMenuSection;
+        settingsSection: Model.SidebarMenuSection;
         
-        sections: DataModel.SidebarMenuSection[];
+        sections: Model.SidebarMenuSection[];
 
         constructor()
         {
@@ -20,7 +20,7 @@ module ViewController
             // the menu already present in the HTML.
             this.setElement($("#SidebarMenuContent"), true);
 
-            this.headerSection = new DataModel.SidebarMenuSection(
+            this.headerSection = new Model.SidebarMenuSection(
             [
             	{
             		name: "HomePlex", 
@@ -32,7 +32,7 @@ module ViewController
             	}
             ]);
 
-            this.browseSection = new DataModel.SidebarMenuSection(
+            this.browseSection = new Model.SidebarMenuSection(
             [
             	{
             		name: "Music", 
@@ -49,7 +49,7 @@ module ViewController
             ]);
             this.browseSection.name = "Browse";
 
-            this.personalizeSection = new DataModel.SidebarMenuSection(
+            this.personalizeSection = new Model.SidebarMenuSection(
             [
             	{
             		name: "Favorite", 
@@ -82,7 +82,7 @@ module ViewController
             ]);
             this.personalizeSection.name = "Personlize";
 
-    		this.settingsSection = new DataModel.SidebarMenuSection(
+    		this.settingsSection = new Model.SidebarMenuSection(
             [
             	{
             		name: "Offline", 
@@ -100,7 +100,7 @@ module ViewController
             this.$el.empty();
 
             // Add the lists to the DOM
-            _.each(this.sections, (section: DataModel.SidebarMenuSection) => 
+            _.each(this.sections, (section: Model.SidebarMenuSection) => 
             {
             	// Add the section title if necessary
             	if (section.name !== undefined)
@@ -109,7 +109,7 @@ module ViewController
             	}
             	
             	// Add the menu row
-            	_.each(section.models, (item: DataModel.SidebarMenuItem) => 
+            	_.each(section.models, (item: Model.SidebarMenuItem) => 
             	{
             		var itemView = new SidebarMenuItemView({
             			model: item

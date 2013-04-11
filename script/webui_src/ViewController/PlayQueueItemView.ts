@@ -1,11 +1,11 @@
-/// <reference path="../DataModel/MediaItem.ts"/>
-/// <reference path="../DataModel/Song.ts"/>
+/// <reference path="../Model/MediaItem.ts"/>
+/// <reference path="../Model/Song.ts"/>
 
 module ViewController
 {
     export class PlayQueueItemView extends Backbone.View 
     {
-        model: DataModel.Song;
+        model: Model.Song;
         template: (data: any) => string;
 
         constructor(options?) 

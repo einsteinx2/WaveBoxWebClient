@@ -1,10 +1,10 @@
-/// <reference path="./Album.ts"/>
+/// <reference path="../Model/Album.ts"/>
 
-module DataModel
+module Collection
 {
 	export class AlbumList extends Backbone.Collection 
 	{
 	    // Reference to this collection's model.
-	    model = DataModel.Album;
+	    model = Model.Album;
 	}
 }

@@ -1,5 +1,5 @@
-/// <reference path="../DataModel/Song.ts"/>
-/// <reference path="../DataModel/PlayQueueList.ts"/>
+/// <reference path="../Model/Song.ts"/>
+/// <reference path="../Model/PlayQueueList.ts"/>
 /// <reference path="./PlayQueueItemView.ts"/>
 
 module ViewController
@@ -7,7 +7,7 @@ module ViewController
     // This represents the entire sidebar menu
     export class PlayQueueView extends Backbone.View 
     {
-        playQueueList: DataModel.PlayQueueList;
+        playQueueList: Collection.PlayQueueList;
 
         constructor()
         {        
@@ -23,7 +23,7 @@ module ViewController
             this.$el.empty();
 
             // Add the items to the DOM
-            this.playQueueList.each((item : DataModel.Song) => {
+            this.playQueueList.each((item : Model.Song) => {
                 console.log(item);
 
                 var itemView = new PlayQueueItemView({model: item});

@@ -1,8 +1,8 @@
 /// <reference path="./SidebarMenuView.ts"/>
 /// <reference path="./AlbumListView.ts"/>
-/// <reference path="../DataModel/AlbumList.ts"/>
+/// <reference path="../Model/AlbumList.ts"/>
 /// <reference path="./PlayQueueView.ts"/>
-/// <reference path="../DataModel/PlayQueueList.ts"/>
+/// <reference path="../Collection/PlayQueueList.ts"/>
 
 module ViewController
 {
@@ -36,7 +36,7 @@ module ViewController
             		numberOfSongs: i
             	};
             }
-            this.albumList.albumList = new DataModel.AlbumList(albums);
+            this.albumList.albumList = new Collection.AlbumList(albums);
             $("#contentScroller").append(this.albumList.render().el);
 
             // Create the play queue with some test data
@@ -51,7 +51,7 @@ module ViewController
                     duration: i
                 };
             }
-            this.playQueue.playQueueList = new DataModel.PlayQueueList(items);
+            this.playQueue.playQueueList = new Collection.PlayQueueList(items);
             this.playQueue.render();
         }
     }
