@@ -12,10 +12,20 @@ module ViewController
             // This is a list tag.
             this.tagName = "li";
 
+            // Setup the DOM events
+            this.events = {
+                "click": "open"
+            }
+
             super(options);
         }
 
-        render() 
+        open()
+        {
+            app.trigger(this.model.get("action"));
+        }
+
+        render()
         {
         	// The default sidebar item style
         	this.$el.addClass("SidebarIcons");

@@ -13,12 +13,16 @@ declare module Backbone {
         set(obj: any): void;
         save(attr? , opts? ): void;
         destroy(): void;
-        bind(ev: string, f: Function, ctx?: any): void;
+        on(ev: string, f: Function, ctx?: any): void;
+        off(ev?: string, f?: Function, ctx?: any): void;
+        trigger(ev: string, args?: any): void;
         toJSON(): any;
     }
     export class Collection {
         constructor (models? , opts? );
-        bind(ev: string, f: Function, ctx?: any): void;
+        on(ev: string, f: Function, ctx?: any): void;
+        off(ev?: string, f?: Function, ctx?: any): void;
+        trigger(ev: string, args?: any): void;
         length: number;
         create(attrs, opts? ): any;
         each(f: (elem: any) => void ): void;
@@ -41,6 +45,9 @@ declare module Backbone {
         setElement(element: HTMLElement, delegate?: bool): void;
         tagName: string;
         events: any;
+        on(ev: string, f: Function, ctx?: any): void;
+        off(ev?: string, f?: Function, ctx?: any): void;
+        trigger(ev: string, args?: any): void;
 
         static extend: any;
     }
@@ -48,3 +55,6 @@ declare module Backbone {
 
 // Backbone.localStorage.js
 declare var Store: any;
+
+// iScroll
+declare var iScroll: any;

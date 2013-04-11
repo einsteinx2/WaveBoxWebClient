@@ -10,9 +10,6 @@ module Model
         // Reference to this collection's model.
         model = SidebarMenuItem;
 
-        // Save all of the todo items under the `"todos"` namespace.
-        //localStorage = new Store("sidebaritems-backbone");
-
         // Filter down to only the enabled
         enabled() 
         {

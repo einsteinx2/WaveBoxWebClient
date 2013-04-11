@@ -19,6 +19,7 @@ interface Array
 interface Window
 {
 	webkitNotifications: any;
+	devicePixelRatio: any;
 }
 
 Array.prototype.shuffle = function () {

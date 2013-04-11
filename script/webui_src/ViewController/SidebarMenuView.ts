@@ -24,11 +24,13 @@ module ViewController
             [
             	{
             		name: "HomePlex", 
-            		cssClass: "Cloud"
+            		cssClass: "Cloud",
+                    action: "show:server"
             	}, 
             	{
             		name: "", 
-            		cssClass: "Settings"
+            		cssClass: "Settings",
+                    action: "show:settings"
             	}
             ]);
 
@@ -42,9 +44,15 @@ module ViewController
             		name: "Discover", 
             		cssClass: "Discover"
             	},
+                {
+                    name: "Artist", 
+                    cssClass: "Folder",
+                    action: "show:artists"
+                },
             	{
             		name: "Folder", 
-            		cssClass: "Folder"
+            		cssClass: "Folder",
+                    action: "show:folders"
             	}
             ]);
             this.browseSection.name = "Browse";

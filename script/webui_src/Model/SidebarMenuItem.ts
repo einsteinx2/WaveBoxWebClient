@@ -7,6 +7,7 @@ module Model
         cssClass: string;
         index: number;
         enabled: bool;
+        action: string;
 
         // Default attributes for sidebar items
         defaults() 

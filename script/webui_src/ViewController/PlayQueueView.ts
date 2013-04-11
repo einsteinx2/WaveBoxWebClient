@@ -1,5 +1,5 @@
 /// <reference path="../Model/Song.ts"/>
-/// <reference path="../Model/PlayQueueList.ts"/>
+/// <reference path="../Collection/PlayQueueList.ts"/>
 /// <reference path="./PlayQueueItemView.ts"/>
 
 module ViewController
@@ -24,7 +24,6 @@ module ViewController
 
             // Add the items to the DOM
             this.playQueueList.each((item : Model.Song) => {
-                console.log(item);
 
                 var itemView = new PlayQueueItemView({model: item});
                 this.$el.append(itemView.render().el);
