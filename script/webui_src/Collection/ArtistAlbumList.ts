@@ -1,16 +1,17 @@
 /// <reference path="./WaveBoxCollection.ts"/>
 /// <reference path="../Model/Album.ts"/>
-/// <reference path="../Model/ApiClient.ts"/>
 
 module Collection
 {
-    export class ArtistList extends WaveBoxCollection 
-    {
-        // Reference to this collection's model.
-        model = Model.Artist;
+	export class ArtistAlbumList extends WaveBoxCollection 
+	{
+	    // Reference to this collection's model.
+	    model = Model.Album;
 
         sync(method: string, model: any, options?: any): any
         {
+            console.log("options: " + JSON.stringify(this.options));
+
             switch (method) 
             {
                 case 'create':
@@ -24,7 +25,7 @@ module Collection
 
                 case 'read':
                     // The model value is a collection in this case
-                    Model.ApiClient.getArtistList(this, (success: bool, data: any) => {
+                    Model.ApiClient.getArtistAlbums(this.options.artistId, this, (success: bool, data: any) => {
                         console.log("success: " + success + "  data: " + JSON.stringify(data));
                         if (success)
                         {
@@ -50,5 +51,5 @@ module Collection
             console.log("parse called, response: " + JSON.stringify(response));
             return response;
         }
-    }
+	}
 }

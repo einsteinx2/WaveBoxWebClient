@@ -107,29 +107,26 @@ module Model
 			});
 		}
 
-		public static getArtistInfo(artistId: string): void 
+		public static getArtistAlbums(artistId: number, context: any, callback: any): void 
 		{
-			var aId = "";
-			//console.log("entered getartistinfo");
-			if (artistId !== undefined) 
+			if (artistId === undefined) 
 			{
-				aId = artistId;
-			} 
-			else 
-			{
-				console.log("artist id undefined");
-				$.publish("data/getArtistInfoDone", [ undefined ]);
+				callback.call(context, false, "artistId missing");
 				return;
 			}
 
-			//console.log("getting artist info");
-
 			$.ajax({
 				url:	this.API_ADDRESS + "artists/",
-				data:	"s=" + this.SESSION_ID + "&id=" + aId,
+				data:	"s=" + this.SESSION_ID + "&id=" + artistId,
 				success: (data) => {
-					//console.log("got artist info");
-					$.publish("data/getArtistInfoDone", [ data ]);
+					if (data.error === null) 
+					{
+						callback.call(context, true, data.albums);
+					} 
+					else 
+					{
+						callback.call(context, false, data.error);
+					}
 				},
 				async:	true,
 				type:	'POST'

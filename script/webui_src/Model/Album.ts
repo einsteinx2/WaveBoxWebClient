@@ -1,6 +1,8 @@
+/// <reference path="./WaveBoxModel.ts"/>
+
 module Model
 {
-	export class Album extends Backbone.Model 
+	export class Album extends WaveBoxModel
 	{
 	    itemTypeId: number;
 	    artistId: number;
@@ -11,5 +13,20 @@ module Model
 	    artId: number;
 	    artUrl: string;
 	    numberOfSongs: number;
+
+	    defaults() 
+        {
+            return {
+            	itemTypeId: 2,
+            	artistId: 0,
+            	artistName: "",
+            	albumId: 0,
+            	albumName: "",
+            	releaseYear: 0,
+            	artId: 0,
+            	artUrl: "",
+            	numberOfSongs: 0
+            };
+        }
 	}
 }

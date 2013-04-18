@@ -1,9 +1,10 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Model/SidebarMenuItem.ts"/>
 
 module ViewController
 {
     // This represents an item in the sidebar menu view
-    export class SidebarMenuItemView extends Backbone.View 
+    export class SidebarMenuItemView extends WaveBoxView
     {
         model: Model.SidebarMenuItem;
 

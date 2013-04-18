@@ -1,34 +1,56 @@
-/// <reference path="../Model/Artist.ts"/>
+/// <reference path="./WaveBoxView.ts"/>
+/// <reference path="../Collection/ArtistAlbumList.ts"/>
+/// <reference path="./AlbumItemView.ts"/>
 
 module ViewController
 {
-    // This represents an item in the sidebar menu view
-    export class ArtistView extends Backbone.View 
+    export class ArtistView extends WaveBoxView
     {
-        model: Model.Artist;
-        template: (data: any) => string;
+        artistAlbumList: Collection.ArtistAlbumList;
+        displayType: string;
 
-        constructor(options?) 
-        {
-            // This is a list tag.
-            this.tagName = "li";
+        constructor(options?)
+        {        
+            // This is an unnumbered list tag.
+            this.tagName = "ul";
 
             super(options);
 
-            // Cache the template function for a single item.
-            this.template = _.template($('#ArtistView_cover-template').html());
+            // Default display type of cover
+            this.displayType = "cover";
+
+            // Fetch the artists
+            console.log("options.artistId: " + this.options.artistId);
+            this.artistAlbumList = new Collection.ArtistAlbumList([], this.options);
+            this.artistAlbumList.on("change", this.render, this);
+            this.artistAlbumList.fetch({ success: this.fetchSuccess });
         }
 
-        // Re-render the contents of the todo item.
-        render() 
+        fetchSuccess()
         {
-            // Add the default style
-            this.$el.addClass("AlbumContainer");
+            console.log(this.artistAlbumList.models);
+            this.render();
+        }
 
-            // Create the album from the template
-            this.$el.html(this.template(this.model.toJSON()));
+        render()
+        {
+            console.log("ArtistView render called");
 
-            // Return this for chaining
+            // Clear the view and add to the DOM
+            this.$el.empty();
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.el);
+
+            // Set the id
+            this.$el.attr("id", "AlbumView");
+
+            // Add the albums
+            this.artistAlbumList.each((album : Model.Album) => 
+            {
+                var albumView = new AlbumItemView({parentView: this, model: album});
+                this.$el.append(albumView.render().el);
+            });
+
             return this;
         }
     }

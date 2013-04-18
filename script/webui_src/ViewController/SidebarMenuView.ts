@@ -1,10 +1,11 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Model/SidebarMenuSection.ts"/>
 /// <reference path="./SidebarMenuItemView.ts"/>
 
 module ViewController
 {
     // This represents the entire sidebar menu
-    export class SidebarMenuView extends Backbone.View 
+    export class SidebarMenuView extends WaveBoxView
     {
         headerSection: Model.SidebarMenuSection;
         browseSection: Model.SidebarMenuSection;
@@ -13,7 +14,7 @@ module ViewController
         
         sections: Model.SidebarMenuSection[];
 
-        constructor()
+        constructor(options?)
         {
             super();
             // Instead of generating a new element, bind to the existing skeleton of
@@ -117,12 +118,12 @@ module ViewController
             		this.$el.append("<span>" + section.name + "</span>");
             	}
             	
-            	// Add the menu row
+            	// Add the menu rows
             	_.each(section.models, (item: Model.SidebarMenuItem) => 
             	{
             		var itemView = new SidebarMenuItemView({
             			model: item
-            		})
+            		});
 
             		this.$el.append(itemView.render().el);
             	});

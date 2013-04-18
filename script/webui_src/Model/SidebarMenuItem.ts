@@ -1,6 +1,7 @@
+/// <reference path="./WaveBoxModel.ts"/>
 module Model
 {
-    export class SidebarMenuItem extends Backbone.Model 
+    export class SidebarMenuItem extends WaveBoxModel
     {
         name: string;
         image: string;

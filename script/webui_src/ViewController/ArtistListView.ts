@@ -1,15 +1,15 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Collection/ArtistList.ts"/>
-/// <reference path="./ArtistView.ts"/>
+/// <reference path="./ArtistItemView.ts"/>
 
 module ViewController
 {
-    // This represents the entire sidebar menu
-    export class ArtistListView extends Backbone.View 
+    export class ArtistListView extends WaveBoxView
     {
         artistList: Collection.ArtistList;
         displayType: string;
 
-        constructor()
+        constructor(options?)
         {        
             // This is an unnumbered list tag.
             this.tagName = "ul";
@@ -21,27 +21,32 @@ module ViewController
 
             // Fetch the artists
             this.artistList = new Collection.ArtistList();
-            this.artistList.on("all", this.render, this);
-            var temp = this.artistList;
-            this.artistList.fetch({ 
-                success: function () {
-                console.log(temp.models);
-            }});
+            this.artistList.on("change", this.render, this);
+            this.artistList.fetch({ success: this.fetchSuccess });
+        }
+
+        fetchSuccess()
+        {
+            console.log(this.artistList.models);
+            this.render();
         }
 
         render()
         {
-            console.log("ArtistListView render called");
-
-            // Clear the view
+            // Clear the view and add to the DOM
             this.$el.empty();
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.el);
+
+            // Set the ID
             this.$el.attr("id", "AlbumView");
 
-            // Add the albums to the DOM
+            // Add the artists
             this.artistList.each((artist : Model.Artist) => 
             {
-                var artistView = new ArtistView({model: artist});
-                this.$el.append(artistView.render().el);
+                var artistView = new ArtistItemView({parentView: this, model: artist});
+                artistView.render();
+                //this.$el.append(artistView.render().el);
             });
 
             return this;

@@ -1,15 +1,15 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Collection/AlbumList.ts"/>
-/// <reference path="./AlbumView.ts"/>
+/// <reference path="./AlbumItemView.ts"/>
 
 module ViewController
 {
-    // This represents the entire sidebar menu
-    export class AlbumListView extends Backbone.View 
+    export class AlbumListView extends WaveBoxView 
     {
         albumList: Collection.AlbumList;
         displayType: string;
 
-        constructor()
+        constructor(options?)
         {        
             // This is an unnumbered list tag.
             this.tagName = "ul";
@@ -29,7 +29,7 @@ module ViewController
             // Add the albums to the DOM
             this.albumList.each((album : Model.Album) => 
             {
-                var albumView = new AlbumView({model: album});
+                var albumView = new AlbumItemView({model: album});
                 this.$el.append(albumView.render().el);
             });
 

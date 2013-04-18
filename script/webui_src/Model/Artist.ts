@@ -1,8 +1,9 @@
+/// <reference path="./WaveBoxModel.ts"/>
 /// <reference path="./ApiClient.ts"/>
 
 module Model
 {
-    export class Artist extends Backbone.Model 
+    export class Artist extends WaveBoxModel
     {
         itemTypeId: number;
         artistId: number;

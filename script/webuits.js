@@ -3,6 +3,36 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+var ViewController;
+(function (ViewController) {
+    var WaveBoxView = (function (_super) {
+        __extends(WaveBoxView, _super);
+        function WaveBoxView(options) {
+                _super.call(this, options);
+            this.parentView = this.options.parentView;
+            _.bindAll(this);
+        }
+        WaveBoxView.prototype.appendToParent = function () {
+            this.parentView.$el.append(this.el);
+        };
+        return WaveBoxView;
+    })(Backbone.View);
+    ViewController.WaveBoxView = WaveBoxView;    
+})(ViewController || (ViewController = {}));
+var Model;
+(function (Model) {
+    var WaveBoxModel = (function (_super) {
+        __extends(WaveBoxModel, _super);
+        function WaveBoxModel(attr, opts) {
+            if(opts !== undefined && opts !== null) {
+                this.options = opts;
+            }
+                _super.call(this, attr, opts);
+        }
+        return WaveBoxModel;
+    })(Backbone.Model);
+    Model.WaveBoxModel = WaveBoxModel;    
+})(Model || (Model = {}));
 var Model;
 (function (Model) {
     var SidebarMenuItem = (function (_super) {
@@ -21,7 +51,7 @@ var Model;
             };
         };
         return SidebarMenuItem;
-    })(Backbone.Model);
+    })(Model.WaveBoxModel);
     Model.SidebarMenuItem = SidebarMenuItem;    
 })(Model || (Model = {}));
 var Model;
@@ -66,14 +96,14 @@ var ViewController;
             return this;
         };
         return SidebarMenuItemView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.SidebarMenuItemView = SidebarMenuItemView;    
 })(ViewController || (ViewController = {}));
 var ViewController;
 (function (ViewController) {
     var SidebarMenuView = (function (_super) {
         __extends(SidebarMenuView, _super);
-        function SidebarMenuView() {
+        function SidebarMenuView(options) {
                 _super.call(this);
             this.setElement($("#SidebarMenuContent"), true);
             this.headerSection = new Model.SidebarMenuSection([
@@ -172,7 +202,7 @@ var ViewController;
             return this;
         };
         return SidebarMenuView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.SidebarMenuView = SidebarMenuView;    
 })(ViewController || (ViewController = {}));
 var ViewController;
@@ -184,9 +214,23 @@ var ViewController;
 
         }
         return FolderListView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.FolderListView = FolderListView;    
 })(ViewController || (ViewController = {}));
+var Collection;
+(function (Collection) {
+    var WaveBoxCollection = (function (_super) {
+        __extends(WaveBoxCollection, _super);
+        function WaveBoxCollection(models, opts) {
+            if(opts !== undefined && opts !== null) {
+                this.options = opts;
+            }
+                _super.call(this, models, opts);
+        }
+        return WaveBoxCollection;
+    })(Backbone.Collection);
+    Collection.WaveBoxCollection = WaveBoxCollection;    
+})(Collection || (Collection = {}));
 var Model;
 (function (Model) {
     var Album = (function (_super) {
@@ -195,8 +239,21 @@ var Model;
             _super.apply(this, arguments);
 
         }
+        Album.prototype.defaults = function () {
+            return {
+                itemTypeId: 2,
+                artistId: 0,
+                artistName: "",
+                albumId: 0,
+                albumName: "",
+                releaseYear: 0,
+                artId: 0,
+                artUrl: "",
+                numberOfSongs: 0
+            };
+        };
         return Album;
-    })(Backbone.Model);
+    })(Model.WaveBoxModel);
     Model.Album = Album;    
 })(Model || (Model = {}));
 var Model;
@@ -314,24 +371,20 @@ var Model;
                 type: 'POST'
             });
         }
-        ApiClient.getArtistInfo = function getArtistInfo(artistId) {
-            var aId = "";
-            if(artistId !== undefined) {
-                aId = artistId;
-            } else {
-                console.log("artist id undefined");
-                $.publish("data/getArtistInfoDone", [
-                    undefined
-                ]);
+        ApiClient.getArtistAlbums = function getArtistAlbums(artistId, context, callback) {
+            if(artistId === undefined) {
+                callback.call(context, false, "artistId missing");
                 return;
             }
             $.ajax({
                 url: this.API_ADDRESS + "artists/",
-                data: "s=" + this.SESSION_ID + "&id=" + aId,
+                data: "s=" + this.SESSION_ID + "&id=" + artistId,
                 success: function (data) {
-                    $.publish("data/getArtistInfoDone", [
-                        data
-                    ]);
+                    if(data.error === null) {
+                        callback.call(context, true, data.albums);
+                    } else {
+                        callback.call(context, false, data.error);
+                    }
                 },
                 async: true,
                 type: 'POST'
@@ -554,7 +607,7 @@ var Collection;
             return response;
         };
         return ArtistList;
-    })(Backbone.Collection);
+    })(Collection.WaveBoxCollection);
     Collection.ArtistList = ArtistList;    
 })(Collection || (Collection = {}));
 var Model;
@@ -566,59 +619,182 @@ var Model;
 
         }
         return Artist;
-    })(Backbone.Model);
+    })(Model.WaveBoxModel);
     Model.Artist = Artist;    
 })(Model || (Model = {}));
+var Collection;
+(function (Collection) {
+    var ArtistAlbumList = (function (_super) {
+        __extends(ArtistAlbumList, _super);
+        function ArtistAlbumList() {
+            _super.apply(this, arguments);
+
+            this.model = Model.Album;
+        }
+        ArtistAlbumList.prototype.sync = function (method, model, options) {
+            console.log("options: " + JSON.stringify(this.options));
+            switch(method) {
+                case 'create': {
+                    break;
+
+                }
+                case 'update': {
+                    break;
+
+                }
+                case 'delete': {
+                    break;
+
+                }
+                case 'read': {
+                    Model.ApiClient.getArtistAlbums(this.options.artistId, this, function (success, data) {
+                        console.log("success: " + success + "  data: " + JSON.stringify(data));
+                        if(success) {
+                            options.success(data);
+                        } else {
+                            options.error(data);
+                        }
+                    });
+                    break;
+
+                }
+                default: {
+                    console.error('Unknown method:', method);
+                    break;
+
+                }
+            }
+        };
+        ArtistAlbumList.prototype.parse = function (response, options) {
+            console.log("parse called, response: " + JSON.stringify(response));
+            return response;
+        };
+        return ArtistAlbumList;
+    })(Collection.WaveBoxCollection);
+    Collection.ArtistAlbumList = ArtistAlbumList;    
+})(Collection || (Collection = {}));
+var ViewController;
+(function (ViewController) {
+    var AlbumItemView = (function (_super) {
+        __extends(AlbumItemView, _super);
+        function AlbumItemView(options) {
+            this.tagName = "li";
+                _super.call(this, options);
+            this.template = _.template($('#AlbumView_cover-template').html());
+        }
+        AlbumItemView.prototype.render = function () {
+            this.appendToParent();
+            this.$el.addClass("AlbumContainer");
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        };
+        return AlbumItemView;
+    })(ViewController.WaveBoxView);
+    ViewController.AlbumItemView = AlbumItemView;    
+})(ViewController || (ViewController = {}));
 var ViewController;
 (function (ViewController) {
     var ArtistView = (function (_super) {
         __extends(ArtistView, _super);
         function ArtistView(options) {
+            this.tagName = "ul";
+                _super.call(this, options);
+            this.displayType = "cover";
+            console.log("options.artistId: " + this.options.artistId);
+            this.artistAlbumList = new Collection.ArtistAlbumList([], this.options);
+            this.artistAlbumList.on("change", this.render, this);
+            this.artistAlbumList.fetch({
+                success: this.fetchSuccess
+            });
+        }
+        ArtistView.prototype.fetchSuccess = function () {
+            console.log(this.artistAlbumList.models);
+            this.render();
+        };
+        ArtistView.prototype.render = function () {
+            var _this = this;
+            console.log("ArtistView render called");
+            this.$el.empty();
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.el);
+            this.$el.attr("id", "AlbumView");
+            this.artistAlbumList.each(function (album) {
+                var albumView = new ViewController.AlbumItemView({
+                    parentView: _this,
+                    model: album
+                });
+                _this.$el.append(albumView.render().el);
+            });
+            return this;
+        };
+        return ArtistView;
+    })(ViewController.WaveBoxView);
+    ViewController.ArtistView = ArtistView;    
+})(ViewController || (ViewController = {}));
+var ViewController;
+(function (ViewController) {
+    var ArtistItemView = (function (_super) {
+        __extends(ArtistItemView, _super);
+        function ArtistItemView(options) {
             this.tagName = "li";
+            this.events = {
+                "click": "open"
+            };
                 _super.call(this, options);
             this.template = _.template($('#ArtistView_cover-template').html());
         }
-        ArtistView.prototype.render = function () {
+        ArtistItemView.prototype.open = function () {
+            console.log("artist item view clicked, artistId = " + this.model.get("artistId"));
+            var view = new ViewController.ArtistView({
+                "artistId": this.model.get("artistId")
+            });
+            view.render();
+        };
+        ArtistItemView.prototype.render = function () {
+            this.appendToParent();
             this.$el.addClass("AlbumContainer");
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         };
-        return ArtistView;
-    })(Backbone.View);
-    ViewController.ArtistView = ArtistView;    
+        return ArtistItemView;
+    })(ViewController.WaveBoxView);
+    ViewController.ArtistItemView = ArtistItemView;    
 })(ViewController || (ViewController = {}));
 var ViewController;
 (function (ViewController) {
     var ArtistListView = (function (_super) {
         __extends(ArtistListView, _super);
-        function ArtistListView() {
+        function ArtistListView(options) {
             this.tagName = "ul";
                 _super.call(this);
             this.displayType = "cover";
             this.artistList = new Collection.ArtistList();
-            this.artistList.on("all", this.render, this);
-            var temp = this.artistList;
+            this.artistList.on("change", this.render, this);
             this.artistList.fetch({
-                success: function () {
-                    console.log(temp.models);
-                }
+                success: this.fetchSuccess
             });
         }
+        ArtistListView.prototype.fetchSuccess = function () {
+            console.log(this.artistList.models);
+            this.render();
+        };
         ArtistListView.prototype.render = function () {
             var _this = this;
-            console.log("ArtistListView render called");
             this.$el.empty();
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.el);
             this.$el.attr("id", "AlbumView");
             this.artistList.each(function (artist) {
-                var artistView = new ViewController.ArtistView({
+                var artistView = new ViewController.ArtistItemView({
+                    parentView: _this,
                     model: artist
                 });
-                _this.$el.append(artistView.render().el);
+                artistView.render();
             });
             return this;
         };
         return ArtistListView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.ArtistListView = ArtistListView;    
 })(ViewController || (ViewController = {}));
 var Collection;
@@ -631,32 +807,14 @@ var Collection;
             this.model = Model.Album;
         }
         return AlbumList;
-    })(Backbone.Collection);
+    })(Collection.WaveBoxCollection);
     Collection.AlbumList = AlbumList;    
 })(Collection || (Collection = {}));
 var ViewController;
 (function (ViewController) {
-    var AlbumView = (function (_super) {
-        __extends(AlbumView, _super);
-        function AlbumView(options) {
-            this.tagName = "li";
-                _super.call(this, options);
-            this.template = _.template($('#AlbumView_cover-template').html());
-        }
-        AlbumView.prototype.render = function () {
-            this.$el.addClass("AlbumContainer");
-            this.$el.html(this.template(this.model.toJSON()));
-            return this;
-        };
-        return AlbumView;
-    })(Backbone.View);
-    ViewController.AlbumView = AlbumView;    
-})(ViewController || (ViewController = {}));
-var ViewController;
-(function (ViewController) {
     var AlbumListView = (function (_super) {
         __extends(AlbumListView, _super);
-        function AlbumListView() {
+        function AlbumListView(options) {
             this.tagName = "ul";
                 _super.call(this);
             this.displayType = "cover";
@@ -666,7 +824,7 @@ var ViewController;
             this.$el.empty();
             this.$el.attr("id", "AlbumView");
             this.albumList.each(function (album) {
-                var albumView = new ViewController.AlbumView({
+                var albumView = new ViewController.AlbumItemView({
                     model: album
                 });
                 _this.$el.append(albumView.render().el);
@@ -674,7 +832,7 @@ var ViewController;
             return this;
         };
         return AlbumListView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.AlbumListView = AlbumListView;    
 })(ViewController || (ViewController = {}));
 var Model;
@@ -691,7 +849,7 @@ var Model;
             return minutes + ":" + seconds;
         };
         return MediaItem;
-    })(Backbone.Model);
+    })(Model.WaveBoxModel);
     Model.MediaItem = MediaItem;    
 })(Model || (Model = {}));
 var Model;
@@ -716,7 +874,7 @@ var Collection;
             this.model = Model.Song;
         }
         return PlayQueueList;
-    })(Backbone.Collection);
+    })(Collection.WaveBoxCollection);
     Collection.PlayQueueList = PlayQueueList;    
 })(Collection || (Collection = {}));
 var ViewController;
@@ -733,14 +891,14 @@ var ViewController;
             return this;
         };
         return PlayQueueItemView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.PlayQueueItemView = PlayQueueItemView;    
 })(ViewController || (ViewController = {}));
 var ViewController;
 (function (ViewController) {
     var PlayQueueView = (function (_super) {
         __extends(PlayQueueView, _super);
-        function PlayQueueView() {
+        function PlayQueueView(options) {
                 _super.call(this);
             this.setElement($("#QueueScroller"), true);
         }
@@ -756,14 +914,14 @@ var ViewController;
             return this;
         };
         return PlayQueueView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.PlayQueueView = PlayQueueView;    
 })(ViewController || (ViewController = {}));
 var ViewController;
 (function (ViewController) {
     var ApplicationView = (function (_super) {
         __extends(ApplicationView, _super);
-        function ApplicationView() {
+        function ApplicationView(options) {
                 _super.call(this);
             this.createInterface();
             this.authenticate();
@@ -912,8 +1070,7 @@ var ViewController;
             if(!this.artistList) {
                 this.artistList = new ViewController.ArtistListView();
             }
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.artistList.render().el);
+            this.artistList.render();
             this.hideMenu();
         };
         ApplicationView.prototype.showAlbums = function () {
@@ -1018,7 +1175,7 @@ var ViewController;
             }
         };
         return ApplicationView;
-    })(Backbone.View);
+    })(ViewController.WaveBoxView);
     ViewController.ApplicationView = ApplicationView;    
 })(ViewController || (ViewController = {}));
 var muc;

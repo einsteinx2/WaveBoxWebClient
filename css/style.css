@@ -759,3 +759,175 @@ ul#Filters .FolderIcon {
 .OneStars {
 	width:23px;
 	}	
+
+
+
+
+/*  Artist Page
+
+
+For mini player, when it uses 320px width.
+.MiniPlayerLeftMargins{
+	left:60px !important;
+	}	
+	
+	
+.MiniPlayerRightMargins{
+	left:-380px !important;
+	}		
+	
+.MiniPlayerFilterMargins{
+	left:-300px !important;
+	}	
+*/	
+	
+#MiniPlayer{
+	height:45px;
+	width:100%;
+	z-index:999;
+	position:fixed;
+	bottom:0;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	/** The Wrong Colors **/
+	background: rgb(226,226,226);
+	background: -moz-linear-gradient(top,  rgba(226,226,226,1) 0%, rgba(234,234,234,1) 50%, rgba(224,224,224,1) 51%, rgba(254,254,254,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(234,234,234,1)), color-stop(51%,rgba(224,224,224,1)), color-stop(100%,rgba(254,254,254,1)));
+	background: -webkit-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
+	background: -o-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
+	background: linear-gradient(to bottom,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 );
+	/** The Wrong Colors **/
+	border:1px #999 solid;
+	border-bottom-width:0px;
+	}
+	
+.MiniPlayerBtnsDropShadow{
+	-webkit-box-shadow:  2px 2px 0px 0px #00000;
+    		box-shadow:  2px 2px 0px 0px #00000;
+	}
+	
+	
+#PlayBtn{
+	height:45px;
+	width:45px;
+	background-repeat:no-repeat;
+	background-size:13px auto;
+	background-position:center;
+	position:absolute;
+	left:0px;
+	}	
+
+#MiniPlayer .Pause{
+	background-image:url(../img/Player/PauseBtn.png);
+	}	
+
+#MiniPlayer .Playing{
+	}	
+
+#FullScreenBtn{
+	height:45px;
+	width:45px;
+	background-repeat:no-repeat;
+	background-size:18px auto;
+	background-position:center;
+	background-image:url(../img/Player/FullScreenBtn.png);
+	float:right;
+	}
+	
+.PlayerDisplay{
+	height:45px;
+	width:232px;
+	position:absolute;
+	left:45px;
+}
+
+.PlayerDisplayDropShadow{	
+background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.3)));
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=1 );
+	}	
+
+.PlayerDisplayAlbum{
+	height:32px;
+	width:32px;
+	background-image:url(../img/Player/PlayerDisplayAlbum.png);
+	background-size:cover;
+	float:left;
+	margin-right: 6.5px;
+	}
+	
+.PlayerDisplayContainer{
+	margin: 6.5px;
+	}	
+
+.PlayerDisplaText{
+	font-size:12px;
+	float:left;
+	line-height:25px;
+	position:absolute;
+	}
+
+.PlayerDisplaySongTitle{
+	font-weight:600;
+	color:#333333;
+	left:45px;
+	top:0px;
+	}
+	
+
+.PlayerDisplayArtist{
+	font-weight:100;
+	color:#6d6d6d;
+	bottom:0px;
+	left:45px;
+	}
+	
+.PlayerDisplaySongTime{
+	font-weight:600;
+	color:#333333;
+	right:6.5px;
+	top:0px;
+	}
+
+.PlayerDisplaySongTimeLeft{
+	font-weight:100;
+	color:#6d6d6d;
+	bottom:0px;
+	right:6.5px;
+	}
+	
+		
+		
+.PlayMarker{
+	height:45px;
+	width:5px;
+	background: rgb(255,119,67);
+	background: -moz-linear-gradient(left,  rgba(255,119,67,1) 50%, rgba(255,83,33,1) 51%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(50%,rgba(255,119,67,1)), color-stop(51%,rgba(255,83,33,1)));
+	background: -webkit-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
+	background: -o-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
+	background: -ms-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
+	background: linear-gradient(to right,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7743', endColorstr='#ff5321',GradientType=1 );
+	position:absolute;
+	bottom:0px;
+	left:30%;
+	}
+	
+.ArtistPageBG{
+	background-image:url(../img/artist/OnerepublicBG.jpg) !important;
+	background-repeat:no-repeat;
+	background-position:0 0;
+	}	
+	
+	

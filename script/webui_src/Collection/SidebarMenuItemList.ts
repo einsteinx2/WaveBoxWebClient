@@ -1,8 +1,9 @@
+/// <reference path="./WaveBoxCollection.ts"/>
 /// <reference path="../Model/SidebarMenuItem.ts"/>
 
 module Collection
 {
-    export class SidebarMenuItemList extends Backbone.Collection 
+    export class SidebarMenuItemList extends WaveBoxCollection 
     {
         // Reference to this collection's model.
         model = Model.SidebarMenuItem;

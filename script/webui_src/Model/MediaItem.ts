@@ -1,6 +1,7 @@
+/// <reference path="./WaveBoxModel.ts"/>
 module Model
 {
-    export class MediaItem extends Backbone.Model 
+    export class MediaItem extends WaveBoxModel
     {
         itemTypeId: number;
         itemId: number;

@@ -1,9 +1,10 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Model/MediaItem.ts"/>
 /// <reference path="../Model/Song.ts"/>
 
 module ViewController
 {
-    export class PlayQueueItemView extends Backbone.View 
+    export class PlayQueueItemView extends WaveBoxView
     {
         model: Model.Song;
         template: (data: any) => string;

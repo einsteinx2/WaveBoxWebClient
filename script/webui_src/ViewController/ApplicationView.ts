@@ -1,3 +1,4 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="./SidebarMenuView.ts"/>
 /// <reference path="./FolderListView.ts"/>
 /// <reference path="./ArtistListView.ts"/>
@@ -8,7 +9,7 @@
 module ViewController
 {
     // This is the main application view controller. It is also the Event object used throughout the app for pub/sub events
-    export class ApplicationView extends Backbone.View 
+    export class ApplicationView extends WaveBoxView
     {
     	sidebarMenu: SidebarMenuView;
         folderList: FolderListView;
@@ -20,7 +21,7 @@ module ViewController
         isPlayQueueShowing: bool;
         isFilterShowing: bool;
 
-    	constructor()
+    	constructor(options?)
     	{
             super();
 
@@ -216,8 +217,7 @@ module ViewController
                 this.artistList = new ArtistListView();
             }
             
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.artistList.render().el);
+            this.artistList.render();
 
             this.hideMenu();
         }

@@ -1,15 +1,15 @@
+/// <reference path="./WaveBoxView.ts"/>
 /// <reference path="../Model/Song.ts"/>
 /// <reference path="../Collection/PlayQueueList.ts"/>
 /// <reference path="./PlayQueueItemView.ts"/>
 
 module ViewController
 {
-    // This represents the entire sidebar menu
-    export class PlayQueueView extends Backbone.View 
+    export class PlayQueueView extends WaveBoxView
     {
         playQueueList: Collection.PlayQueueList;
 
-        constructor()
+        constructor(options?)
         {        
             super();
 

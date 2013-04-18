@@ -64,6 +64,7 @@
     <link rel="stylesheet" type="text/css" href="css/nav.css"/>
     <link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+    <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 800px)' href='css/min500.css' />
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
@@ -106,10 +107,11 @@
         <!-- Content -->
         <div id="ContentWindow">
 
-        <!-- Album Popup -->
-        <div id="unclickable"></div>
+            <!-- Album Popup -->
+            <div id="unclickable"></div>
 
-        <div id="unclickableAlbumView"></div>
+            <div id="unclickableAlbumView"></div>
+            
             <div id="contentWrapper" class="animate">
                 <div id="contentScroller">
                     <div class="Cell">
@@ -127,8 +129,8 @@
                         </nav>
                     </div> 
                     <div id="contentMainArea"></div>
-				</div>
-			</div>
+    			</div>
+    		</div>
 		</div>
 	</div>
     
@@ -207,7 +209,7 @@
     <!-- Album Cover Template -->
     <script type="text/template" id="AlbumView_cover-template">
         <a href="#" class="AlbumContainerLink" onClick="window.location.reload()">
-            <span class="AlbumArtwork" style=<%= '"background-image:url(' + artUrl + ')"' %>>         
+            <span class="AlbumArtwork" style=<%= '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>>         
                 <div class="AlbumInfo">
                     <div class="TrackCount"><%= numberOfSongs %> <span>Tracks</span></div>
                 </div>
@@ -219,7 +221,7 @@
 
     <!-- Artist Cover Template -->
     <script type="text/template" id="ArtistView_cover-template">
-        <a href="#" class="AlbumContainerLink" onClick="window.location.reload()">
+        <a href="#" class="AlbumContainerLink">
             <span class="AlbumArtwork" style=<%= '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>>         
                 <div class="AlbumInfo">
                     <div class="TrackCount"><%= 2 %> <span>Tracks</span></div>

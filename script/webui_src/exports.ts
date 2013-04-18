@@ -19,6 +19,7 @@ declare module Backbone {
         toJSON(): any;
         sync(method: string, model: any, options?: any): any;
         parse(response: any, options?: any): any;
+        options: any;
     }
     export class Collection {
         constructor (models? , opts? );
@@ -37,6 +38,7 @@ declare module Backbone {
         sync(method: string, model: any, options?: any): any;
         parse(response: any, options?: any): any;
         toJSON(): any;
+        options: any;
     }
     export class View {
         constructor (options? );
@@ -54,6 +56,7 @@ declare module Backbone {
         off(ev?: string, f?: Function, ctx?: any): void;
         trigger(ev: string, args?: any): void;
         toJSON(): any;
+        options: any;
 
         static extend: any;
     }
