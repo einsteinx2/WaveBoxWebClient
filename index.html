@@ -222,7 +222,7 @@
     <!-- Artist Cover Template -->
     <script type="text/template" id="ArtistView_cover-template">
         <a href="#" class="AlbumContainerLink">
-            <span class="AlbumArtwork" style=<%= '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>>         
+            <span class="AlbumArtwork" style=<%= artId == null ? '' : "background-image:url(" + Model.ApiClient.getArtUrl(artId) + ')"' %>         
                 <div class="AlbumInfo">
                     <div class="TrackCount"><%= 2 %> <span>Tracks</span></div>
                 </div>
