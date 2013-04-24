@@ -170,7 +170,7 @@ module Model
 			});
 		}
 
-		public static getFolder(folderId: string, recursive: bool, callback: any): void
+		public static getFolder(folderId: number, recursive: bool, callback: any): void
 		{
 			var folder, url = this.API_ADDRESS + "folders", theData = "s=" + this.SESSION_ID, i;
 

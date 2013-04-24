@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <!-- LiveReload -->
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
     <title>Wave</title>
 
     <!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width 
@@ -222,13 +224,26 @@
     <!-- Artist Cover Template -->
     <script type="text/template" id="ArtistView_cover-template">
         <a href="#" class="AlbumContainerLink">
-            <span class="AlbumArtwork" style=<%= artId == null ? '' : "background-image:url(" + Model.ApiClient.getArtUrl(artId) + ')"' %>         
+            <span class="AlbumArtwork" style=<%= artId == null ? '' : '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>         
                 <div class="AlbumInfo">
                     <div class="TrackCount"><%= 2 %> <span>Tracks</span></div>
                 </div>
             </span>
             <span class="AlbumTitle"></span>
             <span class="ArtistName"><%= artistName %></span>
+        </a>
+    </script>
+
+    <!-- Folder Cover Template -->
+    <script type="text/template" id="FolderView_cover-template">
+        <a href="#" class="AlbumContainerLink">
+            <span class="AlbumArtwork" style=<%= artId == null ? '' : '"background-image:url(' + (artId == null ? "''" : Model.ApiClient.getArtUrl(artId)) + ')"' %>         
+                <div class="AlbumInfo">
+                    <div class="TrackCount"><%= 2 %> <span>Tracks</span></div>
+                </div>
+            </span>
+            <span class="AlbumTitle"></span>
+            <span class="ArtistName"><%= folderName %></span>
         </a>
     </script>
 

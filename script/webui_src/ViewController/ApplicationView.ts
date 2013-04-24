@@ -207,6 +207,12 @@ module ViewController
         showFolders()
         {
             //alert("showing folders");
+            if (!this.folderList)
+            {
+                this.folderList = new FolderListView();
+            }
+
+            this.folderList.render();
             this.hideMenu();
         }
 
@@ -218,7 +224,6 @@ module ViewController
             }
             
             this.artistList.render();
-
             this.hideMenu();
         }
 

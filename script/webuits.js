@@ -205,18 +205,6 @@ var ViewController;
     })(ViewController.WaveBoxView);
     ViewController.SidebarMenuView = SidebarMenuView;    
 })(ViewController || (ViewController = {}));
-var ViewController;
-(function (ViewController) {
-    var FolderListView = (function (_super) {
-        __extends(FolderListView, _super);
-        function FolderListView() {
-            _super.apply(this, arguments);
-
-        }
-        return FolderListView;
-    })(ViewController.WaveBoxView);
-    ViewController.FolderListView = FolderListView;    
-})(ViewController || (ViewController = {}));
 var Collection;
 (function (Collection) {
     var WaveBoxCollection = (function (_super) {
@@ -231,6 +219,142 @@ var Collection;
     })(Backbone.Collection);
     Collection.WaveBoxCollection = WaveBoxCollection;    
 })(Collection || (Collection = {}));
+var Model;
+(function (Model) {
+    var Folder = (function (_super) {
+        __extends(Folder, _super);
+        function Folder() {
+            _super.apply(this, arguments);
+
+        }
+        return Folder;
+    })(Model.WaveBoxModel);
+    Model.Folder = Folder;    
+})(Model || (Model = {}));
+var Collection;
+(function (Collection) {
+    var FolderList = (function (_super) {
+        __extends(FolderList, _super);
+        function FolderList(options) {
+                _super.call(this);
+            this.model = Model.Folder;
+            this.folderId = options.folderId;
+        }
+        FolderList.prototype.sync = function (method, model, options) {
+            switch(method) {
+                case 'create': {
+                    break;
+
+                }
+                case 'update': {
+                    break;
+
+                }
+                case 'delete': {
+                    break;
+
+                }
+                case 'read': {
+                    console.log("folderId: " + this.folderId);
+                    Model.ApiClient.getFolder(this.folderId, false, function (success, data) {
+                        console.log("success: " + success + "  data: " + JSON.stringify(data));
+                        if(success) {
+                            options.success(data);
+                        } else {
+                            options.error(data);
+                        }
+                    });
+                    break;
+
+                }
+                default: {
+                    console.error('Unknown method:', method);
+                    break;
+
+                }
+            }
+        };
+        FolderList.prototype.parse = function (response, options) {
+            console.log("parse called, response: " + JSON.stringify(response));
+            return response.folders;
+        };
+        return FolderList;
+    })(Collection.WaveBoxCollection);
+    Collection.FolderList = FolderList;    
+})(Collection || (Collection = {}));
+var ViewController;
+(function (ViewController) {
+    var FolderItemView = (function (_super) {
+        __extends(FolderItemView, _super);
+        function FolderItemView(options) {
+            this.tagName = "li";
+            this.events = {
+                "click": "open"
+            };
+                _super.call(this, options);
+            this.template = _.template($('#FolderView_cover-template').html());
+        }
+        FolderItemView.prototype.open = function () {
+            console.log("open called.  folderId: " + this.model.get("folderId"));
+            var view = new ViewController.FolderListView({
+                "folderId": this.model.get("folderId")
+            });
+            view.render();
+        };
+        FolderItemView.prototype.render = function () {
+            console.log(this.model);
+            this.appendToParent();
+            this.$el.addClass("AlbumContainer");
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        };
+        return FolderItemView;
+    })(ViewController.WaveBoxView);
+    ViewController.FolderItemView = FolderItemView;    
+})(ViewController || (ViewController = {}));
+var ViewController;
+(function (ViewController) {
+    var FolderListView = (function (_super) {
+        __extends(FolderListView, _super);
+        function FolderListView(options) {
+                _super.call(this);
+            this.displayType = "cover";
+            this.tagName = "ul";
+            var folderId = undefined;
+            if(options !== undefined && options !== null && options.folderId !== undefined && options.folderId !== null) {
+                folderId = options.folderId;
+            }
+            this.folderList = new Collection.FolderList({
+                "folderId": folderId
+            });
+            this.folderList.on("change", this.render, this);
+            this.folderList.fetch({
+                success: this.fetchSuccess
+            });
+        }
+        FolderListView.prototype.fetchSuccess = function () {
+            console.log(this.folderList.models);
+            this.render();
+        };
+        FolderListView.prototype.render = function () {
+            var _this = this;
+            this.$el.empty();
+            $("#contentMainArea").empty();
+            $("#contentMainArea").append(this.el);
+            this.$el.attr("id", "AlbumView");
+            this.folderList.each(function (folder) {
+                var artistView = new ViewController.FolderItemView({
+                    parentView: _this,
+                    model: folder
+                });
+                artistView.render();
+            });
+            return this;
+        };
+        return FolderListView;
+    })(ViewController.WaveBoxView);
+    ViewController.FolderListView = FolderListView;    
+})(ViewController || (ViewController = {}));
 var Model;
 (function (Model) {
     var Album = (function (_super) {
@@ -1064,6 +1188,10 @@ var ViewController;
             $('#ContentFilter').removeClass('ContentFilterVisibility');
         };
         ApplicationView.prototype.showFolders = function () {
+            if(!this.folderList) {
+                this.folderList = new ViewController.FolderListView();
+            }
+            this.folderList.render();
             this.hideMenu();
         };
         ApplicationView.prototype.showArtists = function () {
