@@ -21,27 +21,33 @@
     left: 0px;
     top: 0px;
     bottom: 0px;
+	padding-bottom:35px;
 }
 
+
 #AlbumView:after {
-    content: ".";
-    display: block;
+    /** content: "."; **/
+	content: "";    
+	display: block;
     clear: both;
     visibility: hidden;
 }
 
+.AlbumViewContent:after {
+    content: "." !important;
+}
+
+
 #AlbumView .AlbumContainer {
     display: inline-block;
-    vertical-align: top;
-    float: none;
     position: relative;
+    float: none;
+    vertical-align: top;
     overflow: hidden;
     width: 230px;
     max-width: 230px;
 }
-    .ArtistName:empty, .AlbumTitle:empty {
-        display: none !important;
-    }
+
     #AlbumView .AlbumContainer .AlbumContainerLink, #AlbumView .AlbumContainer .AlbumTitle, .ArtistName {
         display: block;
         text-decoration: none;
@@ -56,7 +62,6 @@
     }
 
     #AlbumView .AlbumContainer .AlbumArtwork {
-        position: relative;
         display: block;
         text-align: center;
         padding-top: 100%;
@@ -66,19 +71,16 @@
     }
 
 .AlbumArtwork {
-    margin-bottom: 5px;
     background-image: url(../img/BlankAlbum.png);
     background-size: cover;
     overflow: hidden;
 }
 
 .AlbumInfo{
-    width: 100%;
-    height: 100%;
 	position:absolute;
     top: 0px;
     left: 0;
-    bottom: 42px;
+    bottom: 0px !important;
     right: -2px;
 	overflow:hidden;
 	background: -moz-linear-gradient(-45deg,  rgba(188,188,188,0) 0%, rgba(117,117,117,0.1) 50%, rgba(10,14,10,0.1) 51%, rgba(10,8,9,0.19) 100%); /* FF3.6+ */
@@ -188,15 +190,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
     right: -2px;
     border: 1px solid gray;
 	position:absolute;
-	
-	
-
 	}
+
+	#ContentWindow{padding-top: 50px;}
+	#contentWrapper{top:100px;}	
+
 
 @media (max-width: 1970px) { 
 	#AlbumView .AlbumContainer { width: 12.5% }
-
 	#AlbumView { max-width: 1970px }
+		
+	.ContentWindowArtist{padding-top:327px !important;}	
+	.contentWrapperArtist{top: 377px !important;}	
+	
 }
 
 @media (max-width: 1640px) { 
@@ -225,15 +231,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
 
 @media (max-width: 720px) { 
 	#AlbumView .AlbumContainer { width: 25% }
-
 	#AlbumView { max-width: 720px }
 }
 
 @media (max-width: 479px) { 
 	#AlbumView .AlbumContainer { width: 50% }
-
 	#AlbumView { max-width: 479px }
-
 	#FullAlbum {
 	    width: 300px;
 	    height: 400px;
@@ -242,40 +245,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
 	    bottom: 50%;
 	    margin-bottom: 50px;
 	}
+	.ContentWindowArtist{padding-top:127px; }	
+	.contentWrapperArtist{top: 177px;}	
 }
 
 @media (max-width: 440px) { 
 	#AlbumView { min-height: 0 }
-
-	    #AlbumView .AlbumContainer {
-	        width: 50%;
-	        max-width: 210px;
-	    }
-
-	        #AlbumView .AlbumContainer .AlbumTitle, .ArtistName { margin: 5px }
-
-	#AlbumView { max-width: 440px }
-
+	#AlbumView .AlbumContainer {width: 50%;max-width: 210px;}
+	#AlbumView .AlbumContainer .AlbumTitle, .ArtistName {margin: 5px;}
+	#AlbumView { max-width: 440px;}
 	.AlbumQuickView { bottom: 52px }
-	
-	.AlbumInfo{
-    bottom: 52px;
-	}
+	.AlbumInfo{bottom: 52px;}
 
-	
 }
 
 @media only screen and (min-device-width: 320px) { 
 	/* iPhone 5 CSS styles  */
-
-	#AlbumView { min-width: 320px;
-	background-color:#e8e8e8;
-	 }
+	#AlbumView { min-width: 320px;background-color:#e8e8e8;}	 
 }
+
+
 
 @media (max-width: 310px) { 
 	#AlbumView { padding: 5px }
-
 	#AlbumView { max-width: 310px }
 }
 
@@ -285,7 +277,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
 
 @media only screen and (max-width: 225px) { 
 	#AlbumView .AlbumContainer { width: 100% }
-
 	#AlbumView { max-width: 225px }
 }
 
@@ -301,4 +292,58 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
 	#AlbumView { max-width: 1024px }
 }
 
+/** Full Cover view **/
 
+.FullCover {
+	width: 100% !important;
+	display: inline-table;
+}
+
+
+.FullCoverTitleShift {
+	width: 100% !important;
+	display: inline-table;
+}
+
+
+/** List View **/
+
+.AlbumArtwork.AlbumArtList {
+	height: 57px !important;
+	width: 57px !important;
+	padding: 0px !important;
+	border: 0px !important;
+	margin:0px !important;
+	display:inline !important;
+	float:left !important;
+}
+
+.AlbumContainerLink.AlbumMarginReset {
+	margin: 0 !important;
+	width:100% !important;
+
+}
+
+
+.ArtistPaddingList {
+	float: left !important;
+	margin-left: 8px !important;
+	padding-top: 5px !important;
+	height: 51px !important;
+	overflow:hidden; 
+}
+
+
+.AlbumContainer.ItemsList {
+	width: 100% !important;
+	min-width:100% !important;
+	border-top: 1px solid #CCC;
+}
+
+#ArtistLinks {
+	float: left !important;
+}
+
+.ArtistListClearMargin{
+	margin: 0px !important;
+}

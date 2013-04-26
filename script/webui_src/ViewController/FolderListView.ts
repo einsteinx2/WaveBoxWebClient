@@ -36,10 +36,12 @@ module ViewController
 
         render()
         {
+            console.log("Rendering folder list");
+
             // Clear the view and add to the DOM
             this.$el.empty();
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.el);
+            $("#contentScroller").empty();
+            $("#contentScroller").append(this.el);
 
             // Set the ID
             this.$el.attr("id", "AlbumView");
@@ -47,8 +49,8 @@ module ViewController
             // Add the folders
             this.folderList.each((folder : Model.Folder) => 
             {
-                var artistView = new FolderItemView({parentView: this, model: folder});
-                artistView.render();
+                var folderView = new FolderItemView({parentView: this, model: folder});
+                folderView.render();
                 //this.$el.append(artistView.render().el);
             });
 

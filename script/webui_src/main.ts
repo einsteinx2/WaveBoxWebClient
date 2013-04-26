@@ -2,12 +2,7 @@
 /// <reference path="ViewController/ApplicationView.ts"/>
 
 // Tino stuff
-var muc;
-var sbw;  
-var vpw;
-var vph;
-var sdh;
-var mbh;
+var muc, sbw, vpw, vph, sdh, mbh, cts, ctw;
 //
 
 var app;

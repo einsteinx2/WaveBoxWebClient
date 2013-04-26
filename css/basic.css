@@ -13,7 +13,7 @@ a, div {
 }
 
 body{
-	background:#e8e8e8;
+	background:#e6e6e6;
 	font:14px/18px HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color:#666;	
 	-webkit-font-smoothing:antialiased;
@@ -154,7 +154,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active{
 	}
 	
 	
-	
 .disable {
    pointer-events: none;
    cursor: default;
@@ -169,7 +168,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active{
 	}	
 
 .PlaylistMargin{
-	margin-left:-220px !important;	
+	margin-left:-260px !important;	
 	}
 	
 .FilterMargin{
@@ -231,5 +230,11 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active{
 .DisplayNone{
 	display:none;
 	}	
+
+.nocolorBG{
+	background-color:transparent !important;
+	}
 	
-	
+.contentWrapperArtist{
+	background-color:#e6e6e6;
+	}

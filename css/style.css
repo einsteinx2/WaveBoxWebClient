@@ -14,7 +14,6 @@
             #content ul li {  }
 
        		#MenuColumn { 
-			opacity:.5;
 			background-color:#dadada;
 			height:100%;
 			z-index:1;
@@ -26,26 +25,25 @@
       
 			
 			#Playlist {
-			opacity:.5;
 			background-color:#dadada;
 			height:100%;
 			z-index:1;
-			width:220px;
+			width:260px;
 			right:0px;
 			position:fixed;
-			margin-right:-220px;}
+			margin-right:-260px;
+			}
 			
 
 			#Filter {
-			opacity:.5;
 			background-color:#fff;
 			height:100%;
 			z-index:1;
 			width:140px;
 			right:0px;
 			position:fixed;
-			margin-right:-220px;
-			 }
+			margin-right:-140px;
+			}
 			 
 			 
 			
@@ -59,16 +57,25 @@
 
 #HeaderBar{
 	width:100%;
-	color:#545454;
-	font-weight:800;
-	font-size:18px;
-	z-index:99;
-	text-transform:uppercase;
+	z-index:99;	
 	
 	}
+	
+#HeaderBar h1{
+	font-weight:800;
+	font-size:18px;	
+	background: -webkit-linear-gradient(top, #545454, #343434);
+	background: linear-gradient(top, #545454, #343434);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;	
+}	
+.UpperCase{
+	text-transform:uppercase;
+	}	
 
 .HeaderMenuOption{
-	padding:31px 31px;
+	height:44px;
+	width:50px;
 	}	
 	
 .Logo{
@@ -79,10 +86,9 @@
 	}
 	
 #LogoArea {
-height: 58px;
+height: 50px;
 width: 220px;
 position: absolute;
-top: 0px;
 }	
 
 
@@ -104,7 +110,7 @@ top: 0px;
 .CenterBar{
 	background-color:#d1d1d1;
 	padding: 0 0;
-	height:58px;
+	height: 50px;
 	position:fixed;
 	top:0;
 	
@@ -112,31 +118,38 @@ top: 0px;
 	}
 .Sidebars{
 	background-color:#bababa;
-	padding: 20px 0;
+	padding: 16.66px 0;
 	height:18px;
 	text-align:center;
 	}
 
 .PlaylistIcon{
 	background-image:url(../img/playlist.png);
-	background-position:center;
+	background-position:center 18px;
 	background-size:23px auto;
 	background-repeat:no-repeat;
 	}
 .MenuIcon{
 	background-image:url(../img/menu.png);
-	background-position:center;
+	background-position:center 21px;
 	background-size:19px auto;
 	background-repeat:no-repeat;
-	}	
+	}
+	
+.BackIcon{
+	background-image:url(../img/back.png);
+	background-position:center 21px;
+	background-size:20px auto;
+	background-repeat:no-repeat;
+	}		
 
 #ContentWindow{
 	height:1000px;
 	width:100%;
-	margin-top:58px;
+	padding-top: 50px;
 	position:fixed;
 	background-color:#fff;
-	box-shadow: 2px 8px 15px rgba(0,0,0,.2) 
+	box-shadow: 2px 8px 15px rgba(0,0,0,.2);
 	overflow:hidden;
 	overflow-x:hidden;	
 	}
@@ -208,20 +221,26 @@ padding: 0px 25px;
 	}	
 
 .FilterIcon{
-	background-image:url(../img/Filters.png);
+	background-image:url(../img/filters.png);
 	background-position:center;
 	background-size:15px auto;
 	background-repeat:no-repeat;
+	position:relative;
+	z-index:5001;
 	}	
 	
 	
 #contentWrapper{
 	position:fixed;
-	top:58px; bottom:0px; left:0; right:0;
+	bottom:0px; left:0; right:0;
 	max-width:100%;
 	z-index:1;
 	overflow:scroll;
 	overflow-x:hidden;
+}
+
+.contentWrapperWOminiMusicPlayer{
+	bottom:0px !important;
 }	
 
 #contentScroller {
@@ -276,9 +295,10 @@ and (max-width : 321px) {
 	width:100%;
 	position:absolute;
 	background-color:#fff;
-	opacity:.5;
-	z-index:800;
+	opacity:0;
+	z-index:5000;
 	display:none;
+	top: 50px;	
 	}
 	
 #unclickableHeader{
@@ -375,7 +395,6 @@ and (max-width : 321px) {
 .SidebarMenu  li.Settings{
 	background-image:url(../img/SettingIcon.png);
 	background-size: 23px;
-	opacity: 0.4;
 	margin-top:-50px;
 	margin-left:165px;
 	width:55px;
@@ -388,6 +407,7 @@ and (max-width : 321px) {
 	background-image:url(../img/SettingIcon.png);
 	background-size: 23px;
 	background-color:#fff;
+	
 	}	
 			
 
@@ -471,7 +491,7 @@ and (max-width : 321px) {
 
 #SidebarMenu{
 	position: absolute;
-	top: 58px;
+	top: 50px;
 	bottom: 0px;
 	right: 0;
 	width: 220px;
@@ -491,10 +511,10 @@ and (max-width : 321px) {
 
 #QueueList {
 	position: absolute;
-	top: 58px;
+	top: 50px;
 	bottom: 0px;
 	right: 0;
-	width: 220px;
+	width: 260px;
 	z-index: 1;
 	overflow: scroll;
 	overflow-x:hidden;
@@ -505,15 +525,14 @@ and (max-width : 321px) {
 #QueueScroller {
 	overflow:scroll;
 	overflow-x:hidden;
-	width: 220px;
+	width: 260px;
 	height:auto;
-	
+	background-color:#e8e8e8;
 }
 
 .QueueList{
 	width:100%;
 	height:50px;
-	background-color:#dadada;
 	color:#7d7d7d;
 	}
 	
@@ -564,7 +583,7 @@ and (max-width : 321px) {
 
 #FilterList {
 	position: absolute;
-	top: 58px;
+	top: 50px;
 	bottom: 0px;
 	right: 0;
 	width: 140px;
@@ -596,7 +615,7 @@ li.FilterTitle {
 	font-size:11px;
 	width:120px;
 	color:#fff;
-	padding: 2px 10px 4px 10px !important;
+	padding: 0px 10px 4px 10px !important;
 	height:20px;
 	background-color:#656565;	
 	opacity:1 !important;
@@ -618,10 +637,10 @@ padding: 0 0 0 30px;
 	
 ul#Filters li{
 	padding: 17px 10px 17px 10px;
-	height:16.6px;
+	height:15px;
 	white-space:nowrap;
 	width:120px;
-	opacity: 0.4;	
+	opacity:0.4;
 	}	
 	
 ul#Filters li:hover,ul#Filters li:active , .current{
@@ -670,7 +689,7 @@ ul#Filters:first-child {
 	
 ul#Filters {
 	padding:0px 0 0 0;
-	background-color:#dadada;
+	background-color:#e8e8e8;
 	width:160px;
 
 	}		
@@ -759,10 +778,10 @@ ul#Filters .FolderIcon {
 .OneStars {
 	width:23px;
 	}	
-
-
-
-
+	
+	
+	
+	
 /*  Artist Page
 
 
@@ -782,40 +801,36 @@ For mini player, when it uses 320px width.
 */	
 	
 #MiniPlayer{
-	height:45px;
+	height: 50px;
 	width:100%;
 	z-index:999;
-	position:fixed;
-	bottom:0;
-	-webkit-border-top-left-radius: 3px;
-	-webkit-border-top-right-radius: 3px;
-	-moz-border-radius-topleft: 3px;
-	-moz-border-radius-topright: 3px;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+	position:absolute;
+	top:0px;
 	/** The Wrong Colors **/
-	background: rgb(226,226,226);
-	background: -moz-linear-gradient(top,  rgba(226,226,226,1) 0%, rgba(234,234,234,1) 50%, rgba(224,224,224,1) 51%, rgba(254,254,254,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(234,234,234,1)), color-stop(51%,rgba(224,224,224,1)), color-stop(100%,rgba(254,254,254,1)));
-	background: -webkit-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
-	background: -o-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
-	background: linear-gradient(to bottom,  rgba(226,226,226,1) 0%,rgba(234,234,234,1) 50%,rgba(224,224,224,1) 51%,rgba(254,254,254,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 );
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0.5) 49%, rgba(255,255,255,0) 50%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(255,255,255,0.5)), color-stop(50%,rgba(255,255,255,0)));
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
+	background: -o-linear-gradient(top,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
+	background: linear-gradient(to bottom,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#00ffffff',GradientType=0 );
 	/** The Wrong Colors **/
-	border:1px #999 solid;
-	border-bottom-width:0px;
+	border:1px #CCC solid;
+	border-top-width:0px;
+	border-left:0px !important;
+	border-right:0px !important;
 	}
 	
-.MiniPlayerBtnsDropShadow{
-	-webkit-box-shadow:  2px 2px 0px 0px #00000;
-    		box-shadow:  2px 2px 0px 0px #00000;
-	}
+
 	
+.dropshadow {
+	text-shadow: 0px 1px 1px #ffffff;
+    filter: dropshadow(color=#ffffff, offx=0, offy=1);
+}
 	
 #PlayBtn{
-	height:45px;
-	width:45px;
+	height: 50px;
+	width: 50px;
 	background-repeat:no-repeat;
 	background-size:13px auto;
 	background-position:center;
@@ -831,30 +846,31 @@ For mini player, when it uses 320px width.
 	}	
 
 #FullScreenBtn{
-	height:45px;
-	width:45px;
+	height: 50px;
+	width: 50px;
 	background-repeat:no-repeat;
 	background-size:18px auto;
 	background-position:center;
 	background-image:url(../img/Player/FullScreenBtn.png);
-	float:right;
-	}
+	position: relative;
+	left: 210px;	
+}
 	
 .PlayerDisplay{
-	height:45px;
+	height: 50px;
 	width:232px;
 	position:absolute;
-	left:45px;
+	left: 50px;
 }
 
 .PlayerDisplayDropShadow{	
-background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.3)));
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
-background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
-background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
-background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=1 );
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.5)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#80ffffff',GradientType=1 );
 	}	
 
 .PlayerDisplayAlbum{
@@ -864,6 +880,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	background-size:cover;
 	float:left;
 	margin-right: 6.5px;
+	display:none;
 	}
 	
 .PlayerDisplayContainer{
@@ -880,36 +897,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .PlayerDisplaySongTitle{
 	font-weight:600;
 	color:#333333;
-	left:45px;
-	top:0px;
+	top:2px;
 	}
 	
 
 .PlayerDisplayArtist{
 	font-weight:100;
-	color:#6d6d6d;
-	bottom:0px;
-	left:45px;
+	color:#6e6e6e;
+	bottom:4px;
 	}
 	
 .PlayerDisplaySongTime{
-	font-weight:600;
-	color:#333333;
+	color:#6e6e6e;
 	right:6.5px;
-	top:0px;
+	top:2px;
 	}
 
 .PlayerDisplaySongTimeLeft{
 	font-weight:100;
-	color:#6d6d6d;
-	bottom:0px;
+	color:#6e6e6e;
+	bottom:4px;
 	right:6.5px;
 	}
 	
 		
 		
 .PlayMarker{
-	height:45px;
+	height: 50px;
 	width:5px;
 	background: rgb(255,119,67);
 	background: -moz-linear-gradient(left,  rgba(255,119,67,1) 50%, rgba(255,83,33,1) 51%);

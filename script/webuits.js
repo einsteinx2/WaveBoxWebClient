@@ -87,6 +87,7 @@ var ViewController;
                 _super.call(this, options);
         }
         SidebarMenuItemView.prototype.open = function () {
+            console.log("open triggered: " + this.model.get("name"));
             app.trigger(this.model.get("action"));
         };
         SidebarMenuItemView.prototype.render = function () {
@@ -338,16 +339,17 @@ var ViewController;
         };
         FolderListView.prototype.render = function () {
             var _this = this;
+            console.log("Rendering folder list");
             this.$el.empty();
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.el);
+            $("#contentScroller").empty();
+            $("#contentScroller").append(this.el);
             this.$el.attr("id", "AlbumView");
             this.folderList.each(function (folder) {
-                var artistView = new ViewController.FolderItemView({
+                var folderView = new ViewController.FolderItemView({
                     parentView: _this,
                     model: folder
                 });
-                artistView.render();
+                folderView.render();
             });
             return this;
         };
@@ -839,8 +841,8 @@ var ViewController;
             var _this = this;
             console.log("ArtistView render called");
             this.$el.empty();
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.el);
+            $("#contentScroller").empty();
+            $("#contentScroller").append(this.el);
             this.$el.attr("id", "AlbumView");
             this.artistAlbumList.each(function (album) {
                 var albumView = new ViewController.AlbumItemView({
@@ -905,8 +907,8 @@ var ViewController;
         ArtistListView.prototype.render = function () {
             var _this = this;
             this.$el.empty();
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.el);
+            $("#contentScroller").empty();
+            $("#contentScroller").append(this.el);
             this.$el.attr("id", "AlbumView");
             this.artistList.each(function (artist) {
                 var artistView = new ViewController.ArtistItemView({
@@ -1041,6 +1043,29 @@ var ViewController;
     })(ViewController.WaveBoxView);
     ViewController.PlayQueueView = PlayQueueView;    
 })(ViewController || (ViewController = {}));
+var Router;
+(function (Router) {
+    var WaveBoxRouter = (function (_super) {
+        __extends(WaveBoxRouter, _super);
+        function WaveBoxRouter() {
+            _super.apply(this, arguments);
+
+            this.routes = {
+                "artists/:artistId": "artists",
+                "folders/:folderId": "folders"
+            };
+        }
+        WaveBoxRouter.prototype.artists = function (artistId) {
+            var aId = artistId == undefined || artistId == null ? undefined : {
+                "artistId": artistId
+            };
+            var view = new ViewController.ArtistView(aId);
+            view.render();
+        };
+        return WaveBoxRouter;
+    })(Backbone.Router);
+    Router.WaveBoxRouter = WaveBoxRouter;    
+})(Router || (Router = {}));
 var ViewController;
 (function (ViewController) {
     var ApplicationView = (function (_super) {
@@ -1049,6 +1074,7 @@ var ViewController;
                 _super.call(this);
             this.createInterface();
             this.authenticate();
+            this.router = new Router.WaveBoxRouter();
         }
         ApplicationView.prototype.authenticate = function () {
             Model.ApiClient.authenticate("test", "test", this, function (success, error) {
@@ -1062,25 +1088,285 @@ var ViewController;
         };
         ApplicationView.prototype.createInterface = function () {
             console.log("create interface");
-            $("#HeaderBar").ready(this.resizeDiv);
-            window.onresize = this.resizeDiv;
-            $(".MenuIcon").click(this.toggleMenu);
-            $(".PlaylistIcon").click(this.togglePlayQueue);
-            $(".FilterIcon").click(this.toggleFilter);
+            var a = document.getElementsByTagName("a");
+            for(var i = 0; i < a.length; i++) {
+                a[i].onclick = function () {
+                    window.location = this.getAttribute("href");
+                    return false;
+                };
+            }
+            $("#HeaderBar").ready(function () {
+                resizeDiv();
+            });
+            window.onresize = function (event) {
+                resizeDiv();
+            };
+            function resizeDiv() {
+                muc = '124';
+                sbw = '260';
+                vpw = $(window).width();
+                vph = $(window).height();
+                sdh = $("#QueueScroller").height();
+                mbh = $("#SidebarMenuScroller").height();
+                ctw = $("#contentWrapper").height();
+                cts = $("#contentScroller").height();
+                $('#contentScroller').css({
+                    'width': vpw + 'px'
+                });
+                $('#unclickableHeader').css({
+                    'width': vpw - muc + 'px'
+                });
+                $('#container').css({
+                    'height': vph + 'px'
+                });
+                $('#QueueScroller').css({
+                    'height': sdh + 'px'
+                });
+                $('#ContentFilter').css({
+                    'width': vpw - 30 + 'px'
+                });
+                $('.PlayerDisplay').css({
+                    'width': sbw - 100 + 'px'
+                });
+                $('.ArtistPaddingList').css({
+                    'width': 'initial !important'
+                });
+                $('.ArtistPageBG').css({
+                    'background-size': vpw + 'px'
+                });
+                $('.Cell').css({
+                    'width': vpw + 'px'
+                });
+            }
+            $(".FullCover").click(function () {
+                $('.AlbumContainerLink').addClass('FullCover');
+            });
+            $(".DirectoryViewIcon").click(function () {
+                $('.AlbumContainerLink').addClass('AlbumMarginReset');
+                $('div#ArtistLinks').addClass('ArtistPaddingList');
+                $('.AlbumContainer').addClass('ItemsList');
+                $('span.AlbumArtwork, .AlbumInfo').addClass('AlbumArtList');
+                $('.AlbumTitle').addClass('ArtistLabelList');
+                $('.AlbumTitle, .ArtistName').addClass('ArtistListClearMargin');
+                $('#AlbumView').removeClass('AlbumViewContent');
+            });
+            $(".AlbumSortIcon").click(function () {
+                $('.AlbumContainerLink').removeClass('AlbumMarginReset');
+                $('div#ArtistLinks').removeClass('ArtistPaddingList');
+                $('.AlbumContainer').removeClass('ItemsList');
+                $('span.AlbumArtwork, .AlbumInfo').removeClass('AlbumArtList');
+                $('.AlbumTitle').removeClass('ArtistLabelList');
+                $('.AlbumTitle, .ArtistName').removeClass('ArtistListClearMargin');
+                $('#AlbumView').addClass('AlbumViewContent');
+            });
+            $("#contentWrapper").swiperight(function () {
+                $('#content').css({
+                    'width': vpw - sbw + 'px'
+                });
+                $('#content, #contentWrapper').toggleClass('MenuMargin');
+                $('#MenuColumn').toggleClass('displaySidebars');
+                $("#unclickable, #unclickableHeader").fadeIn(550);
+                $('.AlbumContainerLink').addClass('disable');
+                $('#ContentFilter').removeClass('ContentFilterVisibility');
+                $('#MiniPlayer').addClass('animate');
+                $('#MiniPlayer').addClass('MiniPlayerLeftMargins');
+            });
+            $("#contentWrapper").swipeleft(function () {
+                $('#content').css({
+                    'width': vpw - sbw + 'px'
+                });
+                $('#content, #contentWrapper').toggleClass('MenuMargin');
+                $('#MenuColumn').toggleClass('displaySidebars');
+                $("#unclickable, #unclickableHeader").fadeIn(550);
+                $('.AlbumContainerLink').addClass('disable');
+                $('#ContentFilter').removeClass('ContentFilterVisibility');
+                $('#MiniPlayer').addClass('animate');
+                $('#MiniPlayer').addClass('MiniPlayerLeftMargins');
+            });
+            $("#contentWrapper").swipeleft(function () {
+                $('#content, #contentWrapper').toggleClass('PlaylistMargin');
+                $('#MiniPlayer').addClass('animate');
+                $('#MiniPlayer').addClass('MiniPlayerRightMargins');
+                $('#Playlist, #QueueList').toggleClass('displaySidebars');
+                $("#unclickable, #unclickableHeader").fadeIn(550);
+                $('.AlbumContainerLink').addClass('disable');
+                $('#ContentFilter').removeClass('ContentFilterVisibility');
+            });
+            $("#unclickable").swipe(function () {
+                $('#content, #contentWrapper').removeClass('PlaylistMargin');
+                $('#content, #contentWrapper').removeClass('FilterMargin');
+                $('#content, #contentWrapper').removeClass('MenuMargin');
+                $('#MenuColumn, #Playlist, #QueueList, #Filter').delay(1000).removeClass('displaySidebars');
+                $("#unclickableHeader, #unclickable").fadeOut();
+                $('.AlbumContainerLink').removeClass('disable');
+                $('.HideBrowseOptions').addClass('DisplayNone');
+                $("#HideBrowseOptions").removeClass('DisplayNone');
+                $('#MiniPlayer').removeClass('MiniPlayerRightMargins');
+                $('#MiniPlayer').removeClass('MiniPlayerLeftMargins');
+                $('#MiniPlayer').removeClass('MiniPlayerFilterMargins');
+            });
+            $(".MenuIcon").click(function () {
+                $('#content').css({
+                    'width': vpw - sbw + 'px'
+                });
+                $('#content, #contentWrapper').toggleClass('MenuMargin');
+                $('#MenuColumn').toggleClass('displaySidebars');
+                $("#unclickable, #unclickableHeader").fadeToggle(550);
+                $('.AlbumContainerLink').addClass('disable');
+                $('#ContentFilter').removeClass('ContentFilterVisibility');
+                $('#MiniPlayer').addClass('animate');
+                $('#MiniPlayer').addClass('MiniPlayerLeftMargins');
+            });
+            $(".PlaylistIcon").click(function () {
+                if($('#content, #contentWrapper').hasClass('FilterMargin')) {
+                    $('#Filter, #FilterList').removeClass('displaySidebars');
+                    $('#content, #contentWrapper').removeClass('FilterMargin');
+                    $('#content').css({
+                        'width': vpw - sbw + 'px'
+                    }, 100);
+                    $('#content, #contentWrapper').toggleClass('PlaylistMargin');
+                    $('#MiniPlayer').addClass('animate');
+                    $('#MiniPlayer').addClass('MiniPlayerRightMargins');
+                    $('#Playlist, #QueueList').toggleClass('displaySidebars');
+                    $('.AlbumContainerLink').addClass('disable');
+                    $('#ContentFilter').removeClass('ContentFilterVisibility');
+                } else {
+                    $('#content').css({
+                        'width': vpw - sbw + 'px'
+                    });
+                    $('#content, #contentWrapper').toggleClass('PlaylistMargin');
+                    $('#MiniPlayer').addClass('animate');
+                    $('#MiniPlayer').addClass('MiniPlayerRightMargins');
+                    $('#Playlist, #QueueList').toggleClass('displaySidebars');
+                    $("#unclickableHeader, #unclickable").fadeIn();
+                    $('.AlbumContainerLink').addClass('disable');
+                    $('#ContentFilter').removeClass('ContentFilterVisibility');
+                }
+            });
+            $(".FilterIcon").click(function () {
+                if($('#content, #contentWrapper').hasClass('PlaylistMargin')) {
+                    $('#content, #contentWrapper').removeClass('PlaylistMargin');
+                    $('#Playlist, #QueueList').removeClass('displaySidebars');
+                    $('#content').css({
+                        'width': vpw - sbw + 'px'
+                    });
+                    $('#MiniPlayer').addClass('animate');
+                    $('#MiniPlayer').addClass('MiniPlayerFilterMargins');
+                    $('#content, #contentWrapper').toggleClass('FilterMargin');
+                    $('#Filter, #FilterList').toggleClass('displaySidebars');
+                    $('.AlbumContainerLink').addClass('disable');
+                    $('#ContentFilter').removeClass('ContentFilterVisibility');
+                } else {
+                    $('#content').css({
+                        'width': vpw - sbw + 'px'
+                    });
+                    $('#MiniPlayer').addClass('animate');
+                    $('#MiniPlayer').addClass('MiniPlayerFilterMargins');
+                    $('#content, #contentWrapper').toggleClass('FilterMargin');
+                    $('#Filter, #FilterList').toggleClass('displaySidebars');
+                    $("#unclickableHeader, #unclickable").fadeIn();
+                    $('.AlbumContainerLink').addClass('disable');
+                    $('#ContentFilter').removeClass('ContentFilterVisibility');
+                }
+            });
             $(".SidebarIcons, .FilterSideBar, #unclickable, #unclickableHeader").click(function () {
                 $('#content, #contentWrapper').removeClass('PlaylistMargin');
                 $('#content, #contentWrapper').removeClass('FilterMargin');
                 $('#content, #contentWrapper').removeClass('MenuMargin');
                 $('#MenuColumn, #Playlist, #QueueList, #Filter').delay(1000).removeClass('displaySidebars');
-                $("#unclickableHeader, #unclickable").fadeToggle();
+                $("#unclickableHeader, #unclickable").fadeOut();
                 $('.AlbumContainerLink').removeClass('disable');
                 $('.HideBrowseOptions').addClass('DisplayNone');
                 $("#HideBrowseOptions").removeClass('DisplayNone');
+                $('#MiniPlayer').removeClass('MiniPlayerRightMargins');
+                $('#MiniPlayer').removeClass('MiniPlayerLeftMargins');
+                $('#MiniPlayer').removeClass('MiniPlayerFilterMargins');
             });
             $("#HideBrowseOptions").click(function () {
                 $("#HideBrowseOptions").addClass('DisplayNone');
                 $('.HideBrowseOptions').removeClass('DisplayNone');
             });
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                var header = $('.Cell');
+                $("#contentWrapper").scroll(function (e) {
+                    if(header.offset().top !== 0) {
+                        if(!header.hasClass('shadow')) {
+                            header.addClass('shadow');
+                        }
+                    } else {
+                        header.removeClass('shadow');
+                    }
+                });
+                var contentWrapper, QueueList, FilterList, SidebarMenu;
+                QueueList = new iScroll('QueueList', {
+                    snap: '.QueueList',
+                    hScroll: false,
+                    scrollbarClass: 'AllScrollbar',
+                    checkDOMChanges: true
+                });
+                FilterList = new iScroll('FilterList', {
+                    checkDOMChanges: true,
+                    snap: 'li',
+                    hScroll: false,
+                    scrollbarClass: 'AllScrollbar',
+                    onBeforeScrollStart: function (e) {
+                        var target = e.target;
+                        while(target.nodeType != 1) {
+                            target = target.parentNode;
+                        }
+                        if(target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
+                            e.preventDefault();
+                        }
+                    }
+                });
+                SidebarMenu = new iScroll('SidebarMenu', {
+                    snap: '.SidebarIcons, span',
+                    checkDOMChanges: true,
+                    hScroll: false,
+                    fadeScrollbar: true,
+                    scrollbarClass: 'AllScrollbar'
+                });
+                contentWrapper = new iScroll("contentWrapper", {
+                    snap: '.AlbumContainer, .Cell',
+                    checkDOMChanges: true,
+                    momentum: true,
+                    hScroll: false,
+                    scrollbarClass: 'AllScrollbar',
+                    useTransform: false,
+                    onBeforeScrollStart: function (e) {
+                        var target = e.target;
+                        while(target.nodeType != 1) {
+                            target = target.parentNode;
+                        }
+                        if(target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
+                            e.preventDefault();
+                        }
+                    },
+                    onScrollMove: function () {
+                        $('.AlbumContainerLink').addClass('disable');
+                        $('.Center.Bar').addClass('LogoColored');
+                        $(".nav li").removeClass("navDisplay");
+                        $('#ContentFilter').removeClass('ContentFilterVisibility');
+                    },
+                    onScrollEnd: function () {
+                        $('.AlbumContainerLink').removeClass('disable');
+                        $('.Center.Bar').removeClass('LogoColored');
+                    }
+                });
+                var header = $('#HeaderBar');
+                $("#contentScroller").scroll(function (e) {
+                    if(header.offset().top !== 0) {
+                        if(!header.hasClass('shadow')) {
+                            header.addClass('shadow');
+                        }
+                    } else {
+                        header.removeClass('shadow');
+                    }
+                });
+                $(".nav li , .closeNav").click(function () {
+                    $(".nav li").toggleClass("navDisplay");
+                });
+            }
             this.handleMobile();
             this.sidebarMenu = new ViewController.SidebarMenuView();
             this.sidebarMenu.render();
@@ -1104,22 +1390,39 @@ var ViewController;
         };
         ApplicationView.prototype.resizeDiv = function () {
             muc = '124';
-            sbw = '220';
+            sbw = '260';
             vpw = $(window).width();
             vph = $(window).height();
             sdh = $("#QueueScroller").height();
             mbh = $("#SidebarMenuScroller").height();
+            ctw = $("#contentWrapper").height();
+            cts = $("#contentScroller").height();
             $('#contentScroller').css({
                 'width': vpw + 'px'
             });
             $('#unclickableHeader').css({
                 'width': vpw - muc + 'px'
             });
-            $('#QueueScroller, #').css({
+            $('#container').css({
+                'height': vph + 'px'
+            });
+            $('#QueueScroller').css({
                 'height': sdh + 'px'
             });
             $('#ContentFilter').css({
                 'width': vpw - 30 + 'px'
+            });
+            $('.PlayerDisplay').css({
+                'width': sbw - 100 + 'px'
+            });
+            $('.ArtistPaddingList').css({
+                'width': 'initial !important'
+            });
+            $('.ArtistPageBG').css({
+                'background-size': vpw + 'px'
+            });
+            $('.Cell').css({
+                'width': vpw + 'px'
             });
         };
         ApplicationView.prototype.showMenu = function () {
@@ -1188,6 +1491,7 @@ var ViewController;
             $('#ContentFilter').removeClass('ContentFilterVisibility');
         };
         ApplicationView.prototype.showFolders = function () {
+            alert("showing folders");
             if(!this.folderList) {
                 this.folderList = new ViewController.FolderListView();
             }
@@ -1306,12 +1610,7 @@ var ViewController;
     })(ViewController.WaveBoxView);
     ViewController.ApplicationView = ApplicationView;    
 })(ViewController || (ViewController = {}));
-var muc;
-var sbw;
-var vpw;
-var vph;
-var sdh;
-var mbh;
+var muc, sbw, vpw, vph, sdh, mbh, cts, ctw;
 var app;
 $(function () {
     app = new ViewController.ApplicationView();

@@ -38,8 +38,8 @@ module ViewController
 
             // Clear the view and add to the DOM
             this.$el.empty();
-            $("#contentMainArea").empty();
-            $("#contentMainArea").append(this.el);
+            $("#contentScroller").empty();
+            $("#contentScroller").append(this.el);
 
             // Set the id
             this.$el.attr("id", "AlbumView");

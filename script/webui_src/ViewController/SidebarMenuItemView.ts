@@ -23,6 +23,7 @@ module ViewController
 
         open()
         {
+            console.log("open triggered: " + this.model.get("name"));
             app.trigger(this.model.get("action"));
         }
 
