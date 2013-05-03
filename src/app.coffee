@@ -8,3 +8,5 @@ App = Backbone.Router.extend
 
 $ ->
 	app = new App()
+	app.apiClient.authenticate "test", "test", this, (success) ->
+		console.log "success? #{success}"	
