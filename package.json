@@ -1,0 +1,8 @@
+{
+	"name": "WaveBoxHTML",
+	"version": "0.1.0",
+	"dependencies": {
+		"coffee-script": "1.6.2",
+		"browserify": "2.13.2"
+	}
+}
