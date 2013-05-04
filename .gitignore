@@ -2,3 +2,4 @@ node_modules
 script/wavebox.js
 script/pagebehavior.js
 .lib
+Guardfile
