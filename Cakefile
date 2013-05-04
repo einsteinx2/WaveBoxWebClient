@@ -53,6 +53,8 @@ task 'docs', 'generate documentation', -> docco()
 # ```
 task 'build', 'compile source', -> build ->
   #launch 'pwd', null, ->
+  exec ['ls -l > /Users/justin/Desktop/out.txt']
+  exec '/bin/cp', ['./.lib/pagebehavior.js', './script/pagebehavior.js']
   launch 'browserify', ['-e', './.lib/app.js', '-o', './script/wavebox.js'], ->
     log "All done! :)", green
 
