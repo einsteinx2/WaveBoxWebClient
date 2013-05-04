@@ -13,7 +13,7 @@ class exports.ApiClient
 	logOut: ->
 		localStorage.clear()
 
-	authenticate: (username, password, context, callback) ->
+	authenticate: (username, password, callback) ->
 		console.log "Calling authenticate"
 
 		$.ajax
@@ -24,12 +24,12 @@ class exports.ApiClient
 					@SESSION_ID = data.sessionId
 					console.log "sessionId: #{@SESSION_ID}"
 					localStorage.setItem "waveBoxSessionKey", @SESSION_ID
-					callback.call context, true
+					if callback? then callback true
 				else
-					callback.call context, false, data.error
+					if callback? then callback false, data.error
 			error: (XHR, status, error) ->
 				console.log "authenticate failed with error code: #{JSON.stringify(XHR)}"
-				callback false
+				if callback? then callback false
 			async: true
 			type: 'POST'
 
@@ -42,17 +42,17 @@ class exports.ApiClient
 				success: (data) ->
 					if data.error?
 						console.log "sessionId not valid, error: #{data.error}"
-						callback false, data.error
+						if callback? then callback false, data.error
 					else
 						console.log "sessionId is valid"
-						callback true
+						if callback? then callback true
 				error: (XHR, status, error) ->
 					console.log "error checking session id: #{status}"
-					callback false
+					if callback? then callback false
 				async: true
 				type: "POST"
 		else
-			callback false
+			if callback? then callback false
 
 	getArtistList: (context, callback) ->
 		$.ajax
@@ -60,13 +60,12 @@ class exports.ApiClient
 			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
-					callback context, false, data.error
+					if callback? then callback false, data.error
 				else
-					console.log "sessionId is valid"
-					callback.call context, true, data.artists
+					if callback? then callback true, data.artists
 			error: (XHR, status, error) ->
 				console.log "error getting artist list: #{status}"
-				callback context, false, error
+				callback false, error
 			async: true
 			type: "POST"
 
@@ -78,13 +77,13 @@ class exports.ApiClient
 			data: "s=#{@SESSION_ID}&id=#{artistId}"
 			success: (data) ->
 				if data.error?
-					callback context, false, data.error
+					if callback? then callback false, data.error
 				else
 					console.log "sessionId is valid"
-					callback.call context, true, data.albums
+					if callback? then callback true, data.albums
 			error: (XHR, status, error) ->
 				console.log "error getting artist albums list: #{status}"
-				callback context, false, error
+				if callback? then callback false, error
 			async: true
 			type: "POST"
 
@@ -96,13 +95,13 @@ class exports.ApiClient
 			data: "s=#{@SESSION_ID}&id=#{id}"
 			success: (data) ->
 				if data.error?
-					callback context, false, data.error
+					if callback? then callback false, data.error
 				else
 					console.log "sessionId is valid"
-					callback.call context, true, data
+					if callback? then callback true, data
 			error: (XHR, status, error) ->
 				console.log "error getting song list: #{status}"
-				callback context, false, error
+				if callback? then callback false, error
 			async: true
 			type: "POST"
 
@@ -117,10 +116,10 @@ class exports.ApiClient
 			data: d
 			success: (data) ->
 				if data.error?
-					callback context, false, data.error
+					if callback? then callback false, data.error
 				else
 					console.log "sessionId is valid"
-					callback.call context, true, data
+					if callback? then callback true, data
 			error: (XHR, status, error) ->
 				console.log "error getting song list: #{status}"
 				callback context, false, error
@@ -132,14 +131,14 @@ class exports.ApiClient
 		urlObj = {}
 
 		if song.fileType is 2
-			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.songId}"
+			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.itemId}"
 		else
-			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.songId}&transType=MP3&transQuality=MEDIUM"
+			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.itemId}&transType=MP3&transQuality=MEDIUM"
 
 		if song.fileType is 4
-			objUrl.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.songId}"
+			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.itemId}"
 		else 
-			objUrl.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.songId}&transType=OGG&transQuality=MEDIUM"
+			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.itemId}&transType=OGG&transQuality=MEDIUM"
 
 		return urlObj
 
@@ -150,41 +149,39 @@ class exports.ApiClient
 
 		return "#{@API_ADDRESS}/art?id=#{artId}&s=#{@SESSION_ID}#{asize}"
 
-	lastfmSetNowPlaying: (song) ->
+	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/scrobble"
-			data: "s=#{@SESSION_ID}&id=#{song.songId}&action=NOWPLAYING"
+			data: "s=#{@SESSION_ID}&id=#{song.itemId}&action=NOWPLAYING"
 			success: (data) ->
 				if data.error?
 					if data.error is "LFMNotAuthenticated" 
 						window.open data.authUrl
-					else
-						callback context, false, data.error
+					if callback? then callback false, data.error
 				else
 					console.log "Successfully updated last.fm now playing"
-					callback.call context, true, data
+					if callback? then callback true, data
 			error: (XHR, status, error) ->
 				console.log "error getting song list: #{status}"
-				callback context, false, error
+				if callback? then callback false, error
 			async: true
 			type: "POST"
 
-	lastfmScrobbleTrack: (song) ->
+	lastfmScrobbleTrack: (song, callback) ->
 		timestamp = new Date().getTime() / 1000
 		$.ajax
 			url: "#{@API_ADDRESS}/scrobble"
-			data: "s=#{@SESSION_ID}&event=#{song.songId},#{timestamp}&action=SUBMIT"
+			data: "s=#{@SESSION_ID}&event=#{song.itemId},#{timestamp}&action=SUBMIT"
 			success: (data) ->
 				if data.error?
 					if data.error is "LFMNotAuthenticated" 
 						window.open data.authUrl
-					else
-						callback context, false, data.error
+						if callback? then callback context, false, data.error
 				else
 					console.log "Scrobble successful"
-					callback.call context, true, data
+					if callback? then callback true, data
 			error: (XHR, status, error) ->
 				console.log "error getting song list: #{status}"
-				callback context, false, error
+				if callback? then callback false, error
 			async: true
 			type: "POST"

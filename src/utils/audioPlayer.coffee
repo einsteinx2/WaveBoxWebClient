@@ -1,4 +1,4 @@
-exports.AudioPlayer = Backbone.Router.extend
+exports.AudioPlayer = Backbone.Model.extend
 	events:
 		"click .playerButtonShuffle": "shuffle"
 		"click .playerButtonRepeat": "repeat"
@@ -23,31 +23,34 @@ exports.AudioPlayer = Backbone.Router.extend
 		# progress
 		@elapsed = 0
 		@duration = 0
-		@downloadProgress = 0
+		@downloadProgress = 1
 		
 		# options
 		@preferredCodec = "mp3"
-		@jPlayer = $("#jquery_jplayer_1")
+		@jPlayer = $("#jPlayer")
+
+		thisRef = @
 
 		# initialize jPlayer
 		@jPlayer.jPlayer
 			ready: ->
 			ended: ->
-				@events.trigger "songEnded"
+				thisRef.trigger "songEnded"
 			play: ->
 				@playing = true
 			pause: ->
 				@playing = false
 			progress: (e) ->
 				@downloadProgress = e.jPlayer.status.seekPercent / 100
-				@events.trigger "downloadUpdate"
+				thisRef.trigger "downloadUpdate"
 			timeupdate: (e) ->
 				@elapsed = e.jPlayer.status.currentTime
 				@duration = e.jPlayer.status.duration
-				@events.trigger "timeUpdate"
+				thisRef.trigger "timeUpdate"
 			volumechange: (e) ->
 				@volume = e.jPlayer.options.volume
 				@muted = e.jPlayer.options.muted
+				thisRef.trigger "volumeChange"
 			swfPath: "/swf/"
 			supplied: "mp3, oga"
 			solution: "html, flash"
@@ -67,6 +70,7 @@ exports.AudioPlayer = Backbone.Router.extend
 		return ""
 
 	playPause: ->
+		console.log "playPause triggered"
 		if not @playing then @jPlayer.jPlayer "play" else @jPlayer.jPlayer "pause"
 
 	currentSong: ->
@@ -79,17 +83,18 @@ exports.AudioPlayer = Backbone.Router.extend
 		if incomingCodec isnt "INCOMPATIBLE"
 			# if jPlayer isn't init'd with the proper incoming codec, we need to re-init it
 			if @preferredCodec isnt incomingCodec
+				console.log "Destroying jPlayer"
 				@jPlayer.jPlayer "destroy"
 				@preferredCodec = incomingCodec
 				supplyString = if incomingCodec is "mp3" then "mp3, oga" else "oga, mp3"
 				@createJPlayerInstanceWithSupplyString supplyString
 
-			urlObject = WBApiClient.getSongUrlObject song
+			urlObject = wavebox.apiClient.getSongUrlObject song
 			@jPlayer.jPlayer "setMedia", urlObject
 			@jPlayer.jPlayer "play" if shouldPlay
 
-			@saveToLocalStorage()
-			@events.trigger "newSong"
+			# @saveToLocalStorage()
+			@trigger "newSong"
 
 		else
 			console.log "unable to play\n #{song}"
