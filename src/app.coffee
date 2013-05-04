@@ -7,6 +7,7 @@ App = Backbone.Router.extend
 		@apiClient = new ApiClient.ApiClient()
 
 $ ->
-	app = new App()
-	app.apiClient.authenticate "test", "test", this, (success) ->
+	window.wavebox = new App()
+	wavebox.apiClient.authenticate "test", "test", this, (success) ->
 		console.log "success? #{success}"	
+		$("body").append "Great success with the authentications!"
