@@ -45,6 +45,11 @@
             <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 500px)' href='css/min500.css' />
             <link rel="stylesheet" type="text/css" href="css/framework.css" />
             <!-- Cuz Kickass --><link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+
+            <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+            <script type="text/javascript" src="js/jquery-noclickdelay.js"></script>
+            <script type="text/javascript" src="js/offline.js"></script>
 	<title>WaveBox</title>
 </head>
 
@@ -362,11 +367,12 @@
 
 	</div>
 </div>
-<div id="main">
+<div id="main" class='scroll'>
 	
 	<div id="mainContent" class='scrollContent'>
     <div id="HeaderBar" class="CenterBar Logo use-fastClick">
-
+        <div id="unclickableHeader"></div>
+        <div id="unclickableHeaderAlbumView"></div>
         <a href="#" class="first">
             <button class="MenuIcon leftPanelToggle sprite FloatLeft HeaderMenuOption  fastClick"></button>
         </a>
@@ -378,6 +384,8 @@
     <div id="ContentWindow">
         <!-- Album Popup -->
         <!-- Album Popup -->
+        <div id="unclickable"></div>
+        <div id="unclickableAlbumView"></div>
         <div class="Cell">
             <div id="SearchCell">
                 <form class="form-search use-fastClick">
@@ -408,7 +416,7 @@
             <div id="contentScroller">
                 <!-- Album View -->
                 
-                <ul id="AlbumView" class="AlbumViewContent scroll">
+                <ul id="AlbumView" class="AlbumViewContent">
                 <div id="OfflineAlert" class="DisplayNone">
                 <span class=" sprite offlineGFX"></span>
                 </div>
@@ -813,15 +821,10 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="script/underscore-min.js"></script>
-<script type="text/javascript" src="script/backbone-min.js"></script>
-<script type="text/javascript" src="script/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="script/jquery.mobile.custom.min.js"></script>
-<script type="text/javascript" src="script/jquery-noclickdelay.js"></script>
-<script type="text/javascript" src="script/offline.js"></script>
-<script type="text/javascript" src="script/wbTranslate.js"></script>
-<script type="text/javascript" src="script/pagebehavior.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/wbTranslate.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type='text/javascript' src="http://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>
 
 </body>
 </html>
