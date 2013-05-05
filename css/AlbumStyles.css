@@ -57,6 +57,10 @@
     #AlbumView .AlbumContainer .AlbumTitle, .ArtistName {
         display: block;
         margin: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
     }
 
     #AlbumView .AlbumContainer .AlbumArtwork {
@@ -352,7 +356,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', e
 	border-top: 1px solid #CCC;
 }
 
-#ArtistLinks {
+.ArtistLinks {
+	width: 100%;
 	float: left !important;
 }
 

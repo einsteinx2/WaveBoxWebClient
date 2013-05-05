@@ -54,7 +54,7 @@ class exports.ApiClient
 		else
 			if callback? then callback false
 
-	getArtistList: (context, callback) ->
+	getArtistList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/artists"
 			data: "s=#{@SESSION_ID}"
@@ -69,7 +69,7 @@ class exports.ApiClient
 			async: true
 			type: "POST"
 
-	getArtistAlbums: (artistId, context, callback) ->
+	getArtistAlbums: (artistId, callback) ->
 		return if not artistId?
 
 		$.ajax
@@ -87,7 +87,7 @@ class exports.ApiClient
 			async: true
 			type: "POST"
 
-	getSongList: (id, forItemType = "albums", context, callback) ->
+	getSongList: (id, forItemType = "albums", callback) ->
 		return if not id?
 
 		$.ajax

@@ -10,8 +10,6 @@ exports.AudioPlayer = Backbone.Model.extend
 	initialize: ->
 		# player properties
 		@playing = false
-		@shuffle = false
-		@repeat = "off"
 		@volume = 1
 		@muted = false
 
@@ -29,39 +27,29 @@ exports.AudioPlayer = Backbone.Model.extend
 		@preferredCodec = "mp3"
 		@jPlayer = $("#jPlayer")
 
-		thisRef = @
-
 		# initialize jPlayer
 		@jPlayer.jPlayer
-			ready: ->
-			ended: ->
-				thisRef.trigger "songEnded"
-			play: ->
+			ready: =>
+			ended: =>
+				@trigger "songEnded"
+			play: =>
 				@playing = true
-			pause: ->
+			pause: =>
 				@playing = false
-			progress: (e) ->
+			progress: (e) =>
 				@downloadProgress = e.jPlayer.status.seekPercent / 100
-				thisRef.trigger "downloadUpdate"
-			timeupdate: (e) ->
+				@trigger "downloadUpdate"
+			timeupdate: (e) =>
 				@elapsed = e.jPlayer.status.currentTime
 				@duration = e.jPlayer.status.duration
-				thisRef.trigger "timeUpdate"
-			volumechange: (e) ->
+				@trigger "timeUpdate"
+			volumechange: (e) =>
 				@volume = e.jPlayer.options.volume
 				@muted = e.jPlayer.options.muted
-				thisRef.trigger "volumeChange"
+				@trigger "volumeChange"
 			swfPath: "/swf/"
 			supplied: "mp3, oga"
 			solution: "html, flash"
-
-
-
-	shuffle: ->
-		return ""
-
-	repeat: ->
-		return ""
 
 	next: ->
 		return ""
