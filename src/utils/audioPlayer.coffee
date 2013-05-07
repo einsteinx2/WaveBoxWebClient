@@ -1,4 +1,4 @@
-exports.AudioPlayer = Backbone.Model.extend
+module.exports = Backbone.Model.extend
 	events:
 		"click .playerButtonShuffle": "shuffle"
 		"click .playerButtonRepeat": "repeat"

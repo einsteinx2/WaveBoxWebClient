@@ -17,6 +17,7 @@ body, html {
 
 .scroll {
     overflow-x:hidden;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -60,18 +61,20 @@ h1 {
 
 #main {
     background-color: white;
+    box-sizing: border-box;
 	box-shadow: 2px 8px 15px rgba(0,0,0,.2);    
-	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    -webkit-transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
+    height: 100%;
+    position: relative;
+    overflow: scroll;
 }
 
 #mainContent {
-    padding: 0;
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom: 0;
     box-sizing: border-box;
 }
 

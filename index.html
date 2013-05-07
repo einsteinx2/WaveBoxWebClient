@@ -42,7 +42,7 @@
             <![endif]-->
             <link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
             <link rel="stylesheet" type="text/css" href="css/style.css" />
-            <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 500px)' href='css/min500.css' />
+            <!-- <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 500px)' href='css/min500.css' /> -->
             <link rel="stylesheet" type="text/css" href="css/framework.css" />
             <!-- Cuz Kickass --><link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<title>WaveBox</title>
@@ -364,7 +364,7 @@
 </div>
 <div id="main">
 	
-	<div id="mainContent" class='scrollContent'>
+	<div id="mainContent" class="scroll mainContentContainer"></div>
     <div id="HeaderBar" class="CenterBar Logo use-fastClick">
 
         <a href="#" class="first">
@@ -404,10 +404,7 @@
                 </ul>
             </nav>
         </div>
-        <div id="contentWrapper" class="animate scroll">
-            <ul id="AlbumView" class="AlbumViewContent scroll"></ul>
-        </div>
-        </div>
+        
 	</div>
 </div>
 
@@ -431,18 +428,12 @@
 </script>
 
 <script type='text/template' id='template-artist_container'>
-<a class="AlbumContainerLink" href="#"> 
-    <span class="AlbumArtwork" style="background-image:url(art/1.jpg)">
-        <div class="AlbumInfo">
-            <div class="Glossed"></div>
-            <div class="TrackCount"><%= trackCount %><span>Tracks</span></div>
-        </div>
-    </span>
-    <div class="ArtistLinks"> 
-        <span class="AlbumTitle"><%= albumName %></span>
-        <span class="ArtistName"><%= artistName %></span>
-    </div>
-</a>
+<div class="imgWrapper">
+    <img src="img/BlankAlbum.png" class="overlay">
+</div>
+<div class="imgText">
+    <p><%= itemTitle %></p>
+</div>
 </script>
 
 <script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>

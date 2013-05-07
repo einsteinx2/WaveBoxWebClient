@@ -1,5 +1,50 @@
 $(document).ready ->
 
+    window.imgLoadTimeout = null;
+    $("#mainContent").on "scroll", ->
+        clearTimeout(window.imgReloadTimeout)
+        window.imgReloadTimeout = setTimeout(loadImages, 300);
+
+    loadImages = ->
+        windowTop = document.body.scrollTop - 200
+        windowBottom = document.body.scrollTop + $(window).height() + 200
+        $('.itemWrapper').each (index, item) ->
+            $item = $(item)
+            itemOffset = $item.offset().top
+            hasArt = $item.find(".art").length > 0
+            if itemOffset >= windowTop and itemOffset <= windowBottom and not hasArt
+                img = new Image()
+                img.associatedElement = item
+                $img = $(img)
+                $img.addClass('art')
+                $img.load ->
+                    fadeIn.call(img)
+                img.src = item.getAttribute('data-img-url')
+
+    fadeIn = ->
+        $el = $(this.associatedElement.children[0])
+        window.el = $el
+        overlay = $el.children('.overlay').first()
+        console.log "overlay: #{overlay}"
+        $(this).insertBefore(overlay)
+
+        # overlay.addClass "backface-visibility"
+        # $el.hide().show()
+        fadeOverlay = ->
+            overlay.css "opacity", 0
+            # setTimeout fadeDone 400
+        setTimeout fadeOverlay, 50
+
+        # fadeDone = ->
+        #     overlay.removeClass "backspace-visibility"
+        # setTimeout fadeDone, 400
+
+    $ ->
+        placeholder = new Image
+        $(placeholder).load ->
+            loadImages()
+        placeholder.src = "BlankAlbum.png"
+
     toggledPanel = null
     $main = $("#main")
     $left = $("#left")
@@ -135,6 +180,7 @@ $(document).ready ->
 
         $("body").on "touchstart", (event) ->
             $top = $(event.originalEvent.srcElement).closest(".scroll")
+            console.log "top: #{$top}"
             $next = $top.children().first()
             bottom = $next.height() - $top.height()
             middle = $next.height() / 2
@@ -163,6 +209,9 @@ $(document).ready ->
         $main.bind "touchmove", (event) ->
             return if event.originalEvent.touches.length isnt 1
             $this = $(this)
+
+            console.log "touchmove on #{$target}"
+
             
             if window.scrollType is "x"
                 event.preventDefault()

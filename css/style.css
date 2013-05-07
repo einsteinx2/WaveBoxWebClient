@@ -5,20 +5,18 @@ html, body
     height: 100%;
 }
 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
     margin: 0;
     padding: 0;
 }
 
-a, div {
+a {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-touch-callout: none;
-	
 }
 
 body{
 	background:#e6e6e6;
-	font:14px/18px HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color:#666;	
 	-webkit-font-smoothing:antialiased;
 	-webkit-text-size-adjust:none;
@@ -182,13 +180,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active{
 	margin-left:-140px !important;	
 	}
 
-.animate {
-	-webkit-transition: all 300ms ease-out;
-	-moz-transition: all 300ms ease-out;
-	-o-transition: all 300ms ease-out;
-	-ms-transition: all 300ms ease-out;
-	transition: all 300ms ease-out;	
-  }
   
   
 .FilterAnimate {
@@ -398,16 +389,6 @@ position: absolute;
 	background-size:20px auto;
 	background-repeat:no-repeat;
 	}		
-
-#ContentWindow{
-	height:1000px;
-	width:100%;
-	background-color:#fff;
-	box-shadow: 2px 8px 15px rgba(0,0,0,.2);
-	overflow:hidden;
-	overflow-x:hidden;	
-	}
-	
 	
 .Cell{
 	height:50px;
@@ -493,10 +474,6 @@ padding: 0px 25px;
 	overflow-x:hidden;
 	background-color: #e8e8e8;
 	position:absolute;
-}
-
-.AlbumViewContent {
-	overflow: visible;
 }
 
 .contentWrapperWOminiMusicPlayer{

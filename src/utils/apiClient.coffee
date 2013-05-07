@@ -1,4 +1,4 @@
-class exports.ApiClient
+class module.exports
 	constructor: ->
 		@API_ADDRESS = '/api'
 		@SESSION_ID = localStorage.getItem "waveBoxSessionKey"
