@@ -8,11 +8,15 @@ SidebarSectionView = require "./sidebarsectionview"
 module.exports = Backbone.View.extend
 	
 	el: "#SidebarMenu"
+	className: "scroll"
 	initialize: ->
+		@serverSectionView = new SidebarSectionView
+			items: [
+				{ itemTitle: "MyServer", itemClass: "Cloud sprite", accessoryClass: "Settings" }
+			]
 		@browseSectionView = new SidebarSectionView
 			title: "Browse"
 			items: [
-				{ itemTitle: "", itemClass: "Cloud sprite" },
 				{ itemTitle: "Music", itemClass: "Music sprite" },
 				{ itemTitle: "Discover", itemClass: "Discover sprite" },
 				{ itemTitle: "Folder", itemClass: "Folder sprite" }
@@ -30,6 +34,7 @@ module.exports = Backbone.View.extend
 	render: ->
 		console.log "rendering sideview"
 		$temp = $("<div>")
+		$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
 		#$temp.append @playlistSectionView.render.el
 		$temp.append @settingSectionView.render().el

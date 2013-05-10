@@ -9,8 +9,8 @@ SidebarItem = require "../models/sidebaritem"
 module.exports = Backbone.View.extend
 
 	tagName: "ul"
+	className: "SidebarMenu"
 	defaults:
-		title: "Sidebar section"
 		collection: new SidebarSection
 
 	initialize: (options) ->
@@ -26,11 +26,22 @@ module.exports = Backbone.View.extend
 		"reset": "render"
 
 	render: ->
-		console.log "rendering a section"
-		temp = $("<a>")
+		# render header
+		if @title?
+			header = document.createElement "span"
+			header.innerHTML = @title
+			header.className = "titletabs"
+			@$el.empty().append header
+
+		# render items
+		temp = document.createElement "a"
+		$temp = $(temp)
 		@collection.each (element, index, list) ->
 			view = new SidebarItemView model: element
-			temp.append view.render().el
-		@$el.empty().append temp.html()
+			rendering = view.render().el
+			console.log rendering.innerHTML
+			$temp.append rendering.innerHTML
+
+		@$el.append temp.innerHTML
 		this
 

@@ -76,7 +76,7 @@ html, body {
 }
 
 .mainContentContainer {
-	padding: 0px 15px 0 0;
+	padding: 15px 15px 0 0;
 	position: relative;
 	width: 100%;
 	box-sizing: border-box;

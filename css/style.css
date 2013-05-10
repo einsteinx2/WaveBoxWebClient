@@ -560,12 +560,14 @@ and (max-width : 321px) {
 /* Sidebar Menu */
 
 .SidebarMenu{
-position: fixed;
-top: 50px;
-bottom: 0px;
-width: 220px;
-z-index: 1;
-overflow-x: hidden;
+	position: relative;
+	//top: 50px;
+	bottom: 0px;
+	width: 220px;
+	z-index: 1;
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
 }
 
 	
@@ -601,14 +603,14 @@ overflow-x: hidden;
 	}	
 
 .titletabs {
+	position: relative;
+	margin-bottom: -10px;
 	width:50px;
 	font-weight:600;
 	font-size:11px;
 	text-transform:uppercase;
-	left:30px;
-	position:relative;
 	left:15px;
-	}		
+}		
 	
 .SidebarIcons{
 	background-repeat:no-repeat;
@@ -620,10 +622,16 @@ overflow-x: hidden;
 	}
 	
 a.Settings{
+	background-position: -9px -269px;
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 24px;
+	background-size: 200px;
+
+	opacity: 0.4;
 	position:absolute;
-	width:50px;
-	right:0px;
-	top:0px;
+	right:10px;
+	top:13px;
 	overflow:hidden; 
 	}	
 	

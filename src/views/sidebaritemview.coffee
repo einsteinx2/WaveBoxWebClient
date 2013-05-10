@@ -8,9 +8,20 @@ module.exports = Backbone.View.extend
 	template: _.template($("#template-sideBarItem").html())
 
 	render: ->
-		console.log "rendering an item"
-		@$el.empty().append @template
+		temp = document.createElement "div"
+		$temp = $(temp)
+				
+		$temp.append @template
 			itemTitle: @model.get("itemTitle")
 			itemClass: @model.get("itemClass")
-		console.log @$el.html()
+
+		accessory = @model.get "accessoryClass"
+		console.log "accessory: #{accessory}"
+		if accessory?
+			console.log "Appending the accessory!"
+			ele = document.createElement "a"
+			ele.className = "#{accessory} sprite"
+			$temp.append ele
+
+		@$el.append temp.innerHTML
 		this
