@@ -43,7 +43,7 @@ $(document).ready ->
 				placeholder = new Image
 				$(placeholder).load ->
 						loadImages()
-				placeholder.src = "BlankAlbum.png"
+				placeholder.src = "img/BlankAlbum.png"
 
 		toggledPanel = null
 		$main = $("#main")
@@ -224,7 +224,7 @@ $(document).ready ->
 						if toggledPanel isnt "filter"
 								if $this.offset().left < 0
 										switchPanels "right"
-								else switchPanels "left"							 
+								else switchPanels "left"
 						$this.css left: x - window.touchStartX
 				
 				window.previousX = x

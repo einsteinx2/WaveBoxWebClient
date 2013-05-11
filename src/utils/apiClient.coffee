@@ -22,7 +22,6 @@ class module.exports
 			success: (data) ->
 				if not data.error?
 					@SESSION_ID = data.sessionId
-					console.log "sessionId: #{@SESSION_ID}"
 					localStorage.setItem "waveBoxSessionKey", @SESSION_ID
 					if callback? then callback true
 				else

@@ -39,7 +39,6 @@ module.exports = Backbone.View.extend
 		@collection.each (element, index, list) ->
 			view = new SidebarItemView model: element
 			rendering = view.render().el
-			console.log rendering.innerHTML
 			$temp.append rendering.innerHTML
 
 		@$el.append temp.innerHTML

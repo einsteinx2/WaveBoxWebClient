@@ -7,7 +7,7 @@ SidebarView = require './views/sidebarview'
 window.wavebox = {}
 
 wavebox.apiClient = new ApiClient
-wavebox.audioPlayer = new AudioPlayer
+wavebox.audioPlayer = null
 wavebox.router = new Router
 wavebox.mainView = null
 wavebox.artistsView = null
@@ -17,3 +17,4 @@ wavebox.sidebarView = new SidebarView().render()
 $ ->
 	wavebox.apiClient.authenticate "test", "test", (success) ->
 		Backbone.history.start(pushState: true)
+		wavebox.audioPlayer = new AudioPlayer

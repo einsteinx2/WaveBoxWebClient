@@ -6,12 +6,12 @@ module.exports = Backbone.Collection.extend
 
 	sync: (method, model, options) ->
 		if method is "read"
-			console.log "fetching"
+			console.log "Fetching artists list..."
 			wavebox.apiClient.getArtistList (success, data) =>
-				if success 
+				if success
 					@set data
-					options.success data 
-				else 
+					options.success data
+				else
 					options.error data
 		else
 			console.log "Method '#{method}' is undefined"

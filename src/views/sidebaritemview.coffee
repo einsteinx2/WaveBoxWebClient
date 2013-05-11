@@ -16,9 +16,7 @@ module.exports = Backbone.View.extend
 			itemClass: @model.get("itemClass")
 
 		accessory = @model.get "accessoryClass"
-		console.log "accessory: #{accessory}"
 		if accessory?
-			console.log "Appending the accessory!"
 			ele = document.createElement "a"
 			ele.className = "#{accessory} sprite"
 			$temp.append ele

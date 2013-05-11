@@ -32,13 +32,10 @@ module.exports = Backbone.View.extend
 			#@playlistSectionView.collection.fetch reset: yes
 	
 	render: ->
-		console.log "rendering sideview"
 		$temp = $("<div>")
 		$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
 		#$temp.append @playlistSectionView.render.el
 		$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.html()
-		console.log $temp.html()
-		console.log @$el.html()
 		this

@@ -1,3 +1,5 @@
+PlayQueue = require '../models/playqueue'
+
 module.exports = Backbone.Model.extend
 	events:
 		"click .playerButtonShuffle": "shuffle"
@@ -14,10 +16,8 @@ module.exports = Backbone.Model.extend
 		@muted = false
 
 		# playlist state
-		@shufflePlaylist = []
-		@normalPlaylist = []
-		@currentPlaylist = []
-		
+		@playQueue = new PlayQueue
+
 		# progress
 		@elapsed = 0
 		@duration = 0
