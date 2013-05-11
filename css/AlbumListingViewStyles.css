@@ -1,0 +1,67 @@
+.albumListing {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.albumListingSidebar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 250px;
+	background-color: #d1d1d1;
+}
+
+.albumListingSidebar > img {
+	width: 210px;
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.albumListingSidebar-title {
+	font-size: 1.2em;
+	font-weight: 600;
+	padding: 15px 20px 0px 20px;
+}
+
+.albumListingSidebar-item {
+	padding: 15px 20px 15px 20px;
+}
+
+.albumListingSidebar-item:hover {
+	background-color: #fff
+}
+
+.albumListingTrackList {
+	position: absolute;
+	top: 0;
+	left: 250px;
+	right: 0;
+	bottom: 0;
+}
+
+.albumListingTrackList > li {
+	height: 50px;
+	list-style: none;
+	width: 100%;
+}
+
+.albumListingTrackList > li > div {
+	width: 25%;
+	line-height: 50px;
+	float: left;
+}
+.albumListingTrackList > li:nth-child(even) {
+	background-color: #fafafa;
+}
+
+.albumListingTrackList > li:nth-child(odd) {
+	background-color: #fff;
+}
+
+.albumListingTrackList > li:first-child {
+	background-color: #d1d1d1; 
+}

@@ -41,6 +41,7 @@
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
             <link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
+			<link rel="stylesheet" type="text/css" href="css/AlbumListingViewStyles.css" />
             <link rel="stylesheet" type="text/css" href="css/style.css" />
             <!-- <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 500px)' href='css/min500.css' /> -->
             <link rel="stylesheet" type="text/css" href="css/framework.css" />
@@ -49,7 +50,7 @@
 </head>
 
 <body>
-<div id="left" class='scroll'>
+<div id="left">
 	<div id="leftContent" class='scrollContent'>
 		<div id="HeaderBar" class="Sidebars">
 			<div id="LogoArea" class=" ">
@@ -125,12 +126,12 @@
         </div>
 	</div>
 </div>
-<div id="right" class='scroll'>
+<div id="right">
 	<div id="rightContent" class='scrollContent'>
                 <!-- <div id="HeaderBar" class="Sidebars">
                     <h1>Queue</h1>
                 </div>-->
-                    <div id="QueueScroller">
+                    <div id="QueueScroller" class="scroll">
                         <div class="QueueList">
                             <div class="QueueSongName">Song 1</div>
                             <div class="QueueSongBand">Band 1</div>
@@ -381,7 +382,7 @@
         <div class="Cell">
             <div id="SearchCell">
                 <form class="form-search use-fastClick">
-                    <input type="text" class="searchcell fastClick" placeholder="Search">
+                    <input id="mainSearchField" type="text" class="searchcell fastClick" placeholder="Search">
                 </form>
             </div>
             <nav>
@@ -443,6 +444,113 @@
 		<span id="MenuText"><%= itemTitle %></span>
     </li>
 </a>
+</script>
+
+<script type='text/template' id='template-album_listing'>
+	<div class="albumListing">
+		<div class="albumListingSidebar">
+			<img src="/api/art?id=12547&size=250&s=44BEA52D0D7341509DBF7CF51D599668475D9F06" alt="Album Art" />
+			<ul>
+				<li class="albumListingSidebar-title">Siberia (Acoustic)</li>
+				<li class="albumListingSidebar-item">Lights ></li>
+				<li class="albumListingSidebar-item">Album</li>
+				<li class="albumListingSidebar-item">Social Collaboration</li>
+				<li class="albumListingSidebar-item">Related Artists</li>
+			</ul>
+		</div>
+		<ul class="albumListingTrackList">
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+			<li>
+				<div>1</div>
+				<div>Cactus in the Valley</div>
+				<div>Lights</div>
+				<div>4:22</div>
+			</li>
+		</ul>
+	</div>
 </script>
 
 <script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>

@@ -9,6 +9,7 @@ body, html {
 }
 
 #left, #right, #filter {
+	overflow: auto;
     position: absolute;
     top: 0;
     min-height: 100%;
@@ -16,12 +17,9 @@ body, html {
 }
 
 .scroll {
-    overflow-x:hidden;
-    overflow-y: scroll;
+	overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
-
-
 
 h1 {
     text-align: center;
@@ -31,6 +29,9 @@ h1 {
     left: 0;
     width: 220px;
 	background-color:#dadada;
+}
+#left:not(:first-child) > div, #right:not(:first-child) > div {
+	overflow: auto;
 }
 
 #right {
@@ -66,7 +67,8 @@ h1 {
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: scroll;
+    overflow: hidden;
+	z-index: 9999;
 }
 
 #mainContent {
@@ -117,7 +119,6 @@ h1 {
         position: absolute;
         width: 100%;
         height: 100%;
-        z-index: 9999;
     }
 
     .transitions {

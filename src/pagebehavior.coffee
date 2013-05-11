@@ -1,6 +1,6 @@
-$(document).ready ->
+$ ->
 
-		window.imgLoadTimeout = null;
+		window.imgLoadTimeout = null
 		$("#mainContent").on "scroll", ->
 				clearTimeout(window.imgReloadTimeout)
 				window.imgReloadTimeout = setTimeout(loadImages, 300);
@@ -25,7 +25,6 @@ $(document).ready ->
 				$el = $(this.associatedElement.children[0])
 				window.el = $el
 				overlay = $el.children('.overlay').first()
-				console.log "overlay: #{overlay}"
 				$(this).insertBefore(overlay)
 
 				# overlay.addClass "backface-visibility"

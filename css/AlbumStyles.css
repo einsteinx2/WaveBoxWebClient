@@ -31,6 +31,7 @@ html, body {
 	right: 0;
 	bottom: 18px;
 	background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .10) 50%);
+	background: -moz-linear-gradient(bottom, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .10) 50%);
 	padding: 0 .5em .5em .5em;
 }
 
@@ -58,6 +59,8 @@ html, body {
 /*	-webkit-transform: translate3d(0,0,0);
 	-webkit-transform-style: preserve-3d;*/
 	-webkit-transition: opacity .5s ease-out;
+	-moz-transition: opacity .5s ease-out;
+
 }
 
 .art {
