@@ -3,7 +3,6 @@
 }
 
 .stickyHeader {
-	background-color: #d1d1d1;
 	height: 50px;
 	position: absolute;
 	top: 0;
@@ -46,7 +45,6 @@
 	top: 0;
 	bottom: 0;
 	width: 190px;
-	background-color: #d1d1d1;
 }
 
 .albumListingSidebar > img {
@@ -78,7 +76,7 @@
 
 
 .albumRelatedContentLinks > li:nth-child(2):hover {
-background-color: none;
+background-color: #e8e8e8;
 }
 
 .albumRecordLabelInfo {
@@ -102,7 +100,7 @@ background-color: none;
 
 .albumTableMiddleColumn > div:first-child {
 	float: left;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 13px;
 	width: 65%;
 }
@@ -112,6 +110,9 @@ background-color: none;
 	width: 35%;
 }
 
+.albumListingTrackList .albumTableMiddleColumn > div:last-child {
+color: #959595;
+}
 
 .albumListingTrackList {
 	position: absolute;
@@ -124,14 +125,14 @@ background-color: none;
 }
 
 .albumListingTrackList > li {
-	height: 50px;
+	height: 40px;
 	list-style: none;
 	width: 100%;
 }
 
 .albumListingTrackList > li > div {
 	box-sizing: border-box;
-	line-height: 50px;
+	line-height: 40px;
 	float: left;
 }
 
