@@ -1,3 +1,35 @@
+#ContentView > li:first-child, #ContentView > li:nth-child(2) {
+	display: none;
+}
+
+.stickyHeader {
+	background-color: #d1d1d1;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 250px;
+	right: 0;
+	font-size: 12px;
+}
+
+.stickyHeader > div {
+	line-height: 50px;
+	float: left;
+	color: #515151;
+	font-weight: 600;
+}
+
+.stickyHeader > div:first-child {
+	width: 40px;
+	text-align: center;
+}
+
+.stickyHeader > div:nth-child(2) {
+	width: 52px;
+	float: right;
+	text-align: center;
+}
+
 .albumListing {
 	position: absolute;
 	top: 0;
@@ -7,6 +39,8 @@
 }
 
 .albumListingSidebar {
+	-webkit-select-user: none;
+	cursor: pointer;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -22,6 +56,8 @@
 }
 
 .albumListingSidebar-title {
+	list-style: none;
+	top: 0;
 	font-size: 1.2em;
 	font-weight: 600;
 	padding: 15px 20px 0px 20px;
@@ -29,18 +65,57 @@
 
 .albumListingSidebar-item {
 	padding: 15px 20px 15px 20px;
+	font-size: 14px;
 }
 
 .albumListingSidebar-item:hover {
-	background-color: #fff
+	background-color: #fff;
 }
+
+.albumRelatedContentLinks > li:nth-child(2) {
+	padding: 5px 20px;
+}
+
+.albumRecordLabelInfo {
+	font-size: 11px;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	right: 20px;
+	list-style: none;
+}
+
+.albumRecordLabelInfo > li:first-child {
+	padding-bottom: 5px;
+}
+
+.albumTableMiddleColumn {
+	position:absolute;
+	left: 40px;
+	right: 52px;
+}
+
+.albumTableMiddleColumn > div:first-child {
+	float: left;
+	font-weight: 600;
+	font-size: 13px;
+	width: 65%;
+}
+
+.albumTableMiddleColumn > div:last-child {
+	float: left;
+	width: 35%;
+}
+
 
 .albumListingTrackList {
 	position: absolute;
-	top: 0;
+	top: 50px;
 	left: 250px;
 	right: 0;
 	bottom: 0;
+	font-size: 12px;
+	color: #757575;
 }
 
 .albumListingTrackList > li {
@@ -50,9 +125,22 @@
 }
 
 .albumListingTrackList > li > div {
-	width: 25%;
+	box-sizing: border-box;
 	line-height: 50px;
 	float: left;
+}
+
+.albumListingTrackList > li > div:first-child {
+	float: left;
+	width: 40px;
+	color: #959595;
+	text-align: center;
+}
+
+.albumListingTrackList > li > div:last-child {
+	float: right;
+	width: 52px;
+	text-align: center;
 }
 .albumListingTrackList > li:nth-child(even) {
 	background-color: #fafafa;
@@ -60,8 +148,4 @@
 
 .albumListingTrackList > li:nth-child(odd) {
 	background-color: #fff;
-}
-
-.albumListingTrackList > li:first-child {
-	background-color: #d1d1d1; 
 }
