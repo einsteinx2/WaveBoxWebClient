@@ -7,7 +7,7 @@
 	height: 50px;
 	position: absolute;
 	top: 0;
-	left: 250px;
+	left: 190px;
 	right: 0;
 	font-size: 12px;
 }
@@ -45,14 +45,14 @@
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 250px;
+	width: 190px;
 	background-color: #d1d1d1;
 }
 
 .albumListingSidebar > img {
-	width: 210px;
-	padding-top: 20px;
-	padding-left: 20px;
+	width: 163px;
+	padding-top: 15px;
+	padding-left: 15px;
 }
 
 .albumListingSidebar-title {
@@ -60,11 +60,11 @@
 	top: 0;
 	font-size: 1.2em;
 	font-weight: 600;
-	padding: 15px 20px 0px 20px;
+	padding: 15px 15px 0px 15px;
 }
 
 .albumListingSidebar-item {
-	padding: 15px 20px 15px 20px;
+	padding: 15px 15px 15px 15px;
 	font-size: 14px;
 }
 
@@ -73,15 +73,20 @@
 }
 
 .albumRelatedContentLinks > li:nth-child(2) {
-	padding: 5px 20px;
+	padding: 5px 15px;
+}
+
+
+.albumRelatedContentLinks > li:nth-child(2):hover {
+background-color: none;
 }
 
 .albumRecordLabelInfo {
 	font-size: 11px;
 	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	right: 20px;
+	bottom: 15px;
+	left: 15px;
+	right: 15px;
 	list-style: none;
 }
 
@@ -111,7 +116,7 @@
 .albumListingTrackList {
 	position: absolute;
 	top: 50px;
-	left: 250px;
+	left: 190px;
 	right: 0;
 	bottom: 0;
 	font-size: 12px;
