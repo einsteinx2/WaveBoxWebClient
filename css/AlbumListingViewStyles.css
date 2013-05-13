@@ -1,4 +1,4 @@
-#ContentView > li:first-child, #ContentView > li:nth-child(2) {
+.firstTwoHidden > li:first-child, .firstTwoHidden > li:nth-child(2) {
 	display: none;
 }
 
@@ -118,10 +118,7 @@ background-color: #e8e8e8;
 .albumTableMiddleColumn > div:last-child {
 	float: left;
 	width: 35%;
-}
-
-.albumListingTrackList .albumTableMiddleColumn > div:last-child {
-color: #959595;
+	color: #959595;
 }
 
 .albumListingTrackList {
@@ -131,6 +128,7 @@ color: #959595;
 	right: 0;
 	bottom: 0;
 	font-size: 12px;
+	background-color: #fff;
 	color: #757575;
 }
 
@@ -164,4 +162,9 @@ color: #959595;
 
 .albumListingTrackList > li:nth-child(odd) {
 	background-color: #fafafa;
+}
+
+@media(max-width: 480px)
+{
+
 }

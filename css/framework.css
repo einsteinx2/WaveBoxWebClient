@@ -71,6 +71,10 @@ h1 {
 	z-index: 9999;
 }
 
+.main-albumArt {
+	display: none;
+}
+
 #mainContent {
 	background-color: #e8e8e8;
     position:absolute;

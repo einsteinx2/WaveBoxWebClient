@@ -52,77 +52,6 @@ p {
 	margin-bottom:20px;
 }
 
-.FloatRight {
-	float:right;
-}
-
-.FloatLeft {
-	float:left;
-}
-
-.AlignRight {
-	text-align:left;
-}
-
-input.search {
-	display: inline-block;
-	height: 28px;
-	width:152px;
-	font-size: 12px;
-	color: #555555;
-	vertical-align: middle;
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	padding-left:28px;
-	margin-top:-6px;
-	border: 1px #909090 solid;
-	-webkit-transition:all 240ms ease-in;
-	background-color:#e7e7e7;
-	background-image:url(../img/search.png);
-	background-position: 8px center;
-	background-size: 17px 17px;
-	background-repeat: no-repeat;
-}
-
-input.search:focus, input.search:hover, input.search:active {
-	border: #545454 1px solid;
-	-webkit-transition:all 240ms ease-in;  
-	background-color:#FFF;
-	opacity:1;
-	}
-
-input.searchcell {
-	display: inline-block;
-	height: 28px;
-	width: 124px;
-	font-size: 13px;
-	vertical-align: middle;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	margin-top: 0px;
-	border: 0px #fff solid;
-	-webkit-transition: all 240ms ease-in;
-	background-color: #fff;
-	opacity:.8;
-	color:#666;
-	padding: 11px 0 11px 28px;
-	background-color: #fff;
-	background-image: url(../img/search.png);
-	background-position: 8px center;
-	background-size: 17px 17px;
-	background-repeat: no-repeat;
-}
-
-
-input.searchcell:focus, input.searchcell:hover, input.searchcell:active {
-	border: #fff 0px solid;
-	-webkit-transition:all 240ms ease-in;  
-	opacity:1;
-	color: #555555;
-}
-	
 input.FilterSearch {
 	display: inline-block;
 	height: 28px;
@@ -157,164 +86,15 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 		background-image: url(../img/sprite.png);
 }	
 	
-.disable {
-   pointer-events: none;
-   cursor: default;
-}	
-
-.playingnow {
-	background:#d1d1d1;
-}
-
-.MenuMargin {
-	margin-left:220px !important;
-}	
-
-.PlaylistMargin {
-	margin-left:-260px !important;	
-}
-	
-.FilterMargin {
-	margin-left:-140px !important;	
-}
-
-.FilterAnimate {
-	-webkit-transition: all 300ms ease-out;
-	-moz-transition: all 300ms ease-out;
-	-o-transition: all 300ms ease-out;
-	-ms-transition: all 300ms ease-out;
-	transition: all 300ms ease-out;	
-}
-
-.scrollable {
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
-}
- 
-/* iOS specific fix, don't use it on Android devices */
-.scrollable > * {
-	-webkit-transform: translateZ(0px);
-}
-
-/* Search bar section */
-.CellMiddleLink {
-	margin:16px 0px;
-	position:absolute;
-}	
-.CellMiddleRight {
-	right:13px;
-}
-.CellMiddleLeft {
-	Left:15px;
-}	
-.Cell a {
-	font-weight:600px;
-	color: #757575;
-	font-weight: 600;
-	font-size: 14px;
-}
-.ContentView {
-	color:#333;
-	font-weight:300 !important;
-}
-	
-#ContentView li a {
-	height:30px; 
-}
-	
-.Display {
-	display:block !important;
-}
-	
 .DisplayNone {
 	display:none !important;
 }
 	
-.nocolorBG {
-	background-color:transparent !important;
-}
-	
-.contentWrapperArtist {
-	background-color:#e6e6e6;
-}
-
-#content {
-	width:100%;
-	margin: 0px;
-	padding:0px;
-	top:0px;
-	position:absolute;
-	z-index:800;
-	margin-left:0px;	
-}
-
-#content h1 { 
-	color: #333; 
-	line-height: 1em;
-}
-
-#content ul {
-	padding-left: 0;
-	list-style: none;
-}
-
-#MenuColumn { 
-	background-color:#dadada;
-	height:100%;
-	z-index:1;
-	width:220px;
-	left:0px;
-	position:fixed;
-	margin-left:-220px;			
-}
-
-#Playlist {
-	background-color:#dadada;
-	height:100%;
-	z-index:1;
-	width:260px;
-	right:0px;
-	position:fixed;
-	margin-right:-260px;
-}
-
-#Filter {
-	background-color:#fff;
-	height:100%;
-	z-index:1;
-	width:140px;
-	right:0px;
-	position:fixed;
-	margin-right:-140px;
-}
-
-.displaySidebars {
-	opacity:1 !important;
-	margin:0px !important;
-}
-
 #HeaderBar {
 	width:100%;
 	z-index:99;
 	position:relative;
 	top:0px;
-}
-	
-#HeaderBar h1 {
-	font-weight:800;
-	font-size:18px;	
-	background: -webkit-linear-gradient(top, #545454, #343434);
-	background: linear-gradient(top, #545454, #343434);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;	
-}	
-.UpperCase {
-	text-transform:uppercase;
-}
-
-.HeaderMenuOption {
-	height:44px;
-	width:50px;
 }
 	
 .Logo {
@@ -336,15 +116,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	100% { opacity: 1 }
 }
 
-
-.LogoColored {
-	background-image:url(../img/logoColored.png) !important;
-	background-position:center;
-	background-size:56px 16px;
-	background-repeat:no-repeat;
-	animation-name: fadeIn;
-}	
-
 .CenterBar {
 	background-color:#d1d1d1;
 	padding: 0 0;
@@ -361,21 +132,26 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 
 .PlaylistIcon {
+	position: absolute;
+	right: 0;
 	background-position: -10px -389px;
 	background-repeat: no-repeat;
 	height: 22px;
 	width: 24px;
 	background-size: 200px;
 	margin: 14px 17px;
+	opacity: .6;
 }
 	
 .MenuIcon {
+	position: absolute;
 	background-position: -37px -138px;
 	background-repeat: no-repeat;
 	height: 22px;
 	width: 24px;
 	background-size: 155px;
 	margin: 14px 17px;
+	opacity: .6;
 }
 	
 .BackIcon {
@@ -385,148 +161,53 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-repeat:no-repeat;
 }
 	
-.Cell {
-	height:50px;
-	width:100%;
-	background-color:white;
-	z-index:500;
-	white-space:nowrap;
-	overflow:hidden;
-	overflow-x:hidden;	
-}
-	
-li.ContentSort {
-	color: #757575;
-	font-weight: 600;
-	font-size: 14px;
-	float: left;
-	padding: 16px 0 0 23px;
-}
-	
-li.ContentSort a { 
-	color:#757575;	
-}	
-
-li.ContentSort a:hover {
-	color:#3c3c3c;		
-}
-	
-.active {
-	color:#1f1f1f !important;
-	border-bottom: 2px #2f2f2f solid;
+.searchBar {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	right: 0;
+	height: 50px;
 }
 
-li.ContentView {
-	color:#757575;
-	font-weight:600;
-	font-size:14px;
-	float:left;
-	padding: 10px 0 0 0;	
-	list-style-type: none;		
+.searchBar-textbox {
+	position: absolute;
+	left: 5px;
+	right: 150px;
+	height: 28px;
+	font-size: 13px;
+	border: none;
+	color:#bebebe;
+	padding: 11px 0 11px 28px;
+	background-image: url(../img/search.png);
+	background-position: 8px center;
+	background-size: 17px 17px;
+	background-repeat: no-repeat;
 }
 
-ul#ContentView {
+.searchBar-toggle {
 	float: right;
-	margin: 0px;
-}
-
-#ContentView .ContentView a button {
-	padding: 0px 25px;
-}
-	
-.AlbumSortIcon {
-	background-image:url(../img/AlbumView.png);
+	width: 15px;
+	height: 15px;
+	padding: 17.5px;
+	opacity: .6;
 	background-position:center;
 	background-size:15px auto;
 	background-repeat:no-repeat;
+}
+
+.AlbumSortIcon {
+	background-image:url(../img/AlbumView.png);
 }
 	
 .DirectoryViewIcon {
 	background-image:url(../img/ListView.png);
-	background-position:center;
-	background-size:15px auto;
-	background-repeat:no-repeat;
 }
 
 .FilterIcon {
 	background-image:url(../img/filters.png);
-	background-position:center;
-	background-size:15px auto;
-	background-repeat:no-repeat;
-	position:relative;
-	z-index:5001;
-}
-	
-#contentWrapper {
-	bottom:0px; left:0; right:0;
-	max-width:100%;
-	z-index:1;
-	overflow:scroll;
-	overflow-x:hidden;
-	background-color: #e8e8e8;
-	position:absolute;
 }
 
-.contentWrapperWOminiMusicPlayer {
-	bottom:0px !important;
-}	
-
-#contentScroller {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	-o-box-sizing:border-box;
-	box-sizing:border-box;
-	position:absolute;
-    text-align: justify;
-    -ms-text-justify: distribute-all-lines;
-    text-justify: distribute-all-lines;
-	left:0; right:0;
-}	
-
-/* Avoid Content Resizing on iPad when sidebar reveals */ 
-@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
-	#contentWrapper {
-		min-width:768px;
-	}
-}
-
-@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
-
-	#contentWrapper {
-		min-width:1024px;
-	}
-}
-
-#unclickable {
-	height:100%;
-	width:100%;
-	position:absolute;
-	background-color:#fff;
-	opacity:0;
-	z-index:5000;
-	display:none;
-	top: 50px;	
-}
-	
-#unclickableHeader {
-	position:absolute; width:100%; height:100%; background-color:#000;
-	display:none;	opacity:0;
-	margin:0 62px;
-}
-	
-.AlbumTitle {
-	font-size:16px;
-	font-weight:600;
-	padding-top:6px;
-}
-
-.AlbumArtist {
-	font-size:12px;
-}
-	
-	
 /* Sidebar Menu */
-
 .SidebarMenu {
 	position: relative;
 	bottom: 0px;
@@ -537,23 +218,9 @@ ul#ContentView {
 	padding: 0;
 }
 
-	
-.SidebarMenu ul {
-	width:220px;
-	overflow: scroll;
-	overflow-x: hidden;
-}	
-
 .SidebarMenu li {
 	height:50px;
 	width:220px;
-}
-	
-#SidebarMenu li a {
-	position:relative;
-	height: 50px;
-	width: 220px;
-	overflow:hidden;
 }
 	
 #MenuIcon {
@@ -714,39 +381,7 @@ span#MenuIcon.Settings {
 	opacity: 0.8;	
 }
 
-.AllScrollbarV {
-	position:absolute;
-	z-index:100;
-	width:5px;
-	bottom:3px;
-	top:3px;
-	right:4px
-}
-
-.AllScrollbarV > div {
-	position:absolute;
-	z-index:100;
-	width:100%;
-	background-color:#909090;
-	border:0px;
-	-webkit-background-clip:padding-box;
-	-moz-background-clip:padding-box;
-	-o-background-clip:padding-box;
-	background-clip:padding-box;
-	
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	-o-box-sizing:border-box;
-	box-sizing:border-box;
-	
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	-o-border-radius:4px;
-	border-radius:4px;
-}
-	
 /* SidebarMenu */	
-
 #SidebarMenu {
 	position: fixed;
 	top: 50px;
@@ -756,25 +391,6 @@ span#MenuIcon.Settings {
 	overflow-x: hidden;	
 }
 	
-#SidebarMenuScroller {
-	width: 220px;
-	height:auto;
-	overflow:scroll;	
-	overflow-x:hidden;
-}
-/* Queue List */	
-
-#QueueList {
-	position: absolute;
-	top: 50px;
-	bottom: 0px;
-	right: 0;
-	width: 260px;
-	z-index: 1;
-	overflow: scroll;
-	overflow-x:hidden;
-}
-
 #QueueScroller {
 	position: fixed;
 	top: 50px;
@@ -841,21 +457,6 @@ span#MenuIcon.Settings {
 	background-color:#e8e8e8;
 }
 
-#FilterScroller {
-	width: 140px;
-	height:auto;
-	position:absolute;
-	overflow:scroll;
-	overflow-x:hidden;
-}
-
-.FilterList {
-	width:100%;
-	height:50px;
-	background-color:#dadada;
-	color:#1f1f1f;
-}
-
 li.FilterTitle {
 	padding: 0px;
 	font-weight:600;
@@ -917,10 +518,6 @@ ul#Filters li:hover,ul#Filters li:active , .current {
 	width:100px !important;
 }
 
-.FilterKeyword a {
-	opacity:1 !important;
-}
-
 li.current {
 	background-color:#e8e8e8 !important;		
 }
@@ -941,11 +538,6 @@ ul#Filters {
 	overflow:hidden;
 }
 	
-#SearchCell {
-	float:left;
-	padding:0 0 0 6px;
-}
-
 ul#Filters .MusicIcons {
 	background-image:url(../img/MusicIcon.png);
 	background-repeat:no-repeat;
@@ -1106,7 +698,7 @@ ul#Filters .FolderIcon {
 	margin: 6.5px;
 }
 
-.PlayerDisplaText {
+.PlayerDisplayText {
 	font-size:12px;
 	float:left;
 	line-height:25px;
@@ -1154,29 +746,6 @@ ul#Filters .FolderIcon {
 	bottom:0px;
 	left:30%;
 }
-	
-.ArtistPageBG {
-	background-image:url(../img/artist/OnerepublicBG.jpg) !important;
-	background-repeat:no-repeat;
-	background-position:0 0;
-}
-	
-/* ContentFilter */	
-#ContentFilter{
-	height:.1px;
-	background-color:#F0F0F0;
-	color:#000;
-	overflow:hidden;
-	padding: 0px 15px 0px 15px;
-	color: #757575;
-	font-weight: 600;
-	font-size: 14px;
-}
-
-.ContentFilterVisibility {
-	height:102px !important;
-	opacity:.9;
-}
 
 .FilterTitle {
 	color: #1f1f1f;
@@ -1195,224 +764,8 @@ ul#Filters .FolderIcon {
 	overflow:hidden;2
 }
 
-.navDisplay {
-	display:inline-block !important;
-}
-
-.nav ul {
-	float: left;
-	clear: both
-}
-.nav li {
-	padding: 0;
-	list-style: none;
-	padding: 0px 15px 0px 0px;
-	line-height:25px;
-	float: left;	
-}
-
-.nav a {
-	text-decoration: none;
-	color: #999;
-	line-height: 100%;
-}
-
-.nav a:hover {
-	color: #000;
-}
-.nav .current a {
-	color:#666;
-}
-
 #Filters {
 	margin-right:25px;
 }
 
-/* Offline Items */
-#OfflineAlert {
-	width:100%;
-}
-	
-span.offlineGFX {
-	height: 142px;
-	width: 185px;
-	background-position: -75px 0px;
-	background-repeat: no-repeat;
-	background-size: auto;
-	opacity: 0.8;
-	position: absolute;
-	margin-left: 50%;
-	left: -92.5px;
-}
 
-@-webkit-keyframes MenuColumnFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(220px, 0px);
-		-webkit-transform: translate(220px, 0px);
-		-moz-transform: translate(220px, 0px);
-		transform: translate(220px, 0px);
-	}
-
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px) scale(1);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px) scale(1);
-		transform: translate(0px, 0px) scale(1);
-	}    
-}
-
-@-moz-keyframes MenuColumnFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(220px, 0px);
-		-webkit-transform: translate(220px, 0px);
-		-moz-transform: translate(220px, 0px);
-		transform: translate(220px, 0px);
-	} 
-
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px) scale(1);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px) scale(1);
-		transform: translate(0px, 0px) scale(1);
-	}
-}
-
-@keyframes MenuColumnFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(220px, 0px);
-		-webkit-transform: translate(220px, 0px);
-		-moz-transform: translate(220px, 0px);
-		transform: translate(220px, 0px);
-	} 
-	
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px) scale(1);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px) scale(1);
-		transform: translate(0px, 0px) scale(1);
-	}
-}
- 
- 
-.MenuColumnFadeIn {
-    -webkit-animation:MenuColumnFadeIn linear 1; 
-    -moz-animation:MenuColumnFadeIn linear 1;
-    animation:MenuColumnFadeIn linear 1;
-	 
-    -webkit-animation-fill-mode:forwards;
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
- 
-    -webkit-animation-duration:0ms;
-    -moz-animation-duration:0ms;
-    animation-duration:0ms;
-}
- 
-@-webkit-keyframes PlaylistFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(-260px, 0px);
-		-webkit-transform: translate(-260px, 0px);
-		-moz-transform: translate(-260px, 0px);
-		transform: translate(-260px, 0px);
-	} 
-	
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px);
-		transform: translate(0px, 0px);
-	} 
-}
-
-@-moz-keyframes PlaylistFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(-260px, 0px);
-		-webkit-transform: translate(-260px, 0px);
-		-moz-transform: translate(-260px, 0px);
-		transform: translate(-260px, 0px);
-	} 
-	
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px);
-		transform: translate(0px, 0px);
-	} 
-}
-
-@keyframes PlaylistFadeIn { 
-	0% { 
-		opacity:0; 
-		-ms-transform: translate(-220px, 0px);
-		-webkit-transform: translate(-220px, 0px);
-		-moz-transform: translate(-220p, 0px);
-		transform: translate(-220p, 0px);
-	} 
-	
-	100% { 
-		opacity:1; 
-		-ms-transform: translate(0px, 0px);
-		-webkit-transform: translate(0px, 0px);
-		-moz-transform: translate(0px, 0px);
-		transform: translate(0px, 0px);
-	} 
-}
- 
- 
-.PlaylistFadeIn {
-    -webkit-animation:PlaylistFadeIn linear 1; 
-    -moz-animation:PlaylistFadeIn linear 1;
-    animation:PlaylistFadeIn linear 1;
-	
-	
-	-webkit-animation-fill-mode:forwards;
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
- 
-    -webkit-animation-duration:0ms;
-    -moz-animation-duration:0ms;
-    animation-duration:0ms;
-}
-
-.shadow { 
-	-moz-box-shadow: 0px 8px 15px #333;
-	-webkit-box-shadow: 0px 8px 15px #333;
-	box-shadow: 0px 8px 15px #333;
-}
-
-#ColorFade {
-	position:absolute;
-	top:0;
-	height:100%;
-	width:100%;
-}
-
-.TopDownWhiteFade {
-	background-image:url(../img/whitebgfade.png);
-	background-repeat:repeat-x;
-}
-	
-.TopDownWhiteFadeBottom {
-   background-color: rgba(230, 230, 230, 0.9) !important;
-}
-
-.unclickableGradient {
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 10%) !important;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(10%,rgba(255,255,255,1))) !important;
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 10%) !important;
-	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 10%) !important;
-	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 10%) !important;
-	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 10%) !important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ) !important;
-	top:0px !important;
-}

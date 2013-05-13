@@ -3,7 +3,7 @@ $ ->
 		window.imgLoadTimeout = null
 		$("#mainContent").on "scroll", ->
 				clearTimeout(window.imgReloadTimeout)
-				window.imgReloadTimeout = setTimeout(loadImages, 300);
+				window.imgReloadTimeout = setTimeout(loadImages, 300)
 
 		loadImages = ->
 				windowTop = document.body.scrollTop - 200
