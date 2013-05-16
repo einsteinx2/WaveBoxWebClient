@@ -6,8 +6,13 @@ html, body
 }
 
 * {
+    -webkit-touch-callout:none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent tap highlight color / shadow */
+    -webkit-user-select:none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     margin: 0;
     padding: 0;
+
 }
 
 a {
@@ -90,7 +95,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	display:none !important;
 }
 	
-#HeaderBar {
+.HeaderBar {
 	width:100%;
 	z-index:99;
 	position:relative;
@@ -120,7 +125,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-color:#d1d1d1;
 	padding: 0 0;
 	height: 50px;
-	position:fixed;
 	top:0;
 }
 
@@ -155,10 +159,25 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 	
 .BackIcon {
+	position: absolute;
+	height: 22px;
+	width: 24px;
+	margin: 14px 17px;
+	opacity: .6;
 	background-image:url(../img/back.png);
-	background-position:center 21px;
-	background-size:20px auto;
+	background-size:22px auto;
 	background-repeat:no-repeat;
+}
+
+.pageTitle {
+	position: absolute;
+	top: 0;
+	left: 50px;
+	right: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-weight: 600;
 }
 	
 .searchBar {
@@ -178,10 +197,12 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	border: none;
 	color:#bebebe;
 	padding: 11px 0 11px 28px;
+	background-color: transparent;
 	background-image: url(../img/search.png);
 	background-position: 8px center;
 	background-size: 17px 17px;
 	background-repeat: no-repeat;
+	-webkit-user-select: all;
 }
 
 .searchBar-toggle {

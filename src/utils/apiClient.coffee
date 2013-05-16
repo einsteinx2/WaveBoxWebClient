@@ -136,7 +136,7 @@ class module.exports
 
 		if song.fileType is 4
 			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.itemId}"
-		else 
+		else
 			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.itemId}&transType=OGG&transQuality=MEDIUM"
 
 		return urlObj

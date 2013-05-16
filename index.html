@@ -40,11 +40,11 @@
                 <script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
-            <link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
-			<link rel="stylesheet" type="text/css" href="css/AlbumListingViewStyles.css" />
             <link rel="stylesheet" type="text/css" href="css/style.css" />
-            <!-- <link rel='stylesheet' media='screen and (min-width: 100px) and (max-width: 500px)' href='css/min500.css' /> -->
             <link rel="stylesheet" type="text/css" href="css/framework.css" />
+			<link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
+			<link rel="stylesheet" type="text/css" href="css/AlbumListingViewStyles.css" />
+
             <!-- Cuz Kickass --><link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<title>WaveBox</title>
 </head>
@@ -215,7 +215,7 @@
 	        </div>
 	        </div>
 	        <div id="MiniPlayer" class="animate MiniPlayerRightMargins">
-	            <div id="PlayBtn" class="Pause dropshadow"></div>
+            <div id="PlayBtn" class="Pause dropshadow"></div>
 	            <div class="PlayerDisplayDropShadow PlayerDisplay" style="width: 160px;">
 	                <div class="PlayerDisplayContainer">
 	                    <!-- Container Area -->
@@ -238,8 +238,8 @@
 		<div id="FilterList">
 	            <ul id="Filters">
 	            <li class="FilterKeyword">
-	                <form class="form-search use-fastClick">
-	                    <input type="text" class="FilterSearch fastClick" placeholder="Keywords">
+	                <form class="form-search">
+	                    <input type="text" class="FilterSearch" placeholder="Keywords">
 	                </form>
 	            </li>
 	            <li class="FilterSideBar FilterTitle">Browse</li>
@@ -291,21 +291,7 @@
 		</div>
 	</div>
 	
-	<div id="main">
-		<img src="img/BlankAlbum.png" alt="Blank Album" class="main-albumArt" />
-		<div id="mainContent" class="mainContentContainer"></div>
-	    <div id="HeaderBar" class="CenterBar Logo use-fastClick">
-	        <a href="#" class="MenuIcon leftPanelToggle sprite"></a>
-			<a href="#" class="PlaylistIcon rightPanelToggle sprite"></a>
-	    </div>
-	    <div class="searchBar">
-			<input type="text" class="searchBar-textbox" />	
-			<a class="searchBar-toggle FilterIcon filterPanelToggle"></a>
-			<a class="searchBar-toggle DirectoryViewIcon"></a>
-			<a class="searchBar-toggle AlbumSortIcon"></a>
-		</div>
-	</div>
-	
+	<div id="main"></div>
 	<div id="jPlayer"></div>
 	
 	<script type='text/template' id='template-album_container'>
@@ -346,7 +332,7 @@
 	<script type='text/template' id='template-album_listing'>
 		<div class="albumListing">
 			<div class="albumListingSidebar">
-				<img src="/api/art?id=12547&size=250&s=44BEA52D0D7341509DBF7CF51D599668475D9F06" alt="Album Art" />
+				<img class='albumListingSidebarArt' src='<%= artUrl %>' alt="Album Art" />
 				<ul class="albumRelatedContentLinks">
 					<li class="albumListingSidebar-title">Siberia (Acoustic)</li>
 					<li class="albumListingSidebar-item">Lights ></li>
@@ -366,7 +352,7 @@
 					<div>Artist</div>
 				</div>
 			</div>
-			<ul class="albumListingTrackList scroll">
+			<ul class="albumListingTrackList">
 				<li>
 					<div>1</div>
 						<div class="albumTableMiddleColumn">
@@ -514,16 +500,31 @@
 			</ul>
 		</div>
 	</script>
+
+	<script type="text/template" id="template-pageView">
+		<div class="CenterBar HeaderBar">
+			<a href="#" class="leftPanelToggle <%= leftAccessoryClass %> sprite"></a>
+			<a href="#" class="rightPanelToggle <%= rightAccessoryClass %> sprite"></a>
+			<span class="pageTitle"><%= pageTitle %></span>
+		</div>
+		<div class="searchBar <%= searchBarClass %>">
+			<input type="text" class="searchBar-textbox" placeholder="Search" />	
+			<a class="searchBar-toggle FilterIcon filterPanelToggle"></a>
+			<a class="searchBar-toggle DirectoryViewIcon"></a>
+			<a class="searchBar-toggle AlbumSortIcon"></a>
+		</div>
+		<div class="main-scrollingContent scroll">
+			<img src="<%= artUrl %>" alt="Blank Album" class="main-albumArt" />
+			<div class="mainContent"><%= mainContent %></div>
+		</div>
+	</script>
 	
 	<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="script/underscore-min.js"></script>
 	<script type="text/javascript" src="script/backbone-min.js"></script>
 	<script type="text/javascript" src="script/jquery.jplayer.min.js"></script>
-	<script type="text/javascript" src="script/jquery.mobile.custom.min.js"></script>
-	<script type="text/javascript" src="script/jquery-noclickdelay.js"></script>
 	<script type="text/javascript" src="script/offline.js"></script>
 	<script type="text/javascript" src="script/wbTranslate.js"></script>
-	<script type="text/javascript" src="script/pagebehavior.js"></script>
 	<script type="text/javascript" src="script/wavebox.js"></script>
 	
 </body>

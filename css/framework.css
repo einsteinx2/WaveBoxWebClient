@@ -75,6 +75,14 @@ h1 {
 	display: none;
 }
 
+.main-scrollingContent {
+	position: absolute;
+	top: 100px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 #mainContent {
 	background-color: #e8e8e8;
     position:absolute;
@@ -83,6 +91,7 @@ h1 {
     top: 100px;
     bottom: 0;
     box-sizing: border-box;
+	overflow: auto;
 }
 
 
@@ -124,6 +133,13 @@ h1 {
         width: 100%;
         height: 100%;
     }
+
+	.mainContent {
+		position: relative;
+		height: 100%;
+		overflow: visible;
+		box-sizing: border-box;
+	}
 
     .transitions {
         -moz-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;

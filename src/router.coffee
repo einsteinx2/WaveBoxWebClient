@@ -13,26 +13,26 @@ module.exports = Backbone.Router.extend
 
 	artists: (artistId) ->
 		if artistId?
-			wavebox.mainView = new ArtistListingView artistId: artistId
-			wavebox.mainView.collection.fetch reset: true
+			wavebox.appController.mainView = new ArtistListingView artistId: artistId
+			wavebox.appController.mainView.collection.fetch reset: true
 		else
-			wavebox.mainView = new ArtistsView
-			wavebox.mainView.collection.fetch reset: true
+			wavebox.appController.mainView = new ArtistsView
+			wavebox.appController.mainView.collection.fetch reset: true
 
 	folders: (folderId) ->
 		if folderId?
-			wavebox.mainView = new FoldersView
-			wavebox.mainView.collection.fetch(reset: true)
+			wavebox.appController.mainView = new FoldersView
+			wavebox.appController.mainView.collection.fetch(reset: true)
 		return null
 
 	albums: (albumId) ->
 		if albumId?
-			wavebox.mainView = new AlbumListingView albumId
+			wavebox.appController.mainView = new AlbumListingView albumId
 		else
-			wavebox.mainView = new AlbumsView
+			wavebox.appController.mainView = new AlbumsView
 
-			#wavebox.mainView.collection.fetch reset: true
-		wavebox.mainView.render()
+			#wavebox.appController.mainView.collection.fetch reset: true
+		wavebox.appController.mainView.render()
 
 	playlists: (playlistId) ->
 		return null

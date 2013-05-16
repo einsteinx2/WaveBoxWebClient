@@ -1,4 +1,4 @@
-.firstTwoHidden > li:first-child, .firstTwoHidden > li:nth-child(2) {
+.DirectoryViewIcon, .AlbumSortIcon {
 	display: none;
 }
 
@@ -32,7 +32,7 @@
 
 .albumListing {
 	position: absolute;
-	top: 0;
+	top: 0px;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -53,7 +53,6 @@
 .albumListingSidebar > img {
 	width: 163px;
 	height: 163px;
-	overflow: h;
 	padding-top: 15px;
 	padding-left: 13.5px;
 }
@@ -130,6 +129,7 @@ background-color: #e8e8e8;
 	font-size: 12px;
 	background-color: #fff;
 	color: #757575;
+	overflow: visible;
 }
 
 .albumListingTrackList > li {
@@ -140,8 +140,9 @@ background-color: #e8e8e8;
 
 .albumListingTrackList > li > div {
 	box-sizing: border-box;
-	line-height: 40px;
+	line-height: 39px;
 	float: left;
+	border-top: 1px solid #f7f7f7;
 }
 
 .albumListingTrackList > li > div:first-child {
@@ -166,5 +167,68 @@ background-color: #e8e8e8;
 
 @media(max-width: 480px)
 {
+	.main-albumArt {
+		display: block;
+		position: relative;
+		width: 100%;
+	}
 
+	.affixed-top {
+		position: fixed;
+		top: 0;
+	}
+
+	.main-scrollingContent {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100%;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		padding-top: 100px;
+		box-sizing: border-box;
+	}
+
+	.mainContent, .searchBar {
+		position: relative;
+		/*top: -50px;*/
+	}
+	.searchBar {
+		top: 0;
+		z-index: 10000;
+	}
+	
+	.albumListingMain > .mainContent {
+		padding-top: 320px;
+	}
+
+	.albumListingTrackList {
+		top: 0;
+	}
+
+	.albumListingSidebar {
+		display: none;
+	}
+
+	.stickyHeader {
+		display: none;
+	}
+
+	.stickyHeader, .albumListingTrackList {
+		left: 0;
+	}
+
+	.albumTableMiddleColumn > :first-child {
+		width: 100%;
+	}
+
+	.albumTableMiddleColumn > :last-child {
+		display: none;
+	}	
+
+	.HeaderBar, .searchBar {
+		/*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));*/
+		background-color: rgba(255, 255, 255, .85);
+	}
 }

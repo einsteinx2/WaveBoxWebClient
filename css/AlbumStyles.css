@@ -8,6 +8,14 @@ html, body {
 	font-family: "Helvetica Neue";
 }
 
+.artistsMain {
+	padding-right: 15px;
+}
+
+.artistsMain > img {
+	display: none;
+}
+
 .itemWrapper {
 	position: relative;
 	padding: 0 0 15px 15px;
@@ -76,13 +84,6 @@ html, body {
 }
 
 .overlay > img {
-}
-
-.mainContentContainer {
-	padding: 15px 15px 0 0;
-	position: relative;
-	width: 100%;
-	box-sizing: border-box;
 }
 
 @media (min-width: 1400px) {
