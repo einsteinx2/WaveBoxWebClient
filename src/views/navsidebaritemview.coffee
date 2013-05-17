@@ -12,8 +12,9 @@ module.exports = Backbone.View.extend
 		$temp = $(temp)
 				
 		$temp.append @template
-			itemTitle: @model.get("itemTitle")
-			itemClass: @model.get("itemClass")
+			itemTitle: @model.get "itemTitle" or ""
+			itemClass: @model.get "itemClass" or ""
+			href: @model.get "href" or ""
 
 		accessory = @model.get "accessoryClass"
 		if accessory?

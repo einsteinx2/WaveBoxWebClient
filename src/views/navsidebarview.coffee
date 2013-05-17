@@ -12,21 +12,46 @@ module.exports = Backbone.View.extend
 	initialize: ->
 		@serverSectionView = new SidebarSectionView
 			items: [
-				{ itemTitle: "MyServer", itemClass: "Cloud sprite", accessoryClass: "Settings" }
+				{
+					itemTitle: "MyServer",
+					itemClass: "Cloud sprite",
+					accessoryClass: "Settings",
+					href: "#"
+				}
 			]
 		@browseSectionView = new SidebarSectionView
 			title: "Browse"
 			items: [
-				{ itemTitle: "Music", itemClass: "Music sprite" },
-				{ itemTitle: "Discover", itemClass: "Discover sprite" },
-				{ itemTitle: "Folder", itemClass: "Folder sprite" }
+				{
+					itemTitle: "Music",
+					itemClass: "Music sprite",
+					href: "#artists"
+				},
+				{
+					itemTitle: "Discover",
+					itemClass: "Discover sprite",
+					href: "#/discover"
+				},
+				{
+					itemTitle: "Folder",
+					itemClass: "Folder sprite",
+					href: "#/folder"
+				}
 			]
 		#@playlistSectionView = new SidebarPlaylistSectionView
 		@settingSectionView = new SidebarSectionView
 			title: "Setting"
 			items: [
-				{ itemTitle: "Airplane Mode", itemClass: "Offline sprite" },
-				{ itemTitle: "Settings", itemClass: "Settings sprite" }
+				{
+					itemTitle: "Airplane Mode",
+					itemClass: "Offline sprite",
+					href: "#/airplane"
+				},
+				{
+					itemTitle: "Settings",
+					itemClass: "Settings sprite",
+					href: "#/settings"
+				}
 			]
 		#@listenTo @playlistSectionView.collection, "reset", "render"
 			#@playlistSectionView.collection.fetch reset: yes

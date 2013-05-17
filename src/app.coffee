@@ -20,6 +20,6 @@ $ ->
 	wavebox.views.pageView = _.template($("#template-pageView").html())
 
 	wavebox.apiClient.authenticate "test", "test", (success) ->
-		Backbone.history.start(pushState: true)
+		Backbone.history.start()
 		wavebox.appController.render()
 		wavebox.audioPlayer = new AudioPlayer
