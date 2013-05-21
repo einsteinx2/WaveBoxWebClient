@@ -68,6 +68,24 @@ class module.exports
 			async: true
 			type: "POST"
 
+	getAlbum: (albumId, callback) ->
+		return if not albumId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/albums"
+			data: "id=#{albumId}&s=#{@SESSION_ID}"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting artist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+
 	getArtistAlbums: (artistId, callback) ->
 		return if not artistId?
 

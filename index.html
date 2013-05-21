@@ -334,13 +334,13 @@
 			<div class="albumListingSidebar">
 				<img class='albumListingSidebarArt' src='<%= artUrl %>' alt="Album Art" />
 				<ul class="albumRelatedContentLinks">
-					<li class="albumListingSidebar-title">Siberia (Acoustic)</li>
-					<li class="albumListingSidebar-item">Lights ></li>
+					<li class="albumListingSidebar-title"><%= albumName %></li>
+					<li class="albumListingSidebar-item"><%= artistName %>></li>
 					<li class="albumListingSidebar-item">Album</li>
 					<li class="albumListingSidebar-item">Related Artists</li>
 				</ul>
 				<ul class="albumRecordLabelInfo">
-					<li>14 tracks. Length: 40:10</li>
+					<li><%= trackCount %> tracks. Length: <%= totalDuration %></li>
 					<li>Released: September 24, 2012</li>
 				</ul>
 			</div>
@@ -352,170 +352,41 @@
 					<div>Artist</div>
 				</div>
 			</div>
-			<ul class="albumListingTrackList">
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-				<li>
-					<div>1</div>
-						<div class="albumTableMiddleColumn">
-							<div>Cactus in the Valley</div>
-							<div>Lights</div>
-						</div>
-					<div>4:22</div>
-				</li>
-			</ul>
 		</div>
+	</script>
+
+	<script id="template-artistAlbum_listView" type="text/template">
+		<img class='main-albumArt' src="<%= artUrl %>"> 
+		<div class="stickyHeader">
+			<div>#</div>
+			<div>Time</div>
+			<div class="albumTableMiddleColumn">
+				<div>Name</div>
+				<div>Artist</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/template" id="template-artistAlbumItem">
+		<div><%= trackNumber %></div>
+		<div class="albumTableMiddleColumn">
+			<div><%= songName %></div>
+			<div><%= artistName %></div>
+		</div>
+		<div><%= duration %></div>
 	</script>
 
 	<script type="text/template" id="template-pageView">
 		<div class="CenterBar HeaderBar">
-			<a href="#" class="leftPanelToggle <%= leftAccessoryClass %> sprite"></a>
-			<a href="#" class="rightPanelToggle <%= rightAccessoryClass %> sprite"></a>
+			<a href="#" class="leftPanelToggle <%= leftAccessory %> sprite"></a>
+			<a href="#" class="rightPanelToggle <%= rightAccessory %> sprite"></a>
 			<span class="pageTitle"><%= pageTitle %></span>
 		</div>
-		<div class="searchBar <%= searchBarClass %>">
+		<div class="searchBar">
 			<input type="text" class="searchBar-textbox" placeholder="Search" />	
 			<a class="searchBar-toggle FilterIcon filterPanelToggle"></a>
 			<a class="searchBar-toggle DirectoryViewIcon"></a>
 			<a class="searchBar-toggle AlbumSortIcon"></a>
-		</div>
-		<div class="main-scrollingContent scroll">
-			<img src="<%= artUrl %>" alt="Blank Album" class="main-albumArt" />
-			<div class="mainContent"><%= mainContent %></div>
 		</div>
 	</script>
 	

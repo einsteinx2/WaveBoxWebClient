@@ -23,7 +23,6 @@ module.exports = Backbone.View.extend
 			
 	render: ->
 		if not wavebox.isMobile()
-			console.log "not mobile!"
 			@rightPanelActive = true
 			@leftPanelActive = true
 			@filterPanelActive = false

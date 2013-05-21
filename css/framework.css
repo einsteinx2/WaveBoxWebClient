@@ -61,6 +61,8 @@ h1 {
 }
 
 #main {
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
     background-color: white;
     box-sizing: border-box;
 	box-shadow: 2px 8px 15px rgba(0,0,0,.2);    

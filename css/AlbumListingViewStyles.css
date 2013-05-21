@@ -43,7 +43,7 @@
 	cursor: pointer;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 100px;
 	bottom: 0;
 	width: 190px;
 	background-color: transparent;
@@ -134,6 +134,7 @@ background-color: #e8e8e8;
 
 .albumListingTrackList > li {
 	height: 40px;
+	padding: 0;
 	list-style: none;
 	width: 100%;
 }
@@ -205,6 +206,7 @@ background-color: #e8e8e8;
 
 	.albumListingTrackList {
 		top: 0;
+		position: relative;
 	}
 
 	.albumListingSidebar {
@@ -219,11 +221,11 @@ background-color: #e8e8e8;
 		left: 0;
 	}
 
-	.albumTableMiddleColumn > :first-child {
+	.albumTableMiddleColumn > div:first-child {
 		width: 100%;
 	}
 
-	.albumTableMiddleColumn > :last-child {
+	.albumTableMiddleColumn > div:last-child {
 		display: none;
 	}	
 
