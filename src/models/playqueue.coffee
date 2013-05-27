@@ -1,29 +1,33 @@
-Playlist = require '../collections/playlist'
+TrackList = require '../collections/tracklist'
 
 module.exports = Backbone.Model.extend
 	initialize: ->
 		console.log "Readying the play queue..."
-		if localStorage?
-			normalModels = localStorage.getItem "wbNormalPlaylist"
-			shuffleModels = localStorage.getItem "wbShufflePlaylist"
-			nowPlayingIndex = localStorage.getItem "wbNowPlayingIndex"
-			if shuffleModels?
-				@models = new Playlist shuffleModels
-				@toggleModels = new Playlist normalModels
-				@shuffle = yes
-
-			else if normalModels?
-				@models = new Playlist normalModels
-				@shuffle = no
-			else
-				@models = new Playlist
-				@shuffle = no
-
-			if nowPlayingIndex?
-				@nowPlayingIndex = nowPlayingIndex
-			else
-				@nowPlayingIndex = 0
-		else
-			@models = new Playlist
-			@shuffle = no
-			@nowPlayingIndex = 0
+#		if localStorage?
+#			normalTracks = localStorage.getItem "wbNormalPlaylist"
+#			shuffleTracks = localStorage.getItem "wbShufflePlaylist"
+#			nowPlayingIndex = localStorage.getItem "wbNowPlayingIndex"
+#			if shuffleTracks?
+#				@tracks = new Playlist shuffleTracks
+#				@toggleTracks = new Playlist normalTracks
+#				@shuffle = yes
+#
+#			else if normalTracks?
+#				@tracks = new Playlist normalTracks
+#				@shuffle = no
+#			else
+#				@tracks = new Playlist
+#				@shuffle = no
+#
+#			if nowPlayingIndex?
+#				@nowPlayingIndex = nowPlayingIndex
+#			else
+#				@nowPlayingIndex = 0
+#		else
+		@tracks = new TrackList
+		@shuffle = no
+		@nowPlayingIndex = 0
+	
+	add: (track) ->
+		@tracks.add track
+		@trigger "change"

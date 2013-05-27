@@ -80,10 +80,29 @@ class module.exports
 				else
 					if callback? then callback true, data
 			error: (XHR, status, error) ->
-				console.log "error getting artist list: #{status}"
+				console.log "error getting album: #{status}"
 				callback false, error
 			async: true
 			type: "POST"
+	
+	getArtist: (artistId, callback) ->
+		return if not artistId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/artists"
+			data: "id=#{artistId}&s=#{@SESSION_ID}"
+			success: (data) ->
+				console.log "dunnit"
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting artist: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
 
 
 	getArtistAlbums: (artistId, callback) ->
@@ -147,24 +166,29 @@ class module.exports
 		return if not song?
 		urlObj = {}
 
+		itemId = song.get "itemId"
+
 		if song.fileType is 2
-			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.itemId}"
+			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
-			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.itemId}&transType=MP3&transQuality=MEDIUM"
+			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=MEDIUM"
 
 		if song.fileType is 4
-			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{song.itemId}"
+			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
-			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{song.itemId}&transType=OGG&transQuality=MEDIUM"
+			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=MEDIUM"
 
+		console.log urlObj
 		return urlObj
 
 	getArtUrl: (artId, size) ->
-		if window.devicePixelRatio? and size?
-			size *= window.devicePixelRatio
-		asize = if size? then "&size=#{size}" else ""
+		if size?
+			if window.devicePixelRatio?
+				size *= window.devicePixelRatio
+			aSize = "&size=#{size}"
+		else aSize = ""
 
-		return "#{@API_ADDRESS}/art?id=#{artId}&s=#{@SESSION_ID}#{asize}"
+		return "#{@API_ADDRESS}/art?id=#{artId}&s=#{@SESSION_ID}#{aSize}"
 
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
@@ -172,7 +196,7 @@ class module.exports
 			data: "s=#{@SESSION_ID}&id=#{song.itemId}&action=NOWPLAYING"
 			success: (data) ->
 				if data.error?
-					if data.error is "LFMNotAuthenticated" 
+					if data.error is "LFMNotAuthenticated"
 						window.open data.authUrl
 					if callback? then callback false, data.error
 				else

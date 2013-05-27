@@ -4,3 +4,4 @@ script/pagebehavior.js
 .lib
 Guardfile
 *.swp
+*.swo

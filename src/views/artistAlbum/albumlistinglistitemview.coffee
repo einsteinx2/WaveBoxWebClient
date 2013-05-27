@@ -4,8 +4,11 @@ module.exports = Backbone.View.extend
 	template: _.template($("#template-artistAlbumItem").html())
 	initialize: (options) ->
 		if options? then @model = options
+
+	events:
+		"dblclick": ->
+			wavebox.audioPlayer.playQueue.add @model
 	render: ->
-		console.log @model
 		@$el.html @template
 			trackNumber: @model.get "trackNumber"
 			songName: @model.get "songName"

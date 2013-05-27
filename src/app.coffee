@@ -9,10 +9,10 @@ $ ->
 	window.wavebox = {}
 	
 	wavebox.isMobile = -> if screen.width < 768 then true else false
+	wavebox.audioPlayer = new AudioPlayer
 	wavebox.appController = new AppController
 	wavebox.apiClient = new ApiClient
 	wavebox.router = new Router
-	wavebox.audioPlayer = null
 	
 	wavebox.views = {}
 	wavebox.views.artistsView = null
@@ -22,4 +22,3 @@ $ ->
 	wavebox.apiClient.authenticate "test", "test", (success) ->
 		Backbone.history.start()
 		wavebox.appController.render()
-		wavebox.audioPlayer = new AudioPlayer

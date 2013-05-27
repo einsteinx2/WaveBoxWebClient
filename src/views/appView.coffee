@@ -1,21 +1,26 @@
 NavSidebarView = require './navsidebarview'
-PlaylistSidebarView = require './playlistsidebarview'
+MiniPlayerSidebarView = require './rightSidebar/miniPlayer/miniPlayerView'
+PlayQueueView = require './rightSidebar/playQueue/playQueueView'
 FilterSidebarView = require './filtersidebarview'
 
 module.exports = Backbone.View.extend
 	el: "body"
 	initialize: ->
-		@navSidebar = new NavSidebarView().render()
-		@playlistSidebar = new PlaylistSidebarView().render()
-		@filterSidebar = new FilterSidebarView().render()
+		@navSidebar = new NavSidebarView
+		@miniPlayerSidebarView = new MiniPlayerSidebarView
+		@playQueueSidebarView = new PlayQueueView model: wavebox.audioPlayer.playQueue
+		@filterSidebar = new FilterSidebarView
 		@mainView = null
 		@toggledPanel = null
+
+		@navSidebar.render()
+		@miniPlayerSidebarView.render()
+		@playQueueSidebarView.render()
+		@filterSidebar.render()
 
 		@on "playlistToggle", @rightPanelToggle
 		@on "sidebarToggle", @leftPanelToggle
 		@on "filterToggle", @filterPanelToggle
-		#@$el.find(".BackIcon", wavebox.appController).click wavebox.appController.leftPanelToggle
-		#@$el.find(".PlaylistIcon", wavebox.appController).click wavebox.appController.rightPanelToggle
 
 	events:
 		"playlistToggle": -> console.log "playlist toggle"
@@ -27,13 +32,13 @@ module.exports = Backbone.View.extend
 			@leftPanelActive = true
 			@filterPanelActive = false
 			@mainView.$el.addClass("transitions")
-			@mainView.$el.css({left: @navSidebar.$el.width(), width: $(window).width() - @navSidebar.$el.width() - @playlistSidebar.$el.width()})
+			@mainView.$el.css({left: @navSidebar.$el.width(), width: $(window).width() - @navSidebar.$el.width() - @playQueueSidebarView.$el.width()})
 		else
 			@bindTouchEvents()
 
 		$(window).resize =>
 			leftPanelWidth = if @leftPanelActive then @navSidebar.$el.width() else 0
-			rightPanelWidth = if @rightPanelActive then @playlistSidebar.$el.width() else if @filterPanelActive then @filterSidebar.$el.width() else 0
+			rightPanelWidth = if @rightPanelActive then @playQueueSidebarView.$el.width() else if @filterPanelActive then @filterSidebar.$el.width() else 0
 			@mainView.$el.removeClass("transitions").css({left: leftPanelWidth, width: $(window).width() - leftPanelWidth - rightPanelWidth}).addClass("transitions")
 
 		this
@@ -44,15 +49,15 @@ module.exports = Backbone.View.extend
 
 	switchPanels: (panel) ->
 		if panel is "right"
-			@playlistSidebar.$el.css "display": "block"
+			@playQueueSidebarView.$el.css "display": "block"
 			if wavebox.isMobile() then @navSidebar.$el.css "display": "none"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "left"
-			@playlistSidebar.$el.css "display": "none"
+			@playQueueSidebarView.$el.css "display": "none"
 			if wavebox.isMobile() then @navSidebar.$el.css "display": "block"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "filter"
-			@playlistSidebar.$el.css "display": "none"
+			@playQueueSidebarView.$el.css "display": "none"
 			if wavebox.isMobile() then @navSidebar.$el.css "display": "none"
 			@filterSidebar.$el.css "display": "block"
 	
@@ -86,16 +91,16 @@ module.exports = Backbone.View.extend
 			if @toggledPanel is null or @toggledPanel is "filter"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "right"
-					@mainView.$el.wbTranslate(-@playlistSidebar.$el.width(), 200, "ease-out")
+					@mainView.$el.wbTranslate(-@playQueueSidebarView.$el.width(), 200, "ease-out")
 				else
 					@switchPanels "right"
-					@mainView.$el.wbTranslate(-@playlistSidebar.$el.width(), 200, "ease-out")
+					@mainView.$el.wbTranslate(-@playQueueSidebarView.$el.width(), 200, "ease-out")
 				@toggledPanel = "right"
 			else
 				@focusMainPanel()
 		else
 			leftoffset = parseInt @mainView.$el.css "left"
-			rightwidth = @playlistSidebar.$el.width()
+			rightwidth = @playQueueSidebarView.$el.width()
 
 			if not @rightPanelActive
 				afterfilterclose = =>
@@ -143,7 +148,7 @@ module.exports = Backbone.View.extend
 	
 				if @rightPanelActive
 					@mainView.$el.css
-						width: @mainView.$el.width() + @playlistSidebar.$el.width()
+						width: @mainView.$el.width() + @playQueueSidebarView.$el.width()
 					setTimeout afterRightClose, 200
 					@rightPanelActive = false
 				else
@@ -227,7 +232,7 @@ module.exports = Backbone.View.extend
 				else if futurePosition < width / -2 and left < -30
 					@toggledPanel = "right"
 					console.log "right open"
-					-@playlistSidebar.$el.width()
+					-@playQueueSidebarView.$el.width()
 				else
 					@toggledPanel = null
 					console.log "center panel focus"

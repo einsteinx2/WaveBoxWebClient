@@ -23,7 +23,6 @@ module.exports = Backbone.Model.extend
 		artId: null
 
 	formattedDuration: ->
-		console.log @get "duration"
 		if (@get "duration")?
 			return Utils.formattedTimeWithSeconds(@get "duration")
 		else

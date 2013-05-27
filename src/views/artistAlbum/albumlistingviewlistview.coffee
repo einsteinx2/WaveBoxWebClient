@@ -15,7 +15,6 @@ module.exports = Backbone.View.extend
 		#@listenToOnce @collection, "reset", ->
 		#	@trigger "reset"
 	render: ->
-		console.log @tracks
 		# table header
 		$temp = $('<div>')
 		$temp.append @template

@@ -6,6 +6,7 @@ module.exports = Backbone.View.extend
 	events:
 		"click": ->
 			console.log @model
+			wavebox.router.navigate "artists/#{@model.get 'artistId'}", trigger: true
 	render: ->
 		@$el.html @template
 			itemTitle: @model.get "artistName"

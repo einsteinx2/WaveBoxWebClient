@@ -7,7 +7,6 @@ module.exports = Backbone.Model.extend
 		"click .playerButtonNext": "next"
 		"click .playerButtonPrevious": "previous"
 		"click .playerButtonPlayPause": "playPause"
-		"songEnded": "next"
 
 	initialize: ->
 		# player properties
@@ -17,7 +16,9 @@ module.exports = Backbone.Model.extend
 
 		# playlist state
 		@playQueue = new PlayQueue
-
+		@listenTo @playQueue, "change", ->
+			if @playQueue.tracks.size() is 1
+				@playAt 0
 		# progress
 		@elapsed = 0
 		@duration = 0
@@ -27,35 +28,30 @@ module.exports = Backbone.Model.extend
 		@preferredCodec = "mp3"
 		@jPlayer = $("#jPlayer")
 
-		# initialize jPlayer
-		@jPlayer.jPlayer
-			ready: =>
-			ended: =>
-				@trigger "songEnded"
-			play: =>
-				@playing = true
-			pause: =>
-				@playing = false
-			progress: (e) =>
-				@downloadProgress = e.jPlayer.status.seekPercent / 100
-				@trigger "downloadUpdate"
-			timeupdate: (e) =>
-				@elapsed = e.jPlayer.status.currentTime
-				@duration = e.jPlayer.status.duration
-				@trigger "timeUpdate"
-			volumechange: (e) =>
-				@volume = e.jPlayer.options.volume
-				@muted = e.jPlayer.options.muted
-				@trigger "volumeChange"
-			swfPath: "/swf/"
-			supplied: "mp3, oga"
-			solution: "html, flash"
+		# player events
+		@on "songEnded", ->
+			@next()
+		@on "downloadUpdate", ->
+		@on "timeUpdate", ->
+		@on "volumeChange", ->
 
+		# initialize jPlayer
+		@createJPlayerInstanceWithSupplyString "mp3, oga"
+		
 	next: ->
-		return ""
+		index = @playQueue.nowPlayingIndex + 1
+		@playQueue.nowPlayingIndex = index
+		@playAt index
 
 	previous: ->
-		return ""
+		index = @playQueue.nowPlayingIndex - 1
+		@playQueue.nowPlayingIndex = index
+		@playAt index
+
+	playAt: (index) ->
+		song = @playQueue.tracks.at(index)
+		if song?
+			@setPlayerSong song, yes
 
 	playPause: ->
 		console.log "playPause triggered"
@@ -78,6 +74,7 @@ module.exports = Backbone.Model.extend
 				@createJPlayerInstanceWithSupplyString supplyString
 
 			urlObject = wavebox.apiClient.getSongUrlObject song
+			console.log shouldPlay
 			@jPlayer.jPlayer "setMedia", urlObject
 			@jPlayer.jPlayer "play" if shouldPlay
 
@@ -87,10 +84,34 @@ module.exports = Backbone.Model.extend
 		else
 			console.log "unable to play\n #{song}"
 			@next()
-
+	
+	createJPlayerInstanceWithSupplyString: (supplyString) ->
+		that = this
+		@jPlayer.jPlayer
+			ready: ->
+			ended: ->
+				that.trigger "songEnded"
+			play: ->
+				that.playing = true
+			pause: ->
+				that.playing = false
+			progress: (e) ->
+				that.downloadProgress = e.jPlayer.status.seekPercent / 100
+				that.trigger "downloadUpdate"
+			timeupdate: (e) ->
+				that.elapsed = e.jPlayer.status.currentTime
+				that.duration = e.jPlayer.status.duration
+				that.trigger "timeUpdate"
+			volumechange: (e) ->
+				that.volume = e.jPlayer.options.volume
+				that.muted = e.jPlayer.options.muted
+				that.trigger "volumeChange"
+			swfPath: "/swf/"
+			supplied: supplyString
+			solution: "html, flash"
 
 	preferredFormatForSong: (song) ->
-		switch song.fileType
+		switch song.get "fileType"
 			when 1  then "oga"					# aac
 			when 2  then "mp3"					# mp3
 			when 3  then "oga"					# mpc

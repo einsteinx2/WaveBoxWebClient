@@ -1,5 +1,6 @@
 ArtistsView = require './views/artists/artistsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
+ArtistView = require './views/artist/artistview'
 
 module.exports = Backbone.Router.extend
 	routes:
@@ -9,11 +10,14 @@ module.exports = Backbone.Router.extend
 		"playlists(/:playlistId)":	"playlists"
 		"favorites":				"favorites"
 		"settings":					"settings"
-		"*path":					"default"
+		"*path":					"home"
 
 	artists: (artistId) ->
+		console.log "nav artists"
+
+		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if artistId?
-			wavebox.appController.mainView = new ArtistListingView artistId: artistId
+			wavebox.appController.mainView = new ArtistView artistId: artistId
 		else
 			wavebox.appController.mainView = new ArtistsView
 			
@@ -22,6 +26,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	folders: (folderId) ->
+		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if folderId?
 			wavebox.appController.mainView = new FoldersView
 			wavebox.appController.mainView.collection.fetch(reset: true)
@@ -31,6 +36,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	albums: (albumId) ->
+		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if albumId?
 			wavebox.appController.mainView = new AlbumListingView albumId: albumId
 			wavebox.appController.mainView.render()
@@ -51,6 +57,7 @@ module.exports = Backbone.Router.extend
 		return null
 	settings: ->
 		return null
-	default: ->
-		#@artists()
-		@albums 8050
+
+	home: ->
+		@artists()
+

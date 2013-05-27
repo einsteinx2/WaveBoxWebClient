@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend
 
 		$temp = $("<div>")
 		if @contentLoaded
-			artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 600
+			artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 300
 			albumTitle = @album.get "albumName"
 
 			duration = 0
