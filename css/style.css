@@ -771,7 +771,7 @@ ul#Filters .FolderIcon {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7743', endColorstr='#ff5321',GradientType=1 );
 	position:absolute;
 	bottom:0px;
-	left:30%;
+	left: 0;
 }
 
 .FilterTitle {

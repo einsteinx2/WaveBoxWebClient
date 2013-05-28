@@ -1,13 +1,6 @@
 PlayQueue = require '../models/playqueue'
 
 module.exports = Backbone.Model.extend
-	events:
-		"click .playerButtonShuffle": "shuffle"
-		"click .playerButtonRepeat": "repeat"
-		"click .playerButtonNext": "next"
-		"click .playerButtonPrevious": "previous"
-		"click .playerButtonPlayPause": "playPause"
-
 	initialize: ->
 		# player properties
 		@playing = false
@@ -28,13 +21,6 @@ module.exports = Backbone.Model.extend
 		@preferredCodec = "mp3"
 		@jPlayer = $("#jPlayer")
 
-		# player events
-		@on "songEnded", ->
-			@next()
-		@on "downloadUpdate", ->
-		@on "timeUpdate", ->
-		@on "volumeChange", ->
-
 		# initialize jPlayer
 		@createJPlayerInstanceWithSupplyString "mp3, oga"
 		
@@ -49,6 +35,7 @@ module.exports = Backbone.Model.extend
 		@playAt index
 
 	playAt: (index) ->
+		@playQueue.nowPlayingIndex = index
 		song = @playQueue.tracks.at(index)
 		if song?
 			@setPlayerSong song, yes
@@ -90,17 +77,18 @@ module.exports = Backbone.Model.extend
 		@jPlayer.jPlayer
 			ready: ->
 			ended: ->
+				that.next()
 				that.trigger "songEnded"
 			play: ->
-				that.playing = true
+				that.set "playing", true
 			pause: ->
-				that.playing = false
+				that.set "playing", false
 			progress: (e) ->
-				that.downloadProgress = e.jPlayer.status.seekPercent / 100
+				that.set "downloadProgress", e.jPlayer.status.seekPercent / 100
 				that.trigger "downloadUpdate"
 			timeupdate: (e) ->
-				that.elapsed = e.jPlayer.status.currentTime
-				that.duration = e.jPlayer.status.duration
+				that.set "elapsed", e.jPlayer.status.currentTime
+				that.set "duration", e.jPlayer.status.duration
 				that.trigger "timeUpdate"
 			volumechange: (e) ->
 				that.volume = e.jPlayer.options.volume
@@ -108,7 +96,7 @@ module.exports = Backbone.Model.extend
 				that.trigger "volumeChange"
 			swfPath: "/swf/"
 			supplied: supplyString
-			solution: "html, flash"
+			solution: "flash, html"
 
 	preferredFormatForSong: (song) ->
 		switch song.get "fileType"

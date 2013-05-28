@@ -181,13 +181,12 @@ background-color: #e8e8e8;
 
 	.main-scrollingContent {
 		position: absolute;
-		top: 0;
+		top: 100px;
 		left: 0;
 		right: 0;
-		height: 100%;
+		bottom: 0;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
-		padding-top: 100px;
 		box-sizing: border-box;
 	}
 

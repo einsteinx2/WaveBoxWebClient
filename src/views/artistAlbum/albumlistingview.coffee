@@ -15,7 +15,8 @@ module.exports = Backbone.View.extend
 			@album.fetch()
 	events:
 		"click .BackIcon": ->
-			wavebox.appController.trigger "sidebarToggle"
+			console.log "back"
+			history.back(1)
 		"click .PlaylistIcon": ->
 			wavebox.appController.trigger "playlistToggle"
 		"click .FilterIcon": ->

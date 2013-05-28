@@ -162,12 +162,10 @@ module.exports = Backbone.View.extend
 	bindTouchEvents: ->
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
-			console.log "top: #{$top}"
 			$next = $top.children().first()
 			bottom = $next.height() - $top.height()
 			middle = $next.height() / 2
 
-			console.log "touchStart on body!"
 			if $top.scrollTop() is bottom
 				$top.scrollTop(bottom - 1)
 			else if $top.scrollTop() is 0
@@ -239,4 +237,3 @@ module.exports = Backbone.View.extend
 					0
 
 			@mainView.$el.wbTranslate(left, 200, "ease-out")
-			console.log "touchend"

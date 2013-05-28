@@ -6,7 +6,8 @@ html, body {
 }
 
 .artistsMain {
-	padding-right: 15px;
+	padding: 15px 0 0 15px;
+	background-color: #e8e8e8;
 }
 
 .artistsMain > img {
@@ -15,44 +16,28 @@ html, body {
 
 .itemWrapper {
 	position: relative;
-	padding: 0 0 15px 15px;
 	box-sizing: border-box;
 	float: left;
 	width: 16.666%;
-	background-repeat: no-repeat;
+	padding: 0 15px 15px 0;
 }
 
-.imgWrapper {
-	position: relative;
-}
-
-.imgText {
+.itemWrapper > img
+{
+	width: 100%;
+	height: auto;
+	border: 1px solid #848484;
 	box-sizing: border-box;
-	z-index: 3;
-	font-size: .8em;
-	position: absolute;
-	top: 0px;
-	left: 15px;
-	right: 0;
-	bottom: 18px;
-	background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .10) 50%);
-	background: -moz-linear-gradient(bottom, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .10) 50%);
-	padding: 0 .5em .5em .5em;
 }
 
-.imgText > p {
-	font-size: 1.1em;
-	position: absolute;
-	left: 5px;
-	right: 5px;
-	bottom: 5px;
-	overflow: hidden;
+.itemWrapper > div
+{
+	max-width: 100%;
 	white-space: nowrap;
+	overflow: hidden;
 	text-overflow: ellipsis;
-	color: #fff;
-	text-shadow: 0 0 4px rgba(0, 0, 0, .9);
-	line-height: 1.1em;
-	margin: 0;
+	font-size: .9em;
+	color: #535353;
 }
 
 .overlay {
