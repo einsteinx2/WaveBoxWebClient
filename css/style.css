@@ -434,6 +434,10 @@ span#MenuIcon.Settings {
 }
 	
 .QueueSongName {
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	padding: 8px 0 0 10px;
 	font-weight:600;
 	font-size:14px;
@@ -679,8 +683,22 @@ ul#Filters .FolderIcon {
 	left:0px;
 }
 
+#MiniPlayer .Play {
+	background: url('../img/sprite.png') no-repeat -45px -258px;
+	background-size: 315px 435px;
+	width: 13px;
+	height: 15px; 
+	margin: 17px 20px;
+	opacity: .6;
+}
+
 #MiniPlayer .Pause {
-	background-image:url(../img/Player/PauseBtn.png);
+	background: url('../img/sprite.png') no-repeat -44px -409px;
+	background-size: 315px 435px;
+	width: 14px;
+	height: 15px;
+	margin: 17px 20px;
+	opacity: .6;
 }
 
 #FullScreenBtn {
@@ -733,6 +751,11 @@ ul#Filters .FolderIcon {
 }
 
 .PlayerDisplaySongTitle {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 120px;
+	
 	font-weight:600;
 	color:#333333;
 	top:2px;

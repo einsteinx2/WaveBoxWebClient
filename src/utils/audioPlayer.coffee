@@ -3,7 +3,6 @@ PlayQueue = require '../models/playqueue'
 module.exports = Backbone.Model.extend
 	initialize: ->
 		# player properties
-		@playing = false
 		@volume = 1
 		@muted = false
 
@@ -23,6 +22,9 @@ module.exports = Backbone.Model.extend
 
 		# initialize jPlayer
 		@createJPlayerInstanceWithSupplyString "mp3, oga"
+
+	playing: ->
+		not @jPlayer.data().jPlayer.status.paused
 		
 	next: ->
 		index = @playQueue.nowPlayingIndex + 1
@@ -41,8 +43,11 @@ module.exports = Backbone.Model.extend
 			@setPlayerSong song, yes
 
 	playPause: ->
-		console.log "playPause triggered"
-		if not @playing then @jPlayer.jPlayer "play" else @jPlayer.jPlayer "pause"
+		console.log "playPause triggered #{@playing()}"
+		if @playing()
+			@jPlayer.jPlayer "pause"
+		else
+			@jPlayer.jPlayer "play"
 
 	currentSong: ->
 		if @currentPlaylist.length > 0 then currentPlaylist[0] else null
@@ -63,7 +68,8 @@ module.exports = Backbone.Model.extend
 			urlObject = wavebox.apiClient.getSongUrlObject song
 			console.log shouldPlay
 			@jPlayer.jPlayer "setMedia", urlObject
-			@jPlayer.jPlayer "play" if shouldPlay
+			if shouldPlay
+				@jPlayer.jPlayer "play"
 
 			# @saveToLocalStorage()
 			@trigger "newSong"
@@ -80,9 +86,7 @@ module.exports = Backbone.Model.extend
 				that.next()
 				that.trigger "songEnded"
 			play: ->
-				that.set "playing", true
 			pause: ->
-				that.set "playing", false
 			progress: (e) ->
 				that.set "downloadProgress", e.jPlayer.status.seekPercent / 100
 				that.trigger "downloadUpdate"

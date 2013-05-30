@@ -10,4 +10,14 @@ module.exports = Backbone.View.extend
 	render: ->
 		@$el.html @template
 			itemTitle: @model.get "albumName"
+
+		$artImg = @$el.find("img").first()
+		art = new Image()
+		art.onload = =>
+			@$el.find("img").attr "src", art.src
+
+		url = wavebox.apiClient.getArtUrl @model.get("artId"), 200
+		art.src = url
+		console.log url
+
 		this

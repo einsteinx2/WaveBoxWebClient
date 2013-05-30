@@ -9,6 +9,7 @@ module.exports = Backbone.View.extend
 		"dblclick": ->
 			wavebox.audioPlayer.playQueue.add @model
 	render: ->
+		console.log @model
 		@$el.html @template
 			trackNumber: @model.get "trackNumber"
 			songName: @model.get "songName"
