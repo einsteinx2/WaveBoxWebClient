@@ -734,11 +734,11 @@ ul#Filters .FolderIcon {
 }
 
 .PlayerDisplayAlbum {
-	height:32px;
-	width:32px;
-	background-image:url(../img/Player/PlayerDisplayAlbum.png);
-	background-size:cover;
-	float:left;
+	height: 32px;
+	width: 32px;
+	background-image: url(../img/Player/PlayerDisplayAlbum.png);
+	background-size: cover;
+	float: left;
 	margin-right: 6.5px;
 	display:none;
 }
@@ -748,25 +748,24 @@ ul#Filters .FolderIcon {
 }
 
 .PlayerDisplayText {
-	font-size:12px;
-	float:left;
-	line-height:25px;
-	position:absolute;
-}
-
-.PlayerDisplaySongTitle {
+	font-size: 12px;
+	float: left;
+	line-height: 25px;
+	position: absolute;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	max-width: 120px;
-	
-	font-weight:600;
-	color:#333333;
-	top:2px;
 }
-	
+
+.PlayerDisplaySongTitle {
+	max-width: 120px;
+	font-weight: 600;
+	color: #333333;
+	top: 2px;
+}
 
 .PlayerDisplayArtist {
+	max-width: 120px;
 	font-weight:400;
 	color:#6e6e6e;
 	bottom:4px;
