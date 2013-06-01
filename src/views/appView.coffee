@@ -44,21 +44,24 @@ module.exports = Backbone.View.extend
 		this
 
 	focusMainPanel: (callback) ->
-		@mainView.$el.wbTranslate(0, 200, "ease-out", callback)
+		@mainView.$el.transition({x: 0}, 200, "ease-out", callback)
 		@toggledPanel = null
 
 	switchPanels: (panel) ->
 		if panel is "right"
-			@playQueueSidebarView.$el.css "display": "block"
-			if wavebox.isMobile() then @navSidebar.$el.css "display": "none"
+			console.log "right panel"
+			$("#right").css "display": "block"
+			if wavebox.isMobile() then $("#left").css "display": "none"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "left"
-			@playQueueSidebarView.$el.css "display": "none"
-			if wavebox.isMobile() then @navSidebar.$el.css "display": "block"
+			console.log "left panel"
+			$("#right").css "display": "none"
+			if wavebox.isMobile() then $("#left").css "display": "block"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "filter"
-			@playQueueSidebarView.$el.css "display": "none"
-			if wavebox.isMobile() then @navSidebar.$el.css "display": "none"
+			console.log "filter panel"
+			$("#right").css "display": "none"
+			if wavebox.isMobile() then $("#left").$el.css "display": "none"
 			@filterSidebar.$el.css "display": "block"
 	
 	leftPanelToggle: ->
@@ -66,7 +69,7 @@ module.exports = Backbone.View.extend
 		if wavebox.isMobile()
 			if @toggledPanel is null
 				@switchPanels "left"
-				@mainView.$el.wbTranslate(@navSidebar.$el.width(), 200, "ease-out")
+				@mainView.$el.transition({x: @navSidebar.$el.width()}, 200, "ease-out")
 				@toggledPanel = "left"
 			else
 				@focusMainPanel()
@@ -91,10 +94,10 @@ module.exports = Backbone.View.extend
 			if @toggledPanel is null or @toggledPanel is "filter"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "right"
-					@mainView.$el.wbTranslate(-@playQueueSidebarView.$el.width(), 200, "ease-out")
+					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, 200, "ease-out")
 				else
 					@switchPanels "right"
-					@mainView.$el.wbTranslate(-@playQueueSidebarView.$el.width(), 200, "ease-out")
+					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, 200, "ease-out")
 				@toggledPanel = "right"
 			else
 				@focusMainPanel()
@@ -129,10 +132,10 @@ module.exports = Backbone.View.extend
 			if @toggledPanel is null or @toggledPanel is "right"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "filter"
-					@mainView.$el.wbTranslate(-$("#filter").width(), 200, "ease-out")
+					@mainView.$el.transition({x: -$("#filter").width()}, 200, "ease-out")
 				else
 					@switchPanels "filter"
-					@mainView.$el.wbTranslate(-$("#filter").width(), 200, "ease-out")
+					@mainView.$el.transition({x: -$("#filter").width()}, 200, "ease-out")
 				@toggledPanel = "filter"
 			else
 				@focusMainPanel()
@@ -161,6 +164,7 @@ module.exports = Backbone.View.extend
 
 	bindTouchEvents: ->
 		@$el.bind "touchstart", (event) =>
+			console.log "touchstart on body"
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
 			$next = $top.children().first()
 			bottom = $next.height() - $top.height()
@@ -172,6 +176,7 @@ module.exports = Backbone.View.extend
 				$top.scrollTop(1)
 
 		@$el.bind "touchmove", (event) =>
+			console.log "touchmove on body"
 			$target = $(event.target)
 			$parents = $target.parents ".scroll"
 			$scrollAnchor = $target.parents ".scrollAnchor"
@@ -182,16 +187,18 @@ module.exports = Backbone.View.extend
 			if not ($parents.length > 0 or $target.hasClass ".scroll") then event.preventDefault()
 
 		@mainView.$el.bind "touchstart", (event) =>
+			console.log "touchstart on main!"
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
 
 			@touchStartX = event.originalEvent.touches[0].pageX - $this.offset().left
-			@scrollType = if @touchStartX < 30 or @touchStartX > $this.width() - 30 then "x" else "y"
+			@scrollType = if @touchStartX < 100 or @touchStartX > $this.width() - 100 then "x" else "y"
 			@previousX = @touchStartX
 			@previousTime = event.timeStamp
 			@pixelsPerSecond = 0
 
 		@mainView.$el.bind "touchmove", (event) =>
+			console.log "touchmove on mainview"
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
 
@@ -200,11 +207,13 @@ module.exports = Backbone.View.extend
 				x = event.originalEvent.touches[0].pageX
 				@pixelsPerSecond = (x - @previousX) / (event.timeStamp - @previousTime) * 1000
 
+
 				if @toggledPanel isnt "filter"
 					if $this.offset().left < 0
 						@switchPanels "right"
 					else @switchPanels "left"
-				$this.css left: x - @touchStartX
+				console.log x - @touchStartX
+				$this.css "-webkit-transform": "translate3d(#{x - @touchStartX}px, 0, 0)"
 
 			@previousX = x
 			@previousTime = event.timeStamp
@@ -236,4 +245,4 @@ module.exports = Backbone.View.extend
 					console.log "center panel focus"
 					0
 
-			@mainView.$el.wbTranslate(left, 200, "ease-out")
+			@mainView.$el.transition({x: left}, 200, "ease-out")

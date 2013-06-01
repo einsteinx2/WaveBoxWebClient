@@ -5,6 +5,7 @@ module.exports = Backbone.View.extend
 	initialize: ->
 		console.log @model
 		@listenTo @model, "change", @render
+		@listenTo wavebox.audioPlayer, "newSong", @render
 
 	render: ->
 		$container = $("<div>")

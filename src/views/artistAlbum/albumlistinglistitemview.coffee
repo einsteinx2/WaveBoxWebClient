@@ -4,15 +4,20 @@ module.exports = Backbone.View.extend
 	template: _.template($("#template-artistAlbumItem").html())
 	initialize: (options) ->
 		if options? then @model = options
-
+		currentSong = wavebox.audioPlayer.playQueue.currentSong()
+		if currentSong? and @model.get("itemId") is currentSong.get("itemId")
+			@playing = yes
+		else
+			@playing = no
 	events:
-		"dblclick": ->
+		"click": ->
 			wavebox.audioPlayer.playQueue.add @model
 	render: ->
-		console.log @model
 		@$el.html @template
-			trackNumber: @model.get "trackNumber"
+			trackNumber: if not @playing then @model.get "trackNumber" else "<div></div>"
 			songName: @model.get "songName"
 			artistName: @model.get "artistName"
 			duration: @model.formattedDuration()
+		if @playing
+			@$el.addClass "nowPlaying"
 		this

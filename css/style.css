@@ -1,12 +1,11 @@
 @charset utf-8;
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro|Lato|Cabin|Roboto|Raleway);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 
 html, body
 {
     height: 100%;
-	font-family: "Open Sans";
-	font-weight: 600 !important;
+	font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 600;
 }
 
 * {
@@ -92,7 +91,8 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 	
 .sprite {
-		background-image: url(../img/sprite.png);
+	background-image: url(../img/sprite.png);
+	background-size: 370px;
 }	
 	
 .DisplayNone {
@@ -128,8 +128,14 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 
 .CenterBar {
-	background-color:#d1d1d1;
-	padding: 0 0;
+	background: rgb(220,220,220); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(178,178,178,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(220,220,220,1)), color-stop(100%,rgba(178,178,178,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* W3C */
+	padding: 0;
 	height: 50px;
 	top:0;
 }
@@ -148,19 +154,18 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-repeat: no-repeat;
 	height: 22px;
 	width: 24px;
-	background-size: 200px;
 	margin: 14px 17px;
 	opacity: .6;
 }
 	
 .MenuIcon {
+	background: url('../img/sprite.png') no-repeat -41px -155px;
+	background-size: 315px 435px;
+	width: 20px;
+	height: 19px;
 	position: absolute;
-	background-position: -37px -138px;
 	background-repeat: no-repeat;
-	height: 22px;
-	width: 24px;
-	background-size: 155px;
-	margin: 14px 17px;
+	margin: 15px 17px;
 	opacity: .6;
 }
 	
@@ -178,15 +183,21 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 .pageTitle {
 	position: absolute;
 	top: 0;
-	left: 50px;
-	right: 50px;
+	left: 60px;
+	right: 60px;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
-	font-weight: 600;
+	font-weight: 700;
+	color: #333;
+	text-shadow: 0 1px 1px #e6e6e6;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 	
 .searchBar {
+	background-color: #fff;
 	position: absolute;
 	top: 50px;
 	left: 0;
@@ -309,7 +320,6 @@ span#MenuIcon.Cloud {
 	background-repeat: no-repeat;
 	height: 20px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 17px 0px 0px 12px;
 	opacity: 0.8;	
@@ -325,7 +335,6 @@ span#MenuIcon.Music {
 	background-repeat: no-repeat;
 	height: 20px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 17px 0px 0px 12px;
 	opacity: 0.8;	
@@ -336,7 +345,6 @@ span#MenuIcon.Discover {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -347,7 +355,6 @@ span#MenuIcon.Folder {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -358,7 +365,6 @@ span#MenuIcon.Playlists {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -369,7 +375,6 @@ span#MenuIcon.Favorite {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -380,7 +385,6 @@ span#MenuIcon.Juke {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -391,7 +395,6 @@ span#MenuIcon.Offline {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 15px 0px 0px 12px;
 	opacity: 0.8;	
@@ -402,7 +405,6 @@ span#MenuIcon.Settings {
 	background-repeat: no-repeat;
 	height: 25px;
 	width: 24px;
-	background-size: 200px;
 	float: left;
 	margin: 13px 0px 0px 12px;
 	opacity: 0.8;	
@@ -446,9 +448,11 @@ span#MenuIcon.Settings {
 .QueueSongBand  {
 	font-size: 12px;
 	padding: 0 0 0 10px;
+	font-weight: 400;
 }
 	
 .QueueSongTime {
+	font-weight: 400;
 	float: right;
 	margin-top: -28px;
 	font-size: 12px;

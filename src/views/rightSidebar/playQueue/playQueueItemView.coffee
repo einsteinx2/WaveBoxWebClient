@@ -6,6 +6,12 @@ module.exports = Backbone.View.extend
 	tagName: "div"
 	className: "QueueList"
 	template: _.template($("#template-playQueueItem").html())
+	initialize: ->
+		if wavebox.audioPlayer.playQueue.currentSong().get("itemId") is @model.get("itemId")
+			@playing = yes
+		else
+			@playing = no
+
 	events:
 		"dblclick": "dblclick"
 	render: ->
@@ -13,6 +19,9 @@ module.exports = Backbone.View.extend
 			songName: @model.get "songName"
 			artistName: @model.get "artistName"
 			duration: Utils.formattedTimeWithSeconds(@model.get "duration")
+
+		if @playing
+			@$el.addClass "nowPlaying"
 		this
 
 	dblclick: ->

@@ -28,12 +28,10 @@ module.exports = Backbone.Model.extend
 		
 	next: ->
 		index = @playQueue.nowPlayingIndex + 1
-		@playQueue.nowPlayingIndex = index
 		@playAt index
 
 	previous: ->
 		index = @playQueue.nowPlayingIndex - 1
-		@playQueue.nowPlayingIndex = index
 		@playAt index
 
 	playAt: (index) ->
@@ -48,9 +46,6 @@ module.exports = Backbone.Model.extend
 			@jPlayer.jPlayer "pause"
 		else
 			@jPlayer.jPlayer "play"
-
-	currentSong: ->
-		if @currentPlaylist.length > 0 then currentPlaylist[0] else null
 
 	setPlayerSong: (song, shouldPlay) ->
 		incomingCodec = @preferredFormatForSong song

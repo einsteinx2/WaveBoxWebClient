@@ -10,6 +10,7 @@ module.exports = Backbone.View.extend
 			@tracks = options.collection
 
 		if options.artUrl? then @artUrl = options.artUrl else @artUrl = ""
+		@listenTo wavebox.audioPlayer, "newSong", @render
 		#@collection = new Artists
 		#@collection.fetch reset: true
 		#@listenToOnce @collection, "reset", ->

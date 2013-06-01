@@ -2,6 +2,11 @@
 	display: none;
 }
 
+.artistAlbumMain
+{
+	overflow: hidden;
+}
+
 .stickyHeader {
 	height: 40px;
 	position: absolute;
@@ -47,7 +52,7 @@
 	bottom: 0;
 	width: 190px;
 	background-color: transparent;
-	
+	z-index: 1;	
 }
 
 .albumListingSidebar > img {
@@ -61,17 +66,17 @@
 	list-style: none;
 	top: 0;
 	font-size: 1.2em;
-	font-weight: 600;
+	font-weight: 700;
 	padding: 4px 15px 4px 15px;
 }
 
 .albumListingSidebar-item {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	padding: 12px 13.5px 12px 13.5px;
-	font-size: 14px;
 	position: relative;
-	top:11px;
 	font-weight: 400;
-	
 }
 
 .albumListingSidebar-item:hover {
@@ -89,6 +94,7 @@ background-color: #e8e8e8;
 }
 
 .albumRecordLabelInfo {
+	color: #757575;
 	font-size: 11px;
 	position: absolute;
 	bottom: 13.5px;
@@ -105,19 +111,26 @@ background-color: #e8e8e8;
 	position:absolute;
 	left: 40px;
 	right: 52px;
+	font-weight: 500;
+
+}
+
+.albumTableMiddleColumn > div
+{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .albumTableMiddleColumn > div:first-child {
-	float: left;
-	font-weight: 500;
 	font-size: 13px;
+	float: left;
 	width: 65%;
 }
 
 .albumTableMiddleColumn > div:last-child {
 	float: left;
 	width: 35%;
-	color: #959595;
 }
 
 .albumListingTrackList {
@@ -129,7 +142,7 @@ background-color: #e8e8e8;
 	font-size: 12px;
 	background-color: #fff;
 	color: #757575;
-	overflow: visible;
+	overflow: auto;
 }
 
 .albumListingTrackList > li {
@@ -149,8 +162,25 @@ background-color: #e8e8e8;
 .albumListingTrackList > li > div:first-child {
 	float: left;
 	width: 40px;
+	height: 40px;
 	color: #959595;
 	text-align: center;
+}
+
+.albumListingTrackList .nowPlaying
+{
+	background-color: #e8e8e8 !important;
+}
+
+.nowPlaying > div:first-child > div
+{
+	margin-top: 15px;
+	margin-left: 16px;
+	opacity: .6;
+	background: url('../img/sprite.png') no-repeat -30px -172px;
+	background-size: 210px 290px;
+	width: 13px;
+	height: 15px;
 }
 
 .albumListingTrackList > li > div:last-child {

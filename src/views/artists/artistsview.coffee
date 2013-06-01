@@ -29,6 +29,5 @@ module.exports = Backbone.View.extend
 			searchBarClass: ""
 
 		@$el.empty().append $("<div>").append(result).append @artistListing.render().el
-		@$el.find(".CenterBar").addClass "Logo"
 		this
 	
