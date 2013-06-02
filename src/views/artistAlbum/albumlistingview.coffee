@@ -14,7 +14,8 @@ module.exports = Backbone.View.extend
 				@render()
 			@album.fetch()
 	events:
-		"click .BackIcon": ->
+		"click .BackIcon": (e) ->
+			e.preventDefault()
 			console.log "back"
 			history.back(1)
 		"click .PlaylistIcon": ->
