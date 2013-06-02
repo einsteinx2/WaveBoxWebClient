@@ -9,16 +9,30 @@ $ ->
 	window.wavebox = {}
 	
 	wavebox.isMobile = -> if screen.width < 768 then true else false
-	wavebox.audioPlayer = new AudioPlayer
-	wavebox.appController = new AppController
 	wavebox.apiClient = new ApiClient
-	wavebox.router = new Router
 	
 	wavebox.views = {}
 	wavebox.views.artistsView = null
 	wavebox.views.foldersView = null
 	wavebox.views.pageView = _.template($("#template-pageView").html())
 
-	wavebox.apiClient.authenticate "test", "test", (success) ->
+	launch = ->
+		if error? then console.log error
+		wavebox.audioPlayer = new AudioPlayer
+		wavebox.appController = new AppController
+		wavebox.router = new Router
+		
 		Backbone.history.start()
 		wavebox.appController.render()
+	
+	wavebox.apiClient.clientIsAuthenticated (answer, error) =>
+		if answer is yes
+			console.log "using already-valid session"
+			launch()
+		else
+			console.log "authenticating..."
+			wavebox.apiClient.authenticate "test", "test", (successful, error) =>
+				if successful is yes
+					console.log "success!"
+					launch()
+				else console.log error

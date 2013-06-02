@@ -11,16 +11,17 @@ module.exports = Backbone.View.extend
 			@listenToOnce @artist, "change", =>
 				@contentLoaded = yes
 				console.log "changed!"
+				console.log @artist
 				@render()
 			@artist.fetch()
-			console.log "artist!"
 	
 	render: ->
+		console.log @artist
 		@$el.html wavebox.views.pageView
 			leftAccessory: "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
-			pageTitle: ""
+			pageTitle: @artist.get("artistName") or ""
 
 		$temp = $("<div>").addClass("main-scrollingContent artistMain scroll")
 		console.log @contentLoaded

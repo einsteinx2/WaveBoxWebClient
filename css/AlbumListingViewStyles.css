@@ -146,7 +146,7 @@ background-color: #e8e8e8;
 }
 
 .albumListingTrackList > li {
-	height: 40px;
+	height: 44px;
 	padding: 0;
 	list-style: none;
 	width: 100%;
@@ -154,7 +154,7 @@ background-color: #e8e8e8;
 
 .albumListingTrackList > li > div {
 	box-sizing: border-box;
-	line-height: 39px;
+	line-height: 43px;
 	float: left;
 	border-top: 1px solid #f7f7f7;
 }
@@ -162,7 +162,7 @@ background-color: #e8e8e8;
 .albumListingTrackList > li > div:first-child {
 	float: left;
 	width: 40px;
-	height: 40px;
+	height: 44px;
 	color: #959595;
 	text-align: center;
 }
@@ -174,7 +174,7 @@ background-color: #e8e8e8;
 
 .nowPlaying > div:first-child > div
 {
-	margin-top: 15px;
+	margin-top: 17px;
 	margin-left: 16px;
 	opacity: .6;
 	background: url('../img/sprite.png') no-repeat -30px -172px;

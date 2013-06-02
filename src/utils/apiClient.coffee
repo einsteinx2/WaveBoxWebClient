@@ -2,6 +2,7 @@ class module.exports
 	constructor: ->
 		@API_ADDRESS = '/api'
 		@SESSION_ID = localStorage.getItem "waveBoxSessionKey"
+		console.log @SESSION_ID
 		@itemCache = []
 
 	cacheItem: (item) ->
@@ -12,14 +13,12 @@ class module.exports
 
 	logOut: ->
 		localStorage.clear()
-
+	
 	authenticate: (username, password, callback) ->
-		console.log "Calling authenticate"
-
 		$.ajax
 			url: "#{@API_ADDRESS}/login"
 			data: "u=#{username}&p=#{password}"
-			success: (data) ->
+			success: (data) =>
 				if not data.error?
 					@SESSION_ID = data.sessionId
 					localStorage.setItem "waveBoxSessionKey", @SESSION_ID

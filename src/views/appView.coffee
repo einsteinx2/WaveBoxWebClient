@@ -22,10 +22,6 @@ module.exports = Backbone.View.extend
 		@on "sidebarToggle", @leftPanelToggle
 		@on "filterToggle", @filterPanelToggle
 
-	events:
-		"playlistToggle": -> console.log "playlist toggle"
-		"sidebarToggle": -> console.log "sidebar toggle"
-			
 	render: ->
 		if not wavebox.isMobile()
 			@rightPanelActive = true
@@ -49,23 +45,19 @@ module.exports = Backbone.View.extend
 
 	switchPanels: (panel) ->
 		if panel is "right"
-			console.log "right panel"
 			$("#right").css "display": "block"
 			if wavebox.isMobile() then $("#left").css "display": "none"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "left"
-			console.log "left panel"
 			$("#right").css "display": "none"
 			if wavebox.isMobile() then $("#left").css "display": "block"
 			@filterSidebar.$el.css "display": "none"
 		else if panel is "filter"
-			console.log "filter panel"
 			$("#right").css "display": "none"
 			if wavebox.isMobile() then $("#left").$el.css "display": "none"
 			@filterSidebar.$el.css "display": "block"
 	
 	leftPanelToggle: ->
-		console.log "toggling the left panel!"
 		if wavebox.isMobile()
 			if @toggledPanel is null
 				@switchPanels "left"
@@ -88,9 +80,7 @@ module.exports = Backbone.View.extend
 
 	rightPanelToggle: ->
 		$this = @mainView.$el
-		console.log "clicked rightpaneltoggle.  name: #{this.name}"
 		if wavebox.isMobile()
-			console.log wavebox.isMobile()
 			if @toggledPanel is null or @toggledPanel is "filter"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "right"
@@ -127,7 +117,6 @@ module.exports = Backbone.View.extend
 
 
 	filterPanelToggle: ->
-		console.log "filterPanelToggle clicked"
 		if wavebox.isMobile()
 			if @toggledPanel is null or @toggledPanel is "right"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
@@ -164,11 +153,8 @@ module.exports = Backbone.View.extend
 
 	bindTouchEvents: ->
 		@$el.bind "touchstart", (event) =>
-			console.log "touchstart on body"
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
-			$next = $top.children().first()
-			bottom = $next.height() - $top.height()
-			middle = $next.height() / 2
+			bottom = $top[0].scrollHeight - $top.outerHeight()
 
 			if $top.scrollTop() is bottom
 				$top.scrollTop(bottom - 1)
@@ -176,18 +162,15 @@ module.exports = Backbone.View.extend
 				$top.scrollTop(1)
 
 		@$el.bind "touchmove", (event) =>
-			console.log "touchmove on body"
 			$target = $(event.target)
 			$parents = $target.parents ".scroll"
 			$scrollAnchor = $target.parents ".scrollAnchor"
 			if $scrollAnchor.length > 0
-				console.log "There's a scroll anchor!"
 				$anchor = $scrollAnchor.first()
 				if $anchor.height() < $parents.first().height() then event.preventDefault()
 			if not ($parents.length > 0 or $target.hasClass ".scroll") then event.preventDefault()
 
 		@mainView.$el.bind "touchstart", (event) =>
-			console.log "touchstart on main!"
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
 
@@ -198,7 +181,6 @@ module.exports = Backbone.View.extend
 			@pixelsPerSecond = 0
 
 		@mainView.$el.bind "touchmove", (event) =>
-			console.log "touchmove on mainview"
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
 
@@ -212,7 +194,6 @@ module.exports = Backbone.View.extend
 					if $this.offset().left < 0
 						@switchPanels "right"
 					else @switchPanels "left"
-				console.log x - @touchStartX
 				$this.css "-webkit-transform": "translate3d(#{x - @touchStartX}px, 0, 0)"
 
 			@previousX = x
@@ -234,15 +215,12 @@ module.exports = Backbone.View.extend
 			else
 				if futurePosition > width / 2 and left > 30
 					@toggledPanel = "left"
-					console.log "left open"
 					@navSidebar.$el.width()
 				else if futurePosition < width / -2 and left < -30
 					@toggledPanel = "right"
-					console.log "right open"
 					-@playQueueSidebarView.$el.width()
 				else
 					@toggledPanel = null
-					console.log "center panel focus"
 					0
 
 			@mainView.$el.transition({x: left}, 200, "ease-out")
