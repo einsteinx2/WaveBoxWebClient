@@ -22,12 +22,23 @@ html, body {
 	padding: 0 15px 15px 0;
 }
 
-.itemWrapper > img
+.itemWrapper > div:first-child
 {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-image: url("../img/BlankAlbum.png");
 	width: 100%;
-	height: auto;
 	border: 1px solid #848484;
 	box-sizing: border-box;
+}
+
+/* OH MY GOD EQUAL WIDTH/HEIGHT BOX */
+.itemWrapper > div:first-child:before
+{
+	content: "";
+	margin-top: 100%;
+	display: block;
 }
 
 .itemWrapper > div

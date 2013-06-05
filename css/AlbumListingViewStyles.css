@@ -156,7 +156,6 @@ background-color: #e8e8e8;
 	box-sizing: border-box;
 	line-height: 43px;
 	float: left;
-	border-top: 1px solid #f7f7f7;
 }
 
 .albumListingTrackList > li > div:first-child {
@@ -250,13 +249,57 @@ background-color: #e8e8e8;
 		left: 0;
 	}
 
+	.albumListingTrackList > li {
+		height: 50px;
+		border-top: 1px solid #cecece;
+	}
+
+	.albumListingTrackList > li:last-child
+	{
+		border-bottom: 1px solid #cecece;
+	}
+
+	.albumListingTrackList > li > div {
+		line-height: 50px;
+	}
+
+	.albumListingTrackList > li > div:last-child
+	{
+		border-left: 1px solid #cecece;
+	}
+
+	.albumTableMiddleColumn
+	{
+		border-left: 1px solid #cecece;
+		padding-left: 8px;
+	}
+
+	.albumTableMiddleColumn > div
+	{
+		line-height: 13px;
+	}
+
 	.albumTableMiddleColumn > div:first-child {
+		padding: 10px 0 2px 0;
+		box-sizing: border-box;
+		font-weight: 600;
 		width: 100%;
 	}
 
 	.albumTableMiddleColumn > div:last-child {
-		display: none;
+		padding: 2px 0 10px 0;
+		width: 100%;
 	}	
+
+	.nowPlaying
+	{
+		color: #1f1f1f;
+	}
+
+	.nowPlaying > div:first-child > div
+	{
+		margin-top: 20px;
+	}
 
 	.HeaderBar, .searchBar {
 		/*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));*/

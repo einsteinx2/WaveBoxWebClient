@@ -156,6 +156,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	width: 24px;
 	margin: 14px 17px;
 	opacity: .6;
+	cursor: pointer;
 }
 	
 .MenuIcon {
@@ -167,6 +168,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-repeat: no-repeat;
 	margin: 15px 17px;
 	opacity: .6;
+	cursor: pointer;
 }
 	
 .BackIcon {
@@ -178,6 +180,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-image:url(../img/back.png);
 	background-size:22px auto;
 	background-repeat:no-repeat;
+	cursor: pointer;
 }
 
 .pageTitle {
@@ -219,7 +222,8 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	background-position: 8px center;
 	background-size: 17px 17px;
 	background-repeat: no-repeat;
-	-webkit-user-select: all;
+	user-select: text;
+	-webkit-user-select: text;
 }
 
 .searchBar-toggle {
@@ -242,6 +246,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 
 .FilterIcon {
+	cursor: pointer;
 	background-image:url(../img/filters.png);
 }
 
@@ -430,12 +435,14 @@ span#MenuIcon.Settings {
 }
 
 .QueueList {
+	-webkit-user-select: none;
 	width:100%;
 	height:50px;
 	color:#7d7d7d;
 }
 	
 .QueueSongName {
+	-webkit-user-select: none;
 	width: 200px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -446,12 +453,14 @@ span#MenuIcon.Settings {
 }
 	
 .QueueSongBand  {
+	-webkit-user-select: none;
 	font-size: 12px;
 	padding: 0 0 0 10px;
 	font-weight: 400;
 }
 	
 .QueueSongTime {
+	-webkit-user-select: none;
 	font-weight: 400;
 	float: right;
 	margin-top: -28px;

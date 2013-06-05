@@ -11,10 +11,23 @@ module.exports = Backbone.View.extend
 
 		if options.artUrl? then @artUrl = options.artUrl else @artUrl = ""
 		@listenTo wavebox.audioPlayer, "newSong", @render
+		@animated = no
 		#@collection = new Artists
 		#@collection.fetch reset: true
 		#@listenToOnce @collection, "reset", ->
 		#	@trigger "reset"
+		#
+	events:
+		"click .albumListingSidebar-item": ->
+			console.log "should animate"
+			if wavebox.isMobile()
+				if not @animated
+					@animated = yes
+					wavebox.appController.switchPanels "right"
+					main = $("#main")
+					main.transition {x: -50}, 250, "linear", =>
+						main.transition {x: 0}, 250, "linear"
+
 	render: ->
 		# table header
 		$temp = $('<div>')

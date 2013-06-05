@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend
 		$artImg = @$el.find("img").first()
 		art = new Image()
 		art.onload = =>
-			@$el.find("img").attr "src", art.src
+			@$el.children(":first-child").css "background-image", "url(#{url})"
 
 		url = wavebox.apiClient.getArtUrl @model.get("artId"), 200
 		art.src = url

@@ -9,6 +9,8 @@ module.exports = Backbone.View.extend
 			@playing = yes
 		else
 			@playing = no
+		@transitioning = no
+
 	events:
 		"click": ->
 			wavebox.audioPlayer.playQueue.add @model

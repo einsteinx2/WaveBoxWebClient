@@ -8,15 +8,6 @@ module.exports = Backbone.View.extend
 		@artistListing = new ArtistsDynamicBoxListView
 					
 	events:
-		"click .MenuIcon": ->
-			console.log "menuicon"
-			wavebox.appController.trigger "sidebarToggle"
-		"click .PlaylistIcon": ->
-			console.log "playlist icon"
-			wavebox.appController.trigger "playlistToggle"
-		"click .FilterIcon": ->
-			console.log "filter icon"
-			wavebox.appController.trigger "filterToggle"
 		"input .searchBar-textbox": (event) ->
 			@artistListing.filter = $(event.currentTarget).val()
 			@artistListing.trigger "filterChanged"

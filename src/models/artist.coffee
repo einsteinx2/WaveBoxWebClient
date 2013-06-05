@@ -15,9 +15,11 @@ module.exports = Backbone.Model.extend
 		if method is "read"
 			wavebox.apiClient.getArtist @artistId, (success, data) =>
 				if success
-					hash = data.albums[0]
+					hash = data.artists[0]
 					hash.albums = new AlbumList data.albums
 					console.log hash
 					@set hash
 					
-				else console.log data
+				else
+					console.log "artistInfo!"
+					console.log data

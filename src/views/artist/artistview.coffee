@@ -16,9 +16,8 @@ module.exports = Backbone.View.extend
 			@artist.fetch()
 	
 	render: ->
-		console.log @artist
 		@$el.html wavebox.views.pageView
-			leftAccessory: "MenuIcon"
+			leftAccessory: "BackIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""

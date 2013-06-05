@@ -18,9 +18,19 @@ module.exports = Backbone.View.extend
 		@playQueueSidebarView.render()
 		@filterSidebar.render()
 
-		@on "playlistToggle", @rightPanelToggle
-		@on "sidebarToggle", @leftPanelToggle
-		@on "filterToggle", @filterPanelToggle
+	events:
+		"click .MenuIcon": (e) ->
+			e.preventDefault()
+			@leftPanelToggle()
+		"click .BackIcon": (e) ->
+			e.preventDefault()
+			history.back(1)
+		"click .PlaylistIcon": (e) ->
+			e.preventDefault()
+			@rightPanelToggle()
+		"click .FilterIcon": (e) ->
+			e.preventDefault()
+			@filterPanelToggle()
 
 	render: ->
 		if not wavebox.isMobile()
@@ -78,16 +88,16 @@ module.exports = Backbone.View.extend
 					width: @mainView.$el.width() + leftwidth
 				@leftPanelActive = false
 
-	rightPanelToggle: ->
+	rightPanelToggle: (duration = 200)->
 		$this = @mainView.$el
 		if wavebox.isMobile()
 			if @toggledPanel is null or @toggledPanel is "filter"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "right"
-					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, 200, "ease-out")
+					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, duration, "ease-out")
 				else
 					@switchPanels "right"
-					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, 200, "ease-out")
+					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, duration, "ease-out")
 				@toggledPanel = "right"
 			else
 				@focusMainPanel()

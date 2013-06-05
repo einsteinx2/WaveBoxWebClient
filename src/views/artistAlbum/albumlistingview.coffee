@@ -13,18 +13,8 @@ module.exports = Backbone.View.extend
 				@contentLoaded = yes
 				@render()
 			@album.fetch()
-	events:
-		"click .BackIcon": (e) ->
-			e.preventDefault()
-			console.log "back"
-			history.back(1)
-		"click .PlaylistIcon": ->
-			wavebox.appController.trigger "playlistToggle"
-		"click .FilterIcon": ->
-			wavebox.appController.trigger "filterToggle"
 
 	render: ->
-
 		$temp = $("<div>")
 		if @contentLoaded
 			artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 300

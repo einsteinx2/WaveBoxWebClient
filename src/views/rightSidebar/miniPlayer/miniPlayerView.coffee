@@ -36,10 +36,10 @@ module.exports = Backbone.View.extend
 	playBtn: ->
 		console.log "playBtn"
 		wavebox.audioPlayer.playPause()
-		if wavebox.audioPlayer.playing
-			$("#PlayBtn").removeClass("Pause").addClass("Play")
-		else
+		if wavebox.audioPlayer.playing()
 			$("#PlayBtn").removeClass("Play").addClass("Pause")
+		else
+			$("#PlayBtn").removeClass("Pause").addClass("Play")
 	
 	timeUpdate: ->
 		@updateElapsedTime()

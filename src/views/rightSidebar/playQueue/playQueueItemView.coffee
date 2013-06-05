@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend
 			@playing = no
 
 	events:
-		"dblclick": "dblclick"
+		"click": "dblclick"
 	render: ->
 		@$el.append @template
 			songName: @model.get "songName"
