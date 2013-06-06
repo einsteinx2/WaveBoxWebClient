@@ -10,3 +10,6 @@ module.exports = class
 		if secs < 10 then stringTime += "0#{secs}" else stringTime += secs
 
 		return stringTime
+
+	@delay: (millis, callback) ->
+		setTimeout callback, millis

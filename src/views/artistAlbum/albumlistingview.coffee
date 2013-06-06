@@ -3,7 +3,7 @@ Album = require '../../models/album'
 Utils = require '../../utils/utils'
 
 module.exports = Backbone.View.extend
-	el: "#main"
+	tagName: "div"
 	template: _.template($("#template-album_listing").html())
 	initialize: (options) ->
 		if options.albumId?

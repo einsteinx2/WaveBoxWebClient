@@ -3,9 +3,12 @@
 #        Date: 5/8/2013
 
 module.exports = Backbone.View.extend
-	tagName: "li"
-	className: "SidebarIcons"
+	tagName: "a"
 	template: _.template($("#template-sideBarItem").html())
+
+	events:
+		"click": (e) ->
+			wavebox.appController.mainView.resetNext = yes
 
 	render: ->
 		temp = document.createElement "div"
@@ -14,13 +17,7 @@ module.exports = Backbone.View.extend
 		$temp.append @template
 			itemTitle: @model.get "itemTitle" or ""
 			itemClass: @model.get "itemClass" or ""
-			href: @model.get "href" or ""
+		@$el.attr "href", @model.get("href") or ""
 
-		accessory = @model.get "accessoryClass"
-		if accessory?
-			ele = document.createElement "a"
-			ele.className = "#{accessory} sprite"
-			$temp.append ele
-
-		@$el.append temp.innerHTML
+		@$el.append $temp.children()
 		this

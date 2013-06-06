@@ -1,7 +1,7 @@
 ArtistsDynamicBoxListView = require "./artistsdynamicboxlistview"
 
 module.exports = Backbone.View.extend
-	el: "#main"
+	tagName: "div"
 	filter: ""
 	template: _.template($("#template-pageView").html())
 	initialize: ->

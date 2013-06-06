@@ -2,7 +2,7 @@ AlbumItemView = require './albumitemview'
 Artist = require '../../models/artist'
 
 module.exports = Backbone.View.extend
-	el: "#main"
+	tagName: "div"
 	template: _.template($("#template-artistView").html())
 	initialize: (artistId) ->
 		@contentLoaded = no

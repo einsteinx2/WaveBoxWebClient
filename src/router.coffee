@@ -15,40 +15,25 @@ module.exports = Backbone.Router.extend
 	artists: (artistId) ->
 		console.log "nav artists"
 
-		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
+		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if artistId?
-			wavebox.appController.mainView = new ArtistView artistId: artistId
+			wavebox.appController.mainView.push(new ArtistView artistId: artistId)
 		else
-			wavebox.appController.mainView = new ArtistsView
+			wavebox.appController.mainView.push(new ArtistsView)
 			
-		wavebox.appController.mainView.render()
 		if wavebox.isMobile()
 			wavebox.appController.focusMainPanel()
 
 	folders: (folderId) ->
-		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
-		if folderId?
-			wavebox.appController.mainView = new FoldersView
-			wavebox.appController.mainView.collection.fetch(reset: true)
-		return null
-	
-		if wavebox.isMobile()
-			wavebox.appController.focusMainPanel()
 
 	albums: (albumId) ->
-		if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if albumId?
-			wavebox.appController.mainView = new AlbumListingView albumId: albumId
-			wavebox.appController.mainView.render()
+			wavebox.appController.mainView.push(new AlbumListingView albumId: albumId)
 		else
-			wavebox.appController.mainView = new AlbumsView
-			wavebox.appController.mainView.render()
+			wavebox.appController.mainView.push(new AlbumsView)
 
 		if wavebox.isMobile()
 			wavebox.appController.focusMainPanel()
-
-			#wavebox.appController.mainView.collection.fetch reset: true
-		wavebox.appController.mainView.render()
 
 	playlists: (playlistId) ->
 		return null

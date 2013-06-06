@@ -9,6 +9,7 @@ module.exports = Backbone.View.extend
 	
 	el: "#SidebarMenu"
 	className: "scroll"
+
 	initialize: ->
 		@serverSectionView = new SidebarSectionView
 			items: [
@@ -62,5 +63,5 @@ module.exports = Backbone.View.extend
 		$temp.append @browseSectionView.render().el
 		#$temp.append @playlistSectionView.render.el
 		$temp.append @settingSectionView.render().el
-		@$el.empty().append $temp.html()
+		@$el.empty().append $temp.children()
 		this

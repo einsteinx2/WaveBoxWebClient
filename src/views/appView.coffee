@@ -2,6 +2,7 @@ NavSidebarView = require './navsidebarview'
 MiniPlayerSidebarView = require './rightSidebar/miniPlayer/miniPlayerView'
 PlayQueueView = require './rightSidebar/playQueue/playQueueView'
 FilterSidebarView = require './filtersidebarview'
+ViewStack = require '../utils/viewStack'
 
 module.exports = Backbone.View.extend
 	el: "body"
@@ -10,13 +11,11 @@ module.exports = Backbone.View.extend
 		@miniPlayerSidebarView = new MiniPlayerSidebarView
 		@playQueueSidebarView = new PlayQueueView model: wavebox.audioPlayer.playQueue
 		@filterSidebar = new FilterSidebarView
-		@mainView = null
+		@mainView = new ViewStack "#main"
 		@toggledPanel = null
 
-		@navSidebar.render()
-		@miniPlayerSidebarView.render()
-		@playQueueSidebarView.render()
-		@filterSidebar.render()
+		$(document).on "unload", (e) ->
+			e.preventDefault()
 
 	events:
 		"click .MenuIcon": (e) ->
@@ -24,7 +23,10 @@ module.exports = Backbone.View.extend
 			@leftPanelToggle()
 		"click .BackIcon": (e) ->
 			e.preventDefault()
-			history.back(1)
+			if wavebox.appController.mainView.canPop()
+				wavebox.appController.mainView.pop()
+			else
+				history.back(1)
 		"click .PlaylistIcon": (e) ->
 			e.preventDefault()
 			@rightPanelToggle()
@@ -33,6 +35,11 @@ module.exports = Backbone.View.extend
 			@filterPanelToggle()
 
 	render: ->
+		@navSidebar.render()
+		@miniPlayerSidebarView.render()
+		@playQueueSidebarView.render()
+		@filterSidebar.render()
+
 		if not wavebox.isMobile()
 			@rightPanelActive = true
 			@leftPanelActive = true
@@ -52,7 +59,7 @@ module.exports = Backbone.View.extend
 	focusMainPanel: (callback) ->
 		@mainView.$el.transition({x: 0}, 200, "ease-out", callback)
 		@toggledPanel = null
-
+		
 	switchPanels: (panel) ->
 		if panel is "right"
 			$("#right").css "display": "block"
