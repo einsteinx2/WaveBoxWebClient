@@ -26,4 +26,4 @@ module.exports = Backbone.Model.extend
 						artistId: album.artistId
 						itemTypeId: album.itemTypeId
 						releaseYear: album.releaseYear
-						tracks: new TrackList data.songs
+						tracks: new TrackList data.songs, comparator: "trackNumber"
