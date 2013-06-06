@@ -57,7 +57,7 @@ module.exports = Backbone.View.extend
 		@updateElapsedTime()
 		
 	updateElapsedTime: ->
-		duration = wavebox.audioPlayer.get "duration"
+		duration = wavebox.audioPlayer.playQueue.currentSong().get "duration"
 		elapsed = wavebox.audioPlayer.get "elapsed"
 		elapsedUpdate =
 			if @elapsedMode is "timeLeft"
@@ -67,7 +67,7 @@ module.exports = Backbone.View.extend
 		@elapsedTime.text elapsedUpdate
 	
 	updatePlayMarker: ->
-		duration = wavebox.audioPlayer.get "duration"
+		duration = wavebox.audioPlayer.playQueue.currentSong().get "duration"
 		elapsed = wavebox.audioPlayer.get "elapsed"
 		@playMarker.css "left", Math.round((elapsed / duration) * @playerWidth)
 
