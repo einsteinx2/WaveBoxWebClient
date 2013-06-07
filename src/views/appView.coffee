@@ -169,6 +169,11 @@ module.exports = Backbone.View.extend
 				@filterPanelActive = false
 
 	bindTouchEvents: ->
+
+		###
+		Touch handling for vertical scrolling of center panel
+		###
+
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
 			bottom = $top[0].scrollHeight - $top.outerHeight()
@@ -187,6 +192,10 @@ module.exports = Backbone.View.extend
 				if $anchor.height() < $parents.first().height() then event.preventDefault()
 			if not ($parents.length > 0 or $target.hasClass ".scroll") then event.preventDefault()
 
+		###
+		Touch handling for horizontal scrolling of panels
+		###
+
 		@mainView.$el.bind "touchstart", (event) =>
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
@@ -204,8 +213,19 @@ module.exports = Backbone.View.extend
 			if @scrollType is "x"
 				event.preventDefault()
 				x = event.originalEvent.touches[0].pageX
-				@pixelsPerSecond = (x - @previousX) / (event.timeStamp - @previousTime) * 1000
 
+				# Don't allow scrolling past the left edge when dragging the left side of the screen
+				if @touchStartX < 100 and x < @previousX and $this.offset().left <= 0
+					$this.offset().left = 0
+					return
+
+				# Don't allow scrolling past the right edge when dragging the right side of the screen
+				if @touchStartX > $this.width() - 100 and x > @previousX and $this.offset().left >= 0
+					$this.offset().left = 0
+					return
+
+				# Calculate the dragging speed
+				@pixelsPerSecond = (x - @previousX) / (event.timeStamp - @previousTime) * 1000
 
 				if @toggledPanel isnt "filter"
 					if $this.offset().left < 0
