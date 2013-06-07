@@ -5,7 +5,7 @@ module.exports = Backbone.View.extend
 
 	events:
 		"click": ->
-			console.log @model
+			console.log "artist click event fired! #{Date.now()}"
 			wavebox.router.navigate "artists/#{@model.get 'artistId'}", trigger: true
 	render: ->
 		random = Math.floor(Math.random() * 100)

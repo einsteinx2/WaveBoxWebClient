@@ -169,6 +169,9 @@ module.exports = Backbone.View.extend
 				@filterPanelActive = false
 
 	bindTouchEvents: ->
+		# FastClick!
+		FastClick.attach(document.body)
+
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
 			bottom = $top[0].scrollHeight - $top.outerHeight()
