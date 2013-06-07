@@ -176,7 +176,7 @@ module.exports = Backbone.View.extend
 
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
-			bottom = $top[0].scrollHeight - $top.outerHeight()
+			bottom = if $top[0] isnt undefined then $top[0].scrollHeight - $top.outerHeight() else -$top.outerHeight()
 
 			if $top.scrollTop() is bottom
 				$top.scrollTop(bottom - 1)
