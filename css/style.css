@@ -788,15 +788,15 @@ ul#Filters .FolderIcon {
 }
 	
 .PlayerDisplaySongTime {
+	font-weight:100;
 	color:#6e6e6e;
 	right:6.5px;
-	top:2px;
+	bottom: 4px;
 }
 
 .PlayerDisplaySongTimeLeft {
-	font-weight:100;
 	color:#6e6e6e;
-	bottom:4px;
+	top:2px;
 	right:6.5px;
 }
 

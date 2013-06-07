@@ -8,7 +8,7 @@ module.exports = Backbone.View.extend
 		"click .PlayerDisplaySongTimeLeft": "switchElapsedMode"
 
 	initialize: ->
-		@elapsedMode = "timeLeft"
+		@elapsedMode = "timeElapsed"
 		@listenTo wavebox.audioPlayer, "newSong", @render
 		@listenTo wavebox.audioPlayer, "timeUpdate", @timeUpdate
 		@listenTo wavebox.audioPlayer, "playPause", @playButtonUpdate
