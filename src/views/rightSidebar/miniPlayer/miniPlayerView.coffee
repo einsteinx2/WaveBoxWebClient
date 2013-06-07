@@ -4,13 +4,14 @@ module.exports = Backbone.View.extend
 	el: "#MiniPlayer"
 	template: _.template($("#template-miniPlayer").html())
 	events:
-		"click #PlayBtn": "playBtn"
+		"click #PlayBtn": "playButtonAction"
 		"click .PlayerDisplaySongTimeLeft": "switchElapsedMode"
 
 	initialize: ->
 		@elapsedMode = "timeLeft"
 		@listenTo wavebox.audioPlayer, "newSong", @render
 		@listenTo wavebox.audioPlayer, "timeUpdate", @timeUpdate
+		@listenTo wavebox.audioPlayer, "playPause", @playButtonUpdate
 
 	render: ->
 		song = wavebox.audioPlayer.playQueue.currentSong()
@@ -33,9 +34,11 @@ module.exports = Backbone.View.extend
 
 		if not song?
 			@playMarker.hide()
-	playBtn: ->
+	playButtonAction: ->
 		console.log "playBtn"
 		wavebox.audioPlayer.playPause()
+
+	playButtonUpdate: ->
 		if wavebox.audioPlayer.playing()
 			$("#PlayBtn").removeClass("Play").addClass("Pause")
 		else

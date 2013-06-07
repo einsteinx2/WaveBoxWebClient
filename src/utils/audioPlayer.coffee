@@ -76,16 +76,48 @@ module.exports = Backbone.Model.extend
 	createJPlayerInstanceWithSupplyString: (supplyString) ->
 		that = this
 		@jPlayer.jPlayer
-			ready: ->
-			ended: ->
+			error: (e) -> 
+				console.log "jPlayer error event: "
+				console.log e
+			warning: (e) -> 
+				console.log "jPlayer warning event: "
+				console.log e
+			ready: (e) -> 
+				console.log "jPlayer ready event: "
+				console.log e
+			ended: (e) ->
+				console.log "jPlayer ended event: "
+				console.log e
 				that.next()
 				that.trigger "songEnded"
 			play: ->
+				that.trigger "play"
+				that.trigger "playPause"
 			pause: ->
-			progress: (e) ->
+				that.trigger "pause"
+				that.trigger "playPause"
+			loadstart: (e) -> 
+				console.log "jPlayer loadstart event: "
+				console.log e
+			suspend: (e) -> 
+				console.log "jPlayer suspend event: "
+				console.log e
+			abort: (e) -> 
+				console.log "jPlayer abort event: "
+				console.log e
+			emptied: (e) -> 
+				console.log "jPlayer empty event: "
+				console.log e
+			stalled: (e) -> 
+				console.log "jPlayer stalled event: "
+				console.log e
+			progress: (e) -> 
+				console.log "jPlayer progress event: "
+				console.log e
 				that.set "downloadProgress", e.jPlayer.status.seekPercent / 100
 				that.trigger "downloadUpdate"
 			timeupdate: (e) ->
+				console.log "timeupdate called"
 				that.set "elapsed", e.jPlayer.status.currentTime
 				that.set "duration", e.jPlayer.status.duration
 				that.trigger "timeUpdate"
