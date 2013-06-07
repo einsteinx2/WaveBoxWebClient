@@ -443,6 +443,7 @@ span#MenuIcon.Settings {
 
 .QueueList {
 	-webkit-user-select: none;
+	border-bottom: 1px #ccc solid;
 	width:100%;
 	height:50px;
 	color:#7d7d7d;
@@ -454,7 +455,7 @@ span#MenuIcon.Settings {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding: 8px 0 0 10px;
+	padding: 9px 0 0 10px;
 	font-weight:600;
 	font-size:14px;
 }
@@ -470,7 +471,7 @@ span#MenuIcon.Settings {
 	-webkit-user-select: none;
 	font-weight: 400;
 	float: right;
-	margin-top: -28px;
+	margin-top: -26px;
 	font-size: 12px;
 	padding: 0 10px 0 0;
 }	
@@ -682,10 +683,13 @@ ul#Filters .FolderIcon {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#00ffffff',GradientType=0 );
 
 	/** The Wrong Colors **/
-	border:1px #CCC solid;
 	border-top-width:0px;
 	border-left:0px !important;
 	border-right:0px !important;
+
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);
+	-moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
+	box-shadow: 0 0 4px rgba(0,0,0,.3);
 }
 
 .dropshadow {
@@ -788,7 +792,7 @@ ul#Filters .FolderIcon {
 }
 	
 .PlayerDisplaySongTime {
-	font-weight:100;
+	font-weight: 400;
 	color:#6e6e6e;
 	right:6.5px;
 	bottom: 4px;

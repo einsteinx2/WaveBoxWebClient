@@ -109,7 +109,7 @@ background-color: #e8e8e8;
 
 .albumTableMiddleColumn {
 	position:absolute;
-	left: 40px;
+	left: 50px;
 	right: 52px;
 	font-weight: 500;
 
@@ -160,8 +160,8 @@ background-color: #e8e8e8;
 
 .albumListingTrackList > li > div:first-child {
 	float: left;
-	width: 40px;
-	height: 44px;
+	width: 50px;
+	height: 50px;
 	color: #959595;
 	text-align: center;
 }
@@ -271,7 +271,8 @@ background-color: #e8e8e8;
 	.albumTableMiddleColumn
 	{
 		border-left: 1px solid #cecece;
-		padding-left: 8px;
+		padding: 0 8px 0 8px;
+		height: 50px;
 	}
 
 	.albumTableMiddleColumn > div
@@ -280,14 +281,15 @@ background-color: #e8e8e8;
 	}
 
 	.albumTableMiddleColumn > div:first-child {
-		padding: 10px 0 2px 0;
+		padding: 11px 0 2px 0;
 		box-sizing: border-box;
 		font-weight: 600;
 		width: 100%;
 	}
 
 	.albumTableMiddleColumn > div:last-child {
-		padding: 2px 0 10px 0;
+		font-size: 10px;
+		box-sizing: border-box;
 		width: 100%;
 	}	
 
