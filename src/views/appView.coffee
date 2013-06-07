@@ -172,9 +172,13 @@ module.exports = Backbone.View.extend
 		# FastClick!
 		FastClick.attach(document.body)
 
+		###
+		Touch handling for vertical scrolling of center panel
+		###
+		
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
-			bottom = $top[0].scrollHeight - $top.outerHeight()
+			bottom = if $top[0] isnt undefined then $top[0].scrollHeight - $top.outerHeight() else -$top.outerHeight()
 
 			if $top.scrollTop() is bottom
 				$top.scrollTop(bottom - 1)
@@ -190,12 +194,18 @@ module.exports = Backbone.View.extend
 				if $anchor.height() < $parents.first().height() then event.preventDefault()
 			if not ($parents.length > 0 or $target.hasClass ".scroll") then event.preventDefault()
 
+		###
+		Touch handling for horizontal scrolling of panels
+		###
+
 		@mainView.$el.bind "touchstart", (event) =>
 			return if event.originalEvent.touches.length isnt 1
 			$this = @mainView.$el
 
 			@touchStartX = event.originalEvent.touches[0].pageX - $this.offset().left
 			@scrollType = if @touchStartX < 100 or @touchStartX > $this.width() - 100 then "x" else "y"
+			# If we're on mobile, and either panel is open, only allow panel dragging
+			@scrollType = if wavebox.isMobile() and @toggledPanel isnt null then "x" else @scrollType
 			@previousX = @touchStartX
 			@previousTime = event.timeStamp
 			@pixelsPerSecond = 0
@@ -207,8 +217,19 @@ module.exports = Backbone.View.extend
 			if @scrollType is "x"
 				event.preventDefault()
 				x = event.originalEvent.touches[0].pageX
-				@pixelsPerSecond = (x - @previousX) / (event.timeStamp - @previousTime) * 1000
 
+				# Don't allow scrolling past the left edge when dragging the left side of the screen
+				if @touchStartX < 100 and x < @previousX and $this.offset().left <= 0
+					$this.offset().left = 0
+					return
+
+				# Don't allow scrolling past the right edge when dragging the right side of the screen
+				if @touchStartX > $this.width() - 100 and x > @previousX and $this.offset().left >= 0
+					$this.offset().left = 0
+					return
+
+				# Calculate the dragging speed
+				@pixelsPerSecond = (x - @previousX) / (event.timeStamp - @previousTime) * 1000
 
 				if @toggledPanel isnt "filter"
 					if $this.offset().left < 0

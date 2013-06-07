@@ -5,3 +5,4 @@ script/pagebehavior.js
 Guardfile
 *.swp
 *.swo
+node_modules
