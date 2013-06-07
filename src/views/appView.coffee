@@ -245,21 +245,22 @@ module.exports = Backbone.View.extend
 			left = @mainView.$el.offset().left
 			futurePosition = left + @pixelsPerSecond
 
-			left = if @toggledPanel is "filter"
-				if futurePosition > 0
-					@toggledPanel = null
-					0
+			left = 
+				if @toggledPanel is "filter"
+					if futurePosition > 0
+						@toggledPanel = null
+						0
+					else
+						-@filterSidebar.$el.width()
 				else
-					-@filterSidebar.$el.width()
-			else
-				if futurePosition > width / 2 and left > 30
-					@toggledPanel = "left"
-					@navSidebar.$el.width()
-				else if futurePosition < width / -2 and left < -30
-					@toggledPanel = "right"
-					-@playQueueSidebarView.$el.width()
-				else
-					@toggledPanel = null
-					0
+					if futurePosition > @navSidebar.$el.width() * .75 and left > 30
+						@toggledPanel = "left"
+						@navSidebar.$el.width()
+					else if futurePosition + width < width - (@playQueueSidebarView.$el.width() * .75) and left < -30
+						@toggledPanel = "right"
+						-@playQueueSidebarView.$el.width()
+					else
+						@toggledPanel = null
+						0
 
 			@mainView.$el.transition({x: left}, 200, "ease-out")
