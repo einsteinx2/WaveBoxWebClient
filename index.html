@@ -198,8 +198,12 @@
 
 	<script type="text/template" id="template-pageView">
 		<div class="CenterBar HeaderBar">
-			<a href="#" class="leftPanelToggle <%= leftAccessory %> sprite"></a>
-			<a href="#" class="rightPanelToggle <%= rightAccessory %> sprite"></a>
+			<div class="leftPanelToggle <%= leftAccessory %>">
+				<div href="#" class="sprite"></div>
+			</div>
+			<div class="rightPanelToggle <%= rightAccessory %>">
+				<div href="#" class="sprite"></div>
+			</div>
 			<span class="pageTitle"><%= pageTitle %></span>
 		</div>
 		<div class="searchBar">

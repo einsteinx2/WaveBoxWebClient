@@ -150,37 +150,44 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 .PlaylistIcon {
 	position: absolute;
 	right: 0;
+	padding: 14px 13px;
+	cursor: pointer;
+}
+
+.PlaylistIcon > div {
 	background-position: -10px -389px;
 	background-repeat: no-repeat;
 	height: 22px;
 	width: 24px;
-	margin: 14px 17px;
 	opacity: .6;
-	cursor: pointer;
 }
 	
 .MenuIcon {
+	position: absolute;
+	padding: 15px 17px;
+	cursor: pointer;
+}
+.MenuIcon div {
 	background: url('../img/sprite.png') no-repeat -41px -155px;
 	background-size: 315px 435px;
 	width: 20px;
 	height: 19px;
-	position: absolute;
 	background-repeat: no-repeat;
-	margin: 15px 17px;
 	opacity: .6;
+}
+
+.BackIcon {
+	position: absolute;
+	padding: 17.5px 16px;
 	cursor: pointer;
 }
 	
-.BackIcon {
-	position: absolute;
-	height: 22px;
-	width: 24px;
-	margin: 14px 17px;
+.BackIcon > div {
 	opacity: .6;
-	background-image:url(../img/back.png);
-	background-size:22px auto;
-	background-repeat:no-repeat;
-	cursor: pointer;
+	background: url('../img/sprite.png') no-repeat -42px -384px;
+	background-size: 315px 435px;
+	width: 19px;
+	height: 15px;
 }
 
 .pageTitle {
