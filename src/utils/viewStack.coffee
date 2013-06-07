@@ -38,10 +38,10 @@ module.exports = class ViewStack
 				newView.$el.addClass("viewstack-onscreen")
 				bury.$el.addClass "viewstack-offscreen-left"
 				
-		Utils.delay 350, =>
+		Utils.delay 600, =>
 			if animate and bury?
 				newView.$el.removeClass "viewstack-animate viewstack-offscreen-right viewstack-onscreen"
-				#bury.$el.hide()
+				bury.$el.hide()
 
 			if reset or @resetNext then @reset()
 
