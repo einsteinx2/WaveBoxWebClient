@@ -8,7 +8,7 @@ AppController = require './views/appView'
 $ ->
 	window.wavebox = {}
 	
-	wavebox.isMobile = -> if screen.width < 768 then true else false
+	wavebox.isMobile = -> if screen.width < 769 then true else false
 	wavebox.apiClient = new ApiClient
 	
 	wavebox.views = {}
