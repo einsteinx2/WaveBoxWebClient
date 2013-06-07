@@ -197,10 +197,30 @@ background-color: #e8e8e8;
 
 @media(max-width: 480px)
 {
+
 	.main-albumArt {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
 		display: block;
 		position: relative;
 		width: 100%;
+	}
+
+	.main-albumArt:before {
+		content: '';
+		padding-top: 100%;
+		display: block;
+	}
+
+	.main-albumArt > img
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		-webkit-transition: opacity .2s ease-out;
 	}
 
 	.affixed-top {

@@ -17,7 +17,19 @@ module.exports = Backbone.View.extend
 	render: ->
 		$temp = $("<div>")
 		if @contentLoaded
-			artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 300
+			artId = @album.get "artId"
+
+			if artId?
+				console.log "there's an art id!"
+				artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 300
+				art = new Image
+				art.onload = =>
+					@$el.find(".main-albumArt")
+						.css("background-image", "url('#{artUrl}')")
+						.children()
+						.css("opacity", 0)
+				art.src = artUrl
+
 			albumTitle = @album.get "albumName"
 
 			duration = 0
