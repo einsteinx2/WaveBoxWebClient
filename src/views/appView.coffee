@@ -169,11 +169,13 @@ module.exports = Backbone.View.extend
 				@filterPanelActive = false
 
 	bindTouchEvents: ->
+		# FastClick!
+		FastClick.attach(document.body)
 
 		###
 		Touch handling for vertical scrolling of center panel
 		###
-
+		
 		@$el.bind "touchstart", (event) =>
 			$top = $(event.originalEvent.srcElement).closest(".scroll")
 			bottom = if $top[0]? then $top[0].scrollHeight - $top.outerHeight() else -$top.outerHeight()

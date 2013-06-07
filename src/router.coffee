@@ -13,11 +13,12 @@ module.exports = Backbone.Router.extend
 		"*path":					"home"
 
 	artists: (artistId) ->
-		console.log "nav artists"
+		console.log "nav artists #{Date.now()}"
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if artistId?
 			wavebox.appController.mainView.push(new ArtistView artistId: artistId)
+			console.log "new view push submit #{Date.now()}"
 		else
 			wavebox.appController.mainView.push(new ArtistsView)
 			

@@ -19,26 +19,33 @@ module.exports = class ViewStack
 		
 		bury = @views[@views.length - 1]
 		@views.push newView
-
+		
+		a = Date.now()
 		newView.render()
+		console.log "render time: #{Date.now() - a}"
 
 		if animate and bury?
 			bury.$el.addClass "viewstack-animate"
 			newView.$el.addClass "viewstack-animate viewstack-offscreen-right"
 
+		a = Date.now()
 		@$el.append newView.el
+		console.log "append time: #{Date.now() - a}"
 
+		a = Date.now()
 		Utils.delay 20, ->
 			if animate and bury?
 				newView.$el.addClass("viewstack-onscreen")
 				bury.$el.addClass "viewstack-offscreen-left"
 				
-		Utils.delay 620, =>
+		Utils.delay 350, =>
 			if animate and bury?
 				newView.$el.removeClass "viewstack-animate viewstack-offscreen-right viewstack-onscreen"
 				#bury.$el.hide()
 
 			if reset or @resetNext then @reset()
+
+			console.log "animate time: #{Date.now() - a}"
 
 	pop: (animate = yes) ->
 		# pop a view off the stack
