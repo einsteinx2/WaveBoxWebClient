@@ -166,18 +166,18 @@ class module.exports
 		urlObj = {}
 
 		itemId = song.get "itemId"
+		fileType = song.get "fileType"
 
-		if song.fileType is 2
+		if fileType is 2
 			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
 			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=MEDIUM"
 
-		if song.fileType is 4
+		if fileType is 4
 			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
 			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=MEDIUM"
-
-		console.log urlObj
+		
 		return urlObj
 
 	getArtUrl: (artId, size) ->
