@@ -43,6 +43,7 @@ html, body {
 
 .itemWrapper > div
 {
+	padding-top: 5px;
 	max-width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
