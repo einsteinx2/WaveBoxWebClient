@@ -14,6 +14,7 @@ html, body {
 	display: none;
 }
 
+
 .itemWrapper {
 	position: relative;
 	box-sizing: border-box;
@@ -39,6 +40,13 @@ html, body {
 	content: "";
 	margin-top: 100%;
 	display: block;
+}
+
+.itemWrapper > div:nth-child(3) {
+	margin-top: -4px;
+	font-size: .8em;
+	font-weight: 400;
+	color: #757575;
 }
 
 .itemWrapper > div
@@ -101,6 +109,42 @@ html, body {
 @media (max-width: 800px) {
 	.itemWrapper {
 		width: 25%;
+	}
+
+	.listView {
+		padding: 0;
+	}
+
+	.listView :first-child {
+		border-top: 1px solid #cfcfcf;
+	}
+
+	.listView > .itemWrapper {
+		float: none;
+		clear: both;
+		width: 100%;
+		height: 60px;
+		padding: 0 15px 0 0; 
+		border-bottom: 1px solid #cfcfcf;
+	}
+
+	.listView > .itemWrapper :first-child
+	{
+		padding: 0;
+		border: none;
+		border-left: 1px solid #cfcfcf;
+		border-right: 1px solid #cfcfcf;
+		float: left;
+		width: 60px;
+	}
+
+	.listView > .itemWrapper :first-child:before {
+	}
+	.listView > .itemWrapper :nth-child(2)
+	{
+		padding: 0;
+		line-height: 60px;
+		margin-left: 66px;
 	}
 }
 @media (max-width: 600px) {

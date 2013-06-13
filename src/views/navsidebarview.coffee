@@ -24,10 +24,16 @@ module.exports = Backbone.View.extend
 			title: "Browse"
 			items: [
 				{
-					itemTitle: "Music",
+					itemTitle: "Artists",
 					itemClass: "Music sprite",
 					href: "#artists"
 				},
+				{
+					itemTitle: "Albums",
+					itemClass: "AlbumsIcons sprite",
+					href: "#albums"
+				},
+
 				{
 					itemTitle: "Discover",
 					itemClass: "Discover sprite",

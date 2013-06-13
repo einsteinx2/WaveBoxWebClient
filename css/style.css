@@ -4,7 +4,7 @@ html, body
 {
     height: 100%;
 	/*font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
-	font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 	font-weight: 600;
 }
 
@@ -28,8 +28,6 @@ body {
 	color:#666;	
 	-webkit-font-smoothing:antialiased;
 	-webkit-text-size-adjust:none;
-	margin:0;
-	padding:0;
     -webkit-user-select: none;
 }
 
@@ -604,11 +602,15 @@ ul#Filters .ArtistsIcons {
 	background-position:10px 21px;
 }
 
-ul#Filters .AlbumsIcons {
-	background-image:url(../img/AlbumsIcon.png);
-	background-repeat:no-repeat;
-	background-size:19px;
-	background-position:10px 17px;
+.AlbumsIcons {
+	float: left;
+	background: url('../img/sprite.png') no-repeat -12px -206.66px;
+	background-repeat: no-repeat;
+	background-size: 420px 580px;
+	margin-top: 12px;
+	margin-left: 13px;
+	width: 25.33px;
+	height: 26px;
 }
 	
 ul#Filters .MoreIcon {

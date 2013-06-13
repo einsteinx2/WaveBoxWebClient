@@ -1,25 +1,25 @@
-Artists = require "../../collections/artists"
-ArtistView = require "./artistview"
+Albums = require "../../collections/albums"
+AlbumView = require "./albumview"
 DynamicBoxListView = require "../dynamicboxlistview"
 
 module.exports = class extends DynamicBoxListView
 	tagName: "div"
 	initialize: ->
 		@filter = ""
-		@collection = new Artists
+		@collection = new Albums
 		@collection.fetch reset: true
 		@listenToOnce @collection, "reset", =>
 			@render()
 		@bind "filterChanged", @filterChanged, this
 
-	className: "main-scrollingContent artistsMain scroll listView"
+	className: "main-scrollingContent artistMain scroll"
 	render: ->
 		$temp = $('<div>')
 		filter = @filter.toLowerCase()
-		@collection.each (artist) =>
-			artistN = artist.get("artistName").toLowerCase()
-			if artistN.indexOf(filter) >= 0
-				view = new ArtistView model: artist
+		@collection.each (album) =>
+			albumN = album.get("albumName").toLowerCase()
+			if albumN.indexOf(filter) >= 0
+				view = new AlbumView model: album
 				view.parent = this
 				$temp.append view.render().el
 		@$el.empty().append $temp.children()

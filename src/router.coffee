@@ -1,4 +1,5 @@
 ArtistsView = require './views/artists/artistsview'
+AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
 ArtistView = require './views/artist/artistview'
 

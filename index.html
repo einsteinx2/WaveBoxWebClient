@@ -5,21 +5,27 @@
 				<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>        
         <head>
             <title>Wave</title>
+
             <!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width works properly and doesn't allow children to blow up the viewport width-->
             <meta name="apple-mobile-web-app-title" content="Wave">
             <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
             <meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
             <!-- iPhone -->
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/iOS/57.png">
             <link href="img/iOS/iPhone.png" media="(device-width: 320px) and (device-height: 480px)
          and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+
             <!-- iPhone (Retina) -->
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/iOS/72.png">
             <link href="img/iOS/iPhoneRetina.png" media="(device-width: 320px) and (device-height: 480px)
          and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
             <!-- iPhone 5 -->
             <link href="img/iOS/iPhone5.png" media="(device-width: 320px) and (device-height: 568px)
          and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
             <!-- iPad -->
             <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/iOS/114.png">
             <link href="img/iOS/iPadPortrait.png" media="(device-width: 768px) and (device-height: 1024px)
@@ -28,6 +34,7 @@
             <link href="img/iOS/iPadLandscape.png" media="(device-width: 768px) and (device-height: 1024px)
          and (orientation: landscape)
          and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+
             <!-- iPad (Retina) -->
             <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/iOS/144.png">
             <link href="img/iOS/iPadPortraitRetina.png" media="(device-width: 768px) and (device-height: 1024px)
@@ -36,10 +43,12 @@
             <link href="img/iOS/iPadLandscapeRetina.png" media="(device-width: 768px) and (device-height: 1024px)
          and (orientation: landscape)
          and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
             <!--[if lt IE 9]>
                 <script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
+
             <link rel="stylesheet" type="text/css" href="css/style.css" />
             <link rel="stylesheet" type="text/css" href="css/framework.css" />
 			<link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
@@ -128,28 +137,18 @@
 	<div id="main"></div>
 	<div id="jPlayer"></div>
 	
-	<script type='text/template' id='template-album_container'>
-	<li class="AlbumContainer">
-	    <a class="AlbumContainerLink" href="#"> 
-	        <span class="AlbumArtwork" style="background-image:url(art/1.jpg)">
-	            <div class="AlbumInfo">
-	                <div class="Glossed"></div>
-	                <div class="TrackCount"><%= trackCount %><span>Tracks</span></div>
-	            </div>
-	        </span>
-	        <div class="ArtistLinks"> 
-	            <span class="AlbumTitle"><%= albumName %></span>
-	            <span class="ArtistName"><%= artistName %></span>
-	        </div>
-	    </a>
-	</li>
-	</script>
-	
+		
 	<script type='text/template' id='template-artist_container'>
 	<div src="img/BlankAlbum.png" alt="test image" /></div>	
 	<div><%= itemTitle %></div>
 	</script>
-	
+
+	<script type='text/template' id='template-album_container'>
+	<div src="img/BlankAlbum.png" alt="test image" /></div>	
+	<div><%= albumTitle %></div>
+	<div><%= albumArtist %></div>
+	</script>
+
 	<script type='text/template' id='template-sideBarItem'>
 	<li class="SidebarIcons">
 		<span id="MenuIcon" class="<%= itemClass %>"></span>
