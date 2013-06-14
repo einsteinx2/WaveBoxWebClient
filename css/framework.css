@@ -5,13 +5,19 @@ body, html {
     position: absolute;
     padding: 0;
 	background-color:#dadada;
+	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+	font-weight: 600;
+
+}
+
+.fullscreenWebApp {
+	top: 20px;
 }
 
 #left, #right, #filter {
-	overflow: auto;
     position: absolute;
     top: 0;
-    min-height: 100%;
+	bottom: 0;
     background-color: #333;
 }
 

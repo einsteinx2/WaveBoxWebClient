@@ -71,8 +71,8 @@
 	
 	<div id="right">
 		<div id="rightContent" class='scrollContent'>
-	        <div id="QueueScroller" class="scroll"></div>
 	        <div id="MiniPlayer" class="animate MiniPlayerRightMargins"></div>
+	        <div id="QueueScroller" class="scroll"></div>
 		</div>
 	</div>
 	
@@ -141,12 +141,14 @@
 	<script type='text/template' id='template-artist_container'>
 	<div src="img/BlankAlbum.png" alt="test image" /></div>	
 	<div><%= itemTitle %></div>
+	<div class="itemArrow"></div>
 	</script>
 
 	<script type='text/template' id='template-album_container'>
 	<div src="img/BlankAlbum.png" alt="test image" /></div>	
 	<div><%= albumTitle %></div>
 	<div><%= albumArtist %></div>
+	<div class="itemArrow"></div>
 	</script>
 
 	<script type='text/template' id='template-sideBarItem'>

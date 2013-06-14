@@ -2,7 +2,7 @@ Utils = require "../../utils/utils"
 
 module.exports = Backbone.View.extend
 	tagName: 'div'
-	className: 'itemWrapper'
+	className: 'itemWrapper albumItem'
 	template: _.template($("#template-album_container").html())
 
 	events:

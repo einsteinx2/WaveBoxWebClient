@@ -6,6 +6,9 @@ AppController = require './views/appView'
 
 
 $ ->
+	if window.navigator.standalone
+		$(document.body).css "top", "20px"
+
 	window.wavebox = {}
 	
 	wavebox.isMobile = -> if screen.width < 769 then true else false

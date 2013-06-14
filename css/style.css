@@ -1,13 +1,5 @@
 @charset utf-8;
 
-html, body
-{
-    height: 100%;
-	/*font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
-	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
-	font-weight: 600;
-}
-
 * {
     -webkit-touch-callout:none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
@@ -422,7 +414,6 @@ span#MenuIcon.Settings {
 
 /* SidebarMenu */	
 #SidebarMenu {
-	position: fixed;
 	top: 50px;
 	bottom: 0px;
 	width: 220px;
@@ -431,7 +422,6 @@ span#MenuIcon.Settings {
 }
 	
 #QueueScroller {
-	position: fixed;
 	top: 50px;
 	bottom: 0px;
 	width: 260px;
@@ -669,7 +659,6 @@ ul#Filters .FolderIcon {
 }	
 	
 #MiniPlayer {
-	position:fixed;
 	height: 50px;
 	width:100%;
 	z-index:999;

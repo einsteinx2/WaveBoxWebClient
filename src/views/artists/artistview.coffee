@@ -1,6 +1,6 @@
 module.exports = Backbone.View.extend
 	tagName: 'div'
-	className: 'itemWrapper'
+	className: 'itemWrapper artistItem'
 	template: _.template($("#template-artist_container").html())
 
 	events:
