@@ -5,7 +5,8 @@ module.exports = Backbone.View.extend
 	template: _.template($("#template-miniPlayer").html())
 	events:
 		"click #PlayBtn": "playButtonAction"
-		"click .PlayerDisplaySongTimeLeft": "switchElapsedMode"
+		"click .PlayerDisplay": "seek"
+		#"click .PlayerDisplaySongTimeLeft": "switchElapsedMode"
 
 	initialize: ->
 		@elapsedMode = "timeElapsed"
@@ -73,5 +74,11 @@ module.exports = Backbone.View.extend
 		duration = wavebox.audioPlayer.playQueue.currentSong().get "duration"
 		elapsed = wavebox.audioPlayer.get "elapsed"
 		@playMarker.css "left", Math.round((elapsed / duration) * @playerWidth)
+
+	seek: (e) ->
+		percent = (e.pageX - $(".PlayerDisplay").offset().left) / $(".PlayerDisplay").width()
+		percent = percent * 100
+		console.log "seek percent: " + percent
+		wavebox.audioPlayer.seek percent
 
 
