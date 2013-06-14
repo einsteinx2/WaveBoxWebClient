@@ -3,7 +3,6 @@ body, html {
     height: 100%;
     overflow: hidden;
     position: absolute;
-    margin: 0;
     padding: 0;
 	background-color:#dadada;
 }
@@ -29,6 +28,7 @@ h1 {
     left: 0;
     width: 220px;
 	background-color:#dadada;
+	overflow: none;
 }
 #left:not(:first-child) > div, #right:not(:first-child) > div {
 	overflow: auto;
@@ -38,6 +38,7 @@ h1 {
     right: 0;
     width: 260px;
 	background-color:#dadada;
+	overflow: none;
 }
 
 #right .nowPlaying
