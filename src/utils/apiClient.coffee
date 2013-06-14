@@ -171,12 +171,12 @@ class module.exports
 		if fileType is 2
 			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
-			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=MEDIUM"
+			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=192&estimateContentLength=true"
 
 		if fileType is 4
 			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
 		else
-			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=MEDIUM"
+			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=192&estimateContentLength=true"
 		
 		return urlObj
 
