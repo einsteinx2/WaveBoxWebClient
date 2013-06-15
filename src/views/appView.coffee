@@ -149,7 +149,7 @@ module.exports = Backbone.View.extend
 			filterWidth = @filterSidebar.$el.width()
 	
 			if not @filterPanelActive
-				afterRightClose = () ->
+				afterRightClose = =>
 					@switchPanels "filter"
 					@mainView.$el.css
 						width: @mainView.$el.width() - filterWidth

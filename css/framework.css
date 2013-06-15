@@ -122,7 +122,7 @@ h1 {
 
 @media (min-device-width: 769px) {
 
-    #left, #right, #filter, #main {
+    #main {
         position: relative;
     }
 
@@ -136,7 +136,6 @@ h1 {
 
     #right, #filter {
         float: right;
-        position: relative;
     }
 
     #filter {
