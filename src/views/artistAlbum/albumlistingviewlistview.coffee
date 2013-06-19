@@ -27,6 +27,12 @@ module.exports = Backbone.View.extend
 					main.transition {x: -50}, 250, "linear", =>
 						main.transition {x: 0}, 250, "linear"
 
+		"click .playAll": (e) ->
+			e.preventDefault()
+			console.log this
+			@tracks.each (track) =>
+				wavebox.audioPlayer.playQueue.add track
+
 	render: ->
 		# table header
 		$temp = $('<div>')

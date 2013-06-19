@@ -33,7 +33,6 @@ h1 {
     left: 0;
     width: 220px;
 	background-color:#dadada;
-	overflow: none;
 }
 #left:not(:first-child) > div, #right:not(:first-child) > div {
 	overflow: auto;

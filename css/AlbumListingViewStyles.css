@@ -6,7 +6,7 @@
 .stickyHeader {
 	height: 40px;
 	position: absolute;
-	top: 0;
+	top: 40px;
 	left: 190px;
 	right: 0;
 	font-size: 12px;
@@ -29,6 +29,18 @@
 	width: 52px;
 	float: right;
 	text-align: center;
+}
+
+.collectionActions
+{
+	height: 40px;
+	position: absolute;
+	top: 0;
+	left: 190px;
+	right: 0;
+	line-height: 40px;
+	text-align: right;
+	padding: 0 15px;
 }
 
 .albumListing {

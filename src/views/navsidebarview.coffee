@@ -8,7 +8,6 @@ SidebarSectionView = require "./navsidebarsectionview"
 module.exports = Backbone.View.extend
 	
 	el: "#SidebarMenu"
-	className: "scroll"
 
 	initialize: ->
 		@serverSectionView = new SidebarSectionView

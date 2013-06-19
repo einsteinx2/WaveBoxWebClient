@@ -63,7 +63,11 @@ module.exports = Backbone.View.extend
 		else
 			$temp.append "Loading"
 		@$el.empty().append $temp.children()
-		#@$el.css "background-image", artUrl
+
+		# HACK: in the future, we should be adding this to views
+		# that need it instead of removing it from views that don't
+		# need it.
+		@$el.find(".DirectoryViewIcon, .AlbumSortIcon").remove()
 		this
 
 

@@ -186,13 +186,18 @@ module.exports = Backbone.View.extend
 				$top.scrollTop(1)
 
 		@$el.bind "touchmove", (event) =>
+			console.log "moving!"
 			$target = $(event.target)
 			$parents = $target.parents ".scroll"
 			$scrollAnchor = $target.parents ".scrollAnchor"
 			if $scrollAnchor.length > 0
 				$anchor = $scrollAnchor.first()
-				if $anchor.height() < $parents.first().height() then event.preventDefault()
-			if not ($parents.length > 0 or $target.hasClass ".scroll") then event.preventDefault()
+				if $anchor.height() < $parents.first().height()
+					console.log "anchor height smaller than parent"
+					event.preventDefault()
+			if not ($parents.length > 0 or $target.hasClass ".scroll")
+				console.log "no parent or no scroll"
+				event.preventDefault()
 
 		###
 		Touch handling for horizontal scrolling of panels
