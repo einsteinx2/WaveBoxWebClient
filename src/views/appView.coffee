@@ -1,5 +1,6 @@
 NavSidebarView = require './navsidebarview'
 MiniPlayerSidebarView = require './rightSidebar/miniPlayer/miniPlayerView'
+RightSidebarView = require './rightSidebar/rightsidebarview'
 PlayQueueView = require './rightSidebar/playQueue/playQueueView'
 FilterSidebarView = require './filtersidebarview'
 ViewStack = require '../utils/viewStack'
@@ -8,8 +9,7 @@ module.exports = Backbone.View.extend
 	el: "body"
 	initialize: ->
 		@navSidebar = new NavSidebarView
-		@miniPlayerSidebarView = new MiniPlayerSidebarView
-		@playQueueSidebarView = new PlayQueueView model: wavebox.audioPlayer.playQueue
+		@playerSidebar = new RightSidebarView
 		@filterSidebar = new FilterSidebarView
 		@mainView = new ViewStack "#main"
 		@toggledPanel = null
@@ -36,8 +36,7 @@ module.exports = Backbone.View.extend
 
 	render: ->
 		@navSidebar.render()
-		@miniPlayerSidebarView.render()
-		@playQueueSidebarView.render()
+		@playerSidebar.render()
 		@filterSidebar.render()
 
 		if not wavebox.isMobile()
@@ -45,13 +44,13 @@ module.exports = Backbone.View.extend
 			@leftPanelActive = true
 			@filterPanelActive = false
 			@mainView.$el.addClass("transitions")
-			@mainView.$el.css({left: @navSidebar.$el.width(), width: $(window).width() - @navSidebar.$el.width() - @playQueueSidebarView.$el.width()})
+			@mainView.$el.css({left: @navSidebar.$el.width(), width: $(window).width() - @navSidebar.$el.width() - @playerSidebar.$el.width()})
 		else
 			@bindTouchEvents()
 
 		$(window).resize =>
 			leftPanelWidth = if @leftPanelActive then @navSidebar.$el.width() else 0
-			rightPanelWidth = if @rightPanelActive then @playQueueSidebarView.$el.width() else if @filterPanelActive then @filterSidebar.$el.width() else 0
+			rightPanelWidth = if @rightPanelActive then @playerSidebar.$el.width() else if @filterPanelActive then @filterSidebar.$el.width() else 0
 			@mainView.$el.removeClass("transitions").css({left: leftPanelWidth, width: $(window).width() - leftPanelWidth - rightPanelWidth}).addClass("transitions")
 
 		this
@@ -101,16 +100,16 @@ module.exports = Backbone.View.extend
 			if @toggledPanel is null or @toggledPanel is "filter"
 				if @mainView.$el.css("left") isnt "0px" then @focusMainPanel =>
 					@switchPanels "right"
-					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, duration, "ease-out")
+					@mainView.$el.transition({x: -@playerSidebar.$el.width()}, duration, "ease-out")
 				else
 					@switchPanels "right"
-					@mainView.$el.transition({x: -@playQueueSidebarView.$el.width()}, duration, "ease-out")
+					@mainView.$el.transition({x: -@playerSidebar.$el.width()}, duration, "ease-out")
 				@toggledPanel = "right"
 			else
 				@focusMainPanel()
 		else
 			leftoffset = parseInt @mainView.$el.css "left"
-			rightwidth = @playQueueSidebarView.$el.width()
+			rightwidth = @playerSidebar.$el.width()
 
 			if not @rightPanelActive
 				afterfilterclose = =>
@@ -157,7 +156,7 @@ module.exports = Backbone.View.extend
 	
 				if @rightPanelActive
 					@mainView.$el.css
-						width: @mainView.$el.width() + @playQueueSidebarView.$el.width()
+						width: @mainView.$el.width() + @playerSidebar.$el.width()
 					setTimeout afterRightClose, 200
 					@rightPanelActive = false
 				else
@@ -263,9 +262,9 @@ module.exports = Backbone.View.extend
 					if futurePosition > @navSidebar.$el.width() * .75 and left > 30
 						@toggledPanel = "left"
 						@navSidebar.$el.width()
-					else if futurePosition + width < width - (@playQueueSidebarView.$el.width() * .75) and left < -30
+					else if futurePosition + width < width - (@playerSidebar.$el.width() * .75) and left < -30
 						@toggledPanel = "right"
-						-@playQueueSidebarView.$el.width()
+						-@playerSidebar.$el.width()
 					else
 						@toggledPanel = null
 						0

@@ -420,13 +420,42 @@ span#MenuIcon.Settings {
 	z-index: 1;
 	overflow-x: hidden;	
 }
+
+.sidebarStickyFooter {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 260px;
+	height: 35px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	box-shadow: 0 -1px 2px #aaa;
+	background-color: rgba(226, 226, 226, 1);
+}
+
+.sidebarStickyFooter > div {
+	line-height: 38px;
+	cursor: pointer;
+}
+
+.sidebarStickyFooter > div:first-child
+{
+	float: left;
+}
 	
+.sidebarStickyFooter > div:first-child
+{
+	float: right;
+}
+
 #QueueScroller {
-	top: 50px;
+	padding-top: 50px;
 	bottom: 0px;
 	width: 260px;
 	z-index: 1;
 	overflow-x: hidden;
+	background-color: rgba(226, 226, 226, 1);
+	margin-bottom: 35px;
 }
 
 .QueueList {
@@ -659,12 +688,15 @@ ul#Filters .FolderIcon {
 }	
 	
 #MiniPlayer {
+	position: fixed;
+	background-color: rgba(226, 226, 226, 1);
 	height: 50px;
 	width:100%;
 	z-index:999;
 	top:0px;
  
 	/** The Wrong Colors **/
+	/*
 	background: -moz-linear-gradient(top,  rgba(255,255,255,0.5) 49%, rgba(255,255,255,0) 50%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(255,255,255,0.5)), color-stop(50%,rgba(255,255,255,0)));
 	background: -webkit-linear-gradient(top,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
@@ -672,7 +704,7 @@ ul#Filters .FolderIcon {
 	background: -ms-linear-gradient(top,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
 	background: linear-gradient(to bottom,  rgba(255,255,255,0.5) 49%,rgba(255,255,255,0) 50%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#00ffffff',GradientType=0 );
-
+	*/
 	/** The Wrong Colors **/
 	border-top-width:0px;
 	border-left:0px !important;

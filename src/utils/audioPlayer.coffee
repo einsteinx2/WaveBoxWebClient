@@ -28,6 +28,15 @@ module.exports = Backbone.Model.extend
 		
 	next: ->
 		index = @playQueue.nowPlayingIndex + 1
+		if index > @playQueue.tracks.length - 1
+			if @playQueue.get("repeat") is "all"
+				index = 0
+			else
+				index = null
+
+		if @playQueue.get("repeat") is "one"
+			index = @playQueue.nowPlayingIndex
+
 		@playAt index
 
 	previous: ->
@@ -35,6 +44,10 @@ module.exports = Backbone.Model.extend
 		@playAt index
 
 	playAt: (index) ->
+		if index is null
+			@stop()
+			return
+
 		@playQueue.nowPlayingIndex = index
 		song = @playQueue.tracks.at(index)
 		if song?
@@ -46,6 +59,9 @@ module.exports = Backbone.Model.extend
 			@jPlayer.jPlayer "pause"
 		else
 			@jPlayer.jPlayer "play"
+
+	stop: ->
+		@jPlayer.jPlayer "stop"
 
 	seek: (percent) ->
 		seekable = @jPlayer.data().jPlayer.status.seekPercent
