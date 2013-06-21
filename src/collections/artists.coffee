@@ -1,5 +1,4 @@
 Artist = require "../models/artist"
-ArtistView = require "../views/artists/artistview"
 
 module.exports = Backbone.Collection.extend
 	model: Artist

@@ -25,13 +25,17 @@ module.exports = Backbone.View.extend
 	events:
 		"reset": "render"
 
-	render: ->
-		# render header
+	renderHeader: ->
+		console.log "render header called: #{@title}" 
 		if @title?
 			header = document.createElement "span"
 			header.innerHTML = @title
 			header.className = "titletabs"
 			@$el.empty().append header
+
+	render: ->
+		# render header
+		@renderHeader()
 
 		# render items
 		temp = document.createElement "a"

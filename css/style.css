@@ -412,6 +412,33 @@ span#MenuIcon.Settings {
 	opacity: 0.8;	
 }
 
+.menuStickyFooter {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 220px;
+	height: 35px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	box-shadow: 0 -1px 2px #aaa;
+	background-color: rgba(226, 226, 226, 1);
+}
+
+.menuStickyFooter > div {
+	line-height: 38px;
+	cursor: pointer;
+}
+
+.menuStickyFooter > div:first-child
+{
+	float: left;
+}
+	
+.menuStickyFooter > div:first-child
+{
+	float: right;
+}
+
 /* SidebarMenu */	
 #SidebarMenu {
 	top: 50px;

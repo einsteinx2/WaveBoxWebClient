@@ -3,7 +3,7 @@
 #        Date: 5/8/2013
 
 SidebarSectionView = require "./navsidebarsectionview"
-#SidebarPlaylistSectionView = require "./sidebarplaylistsectionview"
+PlaylistsSectionView = require "./playlists/PlaylistsSectionView"
 
 module.exports = Backbone.View.extend
 	
@@ -44,7 +44,8 @@ module.exports = Backbone.View.extend
 					href: "#/folder"
 				}
 			]
-		#@playlistSectionView = new SidebarPlaylistSectionView
+		@playlistSectionView = new PlaylistsSectionView
+			title: "Playlists"
 		@settingSectionView = new SidebarSectionView
 			title: "Setting"
 			items: [
@@ -60,13 +61,14 @@ module.exports = Backbone.View.extend
 				}
 			]
 		#@listenTo @playlistSectionView.collection, "reset", "render"
-			#@playlistSectionView.collection.fetch reset: yes
+		#@playlistSectionView.collection.fetch reset: yes
 	
 	render: ->
 		$temp = $("<div>")
 		$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
-		#$temp.append @playlistSectionView.render.el
+		$temp.append @playlistSectionView.render().el
 		$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.children()
 		this
+
