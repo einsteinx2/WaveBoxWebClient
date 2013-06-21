@@ -7,7 +7,6 @@ module.exports = class extends SidebarSectionView
 	initialize: (options) ->
 		@options = options
 		@title = options.title
-		console.log "options.title: #{options.title}  @title: #{@title}"
 		@filter = ""
 		@collection = new Playlists
 		@collection.fetch reset: true

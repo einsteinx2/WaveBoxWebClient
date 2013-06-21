@@ -8,17 +8,21 @@ module.exports = Backbone.Model.extend
 		duration: null
 		md5Hash: null
 		lastUpdateTime: null
-		trackList: null
+		tracks: null
 
 	initialize: (options) ->
-		@playlistId = if options.playlistId? then options.playlistId else null
+		@playlistId = if options.id? then options.id else null
+		console.log "Playlist INIT called for #{@playlistId} with options:"
+		console.log options
 
 	sync: (method, model, options) ->
 		if method is "read"
+			console.log "Playlist SYNC called for #{@playlistId}"
 			wavebox.apiClient.getPlaylist @playlistId, (success, data) =>
 				if success
 					hash = data.playlists[0]
-					hash.trackList = new TrackList data.mediaItems
+
+					hash.tracks = new TrackList data.mediaItems
 					@set hash
 				else
 					console.log "artistInfo!"

@@ -36,12 +36,12 @@ module.exports = Backbone.View.extend
 				{
 					itemTitle: "Discover",
 					itemClass: "Discover sprite",
-					href: "#/discover"
+					href: "#discover"
 				},
 				{
 					itemTitle: "Folder",
 					itemClass: "Folder sprite",
-					href: "#/folders"
+					href: "#folders"
 				}
 			]
 		@playlistSectionView = new PlaylistsSectionView
@@ -52,12 +52,12 @@ module.exports = Backbone.View.extend
 				{
 					itemTitle: "Airplane Mode",
 					itemClass: "Offline sprite",
-					href: "#/airplane"
+					href: "#airplane"
 				},
 				{
 					itemTitle: "Settings",
 					itemClass: "Settings sprite",
-					href: "#/settings"
+					href: "#settings"
 				}
 			]
 		#@listenTo @playlistSectionView.collection, "reset", "render"

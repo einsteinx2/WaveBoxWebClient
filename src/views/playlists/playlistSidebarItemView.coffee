@@ -2,7 +2,7 @@ NavSidebarItemView = require '../navsidebaritemview'
 
 module.exports = class extends NavSidebarItemView
 	render: ->
-		console.log "playlist render called for " + @model.get "name" 
+		@model.set "href", "#playlists/#{@model.get "id"}"
 		@model.set "itemTitle", @model.get "name" 
 		super
 		this
