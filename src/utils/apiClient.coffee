@@ -157,14 +157,16 @@ class module.exports
 			type: "POST"
 
 	getFolder: (folderId, recursive = false, callback) ->
-		return if not folderId?
 
-		d = "s=#{@SESSION_ID}&id=#{id}"
-		if recursive then url += "&recursiveMedia=1"
+		url = "s=#{@SESSION_ID}"
+		if folderId?
+			url += "&id=#{folderId}"
+		if recursive
+			url += "&recursiveMedia=1"
 
 		$.ajax
 			url: "#{@API_ADDRESS}/folders"
-			data: d
+			data: url
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
