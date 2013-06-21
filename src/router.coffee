@@ -2,6 +2,7 @@ ArtistsView = require './views/artists/artistsview'
 AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
 ArtistView = require './views/artist/artistview'
+FolderView = require './views/folder/folderview'
 
 module.exports = Backbone.Router.extend
 	routes:
@@ -27,6 +28,13 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	folders: (folderId) ->
+		if folderId?
+			wavebox.appController.mainView.push(new FolderView folderId: folderId)
+		else
+			wavebox.appController.mainView.push(new FolderView)
+
+		if wavebox.isMobile()
+			wavebox.appController.focusMainPanel()
 
 	albums: (albumId) ->
 		if albumId?

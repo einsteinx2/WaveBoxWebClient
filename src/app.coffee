@@ -4,7 +4,6 @@ Artists = require './collections/artists'
 Router = require './router'
 AppController = require './views/appView'
 
-
 $ ->
 	if window.navigator.standalone
 		$(document.body).css "top", "20px"
