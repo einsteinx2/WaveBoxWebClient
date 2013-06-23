@@ -1,4 +1,5 @@
-AlbumListingViewListView = require './albumlistingviewlistview'
+TrackListView = require '../tracklistview'
+TrackList = require '../../collections/tracklist'
 Album = require '../../models/album'
 Utils = require '../../utils/utils'
 
@@ -33,7 +34,8 @@ module.exports = Backbone.View.extend
 			albumTitle = @album.get "albumName"
 
 			duration = 0
-			tracks = @album.get "tracks"
+
+			tracks = @album.get("tracks")
 
 			tracks.each (track, index, list) ->
 				duration += track.get "duration"
@@ -49,9 +51,8 @@ module.exports = Backbone.View.extend
 			trackCount: trackCount or ""
 			
 		if @contentLoaded
-			trackListView = new AlbumListingViewListView
-				collection: tracks
-				artUrl: artUrl
+
+			trackList = new TrackListView collection: tracks
 			$temp.append @template
 				artUrl: artUrl or ""
 				totalDuration: Utils.formattedTimeWithSeconds duration
@@ -59,7 +60,7 @@ module.exports = Backbone.View.extend
 				artistName: @album.get("artistName") or ""
 				albumName: albumTitle or ""
 
-			$temp.append trackListView.render().el
+			$temp.find(".albumListingContent").append trackList.render().el
 		else
 			$temp.append "Loading"
 		@$el.empty().append $temp.children()

@@ -1,9 +1,8 @@
-AlbumListingListItemView = require './albumlistinglistitemview'
+SongItemView = require './songitemview'
 
 module.exports = Backbone.View.extend
 	tagName: "div"
-	className: "main-scrollingContent artistAlbumMain scroll"
-	template: _.template($("#template-artistAlbum_listView").html())
+	template: _.template($("#template-trackList").html())
 	initialize: (options) ->
 		@filter = ""
 		if options.collection?
@@ -40,13 +39,13 @@ module.exports = Backbone.View.extend
 			artUrl: @artUrl
 
 		# table content
-		$trackList = $("<ul>").addClass "albumListingTrackList"
+		$trackList = $("<table>").addClass "trackTable"
 		filter = @filter.toLowerCase()
 		if @tracks?
 			@tracks.each (track) =>
 				trackN = track.get("songName").toLowerCase()
 				if trackN.indexOf(filter) >= 0
-					view = new AlbumListingListItemView track
+					view = new SongItemView track
 					$trackList.append view.render().el
 		$temp.append $trackList
 		@$el.empty().append $temp.children()

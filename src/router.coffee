@@ -30,7 +30,7 @@ module.exports = Backbone.Router.extend
 
 	folders: (folderId) ->
 		if folderId?
-			wavebox.appController.mainView.push(new FolderView folderId: folderId)
+			wavebox.appController.mainView.push(new FolderView(folderId: folderId, isSubFolder: yes))
 		else
 			wavebox.appController.mainView.push(new FolderView)
 

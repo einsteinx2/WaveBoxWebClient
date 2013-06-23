@@ -7,7 +7,7 @@
 	height: 40px;
 	position: absolute;
 	top: 40px;
-	left: 190px;
+	left: 0;
 	right: 0;
 	font-size: 12px;
 	background-color: transparent;
@@ -31,12 +31,20 @@
 	text-align: center;
 }
 
+.albumListingContent {
+	position: absolute;
+	top: 100px; 
+	left: 190px;
+	bottom: 0;
+	right: 0;
+}
+
 .collectionActions
 {
 	height: 40px;
 	position: absolute;
 	top: 0;
-	left: 190px;
+	left: 0;
 	right: 0;
 	line-height: 40px;
 	text-align: right;
@@ -141,10 +149,10 @@ background-color: #e8e8e8;
 	width: 35%;
 }
 
-.albumListingTrackList {
+.trackList {
 	position: absolute;
 	top: 80px;
-	left: 190px;
+	left: 0;
 	right: 0;
 	bottom: 0;
 	font-size: 12px;
@@ -153,28 +161,29 @@ background-color: #e8e8e8;
 	overflow: auto;
 }
 
-.albumListingTrackList > li {
+.trackList > div {
 	height: 44px;
 	padding: 0;
 	list-style: none;
 	width: 100%;
+	clear: both;
 }
 
-.albumListingTrackList > li > div {
+.trackList > div > div {
 	box-sizing: border-box;
 	line-height: 43px;
 	float: left;
 }
 
-.albumListingTrackList > li > div:first-child {
+.trackList > div > div:first-child {
 	float: left;
 	width: 50px;
-	height: 50px;
+	height: 44px;
 	color: #959595;
 	text-align: center;
 }
 
-.albumListingTrackList .nowPlaying
+.trackList .nowPlaying
 {
 	background-color: #e8e8e8 !important;
 }
@@ -190,16 +199,16 @@ background-color: #e8e8e8;
 	height: 15px;
 }
 
-.albumListingTrackList > li > div:last-child {
+.trackList > div > div:last-child {
 	float: right;
 	width: 52px;
 	text-align: center;
 }
-.albumListingTrackList > li:nth-child(even) {
+.trackList > div:nth-child(even) {
 	background-color: #fff;
 }
 
-.albumListingTrackList > li:nth-child(odd) {
+.trackList > div:nth-child(odd) {
 	background-color: #fafafa;
 }
 
@@ -260,7 +269,7 @@ background-color: #e8e8e8;
 		padding-top: 320px;
 	}
 
-	.albumListingTrackList {
+	.trackList {
 		top: 0;
 		position: relative;
 	}
@@ -273,25 +282,25 @@ background-color: #e8e8e8;
 		display: none;
 	}
 
-	.stickyHeader, .albumListingTrackList {
+	.albumListingContent {
 		left: 0;
 	}
 
-	.albumListingTrackList > li {
+	.trackList > li {
 		height: 50px;
 		border-top: 1px solid #cecece;
 	}
 
-	.albumListingTrackList > li:last-child
+	.trackList > li:last-child
 	{
 		border-bottom: 1px solid #cecece;
 	}
 
-	.albumListingTrackList > li > div {
+	.trackList > li > div {
 		line-height: 50px;
 	}
 
-	.albumListingTrackList > li > div:last-child
+	.trackList > li > div:last-child
 	{
 		border-left: 1px solid #cecece;
 	}
