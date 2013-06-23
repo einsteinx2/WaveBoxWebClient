@@ -1,26 +1,29 @@
 SubFolderView = require './subfolderview'
+TrackListView = require '../tracklistview'
 Folder = require '../../models/folder'
 
 module.exports = Backbone.View.extend
 	tagName: "div"
 	template: _.template($("#template-artistView").html())
-	initialize: (folderId, isSubFolder) ->
+	initialize: (options) ->
 		@contentLoaded = no
 		@folder =
-			if folderId?
-				new Folder folderId
+			if options? and options.folderId?
+				console.log options.folderId
+				new Folder folderId: options.folderId
 			else
 				new Folder
+		@subFolder =
+			if options? and options.isSubFolder?
+				console.log options.isSubFolder
+				options.isSubFolder
+			else
+				no
 
 		@listenToOnce @folder, "change", =>
 			@contentLoaded = yes
 			@render()
 		@folder.fetch()
-		@subFolder =
-			if subFolder?
-				subFolder
-			else
-				no
 
 	render: ->
 		@$el.html wavebox.views.pageView
@@ -30,11 +33,17 @@ module.exports = Backbone.View.extend
 			pageTitle: if @folder? then @folder.get("folderName") else ""
 
 		$temp = $("<div>").addClass("main-scrollingContent artistsMain scroll")
+		$folders = $("<div>")
+		$temp.append $folders
 		if @contentLoaded
 			folders = @folder.get "folders"
 			folders.each (folder, index) ->
 				view = new SubFolderView model: folder
-				$temp.append view.render().el
+				$folders.append view.render().el
 
+			tracks = @folder.get "tracks"
+			if tracks.length > 0
+				view = new TrackListView collection: tracks
+				$temp.append view.render().el
 		@$el.append $temp
 		this

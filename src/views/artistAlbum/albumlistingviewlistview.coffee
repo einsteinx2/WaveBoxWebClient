@@ -3,7 +3,7 @@ AlbumListingListItemView = require './albumlistinglistitemview'
 module.exports = Backbone.View.extend
 	tagName: "div"
 	className: "main-scrollingContent artistAlbumMain scroll"
-	template: _.template($("#template-artistAlbum_listView").html())
+	template: _.template($("#template-trackListItem").html())
 	initialize: (options) ->
 		@filter = ""
 		if options.collection?
