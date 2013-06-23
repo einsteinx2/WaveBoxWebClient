@@ -60,12 +60,19 @@
 </head>
 
 <body>
+
+	<!-- Layout -->
+
 	<div id="left" class="scroll">
 		<div id="leftContent" class='scrollContent'>
 			<div id="HeaderBar" class="Sidebars">
 				<div id="LogoArea" class=" "></div>
 			</div>
 	        <div id="SidebarMenu" class='scrollAnchor'></div>
+	        <div class="menuStickyFooter">
+	        	<div class="editPlaylists">Edit Playlists</div>
+				<div class="addPlaylist">Add Playlist</div>	
+			</div>
 		</div>
 	</div>
 	
@@ -141,6 +148,7 @@
 	<div id="main"></div>
 	<div id="jPlayer"></div>
 	
+	<!-- Templates -->
 		
 	<script type='text/template' id='template-artist_container'>
 	<div src="img/BlankAlbum.png" alt="test image" /></div>	
@@ -250,6 +258,8 @@
 		<div class="QueueSongTime"><%= duration %></div>
 	</script>
 	
+	<!-- Scripts -->
+
 	<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="script/underscore-min.js"></script>
 	<script type="text/javascript" src="script/backbone-min.js"></script>

@@ -1,5 +1,6 @@
 NavSidebarView = require './navsidebarview'
 MiniPlayerSidebarView = require './rightSidebar/miniPlayer/miniPlayerView'
+LeftSidebarView = require './leftSidebarView'
 RightSidebarView = require './rightSidebar/rightsidebarview'
 PlayQueueView = require './rightSidebar/playQueue/playQueueView'
 FilterSidebarView = require './filtersidebarview'
@@ -9,6 +10,7 @@ module.exports = Backbone.View.extend
 	el: "body"
 	initialize: ->
 		@navSidebar = new NavSidebarView
+		@leftSidebar = new LeftSidebarView
 		@playerSidebar = new RightSidebarView
 		@filterSidebar = new FilterSidebarView
 		@mainView = new ViewStack "#main"

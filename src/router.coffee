@@ -3,13 +3,14 @@ AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
 ArtistView = require './views/artist/artistview'
 FolderView = require './views/folder/folderview'
+PlaylistListingView = require './views/playlists/playlistListingView'
 
 module.exports = Backbone.Router.extend
 	routes:
 		"artists(/:artistId)":		"artists"
 		"folders(/:folderId)":		"folders"
 		"albums(/:albumId)":		"albums"
-		"playlists(/:playlistId)":	"playlists"
+		"playlists/:playlistId":	"playlists"
 		"favorites":				"favorites"
 		"settings":					"settings"
 		"*path":					"home"
@@ -46,7 +47,12 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	playlists: (playlistId) ->
-		return null
+		console.log "router playlists for id: #{playlistId}"
+		if playlistId?
+			wavebox.appController.mainView.push(new PlaylistListingView playlistId: playlistId)
+
+		if wavebox.isMobile()
+			wavebox.appController.focusMainPanel()
 
 	favorites: ->
 		return null

@@ -52,6 +52,39 @@ class module.exports
 		else
 			if callback? then callback false
 
+	getPlaylistList: (callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/playlists"
+			data: "s=#{@SESSION_ID}"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data.playlists
+			error: (XHR, status, error) ->
+				console.log "error getting playlist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+	getPlaylist: (playlistId, callback) ->
+		return if not playlistId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/playlists"
+			data: "id=#{playlistId}&s=#{@SESSION_ID}"
+			success: (data) ->
+				console.log "dunnit"
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting playlist: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
 	getArtistList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/artists"
@@ -63,6 +96,24 @@ class module.exports
 					if callback? then callback true, data.artists
 			error: (XHR, status, error) ->
 				console.log "error getting artist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+	getArtist: (artistId, callback) ->
+		return if not artistId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/artists"
+			data: "id=#{artistId}&s=#{@SESSION_ID}"
+			success: (data) ->
+				console.log "dunnit"
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting artist: #{status}"
 				callback false, error
 			async: true
 			type: "POST"
@@ -99,26 +150,6 @@ class module.exports
 				callback false, error
 			async: true
 			type: "POST"
-	
-	getArtist: (artistId, callback) ->
-		return if not artistId?
-
-		$.ajax
-			url: "#{@API_ADDRESS}/artists"
-			data: "id=#{artistId}&s=#{@SESSION_ID}"
-			success: (data) ->
-				console.log "dunnit"
-				if data.error?
-					if callback? then callback false, data.error
-				else
-					if callback? then callback true, data
-			error: (XHR, status, error) ->
-				console.log "error getting artist: #{status}"
-				callback false, error
-			async: true
-			type: "POST"
-
-
 
 	getArtistAlbums: (artistId, callback) ->
 		return if not artistId?
