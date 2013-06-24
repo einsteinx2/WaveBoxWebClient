@@ -3,7 +3,7 @@
 #        Date: 5/8/2013
 
 SidebarSectionView = require "./navsidebarsectionview"
-PlaylistsSectionView = require "./playlists/PlaylistsSectionView"
+PlaylistsSectionView = require "./playlists/playlistsSectionView"
 
 module.exports = Backbone.View.extend
 	
@@ -70,5 +70,3 @@ module.exports = Backbone.View.extend
 		$temp.append @playlistSectionView.render().el
 		$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.children()
-		this
-

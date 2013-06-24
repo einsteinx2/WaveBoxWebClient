@@ -1,10 +1,10 @@
 @charset utf-8;
 
 * {
-    -webkit-touch-callout:none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
-    -webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent tap highlight color / shadow */
-    -webkit-user-select:none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent tap highlight color / shadow */
+    -webkit-user-select: text;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     margin: 0;
     padding: 0;
 
@@ -93,9 +93,17 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
 	width:100%;
+	height: 50px;
 	z-index:99;
-	position:relative;
-	top:0px;
+	padding: 0;
+
+	background: rgb(220,220,220); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(178,178,178,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(220,220,220,1)), color-stop(100%,rgba(178,178,178,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* W3C */
 }
 	
 .Logo {
@@ -115,19 +123,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 @keyframes fadeIn {
 	0% { opacity: 0 }
 	100% { opacity: 1 }
-}
-
-.CenterBar {
-	background: rgb(220,220,220); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(178,178,178,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(220,220,220,1)), color-stop(100%,rgba(178,178,178,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* W3C */
-	padding: 0;
-	height: 50px;
-	top:0;
 }
 
 .Sidebars {
@@ -198,10 +193,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	
 .searchBar {
 	background-color: #fff;
-	position: absolute;
-	top: 50px;
-	left: 0;
-	right: 0;
+	width: 100%;
 	height: 50px;
 }
 

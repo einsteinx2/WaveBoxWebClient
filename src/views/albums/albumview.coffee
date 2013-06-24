@@ -10,7 +10,6 @@ module.exports = Backbone.View.extend
 			console.log "album click event fired! #{Date.now()}"
 			wavebox.router.navigate "albums/#{@model.get 'albumId'}", trigger: true
 	render: ->
-		console.log @model
 		@$el.html @template
 			albumTitle: _.escape(@model.get("albumName"))
 			albumArtist: _.escape(@model.get("artistName") or "Artist Name")

@@ -1,4 +1,4 @@
-PlaylistListingViewListView = require './playlistListingViewListView'
+TrackListView = require '../tracklistview'
 Playlist = require '../../models/playlist'
 Utils = require '../../utils/utils'
 
@@ -49,7 +49,7 @@ module.exports = Backbone.View.extend
 		if @contentLoaded
 			console.log "playlistListingView tracks: "
 			console.log tracks
-			trackListView = new PlaylistListingViewListView
+			trackListView = new TrackListView
 				collection: tracks
 				artUrl: artUrl
 			$temp.append @template

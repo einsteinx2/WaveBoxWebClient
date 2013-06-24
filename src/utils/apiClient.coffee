@@ -100,14 +100,13 @@ class module.exports
 			async: true
 			type: "POST"
 
-	getArtist: (artistId, callback) ->
+	getArtist: (artistId, retrieveSongs, callback) ->
 		return if not artistId?
 
 		$.ajax
 			url: "#{@API_ADDRESS}/artists"
-			data: "id=#{artistId}&s=#{@SESSION_ID}"
+			data: "id=#{artistId}&includeSongs=#{retrieveSongs}&s=#{@SESSION_ID}"
 			success: (data) ->
-				console.log "dunnit"
 				if data.error?
 					if callback? then callback false, data.error
 				else

@@ -32,7 +32,11 @@ module.exports = Backbone.View.extend
 			artUrl: ""
 			pageTitle: if @folder? then @folder.get("folderName") else ""
 
+		if @subFolder
+			@$el.append "<div class='collectionActions'><a class='playAll' href=''>Play all</a></div>"
+
 		$temp = $("<div>").addClass("main-scrollingContent artistsMain scroll")
+		$temp.addClass "noCollectionActions" unless @subFolder
 		$folders = $("<div>")
 		$temp.append $folders
 		if @contentLoaded

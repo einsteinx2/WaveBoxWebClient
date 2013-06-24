@@ -29,13 +29,3 @@ module.exports = class extends DynamicBoxListView
 	filterChanged: ->
 		clearTimeout @filterTimeout
 		@filterTimeout = setTimeout @render.bind(this), 50
-
-	lookupImagesInViewport: ->
-		viewTop = @$el.scrollTop()
-		viewBottom = viewTop + @$el.height()
-		@collection.each (artist) ->
-			console.log artist.el
-			artistOffset = artist.$el.offset().top
-			if artistOffset >= viewTop and artistOffset <= viewBottom
-				console.log artist
-			

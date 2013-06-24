@@ -13,11 +13,9 @@ module.exports = Backbone.View.extend
 			@artistListing.trigger "filterChanged"
 
 		"click .DirectoryViewIcon": (event) ->
-			console.log "dv click"
 			@$el.find(".main-scrollingContent").addClass "listView"
 
 		"click .AlbumSortIcon": (event) ->
-			console.log "as click"
 			@$el.find(".main-scrollingContent").removeClass "listView"
 
 			
@@ -29,5 +27,6 @@ module.exports = Backbone.View.extend
 			searchBarClass: ""
 
 		@$el.empty().append $("<div>").append(result).append @artistListing.render().el
+		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	

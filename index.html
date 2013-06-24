@@ -60,19 +60,12 @@
 </head>
 
 <body>
-
-	<!-- Layout -->
-
 	<div id="left" class="scroll">
 		<div id="leftContent" class='scrollContent'>
 			<div id="HeaderBar" class="Sidebars">
 				<div id="LogoArea" class=" "></div>
 			</div>
 	        <div id="SidebarMenu" class='scrollAnchor'></div>
-	        <div class="menuStickyFooter">
-	        	<div class="editPlaylists">Edit Playlists</div>
-				<div class="addPlaylist">Add Playlist</div>	
-			</div>
 		</div>
 	</div>
 	
@@ -148,26 +141,25 @@
 	<div id="main"></div>
 	<div id="jPlayer"></div>
 	
-	<!-- Templates -->
 		
 	<script type='text/template' id='template-artist_container'>
-	<div src="img/BlankAlbum.png" alt="test image" /></div>	
-	<div><%= itemTitle %></div>
-	<div class="itemArrow"></div>
+		<div src="img/BlankAlbum.png" alt="test image" /></div>	
+		<div><%= itemTitle %></div>
+		<div class="itemArrow"></div>
 	</script>
 
 	<script type='text/template' id='template-album_container'>
-	<div src="img/BlankAlbum.png" alt="test image" /></div>	
-	<div><%= albumTitle %></div>
-	<div><%= albumArtist %></div>
-	<div class="itemArrow"></div>
+		<div src="img/BlankAlbum.png" alt="test image" /></div>	
+		<div><%= albumTitle %></div>
+		<div><%= albumArtist %></div>
+		<div class="itemArrow"></div>
 	</script>
 
 	<script type='text/template' id='template-sideBarItem'>
-	<li class="SidebarIcons">
-		<span id="MenuIcon" class="<%= itemClass %>"></span>
-		<span id="MenuText"><%= itemTitle %></span>
-    </li>
+		<li class="SidebarIcons">
+			<span id="MenuIcon" class="<%= itemClass %>"></span>
+			<span id="MenuText"><%= itemTitle %></span>
+	    </li>
 	</script>
 	
 	<script type='text/template' id='template-album_listing'>
@@ -193,7 +185,6 @@
 		<div class="main-albumArt">
 			<img src="img/BlankAlbum.png"> 
 		</div>
-		<div class="collectionActions"><a class="playAll" href="">Play all</a></div>
 		<div class="stickyHeader">
 			<div>#</div>
 			<div>Time</div>
@@ -229,10 +220,11 @@
 			<a class="searchBar-toggle DirectoryViewIcon"></a>
 			<a class="searchBar-toggle AlbumSortIcon"></a>
 		</div>
+		<div class="content"></div>
 	</script>
 
 	<script id="template-artistView" type="text/template">
-		
+		<div class="collectionActions"><a class="playAll" href="">Play all</a></div>
 	</script>
 
 	<script id="template-miniPlayer" type="text/template">
@@ -258,8 +250,6 @@
 		<div class="QueueSongTime"><%= duration %></div>
 	</script>
 	
-	<!-- Scripts -->
-
 	<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="script/underscore-min.js"></script>
 	<script type="text/javascript" src="script/backbone-min.js"></script>

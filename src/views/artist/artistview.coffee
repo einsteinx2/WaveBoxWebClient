@@ -4,6 +4,10 @@ Artist = require '../../models/artist'
 module.exports = Backbone.View.extend
 	tagName: "div"
 	template: _.template($("#template-artistView").html())
+
+	events:
+		"click .playAll": "playAll"
+
 	initialize: (artistId) ->
 		@contentLoaded = no
 		if artistId?
@@ -22,6 +26,9 @@ module.exports = Backbone.View.extend
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""
 
+		@$el.append @template()
+		console.log @template()
+
 		$temp = $("<div>").addClass("main-scrollingContent artistMain scroll")
 		console.log @contentLoaded
 		if @contentLoaded
@@ -32,3 +39,11 @@ module.exports = Backbone.View.extend
 
 		@$el.append $temp
 		this
+	
+	playAll: (e) ->
+		e.preventDefault()
+		@listenToOnce @artist, "change", ->
+			console.log "got tracks"
+			@artist.get("tracks").each (track) ->
+				wavebox.audioPlayer.playQueue.add track
+		@artist.retrieveSongs()
