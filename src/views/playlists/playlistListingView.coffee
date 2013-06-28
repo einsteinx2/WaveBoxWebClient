@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend
 				artistName: ""
 				albumName: playlistName or ""
 
-			$temp.append trackListView.render().el
+			$temp.find(".albumListingContent").append trackListView.render().el
 		else
 			console.log "playlistListingView content not loaded"
 			$temp.append "Loading"

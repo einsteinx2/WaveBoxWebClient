@@ -15,10 +15,13 @@ class KeyboardShortcuts
 
 	leftArrow: ->
 		wavebox.audioPlayer.previous()
+
 	upArrow: ->
 		wavebox.audioPlayer.volume(wavebox.audioPlayer.volume() + .1)
+
 	rightArrow: ->
 		wavebox.audioPlayer.next()
+
 	downArrow: ->
 		wavebox.audioPlayer.volume(wavebox.audioPlayer.volume() - .1)
 		
