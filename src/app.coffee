@@ -3,6 +3,7 @@ ApiClient = require './utils/apiClient'
 Artists = require './collections/artists'
 Router = require './router'
 AppController = require './views/appView'
+KeyboardShortcuts = require './utils/keyboardShortcuts'
 
 $ ->
 	if window.navigator.standalone
@@ -22,6 +23,7 @@ $ ->
 		if error? then console.log error
 		wavebox.audioPlayer = new AudioPlayer
 		wavebox.appController = new AppController
+		wavebox.keyboardShortcuts = new KeyboardShortcuts
 		wavebox.router = new Router
 		
 		Backbone.history.start()

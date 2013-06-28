@@ -3,7 +3,6 @@ PlayQueue = require '../models/playqueue'
 module.exports = Backbone.Model.extend
 	initialize: ->
 		# player properties
-		@volume = 1
 		@muted = false
 
 		# playlist state
@@ -68,6 +67,13 @@ module.exports = Backbone.Model.extend
 		percent = if percent > seekable then seekable else percent
 		console.log "seekable: " + seekable + " percent: " + percent
 		@jPlayer.jPlayer "playHead", percent
+
+	volume: (newLevel) ->
+		if not newLevel?
+			return @jPlayer.jPlayer "option", "volume"
+
+		else
+			@jPlayer.jPlayer "volume", newLevel
 
 	setPlayerSong: (song, shouldPlay) ->
 		incomingCodec = @preferredFormatForSong song
@@ -144,7 +150,6 @@ module.exports = Backbone.Model.extend
 				that.set "duration", e.jPlayer.status.duration
 				that.trigger "timeUpdate"
 			volumechange: (e) ->
-				that.volume = e.jPlayer.options.volume
 				that.muted = e.jPlayer.options.muted
 				that.trigger "volumeChange"
 			swfPath: "/swf/"

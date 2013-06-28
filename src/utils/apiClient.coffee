@@ -1,4 +1,4 @@
-class module.exports
+class ApiClient
 	constructor: ->
 		@API_ADDRESS = '/api'
 		@SESSION_ID = localStorage.getItem "waveBoxSessionKey"
@@ -273,3 +273,5 @@ class module.exports
 				if callback? then callback false, error
 			async: true
 			type: "POST"
+
+module.exports = ApiClient

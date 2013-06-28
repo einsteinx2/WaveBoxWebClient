@@ -2,9 +2,12 @@ SubFolderView = require './subfolderview'
 TrackListView = require '../tracklistview'
 Folder = require '../../models/folder'
 
-module.exports = Backbone.View.extend
+class FolderView extends Backbone.View
 	tagName: "div"
 	template: _.template($("#template-artistView").html())
+	events:
+		"click .playAll": "playAll"
+
 	initialize: (options) ->
 		@contentLoaded = no
 		@folder =
@@ -51,3 +54,13 @@ module.exports = Backbone.View.extend
 				$temp.append view.render().el
 		@$el.append $temp
 		this
+	
+	playAll: (e) ->
+		e.preventDefault()
+		@listenToOnce @folder, "change", =>
+			@folder.get("tracks").each (track) ->
+				wavebox.audioPlayer.playQueue.add track
+		@folder.recursive = yes
+		@folder.fetch()
+
+module.exports = FolderView
