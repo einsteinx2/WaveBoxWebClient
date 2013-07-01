@@ -795,6 +795,11 @@ ul#Filters .FolderIcon {
 	position: relative;
 	left: 210px;	
 }
+
+.playlistDragOver {
+	border-top: 1px solid blue;
+	border-bottom: 1px solid blue;
+}
 	
 .PlayerDisplay {
 	height: 50px;

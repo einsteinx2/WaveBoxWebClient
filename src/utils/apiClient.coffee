@@ -52,6 +52,27 @@ class ApiClient
 		else
 			if callback? then callback false
 
+	addToPlaylist: (playlistId, itemIds, callback) ->
+		itemIdString = ""
+		_.each itemIds, (itemId, index) ->
+			itemIdString += "," unless index is 0
+			itemIdString += itemId
+
+		$.ajax
+			url: "#{@API_ADDRESS}/playlists"
+			data: "action=add&id=#{playlistId}&itemIds=#{itemIdString}&s=#{@SESSION_ID}"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data.playlists
+			error: (XHR, status, error) ->
+				console.log "error getting playlist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+
 	getPlaylistList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists"

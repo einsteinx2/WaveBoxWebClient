@@ -2,7 +2,7 @@ Playlists = require "../../collections/playlists"
 SidebarSectionView = require "../navsidebarsectionview"
 PlaylistSidebarItemView = require "./playlistSidebarItemView"
 
-module.exports = class extends SidebarSectionView
+class PlaylistSectionView extends SidebarSectionView
 
 	initialize: (options) ->
 		@options = options
@@ -26,3 +26,5 @@ module.exports = class extends SidebarSectionView
 			$temp.append view.render().el
 		@$el.append $temp.children()
 		this
+
+module.exports = PlaylistSectionView
