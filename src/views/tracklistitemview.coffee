@@ -1,12 +1,11 @@
 Utils = require '../utils/utils'
-ActionSheetView = require "./actionSheet/ActionSheetView"
+ActionSheetView = require "./actionSheet/actionSheetView"
 Playlists = require "../collections/playlists"
 
 class TrackListItemView extends Backbone.View
 
 	tagName: "div"
-	template: _.template($("#template-trackListItem").html())	
-<<<<<<< HEAD
+	template: _.template($("#template-trackListItem").html())
 	initialize: ->
 		@listenTo wavebox.audioPlayer, "newSong", @adjustNowPlaying
 

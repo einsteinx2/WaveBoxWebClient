@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend
 		"reset": "render"
 
 	show: ->
-		@$el.transit { "margin-bottom": 0, "opacity": "1" }, 300, "ease-in-out"
+		@$el.transit { y: 0, "opacity": "1" }, 300, "ease-in-out"
 		###
 		$.transit {
 			"-webkit-transform": "translateY(#{-@$el.height()})"
@@ -28,7 +28,8 @@ module.exports = Backbone.View.extend
 		this
 
 	hide: ->
-		@$el.transit { "margin-bottom": -@$el.height(), "opacity": "0" }, 300, "ease-in-out"
+		@$el.transit { y: 50 * @collection.length, "opacity": "0" }, 300, "ease-in-out", =>
+			@remove()
 		###
 		$.transit {
 			"-webkit-transform": "translateY(#{-@$el.height()})"
@@ -50,5 +51,5 @@ module.exports = Backbone.View.extend
 
 		@$el.append $temp.children()
 		# start hidden
-		@$el.css "margin-bottom", -50 * @collection.length
+		@$el.css "-webkit-transform", "translate(0px, #{50 * @collection.length}px)"
 		this
