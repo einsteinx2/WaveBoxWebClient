@@ -6,7 +6,6 @@ module.exports = Backbone.View.extend
 
 	tagName: "ul"
 	className: "ActionSheet"
-	testProp: "something"
 
 	initialize: (options) ->
 		@options = options
@@ -26,6 +25,7 @@ module.exports = Backbone.View.extend
 			"-moz-transform": "translateY(#{-@$el.height()})"
 		}, 300, "ease-in-out"
 		###
+		this
 
 	hide: ->
 		@$el.transit { "margin-bottom": -@$el.height(), "opacity": "0" }, 300, "ease-in-out"
@@ -35,6 +35,7 @@ module.exports = Backbone.View.extend
 			"-moz-transform": "translateY(#{-@$el.height()})"
 		}, 300, "ease-in-out"
 		###
+		this
 
 	render: ->
 		# render items

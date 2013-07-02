@@ -32,6 +32,10 @@ module.exports = Backbone.Model.extend
 	add: (track) ->
 		@tracks.add track
 		@trigger "change"
+
+	addNext: (track) ->
+		@tracks.add track, {at: @nowPlayingIndex + 1}
+		@trigger "change"
 	
 	currentSong: ->
 		if @nowPlayingIndex?

@@ -54,9 +54,14 @@ class ApiClient
 
 	addToPlaylist: (playlistId, itemIds, callback) ->
 		itemIdString = ""
-		_.each itemIds, (itemId, index) ->
-			itemIdString += "," unless index is 0
-			itemIdString += itemId
+		if typeof itemIds is "Array"
+			# Convert the array to a comma delimited list
+			_.each itemIds, (itemId, index) ->
+				itemIdString += "," unless index is 0
+				itemIdString += itemId
+		else
+			# Assume it's a single id and just use it directly
+			itemIdString = itemIds
 
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists"
