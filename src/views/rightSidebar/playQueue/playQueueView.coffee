@@ -6,6 +6,8 @@ module.exports = Backbone.View.extend
 		console.log @model
 		@listenTo @model, "change", @render
 		@listenTo wavebox.audioPlayer, "newSong", @render
+		@listenTo wavebox.notifications, "mediaDragStart", @mediaDragStart
+		@listenTo wavebox.notifications, "mediaDragEnd", @mediaDragEnd
 
 	render: ->
 		$container = $("<div>")
@@ -14,3 +16,11 @@ module.exports = Backbone.View.extend
 			$container.append view.render().el
 		
 		@$el.empty().append $container.children()
+
+	mediaDragStart: ->
+		console.log @el
+		@$el.append($("<div>").addClass("dropzone-callout"))
+
+	mediaDragEnd: ->
+		@$el.find(".dropzone-callout").remove()
+

@@ -1,12 +1,6 @@
 NavSidebarItemView = require '../navsidebaritemview'
 
 module.exports = class extends NavSidebarItemView
-	render: ->
-		@model.set "href", "#playlists/#{@model.get "id"}"
-		@model.set "itemTitle", @model.get "name"
-		super
-		this
-		
 	events:
 		"dragover": (e) ->
 			e.preventDefault()
@@ -18,6 +12,14 @@ module.exports = class extends NavSidebarItemView
 
 		"drop": (e) ->
 			@$el.children().first().removeClass "playlistDragOver"
-			folder = e.originalEvent.dataTransfer.getData("folder")
-			wavebox.apiClient.addToPlaylist @model.get("id"), [ folder ], =>
+			item = e.originalEvent.dataTransfer.getData("item")
+			wavebox.apiClient.addToPlaylist @model.get("id"), [ item ], =>
 				# remove loading spinner and stuff
+			wavebox.notifications.trigger "mediaDragEnd"
+	render: ->
+		@model.set "href", "#playlists/#{@model.get "id"}"
+		@model.set
+			"itemTitle": @model.get "name"
+			"itemClass": "Playlists sprite"
+		super
+		this

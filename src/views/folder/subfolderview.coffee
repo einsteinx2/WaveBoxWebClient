@@ -9,13 +9,12 @@ module.exports = Backbone.View.extend
 		"click": ->
 			wavebox.router.navigate "folders/#{@model.get 'folderId'}", trigger: true
 		"dragstart": (e) ->
-			e.originalEvent.dataTransfer.setData("folder", @model.get("folderId"))
+			wavebox.notifications.trigger "mediaDragStart"
+			e.originalEvent.dataTransfer.setData("item", @model.get("folderId"))
 			console.log @model
-			console.log e
-		"drop": (e) ->
-			window.ev = e
-			folder = e.originalEvent.dataTransfer.getData("folder")
-			console.log folder
+		"dragend": ->
+			wavebox.notifications.trigger "mediaDragEnd"
+
 	render: ->
 		@$el.html @template
 			itemTitle: @model.get "folderName"

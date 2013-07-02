@@ -4,11 +4,18 @@ module.exports = Backbone.View.extend
 	tagName: 'div'
 	className: 'itemWrapper albumItem'
 	template: _.template($("#template-album_container").html())
+	
+	attributes:
+		"draggable": "true"
 
 	events:
 		"click": ->
 			console.log "album click event fired! #{Date.now()}"
 			wavebox.router.navigate "albums/#{@model.get 'albumId'}", trigger: true
+
+		"dragstart": (e) ->
+			e.originalEvent.dataTransfer.setData("item", @model.get("artistId"))
+
 	render: ->
 		@$el.html @template
 			albumTitle: _.escape(@model.get("albumName"))

@@ -6,11 +6,17 @@ class TrackListItemView extends Backbone.View
 	initialize: ->
 		@listenTo wavebox.audioPlayer, "newSong", @adjustNowPlaying
 
+	attributes:
+		"draggable": "true"
+
 	events:
 		"click": ->
 			wavebox.audioPlayer.playQueue.add @model
-
-	
+		"dragstart": (e) ->
+			wavebox.notifications.trigger "mediaDragStart"
+			e.originalEvent.dataTransfer.setData("item", @model.get("itemId"))
+		"dragend": ->
+			wavebox.notifications.trigger "mediaDragEnd"
 	render: ->
 		@$el.empty().append @template
 			trackNumber: @model.get "trackNumber"

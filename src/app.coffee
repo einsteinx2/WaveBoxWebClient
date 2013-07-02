@@ -19,6 +19,8 @@ $ ->
 	wavebox.views.foldersView = null
 	wavebox.views.pageView = _.template($("#template-pageView").html())
 
+	wavebox.notifications = new Backbone.Model
+
 	launch = ->
 		if error? then console.log error
 		wavebox.audioPlayer = new AudioPlayer
