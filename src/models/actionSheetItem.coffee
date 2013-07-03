@@ -1,4 +1,4 @@
-module.exports = Backbone.Model.extend
+class ActionSheetItem extends Backbone.Model
 	defaults:
 		itemTitle: ""
 		itemClass: ""
@@ -6,3 +6,4 @@ module.exports = Backbone.Model.extend
 		href: ""
 		enabled: true
 
+module.exports = ActionSheetItem

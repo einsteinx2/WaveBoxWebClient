@@ -1,13 +1,14 @@
 AlbumList = require '../collections/albumlist'
 TrackList = require '../collections/tracklist'
 
-module.exports = Backbone.Model.extend
+class Artist extends Backbone.Model
 	defaults:
 		artId: null
 		artistId: null
 		artistName: null
 		itemTypeId: null
 		albums: null
+		tracks: null
 
 	initialize: (options) ->
 		@artistId = if options.artistId? then options.artistId else null
@@ -32,3 +33,5 @@ module.exports = Backbone.Model.extend
 	retrieveSongs: ->
 		@shouldRetrieveSongs = yes
 		@fetch()
+	
+module.exports = Artist

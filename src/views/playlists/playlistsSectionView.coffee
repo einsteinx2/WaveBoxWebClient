@@ -12,8 +12,8 @@ class PlaylistSectionView extends SidebarSectionView
 		@collection.fetch reset: true
 		@listenToOnce @collection, "reset", =>
 			@render()
-		@listenTo wavebox.notifications, "mediaDragStart", @mediaDragStart
-		@listenTo wavebox.notifications, "mediaDragEnd", @mediaDragEnd
+		@listenTo wavebox.dragDrop, "mediaDragStart", @mediaDragStart
+		@listenTo wavebox.dragDrop, "mediaDragEnd", @mediaDragEnd
 
 	#className: "main-scrollingContent artistsMain scroll listView"
 	render: ->

@@ -1,6 +1,6 @@
 TrackList = require '../collections/tracklist'
 
-module.exports = Backbone.Model.extend
+class PlayQueue extends Backbone.Model
 	initialize: ->
 		console.log "Readying the play queue..."
 #		if localStorage?
@@ -69,3 +69,5 @@ module.exports = Backbone.Model.extend
 				"all"
 			else
 				no
+
+module.exports = PlayQueue

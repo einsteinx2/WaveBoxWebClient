@@ -10,10 +10,9 @@ module.exports = Backbone.View.extend
 			console.log "artist click event fired! #{Date.now()}"
 			wavebox.router.navigate "artists/#{@model.get 'artistId'}", trigger: true
 		"dragstart": (e) ->
-			wavebox.notifications.trigger "mediaDragStart"
-			e.originalEvent.dataTransfer.setData("item", @model.get("artistId"))
+			wavebox.dragDrop.mediaDragStart @model
 		"dragend": ->
-			wavebox.notifications.trigger "mediaDragEnd"
+			wavebox.dragDrop.mediaDragEnd()
 	render: ->
 		random = Math.floor(Math.random() * 100)
 		if random is 12 then random = 13

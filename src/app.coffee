@@ -4,6 +4,7 @@ Artists = require './collections/artists'
 Router = require './router'
 AppController = require './views/appView'
 KeyboardShortcuts = require './utils/keyboardShortcuts'
+DragDrop = require './utils/dragDrop'
 
 $ ->
 	if window.navigator.standalone
@@ -19,7 +20,7 @@ $ ->
 	wavebox.views.foldersView = null
 	wavebox.views.pageView = _.template($("#template-pageView").html())
 
-	wavebox.notifications = new Backbone.Model
+	wavebox.dragDrop = new DragDrop
 
 	launch = ->
 		if error? then console.log error

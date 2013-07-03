@@ -1,6 +1,6 @@
 TrackList = require '../collections/tracklist'
 
-module.exports = Backbone.Model.extend
+class Album extends Backbone.Model
 	defaults:
 		albumId: null
 		albumName: null
@@ -27,3 +27,5 @@ module.exports = Backbone.Model.extend
 						itemTypeId: album.itemTypeId
 						releaseYear: album.releaseYear
 						tracks: new TrackList data.songs, comparator: "trackNumber"
+
+module.exports = Album

@@ -4,9 +4,10 @@
 #
 # Description: Used by sidebaritemview
 
-module.exports = Backbone.Model.extend
+class SidebarItem extends Backbone.Model
 	defaults:
 		title: ""
 		className: ""
 		enabled: true
 
+module.exports = SidebarItem

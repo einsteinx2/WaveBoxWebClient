@@ -14,10 +14,9 @@ class TrackListItemView extends Backbone.View
 
 	events:
 		"dragstart": (e) ->
-			wavebox.notifications.trigger "mediaDragStart"
-			e.originalEvent.dataTransfer.setData("item", @model.get("itemId"))
+			wavebox.dragDrop.mediaDragStart(@model)
 		"dragend": ->
-			wavebox.notifications.trigger "mediaDragEnd"
+			wavebox.dragDrop.mediaDragEnd()
 		"click": "addToQueue"
 		"touchstart": "beginPress"
 		"touchend": "endPress"

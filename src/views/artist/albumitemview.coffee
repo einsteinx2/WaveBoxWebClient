@@ -11,10 +11,9 @@ module.exports = Backbone.View.extend
 			console.log @model
 			wavebox.router.navigate "albums/#{@model.get 'albumId'}", trigger: true
 		"dragstart": (e) ->
-			wavebox.notifications.trigger "mediaDragStart"
-			e.originalEvent.dataTransfer.setData("item", @model.get("albumId"))
+			wavebox.dragDrop.mediaDragStart @model
 		"dragend": ->
-			wavebox.notifications.trigger "mediaDragEnd"
+			wavebox.dragDrop.mediaDragEnd()
 	render: ->
 		@$el.html @template
 			itemTitle: @model.get "albumName"

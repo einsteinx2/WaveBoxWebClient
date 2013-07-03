@@ -1,6 +1,6 @@
 Utils = require '../utils/utils'
 
-module.exports = Backbone.Model.extend
+class Track extends Backbone.Model
 	defaults:
 		itemTypeId: null
 		artistId: null
@@ -28,3 +28,4 @@ module.exports = Backbone.Model.extend
 		else
 			null
 
+module.exports = Track

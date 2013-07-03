@@ -1,6 +1,6 @@
 TrackList = require '../collections/tracklist'
 
-module.exports = Backbone.Model.extend
+class Playlist extends Backbone.Model
 	defaults:
 		playlistId: null
 		name: null
@@ -27,3 +27,5 @@ module.exports = Backbone.Model.extend
 				else
 					console.log "artistInfo!"
 					console.log data
+
+module.exports = Playlist
