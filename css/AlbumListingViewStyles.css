@@ -274,6 +274,11 @@ background-color: #e8e8e8;
 
 	.trackList {
 		top: 0;
+		left: 0;
+		right: auto;
+		bottom: auto;
+		height: auto;
+		overflow: visible;
 		position: relative;
 	}
 

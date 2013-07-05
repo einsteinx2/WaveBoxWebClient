@@ -28,9 +28,10 @@ class Folder extends Backbone.Model
 				# to troubleshoot someday when you're bored.
 				folderModels = _.map data.folders, (item) ->
 					new Folder item
-				if success
-					@set
-						folders: new FolderList(folderModels)
-						tracks: new TrackList(data.songs)
+
+				theFolder = data.containingFolder or {}
+				theFolder.folders = new FolderList(folderModels)
+				theFolder.tracks = new TrackList(data.songs)
+				@set theFolder
 							
 module.exports = Folder

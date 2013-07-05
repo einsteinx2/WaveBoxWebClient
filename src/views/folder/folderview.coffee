@@ -38,19 +38,21 @@ class FolderView extends Backbone.View
 		if @subFolder
 			@$el.append "<div class='collectionActions'><a class='playAll' href=''>Play all</a></div>"
 
-		$temp = $("<div>").addClass("main-scrollingContent artistsMain scroll")
+		$temp = $("<div>").addClass("main-scrollingContent scroll")
 		$temp.addClass "noCollectionActions" unless @subFolder
-		$folders = $("<div>")
-		$temp.append $folders
+		$folders = $("<div>").addClass "mainContentPadding listView"
 		if @contentLoaded
 			folders = @folder.get "folders"
 			folders.each (folder, index) ->
 				view = new SubFolderView model: folder
 				$folders.append view.render().el
+			if folders.size() > 0
+				$temp.append $folders
 
 			tracks = @folder.get "tracks"
+			console.log @folder
 			if tracks.length > 0
-				view = new TrackListView collection: tracks
+				view = new TrackListView collection: tracks, artId: @folder.get("artId")
 				$temp.append view.render().el
 		@$el.append $temp
 		this

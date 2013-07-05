@@ -21,24 +21,15 @@ module.exports = Backbone.View.extend
 			artId = @album.get "artId"
 
 			if artId?
-				console.log "there's an art id!"
 				artUrl = wavebox.apiClient.getArtUrl @album.get("artId"), 300
-				art = new Image
-				art.onload = =>
-					@$el.find(".main-albumArt")
-						.css("background-image", "url('#{artUrl}')")
-						.children()
-						.css("opacity", 0)
-				art.src = artUrl
 
 			albumTitle = @album.get "albumName"
-
 			duration = 0
-
 			tracks = @album.get("tracks")
 
 			tracks.each (track, index, list) ->
 				duration += track.get "duration"
+
 			totalDuration = Utils.formattedTimeWithSeconds duration
 			trackCount = tracks.size()
 
@@ -51,8 +42,7 @@ module.exports = Backbone.View.extend
 			trackCount: trackCount or ""
 			
 		if @contentLoaded
-
-			trackList = new TrackListView collection: tracks
+			trackList = new TrackListView collection: tracks, artId: @album.get("artId")
 			$temp.append @template
 				artUrl: artUrl or ""
 				totalDuration: Utils.formattedTimeWithSeconds duration
@@ -60,9 +50,15 @@ module.exports = Backbone.View.extend
 				artistName: @album.get("artistName") or ""
 				albumName: albumTitle or ""
 
-			$temp.find(".albumListingContent").append trackList.render().el
+			$contentArea = $temp.find(".albumListingContent").first()
+			$contentArea.append trackList.render().el
+			if wavebox.isMobile()
+				$contentArea.addClass "scroll"
+			else
+				tracklist.$el.addClass "scroll"
 		else
 			$temp.append "Loading"
+
 		@$el.empty().append $temp.children()
 
 		# HACK: in the future, we should be adding this to views

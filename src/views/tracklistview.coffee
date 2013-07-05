@@ -4,6 +4,10 @@ class TrackList extends Backbone.View
 	tagName: "div"
 	template: _.template($("#template-trackList").html())
 
+	initialize: (options) ->
+		if options?
+			@artId = options.artId or null
+
 	events:
 		"click .playAll": (e) ->
 			e.preventDefault()
@@ -21,7 +25,22 @@ class TrackList extends Backbone.View
 			view = new TrackListItemView model: track
 			$tracks.append view.render().el
 		@$el.empty().append $temp.children()
+		@loadArt()
 
 		this
+
+	loadArt: ->
+		console.log this
+
+		if @artId?
+			console.log "there's an art id!"
+			artUrl = wavebox.apiClient.getArtUrl @artId, $(window).width()
+			art = new Image
+			art.onload = =>
+				@$el.find(".main-albumArt")
+					.css("background-image", "url('#{artUrl}')")
+					.children()
+					.css("opacity", 0)
+			art.src = artUrl
 
 module.exports = TrackList
