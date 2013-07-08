@@ -16,6 +16,8 @@ module.exports = Backbone.Router.extend
 		"*path":					"home"
 
 	artists: (artistId) ->
+		@sendSelectionNotification "Artists"
+
 		console.log "nav artists #{Date.now()}"
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
@@ -29,6 +31,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	folders: (folderId) ->
+		@sendSelectionNotification "Folders"
 		if folderId?
 			wavebox.appController.mainView.push(new FolderView(folderId: folderId, isSubFolder: yes))
 		else
@@ -38,6 +41,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	albums: (albumId) ->
+		@sendSelectionNotification "Albums"
 		if albumId?
 			wavebox.appController.mainView.push(new AlbumListingView albumId: albumId)
 		else
@@ -47,6 +51,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.focusMainPanel()
 
 	playlists: (playlistId) ->
+		@sendSelectionNotification "playlist #{playlistId}"
 		console.log "router playlists for id: #{playlistId}"
 		if playlistId?
 			wavebox.appController.mainView.push(new PlaylistListingView playlistId: playlistId)
@@ -61,4 +66,13 @@ module.exports = Backbone.Router.extend
 
 	home: ->
 		@artists()
+
+	sendSelectionNotification: (name) ->
+		wavebox.appController.trigger "sidebarItemSelected", name
+		
+		# Hack for first page load
+		setTimeout(->
+			wavebox.appController.trigger "sidebarItemSelected", name 
+			return
+		,1000)
 

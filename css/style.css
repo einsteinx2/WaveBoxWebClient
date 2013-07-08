@@ -341,7 +341,7 @@ a.Settings {
 	background-color:#e8e8e8;
 }
 	
-.SidebarIconsActive {
+.SidebarIconsActive li {
 	opacity:1  !important;
 	background-color:#e8e8e8 !important;	
 }

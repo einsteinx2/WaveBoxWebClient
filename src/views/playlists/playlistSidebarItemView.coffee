@@ -16,6 +16,13 @@ module.exports = class extends NavSidebarItemView
 			wavebox.apiClient.addToPlaylist @model.get("id"), [ itemId ], =>
 				# remove loading spinner and stuff
 			wavebox.dragDrop.mediaDragEnd()
+
+	initialize: ->
+		@listenTo wavebox.appController, "sidebarItemSelected", @itemSelected
+
+	itemSelected: (playlistId) ->
+		if playlistId == "playlist #{@model.get "id"}" then @$el.addClass("SidebarIconsActive") else @$el.removeClass("SidebarIconsActive")
+
 	render: ->
 		@model.set "href", "#playlists/#{@model.get "id"}"
 		@model.set

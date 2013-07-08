@@ -6,7 +6,6 @@ module.exports = Backbone.View.extend
 		"click": (e) -> 
 			e.preventDefault()
 			@trigger "clicked"
-			console.log "clicked triggered"
 			action = @model.get "action"
 			if action? then action()
 

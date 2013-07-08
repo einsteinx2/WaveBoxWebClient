@@ -10,6 +10,13 @@ module.exports = Backbone.View.extend
 		"click": (e) ->
 			wavebox.appController.mainView.resetNext = yes
 
+	initialize: ->
+		@listenTo wavebox.appController, "sidebarItemSelected", @itemSelected
+
+
+	itemSelected: (name) ->
+		if name == @model.get "itemTitle" then @$el.addClass("SidebarIconsActive") else @$el.removeClass("SidebarIconsActive")
+
 	render: ->
 		temp = document.createElement "div"
 		$temp = $(temp)
