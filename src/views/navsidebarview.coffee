@@ -39,7 +39,7 @@ module.exports = Backbone.View.extend
 					#			href: "#discover"
 					#		},
 				{
-					itemTitle: "Folder",
+					itemTitle: "Folders",
 					itemClass: "Folder sprite",
 					href: "#folders"
 				}

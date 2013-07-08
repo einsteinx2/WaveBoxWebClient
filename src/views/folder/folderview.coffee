@@ -33,7 +33,7 @@ class FolderView extends Backbone.View
 			leftAccessory: if @subFolder then "BackIcon" else "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
-			pageTitle: if @folder? then @folder.get("folderName") else ""
+			pageTitle: if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
 
 		if @subFolder
 			@$el.append "<div class='collectionActions'><a class='playAll' href=''>Play all</a></div>"

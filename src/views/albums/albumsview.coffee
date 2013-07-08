@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend
 		result = @template
 			leftAccessory: "MenuIcon"
 			rightAccessory: "PlaylistIcon"
-			pageTitle: ""
+			pageTitle: "Albums"
 			searchBarClass: ""
 
 		@$el.empty().append $("<div>").append(result).append @albumListing.render().el
