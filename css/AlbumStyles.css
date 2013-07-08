@@ -120,7 +120,7 @@ html, body {
 		position: absolute;
 		opacity: .6;
 		right: 10px;
-		top: 22.5px;
+		top: 27.5px;
 		background: url('../img/sprite.png') no-repeat -87px -308px;
 		background-size: 315px 435px;
 		width: 9px;
@@ -142,6 +142,7 @@ html, body {
 		height: 60px;
 		padding: 0 25px 0 0; 
 		border-bottom: 1px solid #cfcfcf;
+		overflow: hidden;
 	}
 
 	.listView > .itemWrapper :first-child
@@ -153,7 +154,7 @@ html, body {
 		width: 60px;
 	}
 
-	.listView > .artistItem :nth-child(2)
+	.listView > div > div:nth-child(2)
 	{
 		padding: 0;
 		line-height: 60px;
