@@ -28,7 +28,7 @@ module.exports = Backbone.View.extend
 		this
 
 	hide: ->
-		@$el.transit { y: 50 * @collection.length, "opacity": "0" }, 300, "ease-in-out", =>
+		@$el.transit { y: 50 * (@collection.length + 1), "opacity": "0" }, 300, "ease-in-out", =>
 			@remove()
 		###
 		$.transit {
@@ -48,6 +48,14 @@ module.exports = Backbone.View.extend
 				view = new ActionSheetItemView model: element
 				@listenTo view, "clicked", @hide
 				$temp.append view.render().el
+
+		# Add the cancel button
+		cancelItem = new ActionSheetItem {
+					"itemTitle": "Cancel"
+				}
+		view = new ActionSheetItemView model: cancelItem
+		@listenTo view, "clicked", @hide
+		$temp.append view.render().el
 
 		@$el.append $temp.children()
 		# start hidden

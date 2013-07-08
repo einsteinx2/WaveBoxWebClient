@@ -7,7 +7,8 @@ module.exports = Backbone.View.extend
 			e.preventDefault()
 			@trigger "clicked"
 			console.log "clicked triggered"
-			@model.get("action")()
+			action = @model.get "action"
+			if action? then action()
 
 	render: ->
 		temp = document.createElement "div"
