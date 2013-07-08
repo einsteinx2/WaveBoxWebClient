@@ -22,6 +22,9 @@ module.exports = class extends DynamicBoxListView
 				view = new AlbumView model: album
 				view.parent = this
 				$temp.append view.render().el
+		
+		if not wavebox.isMobile()
+			@$el.addClass "mainContentPadding"
 		@$el.empty().append $temp.children()
 		#@lookupImagesInViewport()
 		this
