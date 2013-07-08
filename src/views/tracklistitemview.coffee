@@ -19,6 +19,7 @@ class TrackListItemView extends Backbone.View
 			wavebox.dragDrop.mediaDragEnd()
 		"click": "addToQueue"
 		"touchstart": "beginPress"
+		"touchmove": "touchmove"
 		"touchend": "endPress"
 		"touchcancel": "endPress"
 		"contextmenu": "rightClick"
@@ -100,12 +101,19 @@ class TrackListItemView extends Backbone.View
 		@showActionSheet()
 		return false
 
-	beginPress: ->
+	beginPress: (e) ->
+		@touchStartY = e.originalEvent.pageY
 		@longPressTimer = setTimeout @showActionSheet, 500
-		return
+
+	touchmove: (e) ->
+		showSheet = not (Math.abs(e.originalEvent.pageY - @touchStartY) > 10)
+		console.log "showSheet: #{showSheet}"
+		if not showSheet
+			clearTimeout @longPressTimer
+
+		return yes
 
 	endPress: ->
 		clearTimeout @longPressTimer
-		return
 
 module.exports = TrackListItemView

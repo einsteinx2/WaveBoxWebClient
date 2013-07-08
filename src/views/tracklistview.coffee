@@ -15,7 +15,6 @@ class TrackList extends Backbone.View
 			@collection.each (track) =>
 				wavebox.audioPlayer.playQueue.add track
 
-
 	render: ->
 		$temp = $("<div>")
 		$tracks = $("<div>").addClass("trackList scroll")

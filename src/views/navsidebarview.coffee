@@ -33,11 +33,11 @@ module.exports = Backbone.View.extend
 					href: "#albums"
 				},
 
-				{
-					itemTitle: "Discover",
-					itemClass: "Discover sprite",
-					href: "#discover"
-				},
+					#		{
+					#			itemTitle: "Discover",
+					#			itemClass: "Discover sprite",
+					#			href: "#discover"
+					#		},
 				{
 					itemTitle: "Folder",
 					itemClass: "Folder sprite",
@@ -47,7 +47,7 @@ module.exports = Backbone.View.extend
 		@playlistSectionView = new PlaylistsSectionView
 			title: "Playlists"
 		@settingSectionView = new SidebarSectionView
-			title: "Setting"
+			title: "Settings"
 			items: [
 				{
 					itemTitle: "Airplane Mode",
@@ -65,8 +65,8 @@ module.exports = Backbone.View.extend
 	
 	render: ->
 		$temp = $("<div>")
-		$temp.append @serverSectionView.render().el
+		#$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
 		$temp.append @playlistSectionView.render().el
-		$temp.append @settingSectionView.render().el
+		#$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.children()

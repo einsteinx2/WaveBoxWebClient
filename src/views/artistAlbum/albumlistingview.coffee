@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend
 			if wavebox.isMobile()
 				$contentArea.addClass "scroll"
 			else
-				tracklist.$el.addClass "scroll"
+				trackList.$el.addClass "scroll"
 		else
 			$temp.append "Loading"
 

@@ -137,6 +137,13 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	100% { opacity: 1 }
 }
 
+#LeftSidebarHeader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
 .Sidebars {
 	background-color:#bababa;
 	padding: 16px 0;
@@ -434,6 +441,31 @@ span#MenuIcon.Settings {
 	opacity: 0.8;	
 }
 
+.RepeatIcon {
+	background: url('../img/sprite.png') no-repeat -74px -105px;
+	background-size: 315px 435px;
+	width: 21px;
+	height: 19px;
+}
+
+.RepeatOneIcon {
+	background: url('../img/sprite.png') no-repeat -72px -129px;
+	background-size: 315px 435px;
+	width: 24px;
+	height: 20px;
+}
+
+.ShuffleIcon {
+	background: url('../img/sprite.png') no-repeat -72px -180px;
+	background-size: 315px 435px;
+	width: 25px;
+	height: 18px;
+}
+
+.Off {
+	opacity: .4;
+}
+
 .menuStickyFooter {
 	position: fixed;
 	bottom: 0;
@@ -463,11 +495,12 @@ span#MenuIcon.Settings {
 
 /* SidebarMenu */	
 #SidebarMenu {
+	position: absolute;
 	top: 50px;
 	bottom: 0px;
 	width: 220px;
 	z-index: 1;
-	overflow-x: hidden;	
+	overflow: auto;
 }
 
 .sidebarStickyFooter {
@@ -475,8 +508,8 @@ span#MenuIcon.Settings {
 	bottom: 0;
 	right: 0;
 	width: 260px;
-	height: 35px;
-	padding: 0 10px;
+	height: 45px;
+	padding: 13px 16px;
 	box-sizing: border-box;
 	box-shadow: 0 -1px 2px #aaa;
 	background-color: rgba(226, 226, 226, 1);
