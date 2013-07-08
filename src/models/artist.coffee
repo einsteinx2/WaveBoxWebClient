@@ -1,4 +1,4 @@
-AlbumList = require '../collections/albumlist'
+AlbumList = require '../collections/albums'
 TrackList = require '../collections/tracklist'
 
 class Artist extends Backbone.Model

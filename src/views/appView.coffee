@@ -209,7 +209,7 @@ module.exports = Backbone.View.extend
 			$this = @mainView.$el
 
 			@touchStartX = event.originalEvent.touches[0].pageX - $this.offset().left
-			@scrollType = if @touchStartX < 100 or @touchStartX > $this.width() - 100 then "x" else "y"
+			@scrollType = if @touchStartX < 10 or @touchStartX > $this.width() - 10 then "x" else "y"
 			# If we're on mobile, and either panel is open, only allow panel dragging
 			@scrollType = if wavebox.isMobile() and @toggledPanel isnt null then "x" else @scrollType
 			@previousX = @touchStartX
