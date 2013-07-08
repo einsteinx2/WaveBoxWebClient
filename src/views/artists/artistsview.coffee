@@ -25,6 +25,7 @@ module.exports = Backbone.View.extend
 			rightAccessory: "PlaylistIcon"
 			pageTitle: "Artists"
 			searchBarClass: ""
+		document.title = "Wave - Artists"
 
 		@$el.empty().append $("<div>").append(result).append @artistListing.render().el
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")

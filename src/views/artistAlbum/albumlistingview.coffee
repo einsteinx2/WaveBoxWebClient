@@ -40,6 +40,7 @@ module.exports = Backbone.View.extend
 			pageTitle: albumTitle or ""
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
+		document.title = "Wave - " + (albumTitle or "")
 			
 		if @contentLoaded
 			trackList = new TrackListView collection: tracks, artId: @album.get("artId")

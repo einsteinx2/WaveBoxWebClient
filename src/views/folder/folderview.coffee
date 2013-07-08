@@ -29,11 +29,13 @@ class FolderView extends Backbone.View
 		@folder.fetch()
 
 	render: ->
+		title = if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
 		@$el.html wavebox.views.pageView
 			leftAccessory: if @subFolder then "BackIcon" else "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
-			pageTitle: if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
+			pageTitle: title
+		document.title = "Wave - #{title}"
 
 		if @subFolder
 			@$el.append "<div class='collectionActions'><a class='playAll' href=''>Play all</a></div>"

@@ -25,6 +25,7 @@ module.exports = Backbone.View.extend
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""
+		document.title = "Wave - " + (@artist.get("artistName") or "")
 
 		@$el.append @template()
 		console.log @template()

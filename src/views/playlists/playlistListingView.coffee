@@ -45,6 +45,7 @@ module.exports = Backbone.View.extend
 			pageTitle: playlistName or ""
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
+		document.title = if playlistName? then "Wave - #{playlistName}" else "Wave - Playlist"
 			
 		if @contentLoaded
 			console.log "playlistListingView tracks: "

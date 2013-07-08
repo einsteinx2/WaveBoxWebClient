@@ -25,6 +25,7 @@ module.exports = Backbone.View.extend
 			rightAccessory: "PlaylistIcon"
 			pageTitle: "Albums"
 			searchBarClass: ""
+		document.title = "Wave - Albums"
 
 		@$el.empty().append $("<div>").append(result).append @albumListing.render().el
 		this
