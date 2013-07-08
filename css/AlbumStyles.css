@@ -43,6 +43,7 @@ html, body {
 }
 
 .itemWrapper > div:nth-child(3) {
+	line-height: 16px;
 	margin-top: -4px;
 	font-size: .8em;
 	font-weight: 400;
