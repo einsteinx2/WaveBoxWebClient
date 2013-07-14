@@ -3,6 +3,7 @@ TrackListItemView = require "./tracklistitemview"
 class TrackList extends Backbone.View
 	tagName: "div"
 	template: _.template($("#template-trackList").html())
+	className: "trackListContainer"
 
 	initialize: (options) ->
 		if options?

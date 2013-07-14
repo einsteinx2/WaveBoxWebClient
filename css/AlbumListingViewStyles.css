@@ -4,17 +4,17 @@
 }
 
 .stickyHeader {
-	height: 50px;
+	height: 45px;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	font-size: 12px;
-	background-color: transparent;
+	background-color: #d8d8d8;
 }
 
 .stickyHeader > div {
-	line-height: 50px;
+	line-height: 45px;
 	float: left;
 	color: #515151;
 	font-weight: 600;
@@ -54,76 +54,87 @@
 	padding: 0 15px;
 }
 
-.albumListing {
+.trackListContainer {
 	position: absolute;
-	top: 0px;
-	bottom: 0;
+	top: 0;
 	left: 0;
 	right: 0;
-}
-
-.albumListingSidebar {
-	-webkit-select-user: none;
-	cursor: pointer;
-	position: absolute;
-	left: 0;
-	top: 100px;
 	bottom: 0;
-	width: 190px;
-	background-color: transparent;
-	z-index: 1;	
 }
 
-.albumListingSidebar > img {
-	width: 163px;
-	height: 163px;
-	padding-top: 15px;
-	padding-left: 13.5px;
-}
-
-.albumListingSidebar-title {
-	list-style: none;
-	top: 0;
-	font-size: 1.2em;
-	font-weight: 700;
-	padding: 4px 15px 4px 15px;
-}
-
-.albumListingSidebar-item {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	padding: 12px 13.5px 12px 13.5px;
-	position: relative;
-	font-weight: 400;
-}
-
-.albumListingSidebar-item:hover {
-	background-color: #fff;
-}
-
-.albumRelatedContentLinks > li:nth-child(2) {
-	padding: 0px 14.5px;
-	position: inherit;
+.mediaPage .trackListContainer {
+	top: 152px;
 }
 
 
-.albumRelatedContentLinks > li:nth-child(2):hover {
-background-color: #e8e8e8;
+
+.mediaPage .albumArt {
+	float: left;
+	margin-right: 10px;
+	width: 130px;
+	height: 130px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
-.albumRecordLabelInfo {
-	color: #757575;
-	font-size: 11px;
+
+.mediaPage .content {
 	position: absolute;
-	bottom: 13.5px;
-	left: 13.5px;
-	right: 13.5px;
-	list-style: none;
+	top: 50px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
-.albumRecordLabelInfo > li:first-child {
-	padding-bottom: 5px;
+.mediaPage header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 150px;
+	background-color: #eee;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.mediaPage header ul {
+	list-style: none;
+}
+.mediaPage header li {
+	padding: 1px 0;
+}
+
+.mediaPage header img {
+	width: 130px;
+	height: 130px;
+	float: left;
+	margin-right: 10px;
+}
+
+.mediaPage header h1 {
+	text-align: left;
+	font-size: 1.6em;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.mediaPage header h2 {
+	font-size: .95em;
+	opacity: .8;
+	font-weight: 300;
+}
+
+.mediaPage header h3 {
+	font-size: .6em;
+	opacity: .8;
+	font-weight: 200;
+}
+
+.thinFaded {
+	opacity: 0.4;
+	font-weight: 200;
+	font-size: .8em;
 }
 
 .albumTableMiddleColumn {
@@ -154,7 +165,7 @@ background-color: #e8e8e8;
 
 .trackList {
 	position: absolute;
-	top: 50px;
+	top: 45px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -217,22 +228,35 @@ background-color: #e8e8e8;
 
 @media(max-width: 480px)
 {
-
-	.main-albumArt {
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		display: block;
-		position: relative;
-		width: 100%;
+	.mediaPage header {
+		padding: 0;
 	}
 
-	.main-albumArt:before {
+	.mediaPage header ul {
+		display: none;
+	}
+
+	.mediaPage .albumArt {
+		width: 100%;
+		height: auto
+	}
+
+	.mediaPage .albumArt:before {
+		display: block;
 		content: '';
 		padding-top: 100%;
-		display: block;
 	}
 
+	.mediaPage header img {
+		width: 100%;
+		height: auto;
+		float: none;
+		clear: both;
+	}
+
+	.mediaPage .trackListContainer {
+		top: 180px;
+	}
 	.main-albumArt > img
 	{
 		position: absolute;
@@ -241,11 +265,6 @@ background-color: #e8e8e8;
 		width: 100%;
 		height: auto;
 		-webkit-transition: opacity .2s ease-out;
-	}
-
-	.affixed-top {
-		position: fixed;
-		top: 0;
 	}
 
 	.main-scrollingContent {
@@ -268,10 +287,6 @@ background-color: #e8e8e8;
 		z-index: 10000;
 	}
 	
-	.albumListingMain > .mainContent {
-		padding-top: 320px;
-	}
-
 	.trackList {
 		top: 0;
 		left: 0;
@@ -282,16 +297,8 @@ background-color: #e8e8e8;
 		position: relative;
 	}
 
-	.albumListingSidebar {
-		display: none;
-	}
-
 	.stickyHeader {
 		display: none;
-	}
-
-	.albumListingContent {
-		left: 0;
 	}
 
 	.trackList > li {

@@ -5,6 +5,7 @@ Utils = require '../../utils/utils'
 
 module.exports = Backbone.View.extend
 	tagName: "div"
+	className: "mediaPage"
 	template: _.template($("#template-album_listing").html())
 	initialize: (options) ->
 		if options.albumId?
@@ -41,24 +42,29 @@ module.exports = Backbone.View.extend
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
 		document.title = "Wave - " + (albumTitle or "")
+
+		$content = $temp.find(".content")
 			
 		if @contentLoaded
 			trackList = new TrackListView collection: tracks, artId: @album.get("artId")
-			$temp.append @template
+			$content.append @template
 				artUrl: artUrl or ""
 				totalDuration: Utils.formattedTimeWithSeconds duration
 				trackCount: tracks.size()
 				artistName: @album.get("artistName") or ""
 				albumName: albumTitle or ""
 
-			$contentArea = $temp.find(".albumListingContent").first()
-			$contentArea.append trackList.render().el
+			$content.find(".albumArt").css("background-image", "url(#{artUrl})")
+
+			$content.append(trackList.render().el)
+			$temp.find(".searchBar").remove()
 			if wavebox.isMobile()
-				$contentArea.addClass "scroll"
+				$content.addClass "scroll"
+				trackList.$el.css "top", "#{screen.width}px"
 			else
 				trackList.$el.addClass "scroll"
 		else
-			$temp.append "Loading"
+			$content.append "Loading"
 
 		@$el.empty().append $temp.children()
 

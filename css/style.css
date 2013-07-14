@@ -106,7 +106,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	-webkit-backface-visibility: hidden;
 	width:100%;
 	height: 50px;
-	z-index:99;
 	padding: 0;
 
 	background: rgb(220,220,220); /* Old browsers */
@@ -800,23 +799,30 @@ ul#Filters .FolderIcon {
 	background-position:center;
 	position:absolute;
 	left:0px;
+	box-sizing: border-box;
 }
 
 #MiniPlayer .Play {
+	padding: 17px 20px;
+}
+
+#MiniPlayer .Play > div {
 	background: url('../img/sprite.png') no-repeat -45px -258px;
 	background-size: 315px 435px;
 	width: 13px;
 	height: 15px; 
-	margin: 17px 20px;
 	opacity: .6;
 }
 
 #MiniPlayer .Pause {
+	padding: 17px 20px;
+}
+
+#MiniPlayer .Pause > div {
 	background: url('../img/sprite.png') no-repeat -44px -409px;
 	background-size: 315px 435px;
 	width: 14px;
 	height: 15px;
-	margin: 17px 20px;
 	opacity: .6;
 }
 

@@ -170,28 +170,29 @@
 	</script>
 	
 	<script type='text/template' id='template-album_listing'>
-		<div class="albumListing">
-			<div class="albumListingSidebar">
-				<img class='albumListingSidebarArt' src='<%= artUrl %>' alt="Album Art" />
-				<ul class="albumRelatedContentLinks">
-					<li class="albumListingSidebar-title"><%= albumName %></li>
-					<li class="albumListingSidebar-item"><%= artistName %>></li>
-					<li class="albumListingSidebar-item">Album</li>
-					<li class="albumListingSidebar-item">Related Artists</li>
-				</ul>
-				<ul class="albumRecordLabelInfo">
-					<li><%= trackCount %> tracks. Length: <%= totalDuration %></li>
-					<li>Released: September 24, 2012</li>
-				</ul>
-			</div>
-			<div class="albumListingContent"></div>
-		</div>
+		<header>
+			<div class="albumArt"></div>
+			<ul>
+				<li>
+					<h1><%= albumName %></h1>
+				</li>
+				<li>
+					<h2>more by AWOLNATION</h2>
+				</li>
+				<li>
+					<h3><%= trackCount %> tracks</h3>
+				</li>
+				<li>
+					<h3>play time: <%= totalDuration %></h3>
+				</li>
+				<li>
+					<h3>released: September 24, 2012</h3>
+				</li>
+			</ul>
+		</header>
 	</script>
 
 	<script id="template-trackList" type="text/template">
-		<div class="main-albumArt">
-			<img src="img/BlankAlbum.png"> 
-		</div>
 		<div class="stickyHeader">
 			<div>#</div>
 			<div>Time</div>
@@ -235,7 +236,9 @@
 	</script>
 
 	<script id="template-miniPlayer" type="text/template">
-		<div id="PlayBtn" class="Pause dropshadow"></div>
+		<div id="PlayBtn" class="Pause dropshadow">
+			<div></div>
+		</div>
 		<div class="PlayerDisplayDropShadow PlayerDisplay" style="width: 160px;">
 			<div class="PlayerDisplayContainer">
 				<!-- Container Area -->
