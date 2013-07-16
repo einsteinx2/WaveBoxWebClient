@@ -54,93 +54,36 @@
 			<link rel="stylesheet" type="text/css" href="css/AlbumStyles.css" />
 			<link rel="stylesheet" type="text/css" href="css/AlbumListingViewStyles.css" />
 			<link rel="stylesheet" href="css/ArtistStyles.css" type="text/css" />
-
-            <!-- Cuz Kickass --><link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<title>WaveBox</title>
 </head>
 
 <body>
-	<div id="left" >
-		<div id="leftContent" class='scrollContent'>
-			<div class="LeftSidebarHeader Sidebars">
-				<div id="LogoArea" class=" "></div>
-			</div>
-	        <div id="SidebarMenu" class='scroll'></div>
-		</div>
-	</div>
 	
-	<div id="right">
-		<div id="rightContent" class='scrollContent'>
-	        <div id="MiniPlayer" class="animate MiniPlayerRightMargins"></div>
-	        <div id="QueueScroller" class="scroll"></div>
-			<div class="sidebarStickyFooter">
-				<div class="repeat RepeatIcon Off"></div>	
-				<div class="shuffle ShuffleIcon Off"></div>
-			</div>
-		</div>
-	</div>
-	
-	<div id='filter' class='scroll hidden'>
-	<div id="FilterHeaderBar" class="FilterSidebars">Filters</div>
-		<div id="FilterList">
-	            <ul id="Filters">
-	            <li class="FilterKeyword">
-	                <form class="form-search">
-	                    <input type="text" class="FilterSearch" placeholder="Keywords">
-	                </form>
-	            </li>
-	            <li class="FilterSideBar FilterTitle">Browse</li>
-	            <li class="FilterSideBar Icons MusicIcons"><a href="#">Songs</a></li>
-	            <li class="FilterSideBar Icons ArtistsIcons"><a href="#">Artists</a></li>
-	            <li class="FilterSideBar current Icons AlbumsIcons"><a href="#">Albums</a></li>
-	            <li id="HideBrowseOptions" class=" Icons MoreIcon"><a href="#">More!</a></li>
-	            <li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons GenresIcon"><a href="#">Genres</a></li>
-	            <li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons ComposerIcon"><a href="#">Composers</a></li>
-	            <li class="FilterSideBar HideBrowseOptions animate DisplayNone Icons FolderIcon"><a href="#">Folders</a></li>
-	            </ul>
-	            <ul id="Filters">
-	            <li class="FilterTitle">Order</li>
-	            <li class="FilterSideBar"><a href="#">Alphabetical</a></li>
-	            <li class="FilterSideBar"><a href="#">New Arrivals</a></li>
-	            <li class="current FilterSideBar"><a href="#">Most Popular</a></li>
-	            <li class="FilterSideBar"><a href="#">Recently Released</a></li>
-	            </ul>
-	            <ul id="Filters">
-	            <li class="FilterTitle">Rating</li>
-	            <li class="current FilterSideBar">
-	                <a href="#">
-	                    <div class="Stars FiveStars"></div>
-	                </a>
-	            </li>
-	            <li class="FilterSideBar">
-	                <a href="#">
-	                    <div class="Stars FourStars"></div>
-	                </a>
-	            </li>
-	            <li class="FilterSideBar">
-	                <a href="#">
-	                    <div class="Stars ThreeStars"></div>
-	                </a>
-	            </li>
-	            <li class="FilterSideBar">
-	                <a href="#">
-	                    <div class="Stars TwoStars"></div>
-	                </a>
-	            </li>
-	            <li class="FilterSideBar">
-	                <a href="#">
-	                    <div class="Stars OneStars"></div>
-	                </a>
-	            </li>
-	            <li class="FilterSideBar"><a href="#">No Rating</a></li>
-	            </ul>
-	        </div>
-		</div>
-	</div>
 	
 	<div id="main"></div>
 	<div id="jPlayer"></div>
 	
+	<script id="template-side_panels" type="text/template">
+		<div id="left" >
+			<div id="leftContent" class='scrollContent'>
+				<div class="LeftSidebarHeader Sidebars">
+					<div id="LogoArea" class=" "></div>
+				</div>
+		        <div id="SidebarMenu" class='scroll'></div>
+			</div>
+		</div>
+		
+		<div id="right">
+			<div id="rightContent" class='scrollContent'>
+		        <div id="MiniPlayer" class="animate MiniPlayerRightMargins"></div>
+		        <div id="QueueScroller" class="scroll"></div>
+				<div class="sidebarStickyFooter">
+					<div class="repeat RepeatIcon Off"></div>	
+					<div class="shuffle ShuffleIcon Off"></div>
+				</div>
+			</div>
+		</div>
+	</script>
 		
 	<script type='text/template' id='template-artist_container'>
 		<div src="img/BlankAlbum.png" alt="test image" /></div>	

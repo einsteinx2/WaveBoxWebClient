@@ -64,6 +64,7 @@ module.exports = Backbone.View.extend
 		#@playlistSectionView.collection.fetch reset: yes
 	
 	render: ->
+		console.log "rendering dat navsidebarview"
 		$temp = $("<div>")
 		#$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
