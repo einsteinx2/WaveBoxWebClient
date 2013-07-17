@@ -1,5 +1,6 @@
 @charset utf-8;
 
+/* Defaults */
 * {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -8,6 +9,20 @@
     margin: 0;
     padding: 0;
 
+}
+
+body, html {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    overflow: hidden;
+    position: absolute;
+	margin: 0;
+    padding: 0;
+	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+	font-weight: 600;
 }
 
 a {
@@ -80,6 +95,118 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	color: #555555;
 }
 
+.fullscreenWebApp {
+	top: 20px;
+}
+
+/* 	
+ *  This class is also targeted by javascript as an indicator that
+ *  elements having it should scroll instead of the body.
+ */
+.scroll {
+	overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* side panels */
+#left, #right, #filter {
+    position: absolute;
+    top: 0;
+	bottom: 0;
+    background-color: #333;
+}
+
+h1 {
+    text-align: center;
+}
+
+#left {
+    left: 0;
+    width: 220px;
+	background-color:#dadada;
+}
+#left:not(:first-child) > div, #right:not(:first-child) > div {
+	overflow: auto;
+}
+
+#right {
+    right: 0;
+    width: 260px;
+	background-color:#dadada;
+	overflow: none;
+}
+
+#right .nowPlaying
+{
+	color: #1f1f1f;
+	background-color: #f2f2f2;
+}
+
+#leftContent {
+    width: 220px;
+	height: 100%;
+}
+
+#rightContent {
+	height: 100%;
+    width: 260px;
+}
+
+/* Main content area */
+#main {
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+    background-color: rgb(232, 232, 232);
+    box-sizing: border-box;
+	box-shadow: 0px 8px 15px rgba(0,0,0,.2);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+	z-index: 9999;
+}
+
+.main-albumArt {
+	display: none;
+}
+
+.main-scrollingContent {
+	position: absolute;
+	top: 140px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #e8e8e8;
+}
+
+#mainContent {
+	background-color: #e8e8e8;
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    box-sizing: border-box;
+	overflow: auto;
+}
+
+/* Window chrome? */
+.topBar {
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+.topBarContent {
+    padding: 20px;
+}
+
+.scrollContent {
+    position: absolute;
+    width: 100%;
+	top: 0px;
+}
+
 .dropzone-callout {
     position: absolute;
     top: 0;
@@ -91,7 +218,7 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
     border-radius: 7px;
     margin: 3px;
 }
-	
+
 .sprite {
 	background-image: url(../img/sprite.png);
 	background-size: 370px;
@@ -975,4 +1102,39 @@ ul#Filters .FolderIcon {
 .viewstack-offscreen-right
 {
 	-webkit-transform: translateX(100%);
+}
+
+@media (min-device-width: 769px) {
+
+    #left, #right, #filter {
+        -webkit-transition: width .4s ease-out;
+    }
+
+    #left {
+        float: left;
+    }
+
+    #right, #filter {
+        float: right;
+    }
+
+    #main {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+	.mainContent {
+		position: relative;
+		height: 100%;
+		overflow: visible;
+		box-sizing: border-box;
+	}
+
+    .transitions {
+        -moz-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;
+        -o-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;
+        -webkit-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;
+        transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out
+    }
 }
