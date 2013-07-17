@@ -1,8 +1,9 @@
+PageView = require '../pageView'
 SubFolderView = require './subfolderview'
 TrackListView = require '../tracklistview'
 Folder = require '../../models/folder'
 
-class FolderView extends Backbone.View
+class FolderView extends PageView
 	tagName: "div"
 	template: _.template($("#template-artistView").html())
 	events:
@@ -30,7 +31,7 @@ class FolderView extends Backbone.View
 
 	render: ->
 		title = if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
-		@$el.html wavebox.views.pageView
+		@$el.html FolderView.__super__.render
 			leftAccessory: if @subFolder then "BackIcon" else "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""

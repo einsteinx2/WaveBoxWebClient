@@ -1,9 +1,9 @@
+PageView = require "../pageView"
 ArtistsDynamicBoxListView = require "./artistsdynamicboxlistview"
 
-module.exports = Backbone.View.extend
+class ArtistsView extends PageView
 	tagName: "div"
 	filter: ""
-	template: _.template($("#template-pageView").html())
 	initialize: ->
 		@artistListing = new ArtistsDynamicBoxListView
 					
@@ -20,14 +20,15 @@ module.exports = Backbone.View.extend
 
 			
 	render: ->
-		result = @template
+		result = ArtistsView.__super__.render
 			leftAccessory: "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			pageTitle: "Artists"
 			searchBarClass: ""
 		document.title = "Wave - Artists"
 
-		@$el.empty().append $("<div>").append(result).append @artistListing.render().el
+		@$el.empty().append(result).append @artistListing.render().el
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	
+module.exports = ArtistsView

@@ -1,7 +1,8 @@
+PageView = require '../pageView'
 AlbumItemView = require './albumitemview'
 Artist = require '../../models/artist'
 
-module.exports = Backbone.View.extend
+class ArtistView extends PageView
 	tagName: "div"
 	template: _.template($("#template-artistView").html())
 
@@ -20,7 +21,7 @@ module.exports = Backbone.View.extend
 			@artist.fetch()
 	
 	render: ->
-		@$el.html wavebox.views.pageView
+		@$el.html ArtistView.__super__.render
 			leftAccessory: "BackIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
@@ -28,17 +29,14 @@ module.exports = Backbone.View.extend
 		document.title = "Wave - " + (@artist.get("artistName") or "")
 
 		@$el.append @template()
-		console.log @template()
 
-		$temp = $("<div>").addClass("main-scrollingContent artistMain scroll")
-		console.log @contentLoaded
+		$temp = $("<div>")
 		if @contentLoaded
-			albums = @artist.get "albums"
-			albums.each (album, index) ->
+			@artist.get("albums").each (album, index) ->
 				view = new AlbumItemView model: album
 				$temp.append view.render().el
 
-		@$el.append $temp
+		@$el.find(".main-scrollingContent").append $temp.children()
 		this
 	
 	playAll: (e) ->
@@ -48,3 +46,5 @@ module.exports = Backbone.View.extend
 			@artist.get("tracks").each (track) ->
 				wavebox.audioPlayer.playQueue.add track
 		@artist.retrieveSongs()
+
+module.exports = ArtistView
