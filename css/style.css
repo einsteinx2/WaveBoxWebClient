@@ -212,10 +212,245 @@ h1 {
 	display: none;
 }
 
+/* Artist-album page-specific styles */
+.artistAlbumMain
+{
+	overflow: hidden;
+}
+
+.albumListingContent {
+	position: absolute;
+	top: 100px; 
+	left: 190px;
+	bottom: 0;
+	right: 0;
+}
+
+/* Collection actions (play all, etc) */
+.noCollectionActions {
+	top: 100px;
+}
+
+.collectionActions
+{
+	width: 100%;
+	height: 40px;
+	background-color: white;
+	line-height: 40px;
+	text-align: right;
+	box-sizing: border-box;
+	padding: 0 15px;
+}
+
 /* For when main needs some padding */
 .mainContentPadding {
 	padding: 15px 0 0 15px;
 	background-color: #e8e8e8;
+}
+
+/* TrackList container */
+.trackListContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.mediaPage .trackListContainer {
+	top: 152px;
+}
+
+/* TrackList header */
+.stickyHeader {
+	height: 45px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	font-size: 12px;
+	background-color: #d8d8d8;
+}
+
+.stickyHeader > div {
+	line-height: 45px;
+	float: left;
+	color: #515151;
+	font-weight: 600;
+}
+
+.stickyHeader > div:first-child {
+	width: 40px;
+	text-align: center;
+}
+
+.stickyHeader > div:nth-child(2) {
+	width: 52px;
+	float: right;
+	text-align: center;
+}
+
+/* TrackList */
+.trackList {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 12px;
+	background-color: #fff;
+	color: #757575;
+	overflow: auto;
+}
+
+.trackList > div {
+	height: 44px;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+	clear: both;
+}
+
+.trackList > div > div {
+	box-sizing: border-box;
+	line-height: 43px;
+	float: left;
+}
+
+.trackList > div > div:first-child {
+	float: left;
+	width: 50px;
+	height: 44px;
+	color: #959595;
+	text-align: center;
+}
+
+.trackList > div > div:last-child {
+	float: right;
+	width: 52px;
+	text-align: center;
+}
+.trackList > div:nth-child(even) {
+	background-color: #fff;
+}
+
+.trackList > div:nth-child(odd) {
+	background-color: #fafafa;
+}
+
+/* TrackList now playing modifier */
+.trackList .nowPlaying
+{
+	background-color: #e8e8e8 !important;
+}
+
+.nowPlaying > div:first-child > div
+{
+	margin-top: 17px;
+	margin-left: 16px;
+	opacity: .6;
+	background: url('../img/sprite.png') no-repeat -30px -172px;
+	background-size: 210px 290px;
+	width: 13px;
+	height: 15px;
+}
+
+/* TrackList middle column */
+.albumTableMiddleColumn {
+	position:absolute;
+	left: 50px;
+	right: 52px;
+	font-weight: 500;
+
+}
+
+.albumTableMiddleColumn > div
+{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.albumTableMiddleColumn > div:first-child {
+	font-size: 13px;
+	float: left;
+	width: 65%;
+}
+
+.albumTableMiddleColumn > div:last-child {
+	float: left;
+	width: 35%;
+} 
+
+/* Media page - generally contains a tracklist and some additional information
+ * about those tracks */
+.mediaPage .albumArt {
+	float: left;
+	margin-right: 10px;
+	width: 130px;
+	height: 130px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+.mediaPage .content {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.mediaPage header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 150px;
+	background-color: #eee;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.mediaPage header ul {
+	list-style: none;
+}
+.mediaPage header li {
+	padding: 1px 0;
+}
+
+.mediaPage header img {
+	width: 130px;
+	height: 130px;
+	float: left;
+	margin-right: 10px;
+}
+
+.mediaPage header h1 {
+	text-align: left;
+	font-size: 1.6em;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.mediaPage header h2 {
+	font-size: .95em;
+	opacity: .8;
+	font-weight: 300;
+}
+
+.mediaPage header h3 {
+	font-size: .6em;
+	opacity: .8;
+	font-weight: 200;
+}
+
+.thinFaded {
+	opacity: 0.4;
+	font-weight: 200;
+	font-size: .8em;
 }
 
 /* Media collection list */
@@ -1297,6 +1532,145 @@ ul#Filters .FolderIcon {
 		padding: 0;
 		line-height: 30px;
 		margin-left: 66px;
+	}
+
+	/* Media page - generally contains a tracklist and some additional information
+ 	 * about those tracks */
+	.mediaPage header {
+		padding: 0;
+	}
+
+	.mediaPage header ul {
+		display: none;
+	}
+
+	.mediaPage .albumArt {
+		width: 100%;
+		height: auto
+	}
+
+	.mediaPage .albumArt:before {
+		display: block;
+		content: '';
+		padding-top: 100%;
+	}
+
+	.mediaPage header img {
+		width: 100%;
+		height: auto;
+		float: none;
+		clear: both;
+	}
+
+	.mediaPage .trackListContainer {
+		top: 180px;
+	}
+
+	.main-albumArt > img
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		-webkit-transition: opacity .2s ease-out;
+	}
+
+	/* TrackList */
+	.trackList {
+		top: 0;
+		left: 0;
+		right: auto;
+		bottom: auto;
+		height: auto;
+		overflow: visible;
+		position: relative;
+	}
+
+	.stickyHeader {
+		display: none;
+	}
+
+	.trackList > li {
+		height: 50px;
+		border-top: 1px solid #cecece;
+	}
+
+	.trackList > li:last-child
+	{
+		border-bottom: 1px solid #cecece;
+	}
+
+	.trackList > li > div {
+		line-height: 44px;
+	}
+
+	.trackList > li > div:last-child
+	{
+		border-left: 1px solid #cecece;
+	}
+
+	.albumTableMiddleColumn
+	{
+		border-left: 1px solid #cecece;
+		padding: 0 8px 0 8px;
+		height: 44px;
+	}
+
+	.albumTableMiddleColumn > div
+	{
+		line-height: 13px;
+	}
+
+	.albumTableMiddleColumn > div:first-child {
+		padding: 9px 0 2px 0;
+		box-sizing: border-box;
+		font-weight: 600;
+		width: 100%;
+	}
+
+	.albumTableMiddleColumn > div:last-child {
+		font-size: 10px;
+		box-sizing: border-box;
+		width: 100%;
+	}	
+
+	.nowPlaying
+	{
+		color: #1f1f1f;
+	}
+
+	.nowPlaying > div:first-child > div
+	{
+		margin-top: 20px;
+	}
+
+	/* random stuff */
+	.main-scrollingContent {
+		position: absolute;
+		top: 100px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		box-sizing: border-box;
+	}
+
+	.mainContent, .searchBar {
+		position: relative;
+		/*top: -50px;*/
+	}
+	.searchBar {
+		top: 0;
+		z-index: 10000;
+	}
+	
+
+
+	.HeaderBar, .searchBar {
+		/*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));*/
+		background-color: rgba(255, 255, 255, .85);
 	}
 }
 @media (max-width: 600px) {
