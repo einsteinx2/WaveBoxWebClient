@@ -1,79 +1,58 @@
 @charset utf-8;
 
 /* Defaults */
-* {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent tap highlight color / shadow */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    margin: 0;
-    padding: 0;
-
-}
-
 body, html {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-    overflow: hidden;
-    position: absolute;
+	width: 100%;
+	height: 100%;
 	margin: 0;
     padding: 0;
 	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 	font-weight: 600;
-	background: #5c6367;
+	background-color: #5c6367;
 	color: #666;	
-	-webkit-font-smoothing:antialiased;
-	-webkit-text-size-adjust:none;
-    -webkit-user-select: none;
+	}
 
+body, html, div, a {
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 a, a:visited {
-	text-decoration:none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-touch-callout: none;
-
-}
-
-h1 {
-    text-align: center;
+	text-decoration: none;
 }
 
 input:focus {
 	outline: none;
 }
 
-input.FilterSearch {
+.FilterSearch {
 	display: inline-block;
 	height: 28px;
 	width: 124px;
-	font-size: 13px;
-	vertical-align: middle;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
 	margin-top: 0px;
+	font-size: 13px;
 	border: 0px #fff solid;
-	-webkit-transition: all 240ms ease-in;
+	
 	background-color: #fff;
 	background-image: url(../img/FilterIcon.png);
 	background-position: 14px center;
 	background-size: 14px;
 	background-repeat: no-repeat;
+
 	opacity:.8;
 	color:#666;
 	padding: 11px 0 11px 40px;
+	-webkit-transition:all 240ms ease-in;  
 }
 
 
-input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
+.FilterSearch:focus, .FilterSearch:hover, .FilterSearch:active {
 	border: #fff 0px solid;
-	-webkit-transition:all 240ms ease-in;  
 	opacity:1;
-	color: #555555;
+	color: #555;
 }
 
 .fullscreenWebApp {
@@ -107,38 +86,17 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
     width: 260px;
 }
 
-#right .nowPlaying
-{
-	color: #1f1f1f;
-	background-color: #f2f2f2;
-}
-
-#leftContent {
-    width: 220px;
-	height: 100%;
-}
-
-#rightContent {
-	height: 100%;
-    width: 260px;
-}
-
 /* Main content area */
 #main {
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
     background-color: rgb(232, 232, 232);
-    box-sizing: border-box;
 	box-shadow: 0px 8px 15px rgba(0,0,0,.2);
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: hidden;
+	overflow: hidden;
 	z-index: 9999;
-}
-
-.main-albumArt {
-	display: none;
 }
 
 .main-scrollingContent {
@@ -159,28 +117,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
     bottom: 0;
     box-sizing: border-box;
 	overflow: auto;
-}
-
-/* Window chrome? */
-.topBar {
-    position: relative;
-    width: 100%;
-    height: 60px;
-}
-
-.topBarContent {
-    padding: 20px;
-}
-
-/* Artist page-specific styles */
-.artistMain
-{
-	padding: 15px 0 0 15px;
-	background-color: #e8e8e8;
-}
-
-.artistsMain > img {
-	display: none;
 }
 
 /* Artist-album page-specific styles */
@@ -204,8 +140,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 
 .collectionActions
 {
-	width: 100%;
-	height: 40px;
 	background-color: white;
 	line-height: 40px;
 	text-align: right;
@@ -216,7 +150,6 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 /* For when main needs some padding */
 .mainContentPadding {
 	padding: 15px 0 0 15px;
-	background-color: #e8e8e8;
 }
 
 /* TrackList container */
@@ -515,6 +448,8 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 	width:100%;
 	height: 50px;
 	padding: 0;
+
+	text-align: center;
 
 	background: rgb(220,220,220); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(178,178,178,1) 100%); /* FF3.6+ */
@@ -945,6 +880,12 @@ span#MenuIcon.Settings {
 	z-index: 0;
 	overflow-x: hidden;
 	background-color: rgba(226, 226, 226, 1);
+}
+
+#QueueScroller .nowPlaying
+{
+	color: #1f1f1f;
+	background-color: #f2f2f2;
 }
 
 .QueueList {
@@ -1399,12 +1340,6 @@ ul#Filters .FolderIcon {
         float: right;
     }
 
-    #main {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-
 	.mainContent {
 		position: relative;
 		height: 100%;
@@ -1628,21 +1563,6 @@ ul#Filters .FolderIcon {
 		box-sizing: border-box;
 	}
 
-	.mainContent, .searchBar {
-		position: relative;
-		/*top: -50px;*/
-	}
-	.searchBar {
-		top: 0;
-		z-index: 10000;
-	}
-	
-
-
-	.HeaderBar, .searchBar {
-		/*background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));*/
-		background-color: rgba(255, 255, 255, .85);
-	}
 }
 @media (max-width: 600px) {
 	.itemWrapper {
