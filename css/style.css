@@ -23,46 +23,27 @@ body, html {
     padding: 0;
 	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 	font-weight: 600;
-}
-
-a {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-touch-callout: none;
-}
-
-body {
 	background: #5c6367;
 	color: #666;	
 	-webkit-font-smoothing:antialiased;
 	-webkit-text-size-adjust:none;
     -webkit-user-select: none;
+
 }
 
-
-a,a:visited {
+a, a:visited {
 	text-decoration:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+
+}
+
+h1 {
+    text-align: center;
 }
 
 input:focus {
 	outline: none;
-}
-
-button {
-	border:0px;
-	padding:0px;
-	height:24px;
-	width:24px;
-	background-color:transparent;
-	margin:-4px 0px;
-	opacity:.6;
-}
-
-button:hover {
-	opacity:1;
-}	
-	
-p {
-	margin-bottom:20px;
 }
 
 input.FilterSearch {
@@ -109,31 +90,21 @@ input.FilterSearch:focus, input.FilterSearch:hover, input.FilterSearch:active {
 }
 
 /* side panels */
-#left, #right, #filter {
+#left, #right {
     position: absolute;
     top: 0;
 	bottom: 0;
-    background-color: #333;
-}
-
-h1 {
-    text-align: center;
+	background-color:#dadada;
 }
 
 #left {
     left: 0;
     width: 220px;
-	background-color:#dadada;
-}
-#left:not(:first-child) > div, #right:not(:first-child) > div {
-	overflow: auto;
 }
 
 #right {
     right: 0;
     width: 260px;
-	background-color:#dadada;
-	overflow: none;
 }
 
 #right .nowPlaying
@@ -969,7 +940,7 @@ span#MenuIcon.Settings {
 #QueueScroller {
 	position: absolute;
 	top: 50px;
-	bottom: 35px;
+	bottom: 45px;
 	width: 260px;
 	z-index: 0;
 	overflow-x: hidden;

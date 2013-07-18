@@ -65,22 +65,16 @@
 	
 	<script id="template-side_panels" type="text/template">
 		<div id="left" >
-			<div id="leftContent" class='scrollContent'>
-				<div class="LeftSidebarHeader Sidebars">
-					<div id="LogoArea" class=" "></div>
-				</div>
-		        <div id="SidebarMenu" class='scroll'></div>
-			</div>
+			<div class="LeftSidebarHeader Sidebars"></div>
+		    <div id="SidebarMenu" class='scroll'></div>
 		</div>
 		
 		<div id="right">
-			<div id="rightContent" class='scrollContent'>
-		        <div id="MiniPlayer" class="animate MiniPlayerRightMargins"></div>
-		        <div id="QueueScroller" class="scroll"></div>
-				<div class="sidebarStickyFooter">
-					<div class="repeat RepeatIcon Off"></div>	
-					<div class="shuffle ShuffleIcon Off"></div>
-				</div>
+		    <div id="MiniPlayer" class="MiniPlayerRightMargins"></div>
+		    <div id="QueueScroller" class="scroll"></div>
+			<div class="sidebarStickyFooter">
+				<div class="repeat RepeatIcon Off"></div>	
+				<div class="shuffle ShuffleIcon Off"></div>
 			</div>
 		</div>
 	</script>
@@ -156,7 +150,7 @@
 	</script>
 
 	<script type="text/template" id="template-pageView">
-		<div class="CenterBar HeaderBar">
+		<div class="HeaderBar">
 			<div class="leftPanelToggle <%= leftAccessory %>">
 				<div href="#" class="sprite"></div>
 			</div>
