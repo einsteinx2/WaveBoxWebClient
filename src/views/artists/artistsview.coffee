@@ -25,9 +25,9 @@ class ArtistsView extends PageView
 			rightAccessory: "PlaylistIcon"
 			pageTitle: "Artists"
 			searchBarClass: ""
-		document.title = "Wave - Artists"
+		result.find(".content").addClass("scroll").append @artistListing.render().el
 
-		@$el.empty().append(result).append @artistListing.render().el
+		@$el.empty().append(result)
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	

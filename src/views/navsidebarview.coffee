@@ -24,12 +24,12 @@ module.exports = Backbone.View.extend
 			items: [
 				{
 					itemTitle: "Artists",
-					itemClass: "Music sprite",
+					itemClass: "sprite-music-note",
 					href: "#artists"
 				},
 				{
 					itemTitle: "Albums",
-					itemClass: "AlbumsIcons sprite",
+					itemClass: "sprite-cd",
 					href: "#albums"
 				},
 
@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend
 					#		},
 				{
 					itemTitle: "Folders",
-					itemClass: "Folder sprite",
+					itemClass: "sprite-folder",
 					href: "#folders"
 				}
 			]
@@ -51,12 +51,12 @@ module.exports = Backbone.View.extend
 			items: [
 				{
 					itemTitle: "Airplane Mode",
-					itemClass: "Offline sprite",
+					itemClass: "sprite-airplane",
 					href: "#airplane"
 				},
 				{
 					itemTitle: "Settings",
-					itemClass: "Settings sprite",
+					itemClass: "sprite-cog",
 					href: "#settings"
 				}
 			]

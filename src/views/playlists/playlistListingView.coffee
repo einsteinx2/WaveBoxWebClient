@@ -4,7 +4,8 @@ Utils = require '../../utils/utils'
 
 module.exports = Backbone.View.extend
 	tagName: "div"
-	template: _.template($("#template-album_listing").html())
+	# should the name of this template be changed?
+	template: _.template($("#template-page-album").html())
 	initialize: (options) ->
 		if options.playlistId?
 			@contentLoaded = no

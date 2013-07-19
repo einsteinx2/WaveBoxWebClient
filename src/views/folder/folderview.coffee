@@ -5,7 +5,6 @@ Folder = require '../../models/folder'
 
 class FolderView extends PageView
 	tagName: "div"
-	template: _.template($("#template-artistView").html())
 	events:
 		"click .playAll": "playAll"
 
@@ -31,33 +30,31 @@ class FolderView extends PageView
 
 	render: ->
 		title = if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
-		@$el.html FolderView.__super__.render
+		$page = FolderView.__super__.render
 			leftAccessory: if @subFolder then "BackIcon" else "MenuIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
 			pageTitle: title
-		document.title = "Wave - #{title}"
 
+		$content = $page.find ".content"
 		if @subFolder
-			@$el.append "<div class='collectionActions'><a class='playAll' href=''>Play all</a></div>"
-
-		$temp = $("<div>").addClass("main-scrollingContent scroll")
-		$temp.addClass "noCollectionActions" unless @subFolder
-		$folders = $("<div>").addClass "mainContentPadding listView"
+			$content.append $("#template-page-collection-actions").html()
+		$content.addClass("scroll")
+		$folders = $("<div>").addClass "list-cover listView"
 		if @contentLoaded
 			folders = @folder.get "folders"
 			folders.each (folder, index) ->
 				view = new SubFolderView model: folder
 				$folders.append view.render().el
 			if folders.size() > 0
-				$temp.append $folders
+				$content.append $folders
 
 			tracks = @folder.get "tracks"
 			console.log @folder
 			if tracks.length > 0
 				view = new TrackListView collection: tracks, artId: @folder.get("artId")
-				$temp.append view.render().el
-		@$el.append $temp
+				$content.append view.render().el
+		@$el.empty().append $page
 		this
 	
 	playAll: (e) ->

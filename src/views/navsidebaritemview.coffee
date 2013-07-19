@@ -4,7 +4,7 @@
 
 module.exports = Backbone.View.extend
 	tagName: "a"
-	template: _.template($("#template-sideBarItem").html())
+	template: _.template($("#template-sidebar-item").html())
 
 	events:
 		"click": (e) ->

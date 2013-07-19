@@ -1,12 +1,13 @@
+PageView = require '../pageView'
 TrackListView = require '../tracklistview'
 TrackList = require '../../collections/tracklist'
 Album = require '../../models/album'
 Utils = require '../../utils/utils'
 
-module.exports = Backbone.View.extend
+class AlbumView extends PageView
 	tagName: "div"
 	className: "mediaPage"
-	template: _.template($("#template-album_listing").html())
+	template: _.template($("#template-page-album").html())
 	initialize: (options) ->
 		if options.albumId?
 			@contentLoaded = no
@@ -34,7 +35,7 @@ module.exports = Backbone.View.extend
 			totalDuration = Utils.formattedTimeWithSeconds duration
 			trackCount = tracks.size()
 
-		$temp.append wavebox.views.pageView
+		$temp.append AlbumView.__super__.render
 			leftAccessory: "BackIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: artUrl or ""
@@ -58,11 +59,9 @@ module.exports = Backbone.View.extend
 
 			$content.append(trackList.render().el)
 			$temp.find(".searchBar").remove()
+			$content.addClass "scroll"
 			if wavebox.isMobile()
-				$content.addClass "scroll"
 				trackList.$el.css "top", "#{screen.width}px"
-			else
-				trackList.$el.addClass "scroll"
 		else
 			$content.append "Loading"
 
@@ -74,4 +73,4 @@ module.exports = Backbone.View.extend
 		@$el.find(".DirectoryViewIcon, .AlbumSortIcon").remove()
 		this
 
-
+module.exports = AlbumView

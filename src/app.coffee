@@ -14,12 +14,6 @@ $ ->
 	
 	wavebox.isMobile = -> if screen.width < 769 then true else false
 	wavebox.apiClient = new ApiClient
-	
-	wavebox.views = {}
-	wavebox.views.artistsView = null
-	wavebox.views.foldersView = null
-	wavebox.views.pageView = _.template($("#template-pageView").html())
-
 	wavebox.dragDrop = new DragDrop
 
 	launch = ->

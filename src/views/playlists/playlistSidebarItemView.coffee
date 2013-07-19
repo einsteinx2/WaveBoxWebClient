@@ -27,6 +27,6 @@ module.exports = class extends NavSidebarItemView
 		@model.set "href", "#playlists/#{@model.get "id"}"
 		@model.set
 			"itemTitle": @model.get "name"
-			"itemClass": "Playlists sprite"
+			"itemClass": "sprite-playlist"
 		super
 		this

@@ -5,7 +5,7 @@ module.exports = Backbone.View.extend
 	model: Track
 	tagName: "div"
 	className: "QueueList"
-	template: _.template($("#template-playQueueItem").html())
+	template: _.template($("#template-play-queue-item").html())
 	initialize: ->
 		if wavebox.audioPlayer.playQueue.currentSong().get("itemId") is @model.get("itemId")
 			@playing = yes

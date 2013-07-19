@@ -1,6 +1,6 @@
 module.exports = Backbone.View.extend
 	tagName: "a"
-	template: _.template($("#template-actionSheetItem").html())
+	template: _.template($("#template-action-sheet-item").html())
 
 	events:
 		"click": (e) -> 

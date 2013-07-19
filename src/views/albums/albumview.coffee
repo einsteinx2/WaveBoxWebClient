@@ -3,7 +3,7 @@ Utils = require "../../utils/utils"
 module.exports = Backbone.View.extend
 	tagName: 'div'
 	className: 'itemWrapper albumItem'
-	template: _.template($("#template-album_container").html())
+	template: _.template($("#template-cover-item-two-lines").html())
 	
 	attributes:
 		"draggable": "true"

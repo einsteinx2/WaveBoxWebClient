@@ -2,12 +2,14 @@ TrackListItemView = require "./tracklistitemview"
 
 class TrackList extends Backbone.View
 	tagName: "div"
-	template: _.template($("#template-trackList").html())
-	className: "trackListContainer"
+	template: _.template($("#template-track-list").html())
+	className: "list-track"
 
 	initialize: (options) ->
 		if options?
 			@artId = options.artId or null
+
+		window.a = TrackListItemView
 
 	events:
 		"click .playAll": (e) ->
@@ -18,12 +20,19 @@ class TrackList extends Backbone.View
 
 	render: ->
 		$temp = $("<div>")
-		$tracks = $("<div>").addClass("trackList scroll")
-		$temp.append(@template()).append $tracks
+		
+		$header = $("<div class='list-track-row list-track-header'>")
+		$header.append TrackListItemView.prototype.template
+			trackNumber: "#"
+			songName: "Title"
+			artistName: "Artist"
+			duration: "Time"
+
+		$temp.append $header
 
 		@collection.each (track) ->
 			view = new TrackListItemView model: track
-			$tracks.append view.render().el
+			$temp.append view.render().el
 		@$el.empty().append $temp.children()
 		@loadArt()
 

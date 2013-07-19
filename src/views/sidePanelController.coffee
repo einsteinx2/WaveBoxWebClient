@@ -1,6 +1,6 @@
 class SidePanelController extends Backbone.View
 	el: "body"
-	template: _.template($("#template-side_panels").html())
+	template: _.template($("#template-side-panels").html())
 	initialize: (options) ->
 
 

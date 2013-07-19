@@ -1,8 +1,8 @@
 Utils = require '../../../utils/utils'
 
 module.exports = Backbone.View.extend
-	el: "#MiniPlayer"
-	template: _.template($("#template-miniPlayer").html())
+	el: "#mini-player"
+	template: _.template($("#template-mini-player").html())
 	events:
 		"click #PlayBtn": "playButtonAction"
 		"click .PlayerDisplay": "seek"

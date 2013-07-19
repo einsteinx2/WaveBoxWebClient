@@ -12,7 +12,7 @@ module.exports = class extends DynamicBoxListView
 			@render()
 		@bind "filterChanged", @filterChanged, this
 
-	className: "main-scrollingContent artistsMain scroll listView"
+	className: "list-cover scroll listView"
 	render: ->
 		$temp = $('<div>')
 		filter = @filter.toLowerCase()

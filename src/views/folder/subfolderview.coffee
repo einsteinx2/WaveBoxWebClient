@@ -1,7 +1,7 @@
 module.exports = Backbone.View.extend
 	tagName: 'div'
 	className: 'itemWrapper'
-	template: _.template($("#template-artist_container").html())
+	template: _.template($("#template-cover-item").html())
 	attributes:
 		"draggable": "true"
 

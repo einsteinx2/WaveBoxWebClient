@@ -5,7 +5,8 @@ Playlists = require "../collections/playlists"
 class TrackListItemView extends Backbone.View
 
 	tagName: "div"
-	template: _.template($("#template-trackListItem").html())
+	className: "list-track-row"
+	template: _.template($("#template-track-list-row").html())
 	initialize: ->
 		@listenTo wavebox.audioPlayer, "newSong", @adjustNowPlaying
 
@@ -38,9 +39,9 @@ class TrackListItemView extends Backbone.View
 	adjustNowPlaying: ->
 		currentSong = wavebox.audioPlayer.playQueue.currentSong()
 		if currentSong? and @model.get("itemId") is currentSong.get("itemId")
-			@$el.addClass "nowPlaying"
-		else if @$el.hasClass "nowPlaying"
-			@$el.removeClass "nowPlaying"
+			@$el.addClass "list-track-now-playing"
+		else if @$el.hasClass "list-track-now-playing"
+			@$el.removeClass "list-track-now-playing"
 
 	addToQueue: =>
 		wavebox.audioPlayer.playQueue.add @model

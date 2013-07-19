@@ -4,8 +4,6 @@ Artist = require '../../models/artist'
 
 class ArtistView extends PageView
 	tagName: "div"
-	template: _.template($("#template-artistView").html())
-
 	events:
 		"click .playAll": "playAll"
 
@@ -21,22 +19,27 @@ class ArtistView extends PageView
 			@artist.fetch()
 	
 	render: ->
-		@$el.html ArtistView.__super__.render
+		
+		$page = ArtistView.__super__.render
 			leftAccessory: "BackIcon"
 			rightAccessory: "PlaylistIcon"
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""
 		document.title = "Wave - " + (@artist.get("artistName") or "")
 
-		@$el.append @template()
 
-		$temp = $("<div>")
+		$content = $page.find(".content")
+		$content.append($("#template-page-collection-actions").html())
+		
+		$covers = $("<div class='list-cover scroll'>")
+		$content.append $covers
+
 		if @contentLoaded
 			@artist.get("albums").each (album, index) ->
 				view = new AlbumItemView model: album
-				$temp.append view.render().el
+				$covers.append view.render().el
 
-		@$el.find(".main-scrollingContent").append $temp.children()
+		@$el.html $page.children()
 		this
 	
 	playAll: (e) ->

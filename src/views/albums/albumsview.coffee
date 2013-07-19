@@ -4,7 +4,6 @@ AlbumsDynamicBoxListView = require "./albumsdynamicboxlistview"
 class AlbumsView extends PageView
 	tagName: "div"
 	filter: ""
-	template: _.template($("#template-pageView").html())
 	initialize: ->
 		@albumListing = new AlbumsDynamicBoxListView
 					
@@ -26,9 +25,10 @@ class AlbumsView extends PageView
 			rightAccessory: "PlaylistIcon"
 			pageTitle: "Albums"
 			searchBarClass: ""
-		document.title = "Wave - Albums"
 
-		@$el.empty().append $("<div>").append(result).append @albumListing.render().el
+		result.find(".content").addClass("scroll").append @albumListing.render().el
+
+		@$el.empty().append(result)
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	
