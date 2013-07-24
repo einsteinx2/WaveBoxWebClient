@@ -496,6 +496,18 @@ input:focus {
 	background-position: -50px -550px;
 }
 
+.sprite-shuffle {
+	background-position: -100px -350px;
+}
+
+.sprite-repeat {
+	background-position: -100px -200px;
+}
+
+.sprite-repeat-one {
+	background-position: -100px -250px;
+}
+
 
 
 /* Page chrome */
@@ -618,19 +630,6 @@ input:focus {
 	opacity: .6;
 }
 	
-a.Settings {
-	background-position: -9px -269px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	background-size: 200px;
-	opacity: 0.4;
-	position:absolute;
-	right:10px;
-	top:13px;
-	overflow:hidden; 
-}	
-
 .SidebarIcons:hover {
 	opacity:0.7;
 	background-color:#e8e8e8;
@@ -640,103 +639,6 @@ a.Settings {
 	opacity:1  !important;
 	background-color:#e8e8e8 !important;	
 }
-
-span#MenuIcon.Cloud {
-	background-position: -9px -154px;
-	background-repeat: no-repeat;
-	height: 20px;
-	width: 24px;
-	float: left;
-	margin: 17px 0px 0px 12px;
-	opacity: 0.8;	
-}
-	
-.offlineCloud {
-	background-position: -89px -154px !important;
-	opacity: 1;	
-}
-/*
-span#MenuIcon.Music {
-	background-position: -9px -65px;
-	background-repeat: no-repeat;
-	height: 20px;
-	width: 24px;
-	float: left;
-	margin: 17px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Discover {
-	background-position: -9px -417px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-	
-span#MenuIcon.Folder {
-	background-position: -9px -476px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Playlists {
-	background-position: -9px -298px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Favorite {
-	background-position: -9px -239px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Juke {
-	background-position: -9px -332px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Offline {
-	background-position: -9px -358px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 15px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-span#MenuIcon.Settings {
-	background-position: -9px -269px;
-	background-repeat: no-repeat;
-	height: 25px;
-	width: 24px;
-	float: left;
-	margin: 13px 0px 0px 12px;
-	opacity: 0.8;	
-}
-
-*/
 
 .RepeatIcon {
 	background: url('../img/sprite.png') no-repeat -74px -105px;
@@ -759,7 +661,7 @@ span#MenuIcon.Settings {
 	height: 18px;
 }
 
-.Off {
+.off {
 	opacity: .4;
 }
 
@@ -797,9 +699,7 @@ span#MenuIcon.Settings {
 	bottom: 0;
 	right: 0;
 	width: 260px;
-	height: 45px;
-	padding: 13px 16px;
-	box-sizing: border-box;
+	height: 50px;
 	box-shadow: 0 -1px 2px #aaa;
 	background-color: rgba(226, 226, 226, 1);
 }

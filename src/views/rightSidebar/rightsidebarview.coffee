@@ -24,9 +24,9 @@ module.exports = Backbone.View.extend
 		status = wavebox.audioPlayer.playQueue.get("shuffle")
 		$shuffle = @$el.find(".shuffle")
 		if status
-			$shuffle.removeClass "Off"
+			$shuffle.removeClass "off"
 		else
-			$shuffle.addClass "Off"
+			$shuffle.addClass "off"
 
 	repeatChanged: ->
 		repeat = wavebox.audioPlayer.playQueue.get("repeat")
@@ -34,8 +34,8 @@ module.exports = Backbone.View.extend
 		$repeat = @$el.find(".repeat")
 		switch repeat
 			when "one"
-				$repeat.removeClass("RepeatOneIcon").removeClass("Off")
+				$repeat.addClass("sprite-repeat-one").removeClass("off")
 			when no
-				$repeat.removeClass("RepeatOneIcon").addClass("Off")
+				$repeat.removeClass("sprite-repeat-one").addClass("off")
 			when "all"
-				$repeat.removeClass("Off").addClass("RepeatOneIcon")
+				$repeat.removeClass("sprite-repeat-one off")
