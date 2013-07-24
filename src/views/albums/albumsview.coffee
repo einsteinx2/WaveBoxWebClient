@@ -21,12 +21,12 @@ class AlbumsView extends PageView
 			@$el.find(".main-scrollingContent").removeClass "listView"
 	render: ->
 		result = AlbumsView.__super__.render
-			leftAccessory: "MenuIcon"
-			rightAccessory: "PlaylistIcon"
+			leftAccessory: "sprite-menu"
+			rightAccessory: "sprite-play-queue"
 			pageTitle: "Albums"
 			searchBarClass: ""
 
-		result.find(".content").addClass("scroll").append @albumListing.render().el
+		result.find(".page-content").addClass("scroll").append @albumListing.render().el
 
 		@$el.empty().append(result)
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")

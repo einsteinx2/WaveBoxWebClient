@@ -1,6 +1,6 @@
 module.exports = Backbone.View.extend
 	tagName: 'div'
-	className: 'itemWrapper'
+	className: 'list-cover-item'
 	template: _.template($("#template-cover-item").html())
 	
 	attributes:

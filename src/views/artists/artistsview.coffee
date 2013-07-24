@@ -21,11 +21,11 @@ class ArtistsView extends PageView
 			
 	render: ->
 		result = ArtistsView.__super__.render
-			leftAccessory: "MenuIcon"
-			rightAccessory: "PlaylistIcon"
+			leftAccessory: "sprite-menu"
+			rightAccessory: "sprite-play-queue"
 			pageTitle: "Artists"
 			searchBarClass: ""
-		result.find(".content").addClass("scroll").append @artistListing.render().el
+		result.find(".page-content").addClass("scroll").append @artistListing.render().el
 
 		@$el.empty().append(result)
 		@$el.find(".main-scrollingContent").addClass("noCollectionActions")

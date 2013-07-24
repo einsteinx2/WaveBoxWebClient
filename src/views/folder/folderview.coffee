@@ -6,7 +6,7 @@ Folder = require '../../models/folder'
 class FolderView extends PageView
 	tagName: "div"
 	events:
-		"click .playAll": "playAll"
+		"click .collection-actions-play-all": "playAll"
 
 	initialize: (options) ->
 		@contentLoaded = no
@@ -31,12 +31,12 @@ class FolderView extends PageView
 	render: ->
 		title = if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
 		$page = FolderView.__super__.render
-			leftAccessory: if @subFolder then "BackIcon" else "MenuIcon"
-			rightAccessory: "PlaylistIcon"
+			leftAccessory: if @subFolder then "sprite-back-arrow" else "sprite-menu"
+			rightAccessory: "sprite-play-queue"
 			artUrl: ""
 			pageTitle: title
 
-		$content = $page.find ".content"
+		$content = $page.find ".page-content"
 		if @subFolder
 			$content.append $("#template-page-collection-actions").html()
 		$content.addClass("scroll")

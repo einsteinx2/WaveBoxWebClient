@@ -17,6 +17,10 @@ class AlbumView extends PageView
 				@render()
 			@album.fetch()
 
+	events:
+		"click .collection-actions-play-all": "playAll"
+
+
 	render: ->
 		$temp = $("<div>")
 		if @contentLoaded
@@ -36,15 +40,15 @@ class AlbumView extends PageView
 			trackCount = tracks.size()
 
 		$temp.append AlbumView.__super__.render
-			leftAccessory: "BackIcon"
-			rightAccessory: "PlaylistIcon"
+			leftAccessory: "sprite-back-arrow"
+			rightAccessory: "sprite-play-queue"
 			artUrl: artUrl or ""
 			pageTitle: albumTitle or ""
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
 		document.title = "Wave - " + (albumTitle or "")
 
-		$content = $temp.find(".content")
+		$content = $temp.find(".page-content")
 			
 		if @contentLoaded
 			trackList = new TrackListView collection: tracks, artId: @album.get("artId")
@@ -54,8 +58,10 @@ class AlbumView extends PageView
 				trackCount: tracks.size()
 				artistName: @album.get("artistName") or ""
 				albumName: albumTitle or ""
+				releaseYear: @album.get("releaseYear") or ""
 
-			$content.find(".albumArt").css("background-image", "url(#{artUrl})")
+			$content.find(".page-album-cover").css("background-image", "url(#{artUrl})")
+			console.log @album
 
 			$content.append(trackList.render().el)
 			$temp.find(".searchBar").remove()
@@ -72,5 +78,11 @@ class AlbumView extends PageView
 		# need it.
 		@$el.find(".DirectoryViewIcon, .AlbumSortIcon").remove()
 		this
+
+	playAll: (e) ->
+		e.preventDefault()
+		@album.get("tracks").each (track) ->
+			wavebox.audioPlayer.playQueue.add track
+
 
 module.exports = AlbumView

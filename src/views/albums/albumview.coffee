@@ -2,7 +2,7 @@ Utils = require "../../utils/utils"
 
 module.exports = Backbone.View.extend
 	tagName: 'div'
-	className: 'itemWrapper albumItem'
+	className: 'list-cover-item albumItem'
 	template: _.template($("#template-cover-item-two-lines").html())
 	
 	attributes:

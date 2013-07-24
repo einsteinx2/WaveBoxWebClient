@@ -57,14 +57,14 @@
 	<!-- Side panels -->
 	<script id="template-side-panels" type="text/template">
 		<div id="left" >
-			<div class="LeftSidebarHeader Sidebars"></div>
-		    <div id="SidebarMenu" class='scroll'></div>
+			<div class="sidebar sidebar-left"></div>
+		    <div id="nav" class='nav scroll'></div>
 		</div>
 		
 		<div id="right">
 		    <div id="mini-player"></div>
-		    <div id="QueueScroller" class="scroll"></div>
-			<div class="sidebarStickyFooter">
+		    <div id="play-queue" class="play-queue scroll"></div>
+			<div class="play-queue-footer">
 				<div class="repeat RepeatIcon Off"></div>	
 				<div class="shuffle ShuffleIcon Off"></div>
 			</div>
@@ -74,35 +74,30 @@
 	<!-- Page chrome -->
 	<script type="text/template" id="template-page">
 		<div class="page-header">
-			<div class="leftPanelToggle <%= leftAccessory %>">
-				<div href="#" class="sprite"></div>
-			</div>
-			<div class="rightPanelToggle <%= rightAccessory %>">
-				<div href="#" class="sprite"></div>
-			</div>
-			<span class="pageTitle"><%= pageTitle %></span>
+			<div class="side-panel-toggle-left sprite float-left <%= leftAccessory %>"></div>
+			<div class="side-panel-toggle-right sprite float-right <%= rightAccessory %>"></div>
+			<span class="page-title truncate-ellipsis"><%= pageTitle %></span>
 		</div>
 		<div class="page-search">
 			<input type="text" class="page-search-textbox" placeholder="Search" />	
-			<a class="page-search-toggle FilterIcon filterPanelToggle"></a>
 			<a class="page-search-toggle DirectoryViewIcon"></a>
 			<a class="page-search-toggle AlbumSortIcon"></a>
 		</div>
-		<div class="content"></div>
+		<div class="page-content"></div>
 	</script>
 
 
 	<!-- page collection actions -->
 	<script type="text/template" id="template-page-collection-actions">
-		<div class="collectionActions">
-			<a class="playAll" href="">Play all</a>
+		<div class="collection-actions">
+			<a class="collection-actions-play-all" href="">Play all</a>
 		</div>
 	</script>
 
 	<!-- Album page -->
 	<script type='text/template' id='template-page-album'>
 		<header>
-			<div class="albumArt"></div>
+			<div class="page-album-cover"></div>
 			<ul>
 				<li>
 					<h1><%= albumName %></h1>
@@ -117,9 +112,12 @@
 					<h3>play time: <%= totalDuration %></h3>
 				</li>
 				<li>
-					<h3>released: September 24, 2012</h3>
+					<h3>released: <%= releaseYear %></h3>
 				</li>
 			</ul>
+			<div class="page-header-collection-actions">
+				<div class="collection-actions-item collection-actions-play-all">Play all</div>
+			</div>
 		</header>
 	</script>
 
@@ -128,21 +126,21 @@
 	<script type='text/template' id='template-cover-item'>
 		<div src="img/BlankAlbum.png" alt="test image" /></div>	
 		<div><%= itemTitle %></div>
-		<div class="itemArrow"></div>
+		<div class="list-cover-item-arrow"></div>
 	</script>
 
 	<script type='text/template' id='template-cover-item-two-lines'>
 		<div src="img/BlankAlbum.png" alt="test image" /></div>	
 		<div><%= albumTitle %></div>
 		<div><%= albumArtist %></div>
-		<div class="itemArrow"></div>
+		<div class="list-cover-item-arrow"></div>
 	</script>
 
 	<!-- Sidebar -->
 	<script type='text/template' id='template-sidebar-item'>
 		<li class="SidebarIcons">
 			<span class="sprite sprite-container <%= itemClass %>"></span>
-			<span id="MenuText"><%= itemTitle %></span>
+			<span class="MenuText"><%= itemTitle %></span>
 	    </li>
 	</script>
 
@@ -172,29 +170,24 @@
 	
 	<!-- Mini-player -->
 	<script id="template-mini-player" type="text/template">
-		<div id="PlayBtn" class="Pause dropshadow">
+		<div id="PlayBtn" class="sprite sprite-pause">
 			<div></div>
 		</div>
-		<div class="PlayerDisplayDropShadow PlayerDisplay" style="width: 160px;">
-			<div class="PlayerDisplayContainer">
-				<!-- Container Area -->
-				<div class="PlayerDisplayAlbum"></div>
-				<div class="PlayerDisplayText PlayerDisplaySongTitle dropshadow"><%= songName %></div>
-				<div class="PlayerDisplayText PlayerDisplayArtist dropshadow"><%= artistName %></div>
-				<div class="PlayerDisplayText PlayerDisplaySongTime dropshadow"><%= duration %></div>
-				<div class="PlayerDisplayText PlayerDisplaySongTimeLeft dropshadow"></div>
-				<div class="PlayMarker"></div>
-			</div>
-			<!-- Container Area Ends-->
+		<div class="mini-player-text-area">
+			<div class="mini-player-strong float-left truncate-ellipsis"><%= songName %></div>
+			<div class="mini-player-elapsed mini-player-strong float-right"></div>
+			<div class="float-left clear-fix truncate-ellipsis"><%= artistName %></div>
+			<div class="float-right"><%= duration %></div>
+			<div class="mini-player-playhead"></div>
 		</div>
-		<div id="FullScreenBtn" class="dropshadow"></div>
+		<div class="sprite sprite-full-screen"></div>
 	</script>
 
 	<!-- Play queue -->
 	<script id="template-play-queue-item" type="text/template">
-		<div class="QueueSongName"><%= songName %></div>
-		<div class="QueueSongBand"><%= artistName %></div>
-		<div class="QueueSongTime"><%= duration %></div>
+		<div class="play-queue-item-title"><%= songName %></div>
+		<div class="play-queue-item-artist"><%= artistName %></div>
+		<div class="play-queue-item-duration"><%= duration %></div>
 	</script>
 	
 	<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>

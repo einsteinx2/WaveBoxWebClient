@@ -10,7 +10,8 @@ body, html {
 	font-weight: 600;
 	background-color: #5c6367;
 	color: #666;	
-	}
+	overflow: hidden;
+}
 
 body, html, div, a {
 	-webkit-font-smoothing: antialiased;
@@ -28,8 +29,26 @@ input:focus {
 	outline: none;
 }
 
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.clear-fix {
+	clear: both;
+}
+
 .fullscreenWebApp {
 	top: 20px;
+}
+
+.truncate-ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 /* 	
@@ -93,8 +112,7 @@ input:focus {
 }
 
 /* Artist-album page-specific styles */
-.artistAlbumMain
-{
+.artistAlbumMain {
 	overflow: hidden;
 }
 
@@ -106,16 +124,29 @@ input:focus {
 	right: 0;
 }
 
-.collectionActions
-{
+/* Actions that apply to all media items (play all, etc.) located at the top of a page */
+.collection-actions {
 	text-align: right;
 	box-sizing: border-box;
 	padding: 15px 15px 0 0;
 }
 
-/* For when main needs some padding */
-.mainContentPadding {
-	padding: 15px 0 0 15px;
+/* Same as above, but located inside a page header */
+.page-header-collection-actions {
+	position: absolute;
+	bottom: 0;
+	right: 15px;
+	display: inline-block;
+
+}
+
+.collection-actions-item {
+	cursor: pointer;
+	padding: 6px 8px;
+	background-color: #d8d8d8;
+	border-radius: 2px;
+	border: 1px solid #666;
+	font-size: .75em;
 }
 
 /* Cover list */
@@ -124,9 +155,7 @@ input:focus {
 	box-sizing: border-box;
 }
 
-
-
-/* TrackList */
+/* Track list */
 .list-track {
 	font-size: 12px;
 	color: #757575;
@@ -224,7 +253,7 @@ input:focus {
 
 /* Media page - generally contains a tracklist and some additional information
  * about those tracks */
-.mediaPage .albumArt {
+.mediaPage .page-album-cover {
 	float: left;
 	margin-right: 10px;
 	width: 130px;
@@ -235,7 +264,7 @@ input:focus {
 }
 
 
-.content {
+.page-content {
 	position: absolute;
 	width: 100%;
 	top: 100px;
@@ -294,7 +323,7 @@ input:focus {
 }
 
 /* Media collection list */
-.itemWrapper {
+.list-cover-item {
 	position: relative;
 	box-sizing: border-box;
 	float: left;
@@ -302,7 +331,7 @@ input:focus {
 	padding: 0 15px 15px 0;
 }
 
-.itemWrapper > div:first-child
+.list-cover-item > div:first-child
 {
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -314,14 +343,14 @@ input:focus {
 }
 
 /* OH MY GOD EQUAL WIDTH/HEIGHT BOX */
-.itemWrapper > div:first-child:before
+.list-cover-item > div:first-child:before
 {
 	content: "";
 	margin-top: 100%;
 	display: block;
 }
 
-.itemWrapper > div:nth-child(3) {
+.list-cover-item > div:nth-child(3) {
 	line-height: 16px;
 	margin-top: -4px;
 	font-size: .8em;
@@ -329,7 +358,7 @@ input:focus {
 	color: #757575;
 }
 
-.itemWrapper > div
+.list-cover-item > div
 {
 	padding-top: 5px;
 	max-width: 100%;
@@ -340,7 +369,7 @@ input:focus {
 	color: #535353;
 }
 
-.itemArrow {
+.list-cover-item-arrow {
 	display: none;
 }
 
@@ -402,85 +431,83 @@ input:focus {
 	position: absolute;
 }	
 
-#LeftSidebarHeader {
+.sidebar-left {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 }
 
-.Sidebars {
-	background-color:#bababa;
+.sidebar {
+	background-color: #bababa;
 	padding: 16px 0;
-	height:18px;
-	text-align:center;
+	height: 18px;
+	text-align: center;
 }
 
 /* Sprite mappings */
-
 .sprite {
+	display: inline-block;
+	background-image: url("../img/sprite.png");
 	background-repeat: no-repeat;
-	background-image: url(../img/sprite.png);
-	background-size: 315px 435px;
-}
-
-.PlaylistIcon {
-	position: absolute;
-	right: 0;
-	padding: 14px 13px;
-	cursor: pointer;
-}
-
-.PlaylistIcon > div {
-	background-position: -10px -389px;
-	background-repeat: no-repeat;
-	height: 22px;
-	width: 24px;
-	opacity: .6;
-}
-	
-.MenuIcon {
-	position: absolute;
-	padding: 15px 17px;
-	cursor: pointer;
-}
-.MenuIcon div {
-	background: url('../img/sprite.png') no-repeat -41px -155px;
-	background-size: 315px 435px;
-	width: 20px;
-	height: 19px;
-	background-repeat: no-repeat;
-	opacity: .6;
-}
-
-.BackIcon {
-	position: absolute;
-	padding: 17.5px 16px;
-	cursor: pointer;
-}
-	
-.BackIcon > div {
-	opacity: .6;
-	background: url('../img/sprite.png') no-repeat -42px -384px;
-	background-size: 315px 435px;
-	width: 19px;
-	height: 15px;
-}
-
-.pageTitle {
-	position: absolute;
-	top: 0;
-	left: 60px;
-	right: 60px;
+	background-size: 400px 900px;
+	width: 50px;
 	height: 50px;
+	opacity: .6;
+}
+
+.sprite-music-note {
+	background-position: 0 -100px;
+}
+
+.sprite-cd {
+	background-position: 0 -300px;
+}
+
+.sprite-folder {
+	background-position: 0 -800px;
+}
+
+.sprite-playlist {
+	background-position: 0 -499px;
+}
+
+.sprite-back-arrow {
+	background-position: -50px -750px;
+}
+
+.sprite-menu {
+	background-position: -50px -300px;
+}
+
+.sprite-play-queue {
+	background-position: 0 -650px;
+}
+
+.sprite-play {
+	background-position: -50px -500px;
+}
+
+.sprite-pause {
+	background-position: -50px -800px;
+}
+
+.sprite-full-screen {
+	background-position: -50px -550px;
+}
+
+
+
+/* Page chrome */
+.page-title {
+	padding: 0 55px;
+	box-sizing: border-box;
+	width: 100%;
 	line-height: 50px;
 	text-align: center;
 	font-weight: 700;
 	color: #333;
 	text-shadow: 0 1px 1px #e6e6e6;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 }
 	
 .page-search {
@@ -497,7 +524,7 @@ input:focus {
 	font-size: 13px;
 	border: none;
 	color:#bebebe;
-	padding: 11px 0 11px 28px;
+	padding: 11px 0 11px 32px;
 	background-color: transparent;
 	background-image: url(../img/search.png);
 	background-position: 8px center;
@@ -544,26 +571,31 @@ input:focus {
 }
 
 /* Sidebar Menu */
-.SidebarMenu {
-	position: relative;
+.nav {
+	position: absolute;
+	top: 50px;
 	bottom: 0px;
 	width: 220px;
 	z-index: 1;
-	overflow-x: hidden;
+	overflow: auto;
 	margin: 0;
+	padding: 15px 0 0 0;
+	color: #757575;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.nav ul {
 	padding: 0;
 }
 
-.SidebarMenu li {
+.nav li {
 	height:50px;
 	width:220px;
+	list-style: none;
 }
 	
-#MenuIcon {
-	display:block;
-}
-	
-#MenuText {
+.MenuText {
 	margin-top:18px;
 	position:absolute;
 	color:#1f1f1f;
@@ -581,16 +613,11 @@ input:focus {
 	text-transform:uppercase;
 	left:15px;
 }		
-/*	
+
 .SidebarIcons {
-	background-repeat:no-repeat;
-	background-position: 15px 50%;
-	opacity:0.4;
-	background-size: 25px;
-	list-style-type:none;
+	opacity: .6;
 }
 	
-*/
 a.Settings {
 	background-position: -9px -269px;
 	background-repeat: no-repeat;
@@ -763,17 +790,9 @@ span#MenuIcon.Settings {
 	float: right;
 }
 
-/* SidebarMenu */	
-#SidebarMenu {
-	position: absolute;
-	top: 50px;
-	bottom: 0px;
-	width: 220px;
-	z-index: 1;
-	overflow: auto;
-}
 
-.sidebarStickyFooter {
+
+.play-queue-footer {
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -785,22 +804,22 @@ span#MenuIcon.Settings {
 	background-color: rgba(226, 226, 226, 1);
 }
 
-.sidebarStickyFooter > div {
+.play-queue-footer > div {
 	line-height: 38px;
 	cursor: pointer;
 }
 
-.sidebarStickyFooter > div:first-child
+.play-queue-footer > div:first-child
 {
 	float: left;
 }
 	
-.sidebarStickyFooter > div:first-child
+.play-queue-footer > div:first-child
 {
 	float: right;
 }
 
-#QueueScroller {
+.play-queue {
 	position: absolute;
 	top: 50px;
 	bottom: 45px;
@@ -810,13 +829,13 @@ span#MenuIcon.Settings {
 	background-color: rgba(226, 226, 226, 1);
 }
 
-#QueueScroller .nowPlaying
+.play-queue .play-queue-now-playing
 {
 	color: #1f1f1f;
 	background-color: #f2f2f2;
 }
 
-.QueueList {
+.play-queue-item {
 	-webkit-user-select: none;
 	border-bottom: 1px #ccc solid;
 	width:100%;
@@ -824,7 +843,7 @@ span#MenuIcon.Settings {
 	color:#7d7d7d;
 }
 	
-.QueueSongName {
+.play-queue-item-title {
 	-webkit-user-select: none;
 	width: 200px;
 	white-space: nowrap;
@@ -835,14 +854,14 @@ span#MenuIcon.Settings {
 	font-size:14px;
 }
 	
-.QueueSongBand  {
+.play-queue-item-artist  {
 	-webkit-user-select: none;
 	font-size: 12px;
 	padding: 0 0 0 10px;
 	font-weight: 400;
 }
 	
-.QueueSongTime {
+.play-queue-item-duration {
 	-webkit-user-select: none;
 	font-weight: 400;
 	float: right;
@@ -899,35 +918,34 @@ span#MenuIcon.Settings {
 	opacity: .6;
 }
 
-.dropshadow {
+#mini-player > div {
+	float: left;
+}
+
+.mini-player-text-area {
+	position: relative;
+	width: 160px;
+	height: 50px;
+	background-color: rgba(255, 255, 255, .5);
+	padding: 5px;
+	box-sizing: border-box;
+	font-size: 10px;
+	line-height: 20px;
 	text-shadow: 0px 1px 1px #ffffff;
+	color: #6e6e6e;
     filter: dropshadow(color=#ffffff, offx=0, offy=1);
 }
+
+.mini-player-text-area > div {
+	max-width: 110px;
+}
+
+.mini-player-strong {
+	font-size: 1.2em;
+	color: #333;
+	font-weight: 600;
+}
 	
-#PlayBtn {
-	height: 50px;
-	width: 50px;
-	background-repeat:no-repeat;
-	background-size:13px auto;
-	background-position:center;
-	position:absolute;
-	left:0px;
-	box-sizing: border-box;
-}
-
-
-
-#FullScreenBtn {
-	height: 50px;
-	width: 50px;
-	background-repeat:no-repeat;
-	background-size:18px auto;
-	background-position:center;
-	background-image:url(../img/Player/FullScreenBtn.png);
-	position: relative;
-	left: 210px;	
-}
-
 .playlistDragOver {
 	border-top: 1px solid blue;
 	border-bottom: 1px solid blue;
@@ -938,9 +956,7 @@ span#MenuIcon.Settings {
 	width:232px;
 	position:absolute;
 	left: 50px;
-}
-
-.PlayerDisplayDropShadow {
+	
 	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%);
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.5)));
 	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
@@ -950,31 +966,8 @@ span#MenuIcon.Settings {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#80ffffff',GradientType=1 );
 }
 
-.PlayerDisplayAlbum {
-	height: 32px;
-	width: 32px;
-	background-image: url(../img/Player/PlayerDisplayAlbum.png);
-	background-size: cover;
-	float: left;
-	margin-right: 6.5px;
-	display:none;
-}
-	
-.PlayerDisplayContainer {
-	margin: 6.5px;
-}
-
-.PlayerDisplayText {
-	font-size: 12px;
-	float: left;
-	line-height: 25px;
-	position: absolute;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
 .PlayerDisplaySongTitle {
+	float: left;
 	max-width: 120px;
 	font-weight: 600;
 	color: #333333;
@@ -982,6 +975,8 @@ span#MenuIcon.Settings {
 }
 
 .PlayerDisplayArtist {
+	clear: both;
+	float: left;
 	max-width: 120px;
 	font-weight:400;
 	color:#6e6e6e;
@@ -989,6 +984,7 @@ span#MenuIcon.Settings {
 }
 	
 .PlayerDisplaySongTime {
+	float: right;
 	font-weight: 400;
 	color:#6e6e6e;
 	right:6.5px;
@@ -996,12 +992,13 @@ span#MenuIcon.Settings {
 }
 
 .PlayerDisplaySongTimeLeft {
+	float: right;
 	color:#6e6e6e;
 	top:2px;
 	right:6.5px;
 }
 
-.PlayMarker {
+.mini-player-playhead {
 	height: 50px;
 	width:5px;
 	background: rgb(255,119,67);
@@ -1017,17 +1014,7 @@ span#MenuIcon.Settings {
 	left: 0;
 }
 
-* nav */
-.nav {
-	position: relative;
-	margin: 0px 0px;
-	z-index:700;
-	color: #757575;
-	font-weight: 600;
-	font-size: 14px;
-	padding-top:15px;
-	overflow:hidden;2
-}
+
 
 #main > div
 {
@@ -1089,25 +1076,25 @@ span#MenuIcon.Settings {
 }
 
 @media (min-width: 1400px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 14.285%;
 	}
 }
 
 @media (max-width: 1200px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 16.66667%;
 	}
 }
 
 @media (max-width: 1000px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 20%;
 	}
 }
 
 @media (max-width: 769px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 25%;
 	}
 
@@ -1131,7 +1118,7 @@ span#MenuIcon.Settings {
 		border-top: 1px solid #cfcfcf;
 	}
 
-	.listView > .itemWrapper {
+	.listView > .list-cover-item {
 		float: none;
 		clear: both;
 		width: 100%;
@@ -1141,7 +1128,7 @@ span#MenuIcon.Settings {
 		overflow: hidden;
 	}
 
-	.listView > .itemWrapper :first-child
+	.listView > .list-cover-item :first-child
 	{
 		padding: 0;
 		border: none;
@@ -1183,12 +1170,12 @@ span#MenuIcon.Settings {
 		display: none;
 	}
 
-	.mediaPage .albumArt {
+	.mediaPage .page-album-cover {
 		width: 100%;
 		height: auto
 	}
 
-	.mediaPage .albumArt:before {
+	.mediaPage .page-album-cover:before {
 		display: block;
 		content: '';
 		padding-top: 100%;
@@ -1218,10 +1205,6 @@ span#MenuIcon.Settings {
 	/* TrackList */
 	.list-track {
 		overflow: visible;
-	}
-
-	.list-track-header {
-		display: none;
 	}
 
 	.list-trac > li {
@@ -1289,16 +1272,15 @@ span#MenuIcon.Settings {
 		-webkit-overflow-scrolling: touch;
 		box-sizing: border-box;
 	}
-
 }
 
 @media (max-width: 600px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 33.3%;
 	}
 }
 @media (max-width: 400px) {
-	.itemWrapper {
+	.list-cover-item {
 		width: 50%;
 	}
 }

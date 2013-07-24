@@ -29,9 +29,9 @@ module.exports = Backbone.View.extend
 				duration: ""
 		@$el.empty().append temp
 
-		@playerWidth = @$el.find(".PlayerDisplay").first().width()
-		@playMarker = @$el.find(".PlayMarker").first()
-		@elapsedTime = @$el.find(".PlayerDisplaySongTimeLeft").first()
+		@playerWidth = @$el.find(".mini-player-text-area").first().width()
+		@playMarker = @$el.find(".mini-player-playhead").first()
+		@elapsedTime = @$el.find(".mini-player-elapsed").first()
 
 		if not song?
 			@playMarker.hide()
@@ -41,9 +41,9 @@ module.exports = Backbone.View.extend
 
 	playButtonUpdate: ->
 		if wavebox.audioPlayer.playing()
-			$("#PlayBtn").removeClass("Play").addClass("Pause")
+			$("#PlayBtn").removeClass("sprite-play").addClass("sprite-pause")
 		else
-			$("#PlayBtn").removeClass("Pause").addClass("Play")
+			$("#PlayBtn").removeClass("sprite-pause").addClass("sprite-play")
 	
 	timeUpdate: ->
 		@updateElapsedTime()

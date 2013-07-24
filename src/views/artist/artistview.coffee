@@ -5,7 +5,7 @@ Artist = require '../../models/artist'
 class ArtistView extends PageView
 	tagName: "div"
 	events:
-		"click .playAll": "playAll"
+		"click .collection-actions-play-all": "playAll"
 
 	initialize: (artistId) ->
 		@contentLoaded = no
@@ -21,14 +21,14 @@ class ArtistView extends PageView
 	render: ->
 		
 		$page = ArtistView.__super__.render
-			leftAccessory: "BackIcon"
-			rightAccessory: "PlaylistIcon"
+			leftAccessory: "sprite-back-arrow"
+			rightAccessory: "sprite-play-queue"
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""
 		document.title = "Wave - " + (@artist.get("artistName") or "")
 
 
-		$content = $page.find(".content")
+		$content = $page.find(".page-content")
 		$content.append($("#template-page-collection-actions").html())
 		
 		$covers = $("<div class='list-cover scroll'>")

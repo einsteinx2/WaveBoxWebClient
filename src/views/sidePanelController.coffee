@@ -21,19 +21,19 @@ class SidePanelController extends Backbone.View
 				.addClass("transitions")
 
 	events:
-		"click .MenuIcon": (e) ->
+		"click .side-panel-toggle-left": (e) ->
 			e.preventDefault()
 			@leftToggle()
+		"click .side-panel-toggle-right": (e) ->
+			e.preventDefault()
+			@rightToggle()
 		"click .BackIcon": (e) ->
 			e.preventDefault()
 			if @main.canPop()
 				@main.pop()
 			else
 				history.back(1)
-		"click .PlaylistIcon": (e) ->
-			e.preventDefault()
-			@rightToggle()
-
+	
 	render: ->
 		
 		if not wavebox.isMobile()
@@ -46,8 +46,10 @@ class SidePanelController extends Backbone.View
 		else
 			@bindTouchEvents()
 
+		console.log "rendering left"
 
 		@left.render()
+		console.log "rendering right"
 		@right.render()
 
 		this
@@ -58,13 +60,19 @@ class SidePanelController extends Backbone.View
 		
 	switch: (panel) ->
 		if panel is "right"
-			$("#right").css "display": "block"
 			if wavebox.isMobile() 
-				$("#left").css "display": "none"
+				@left.$el.css "z-index": -10
+				@right.$el.css "z-index": 10
+			else
+				@left.$el.css "display": "none"
+				@right.$el.css "display": "block"
 		else if panel is "left"
-			$("#right").css "display": "none"
 			if wavebox.isMobile() 
-				$("#left").css "display": "block"
+				@right.$el.css "z-index": -10
+				@left.$el.css "z-index": 10
+			else
+				@left.$el.css "display": "block"
+				@right.$el.css "display": "none"
 	
 	leftToggle: ->
 		if wavebox.isMobile()
@@ -204,6 +212,6 @@ class SidePanelController extends Backbone.View
 					@toggledPanel = null
 					0
 
-			@mainView.$el.transition({x: left}, 200, "ease-out")
+			@main.$el.transition({x: left}, 200, "ease-out")
 
 module.exports = SidePanelController 

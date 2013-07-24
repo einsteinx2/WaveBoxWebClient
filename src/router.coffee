@@ -28,7 +28,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new ArtistsView)
 			
 		if wavebox.isMobile()
-			wavebox.appController.focusMainPanel()
+			wavebox.appController.panels.focusMain()
 
 	folders: (folderId) ->
 		@sendSelectionNotification "Folders"
@@ -38,7 +38,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new FolderView)
 
 		if wavebox.isMobile()
-			wavebox.appController.focusMainPanel()
+			wavebox.appController.panels.focusMain()
 
 	albums: (albumId) ->
 		@sendSelectionNotification "Albums"
@@ -48,7 +48,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new AlbumsView)
 
 		if wavebox.isMobile()
-			wavebox.appController.focusMainPanel()
+			wavebox.appController.panels.focusMain()
 
 	playlists: (playlistId) ->
 		@sendSelectionNotification "playlist #{playlistId}"
@@ -57,7 +57,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new PlaylistListingView playlistId: playlistId)
 
 		if wavebox.isMobile()
-			wavebox.appController.focusMainPanel()
+			wavebox.appController.panels.focusMain()
 
 	favorites: ->
 		return null

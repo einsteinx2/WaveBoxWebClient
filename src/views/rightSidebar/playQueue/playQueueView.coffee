@@ -1,7 +1,7 @@
 PlayQueueItemView = require './playQueueItemView'
 
 module.exports = Backbone.View.extend
-	el: "#QueueScroller"
+	el: "#play-queue"
 	initialize: ->
 		console.log @model
 		@listenTo @model, "change", @render

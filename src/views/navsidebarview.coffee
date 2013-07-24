@@ -7,7 +7,7 @@ PlaylistsSectionView = require "./playlists/playlistsSectionView"
 
 module.exports = Backbone.View.extend
 	
-	el: "#SidebarMenu"
+	el: "#nav"
 
 	initialize: ->
 		@serverSectionView = new SidebarSectionView

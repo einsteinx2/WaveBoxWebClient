@@ -4,7 +4,7 @@ Utils = require '../../../utils/utils'
 module.exports = Backbone.View.extend
 	model: Track
 	tagName: "div"
-	className: "QueueList"
+	className: "play-queue-item"
 	template: _.template($("#template-play-queue-item").html())
 	initialize: ->
 		if wavebox.audioPlayer.playQueue.currentSong().get("itemId") is @model.get("itemId")
@@ -21,7 +21,7 @@ module.exports = Backbone.View.extend
 			duration: Utils.formattedTimeWithSeconds(@model.get "duration")
 
 		if @playing
-			@$el.addClass "nowPlaying"
+			@$el.addClass "play-queue-now-playing"
 		this
 
 	dblclick: ->
