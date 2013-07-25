@@ -2,7 +2,7 @@
 	"name": "WaveBoxHTML",
 	"version": "0.1.0",
 	"dependencies": {
-		"coffee-script": "1.6.2",
+		"coffee-script": "1.6.3",
 		"browserify": "2.25.0"
 	}
 }
