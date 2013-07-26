@@ -10,8 +10,7 @@ module.exports = Backbone.View.extend
 
 	events:
 		"click": ->
-			console.log "album click event fired! #{Date.now()}"
-			wavebox.router.navigate "albums/#{@model.get 'albumId'}", trigger: true
+			wavebox.router.navigate @model.url(), trigger: true
 
 		"dragstart": (e) ->
 			wavebox.dragDrop.mediaDragStart @model
@@ -24,3 +23,4 @@ module.exports = Backbone.View.extend
 			albumTitle: _.escape(@model.get("albumName"))
 			albumArtist: _.escape(@model.get("artistName") or "Artist Name")
 		this
+

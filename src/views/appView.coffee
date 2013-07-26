@@ -21,6 +21,20 @@ module.exports = Backbone.View.extend
 		$(document).on "unload", (e) ->
 			e.preventDefault()
 
+	events:
+		"click .sprite-menu": (e) ->
+			e.preventDefault()
+			@panels.leftToggle()
+		"click .sprite-play-queue": (e) ->
+			e.preventDefault()
+			@panels.rightToggle()
+		"click .sprite-back-arrow": (e) ->
+			e.preventDefault()
+			if @panels.main.canPop()
+				@panels.main.pop()
+			else
+				history.back(1)
+
 	render: ->
 		@panels.render().el
 	

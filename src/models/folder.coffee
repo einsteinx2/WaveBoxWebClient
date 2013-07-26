@@ -17,6 +17,13 @@ class Folder extends Backbone.Model
 			@folderId = options.folderId or null
 			@recursive = options.recursive or no
 	
+	pageUrl: ->
+		"/folders/#{@get("folderId")}"
+
+	coverViewFields: ->
+		title: @get "folderName"
+		artId: @get "artId"
+
 	sync: (method, model, options) ->
 		if method is "read"
 			wavebox.apiClient.getFolder @folderId, @recursive, (success, data) =>

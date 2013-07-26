@@ -14,6 +14,14 @@ class Artist extends Backbone.Model
 		@artistId = if options.artistId? then options.artistId else null
 		@shouldRetrieveSongs = if options.retrieveSongs? then options.retrieveSongs else no
 
+	pageUrl: ->
+		"/artists/#{@get("artistId")}"
+
+	coverViewFields: ->
+		title: @get "artistName"
+		artId: @get "artId"
+
+
 	sync: (method, model, options) ->
 		if method is "read"
 			console.log @shouldRetrieveSongs

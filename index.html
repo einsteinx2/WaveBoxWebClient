@@ -8,7 +8,7 @@
             <meta name="apple-mobile-web-app-title" content="Wave">
             <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
             <meta name="apple-mobile-web-app-capable" content="yes" />
-			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
             <!-- iPhone -->
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/iOS/57.png">
@@ -74,16 +74,17 @@
 	<!-- Page chrome -->
 	<script type="text/template" id="template-page">
 		<div class="page-header">
-			<div class="side-panel-toggle-left sprite float-left <%= leftAccessory %>"></div>
-			<div class="side-panel-toggle-right sprite float-right <%= rightAccessory %>"></div>
-			<span class="page-title truncate-ellipsis"><%= pageTitle %></span>
+			<div class="float-left sprite <%= leftAccessory %>"></div>
+			<div class="float-right sprite <%= rightAccessory %>"></div>
+			<div class="page-title truncate-ellipsis"><%= pageTitle %></div>
 		</div>
+				<div class="page-content"></div>
+	</script>
+
+	<script id="template-page-search" type="text/template">
 		<div class="page-search">
 			<input type="text" class="page-search-textbox" placeholder="Search" />	
-			<a class="page-search-toggle DirectoryViewIcon"></a>
-			<a class="page-search-toggle AlbumSortIcon"></a>
 		</div>
-		<div class="page-content"></div>
 	</script>
 
 
@@ -103,7 +104,7 @@
 					<h1><%= albumName %></h1>
 				</li>
 				<li>
-					<h2>AWOLNATION</h2>
+					<h2><%= artistName %></h2>
 				</li>
 				<li>
 					<h3><%= trackCount %> tracks</h3>
@@ -124,8 +125,8 @@
 		
 	<!-- Cover view items -->
 	<script type='text/template' id='template-cover-item'>
-		<div src="img/BlankAlbum.png" alt="test image" /></div>	
-		<div><%= itemTitle %></div>
+		<div alt="Album art" /></div>	
+		<div><%= title %></div>
 		<div class="list-cover-item-arrow"></div>
 	</script>
 

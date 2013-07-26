@@ -8,7 +8,7 @@ DragDrop = require './utils/dragDrop'
 
 $ ->
 	if window.navigator.standalone
-		$(document.body).css "top", "20px"
+		$(document.body).addClass "full-screen-web-app"
 
 	window.wavebox = {}
 	

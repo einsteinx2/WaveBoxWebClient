@@ -15,6 +15,13 @@ class Playlist extends Backbone.Model
 		console.log "Playlist INIT called for #{@playlistId} with options:"
 		console.log options
 
+	pageUrl: ->
+		"/playlists/#{@get("playlistId")}"
+
+	coverViewFields: ->
+		title: @get "playlistName"
+		artId: @get "artId"
+
 	sync: (method, model, options) ->
 		if method is "read"
 			console.log "Playlist SYNC called for #{@playlistId}"

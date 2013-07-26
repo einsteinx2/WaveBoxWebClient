@@ -1,6 +1,7 @@
 PageView = require '../pageView'
 AlbumItemView = require './albumitemview'
 Artist = require '../../models/artist'
+CoverListView = require '../coverList/coverListView'
 
 class ArtistView extends PageView
 	tagName: "div"
@@ -13,8 +14,6 @@ class ArtistView extends PageView
 			@artist = new Artist artistId
 			@listenToOnce @artist, "change", =>
 				@contentLoaded = yes
-				console.log "changed!"
-				console.log @artist
 				@render()
 			@artist.fetch()
 	
@@ -29,17 +28,14 @@ class ArtistView extends PageView
 
 
 		$content = $page.find(".page-content")
+		$content.addClass "scrollAnchor"
 		$content.append($("#template-page-collection-actions").html())
 		
-		$covers = $("<div class='list-cover scroll'>")
-		$content.append $covers
-
 		if @contentLoaded
-			@artist.get("albums").each (album, index) ->
-				view = new AlbumItemView model: album
-				$covers.append view.render().el
-
+			covers = new CoverListView collection: @artist.get("albums")
+			$content.append covers.render().el
 		@$el.html $page.children()
+
 		this
 	
 	playAll: (e) ->

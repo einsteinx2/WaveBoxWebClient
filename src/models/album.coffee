@@ -6,12 +6,21 @@ class Album extends Backbone.Model
 		albumName: null
 		artId: null
 		artistId: null
+		artistName: null
 		itemTypeId: null
 		releaseYear: null
 		tracks: null
 	
 	initialize: (options) ->
 		@albumId = options.albumId
+
+	pageUrl: ->
+		"/albums/#{@get("albumId")}"
+
+	coverViewFields: ->
+		title: @get "albumName"
+		artist: @get "artistName"
+		artId: @get "artId"
 	
 	sync: (method, model, options) ->
 		if method is "read"
@@ -24,6 +33,7 @@ class Album extends Backbone.Model
 						albumName: album.albumName
 						artId: album.artId
 						artistId: album.artistId
+						artistName: album.artistName
 						itemTypeId: album.itemTypeId
 						releaseYear: album.releaseYear
 						tracks: new TrackList data.songs, comparator: "trackNumber"

@@ -261,7 +261,7 @@ class ApiClient
 			aSize = "&size=#{size}"
 		else aSize = ""
 
-		return "#{@API_ADDRESS}/art?id=#{artId}&s=#{@SESSION_ID}#{aSize}"
+		return "#{@API_ADDRESS}/art?id=#{artId}#{aSize}"
 
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax

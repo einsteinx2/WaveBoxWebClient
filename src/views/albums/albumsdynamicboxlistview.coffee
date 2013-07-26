@@ -18,6 +18,7 @@ module.exports = class extends DynamicBoxListView
 		filter = @filter.toLowerCase()
 		@collection.each (album) =>
 			albumN = album.get("albumName").toLowerCase()
+			console.log album
 			if albumN.indexOf(filter) >= 0
 				view = new AlbumView model: album
 				view.parent = this

@@ -1,7 +1,14 @@
 class PageView extends Backbone.View
 	tagName: "div"
 	template: _.template($("#template-page").html())
+	search: _.template($("#template-page-search").html())
 	render: (options) ->
-		$("<div>").append @template(options)
+		$page = $("<div>")
+		$page.append @template(options)
+		if options.search is yes
+			$page.find(".page-content").addClass("page-content-search")
+			$page.append @search()
+
+		return $page
 
 module.exports = PageView

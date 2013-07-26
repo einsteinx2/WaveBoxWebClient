@@ -2,6 +2,7 @@ PageView = require '../pageView'
 SubFolderView = require './subfolderview'
 TrackListView = require '../tracklistview'
 Folder = require '../../models/folder'
+CoverListView = require '../coverList/coverListView'
 
 class FolderView extends PageView
 	tagName: "div"
@@ -30,24 +31,25 @@ class FolderView extends PageView
 
 	render: ->
 		title = if @folder? then (if @folder.get("folderName")? then @folder.get("folderName") else "Folders") else "Folders"
+		folders = @folder.get("folders") or {}
+		tracks = @folder.get("tracks") or {}
+
 		$page = FolderView.__super__.render
 			leftAccessory: if @subFolder then "sprite-back-arrow" else "sprite-menu"
 			rightAccessory: "sprite-play-queue"
 			artUrl: ""
 			pageTitle: title
+			search: folders.length > 0
 
 		$content = $page.find ".page-content"
 		if @subFolder
 			$content.append $("#template-page-collection-actions").html()
 		$content.addClass("scroll")
-		$folders = $("<div>").addClass "list-cover listView"
 		if @contentLoaded
-			folders = @folder.get "folders"
-			folders.each (folder, index) ->
-				view = new SubFolderView model: folder
-				$folders.append view.render().el
+
 			if folders.size() > 0
-				$content.append $folders
+				view = new CoverListView collection: folders
+				$content.append view.render().el
 
 			tracks = @folder.get "tracks"
 			console.log @folder

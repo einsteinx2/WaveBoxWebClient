@@ -20,20 +20,7 @@ class SidePanelController extends Backbone.View
 				.css({ left: leftWidth, width: $(window).width() - leftWidth - rightWidth})
 				.addClass("transitions")
 
-	events:
-		"click .side-panel-toggle-left": (e) ->
-			e.preventDefault()
-			@leftToggle()
-		"click .side-panel-toggle-right": (e) ->
-			e.preventDefault()
-			@rightToggle()
-		"click .BackIcon": (e) ->
-			e.preventDefault()
-			if @main.canPop()
-				@main.pop()
-			else
-				history.back(1)
-	
+		
 	render: ->
 		
 		if not wavebox.isMobile()
@@ -126,21 +113,24 @@ class SidePanelController extends Backbone.View
 		###
 		
 		@$el.bind "touchstart", (event) =>
-			$top = $(event.originalEvent.srcElement).closest(".scroll")
+			$target = $(event.target)
+			$top = $target.parents(".scroll").first()
+
 			bottom = if $top[0]? then $top[0].scrollHeight - $top.outerHeight() else -$top.outerHeight()
 
-			if $top.scrollTop() is bottom
-				$top.scrollTop(bottom - 1)
-			else if $top.scrollTop() is 0
+			if $top.scrollTop() < $top.height() / 2
 				$top.scrollTop(1)
-
+			else
+				$top.scrollTop(bottom - 1)
+			
 		@$el.bind "touchmove", (event) =>
 			$target = $(event.target)
 			$parents = $target.parents ".scroll"
 			$scrollAnchor = $target.parents ".scrollAnchor"
 			if $scrollAnchor.length > 0
 				$anchor = $scrollAnchor.first()
-				if $anchor.height() < $parents.first().height()
+				$scroll = $parents.first()
+				if $scroll.height() < $anchor.height()
 					console.log "anchor height smaller than parent"
 					event.preventDefault()
 			if not ($parents.length > 0 or $target.hasClass ".scroll")

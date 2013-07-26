@@ -1,11 +1,15 @@
 PageView = require "../pageView"
-ArtistsDynamicBoxListView = require "./artistsdynamicboxlistview"
+Artists = require "../../collections/artists"
+CoverListView = require "../coverList/coverListView"
 
 class ArtistsView extends PageView
 	tagName: "div"
 	filter: ""
 	initialize: ->
-		@artistListing = new ArtistsDynamicBoxListView
+		@collection = new Artists
+		@listenToOnce @collection, "reset", @render
+		@collection.fetch reset: true
+
 					
 	events:
 		"input .searchBar-textbox": (event) ->
@@ -24,11 +28,13 @@ class ArtistsView extends PageView
 			leftAccessory: "sprite-menu"
 			rightAccessory: "sprite-play-queue"
 			pageTitle: "Artists"
-			searchBarClass: ""
-		result.find(".page-content").addClass("scroll").append @artistListing.render().el
+			search: yes
+		$content = result.find(".page-content").addClass("scroll")
+
+		covers = new CoverListView collection: @collection
+		$content.append covers.render().el
 
 		@$el.empty().append(result)
-		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	
 module.exports = ArtistsView
