@@ -1,71 +1,73 @@
 <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <title>Wave</title>
-			<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+<html lang="en">
+<head>
+	<title>Wave</title>
 
-            <!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width works properly and doesn't allow children to blow up the viewport width-->
-            <meta name="apple-mobile-web-app-title" content="Wave">
-            <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-				<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<!-- HTML5 standards -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Wave" />
+	<link rel="shortcut icon" type="image/icon" href="favicon.ico" />
 
-            <!-- iPhone -->
-            <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/iOS/57.png">
-            <link href="img/iOS/iPhone.png" media="(device-width: 320px) and (device-height: 480px)
-         and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+	<!-- standard viewport tag to set the viewport to the device's width , Android 2.3 devices need this so 100% width works properly and doesn't allow children to blow up the viewport width-->
+	<meta name="apple-mobile-web-app-title" content="Wave" />
+	<meta name="viewport" content="user-scalable=0, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-            <!-- iPhone (Retina) -->
-            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/iOS/72.png">
-            <link href="img/iOS/iPhoneRetina.png" media="(device-width: 320px) and (device-height: 480px)
-         and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPhone -->
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/iOS/57.png" />
+	<link href="img/iOS/iPhone.png" media="(device-width: 320px) and (device-height: 480px)
+	 and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
 
-            <!-- iPhone 5 -->
-            <link href="img/iOS/iPhone5.png" media="(device-width: 320px) and (device-height: 568px)
-         and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPhone (Retina) -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/iOS/72.png" />
+	<link href="img/iOS/iPhoneRetina.png" media="(device-width: 320px) and (device-height: 480px)
+		 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-            <!-- iPad -->
-            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/iOS/114.png">
-            <link href="img/iOS/iPadPortrait.png" media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: portrait)
-         and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
-            <link href="img/iOS/iPadLandscape.png" media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: landscape)
-         and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+	<!-- iPhone 5 -->
+	<link href="img/iOS/iPhone5.png" media="(device-width: 320px) and (device-height: 568px)
+		 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-            <!-- iPad (Retina) -->
-            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/iOS/144.png">
-            <link href="img/iOS/iPadPortraitRetina.png" media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: portrait)
-         and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
-            <link href="img/iOS/iPadLandscapeRetina.png" media="(device-width: 768px) and (device-height: 1024px)
-         and (orientation: landscape)
-         and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPad -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/iOS/114.png" />
+	<link href="img/iOS/iPadPortrait.png" media="(device-width: 768px) and (device-height: 1024px)
+		 and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
+	<link href="img/iOS/iPadLandscape.png" media="(device-width: 768px) and (device-height: 1024px)
+		 and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image" />
 
-            <!--[if lt IE 9]>
-                <script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
-                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            <![endif]-->
+	<!-- iPad (Retina) -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/iOS/144.png" />
+	<link href="img/iOS/iPadPortraitRetina.png" media="(device-width: 768px) and (device-height: 1024px)
+		 and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+	<link href="img/iOS/iPadLandscapeRetina.png" media="(device-width: 768px) and (device-height: 1024px)
+		and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-            <link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-
 <body>
 	<div id="main"></div>
 	<div id="jPlayer"></div>
-	
+
 	<!-- Side panels -->
 	<script id="template-side-panels" type="text/template">
+		<!-- Navigation panel -->
 		<div id="left" >
 			<div class="sidebar sidebar-left"></div>
-		    <div id="nav" class='nav scroll'></div>
+			<div id="nav" class='nav scroll'></div>
 		</div>
-		
+
+		<!-- Playlist panel -->
 		<div id="right">
-		    <div id="mini-player"></div>
-		    <div id="play-queue" class="play-queue scroll"></div>
+			<div id="mini-player"></div>
+			<div id="play-queue" class="play-queue scroll"></div>
 			<div class="play-queue-footer">
-				<div class="sprite sprite-repeat repeat off"></div>	
+				<div class="sprite sprite-repeat repeat off"></div>
 				<div class="sprite sprite-shuffle shuffle off"></div>
 			</div>
 		</div>
@@ -78,15 +80,15 @@
 			<div class="float-right sprite <%= rightAccessory %>"></div>
 			<div class="page-title truncate-ellipsis"><%= pageTitle %></div>
 		</div>
-				<div class="page-content"></div>
+		<div class="page-content"></div>
 	</script>
 
+	<!-- Search bar -->
 	<script id="template-page-search" type="text/template">
 		<div class="page-search">
-			<input type="text" class="page-search-textbox" placeholder="Search" />	
+			<input type="text" class="page-search-textbox" placeholder="Search" />
 		</div>
 	</script>
-
 
 	<!-- page collection actions -->
 	<script type="text/template" id="template-page-collection-actions">
@@ -122,16 +124,16 @@
 		</header>
 	</script>
 
-		
 	<!-- Cover view items -->
 	<script type='text/template' id='template-cover-item'>
-		<div alt="Album art" /></div>	
+		<div alt="Album art" /></div>
 		<div><%= title %></div>
 		<div class="list-cover-item-arrow"></div>
 	</script>
 
+	<!-- Albums cover view -->
 	<script type='text/template' id='template-cover-item-two-lines'>
-		<div src="img/BlankAlbum.png" alt="test image" /></div>	
+		<div src="img/BlankAlbum.png" alt="test image" /></div>
 		<div><%= albumTitle %></div>
 		<div><%= albumArtist %></div>
 		<div class="list-cover-item-arrow"></div>
@@ -142,18 +144,17 @@
 		<li class="SidebarIcons">
 			<span class="sprite sprite-container <%= itemClass %>"></span>
 			<span class="MenuText"><%= itemTitle %></span>
-	    </li>
+		</li>
 	</script>
 
 	<!-- Action sheet -->
 	<script type='text/template' id='template-action-sheet-item'>
-	<li class="ActionSheetItem">
-		<span id="ActionSheetItemIcon" class="<%= itemClass %>"></span>
-		<span id="ActionSheetItemTitle"><%= itemTitle %></span>
-    </li>
+		<li class="ActionSheetItem">
+			<span id="ActionSheetItemIcon" class="<%= itemClass %>"></span>
+			<span id="ActionSheetItemTitle"><%= itemTitle %></span>
+		</li>
 	</script>
-	
-	
+
 	<!-- Track list -->
 	<script id="template-track-list" type="text/template">
 	</script>
@@ -167,8 +168,6 @@
 		<div><%= duration %></div>
 	</script>
 
-	
-	
 	<!-- Mini-player -->
 	<script id="template-mini-player" type="text/template">
 		<div id="PlayBtn" class="sprite sprite-pause">
@@ -190,7 +189,8 @@
 		<div class="play-queue-item-artist"><%= artistName %></div>
 		<div class="play-queue-item-duration"><%= duration %></div>
 	</script>
-	
+
+	<!-- Libraries -->
 	<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="script/underscore-min.js"></script>
 	<script type="text/javascript" src="script/backbone-min.js"></script>
@@ -198,7 +198,5 @@
 	<script type="text/javascript" src="script/jquery.transit.min.js" ></script>
 	<script type='text/javascript' src='/script/fastclick.js'></script>
 	<script type="text/javascript" src="script/wavebox.js"></script>
-	
 </body>
 </html>
-
