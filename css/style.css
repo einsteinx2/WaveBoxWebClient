@@ -2,8 +2,12 @@
 
 /* Defaults */
 body, html {
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
 	margin: 0;
     padding: 0;
 	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
@@ -42,11 +46,7 @@ input:focus {
 }
 
 .full-screen-web-app {
-	position: absolute;
 	top: 20px;
-	left: 0;
-	right: 0;
-	bottom: 0;
 }
 
 .truncate-ellipsis {
@@ -165,6 +165,7 @@ input:focus {
 	color: #757575;
 	padding-top: 15px;
 	overflow: auto;
+	clear: both;
 }
 
 .list-track-row {
@@ -255,6 +256,24 @@ input:focus {
 	width: 35%;
 } 
 
+/* Action sheet */
+.action-sheet {
+	background-color: white;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	z-index: 100000;
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+.action-sheet li {
+	text-align: center;
+	line-height: 50px;
+	width: 100%;
+}
+
 /* Media page - generally contains a tracklist and some additional information
  * about those tracks */
 .mediaPage .page-album-cover {
@@ -262,9 +281,11 @@ input:focus {
 	margin-right: 10px;
 	width: 130px;
 	height: 130px;
+	background-image: url('../img/BlankAlbum.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+	border: 1px solid #666;
 }
 
 
@@ -735,10 +756,14 @@ input:focus {
 	background-color: rgba(226, 226, 226, 1);
 }
 
-.play-queue .play-queue-now-playing
+.play-queue-now-playing
 {
 	color: #1f1f1f;
 	background-color: #f2f2f2;
+}
+
+.play-queue-drag-position-indicator {
+	padding-top: 50px;
 }
 
 .play-queue-item {
@@ -747,6 +772,7 @@ input:focus {
 	width:100%;
 	height:50px;
 	color:#7d7d7d;
+	-webkit-transition: padding-top .25s ease-in-out;
 }
 	
 .play-queue-item-title {
@@ -1007,6 +1033,7 @@ input:focus {
 
 
 	.list-cover-item-arrow {
+		float: right;
 		display: block;
 		opacity: .6;
 		background: url('../img/sprite.png') no-repeat -120px -596px;
@@ -1034,12 +1061,9 @@ input:focus {
 		overflow: hidden;
 	}
 
-	.list-cover-item > div {
-		float: left;
-	}
-
 	.list-cover-item :first-child
 	{
+		float: left;
 		padding: 0;
 		border: none;
 		border-right: 1px solid #cfcfcf;
@@ -1078,6 +1102,7 @@ input:focus {
 	}
 
 	.mediaPage .page-album-cover {
+		border: none;
 		float: none;
 		height: auto;
 		width: 100%;

@@ -1,11 +1,14 @@
 PageView = require "../pageView"
-AlbumsDynamicBoxListView = require "./albumsdynamicboxlistview"
+Albums = require "../../collections/albums"
+CoverListView = require "../coverList/coverListView"
 
 class AlbumsView extends PageView
 	tagName: "div"
 	filter: ""
 	initialize: ->
-		@albumListing = new AlbumsDynamicBoxListView
+		@collection = new Albums
+		@listenToOnce @collection, "reset", @render
+		@collection.fetch reset: yes
 					
 	events:
 		"input .searchBar-textbox": (event) ->
@@ -20,16 +23,19 @@ class AlbumsView extends PageView
 			console.log "as click"
 			@$el.find(".main-scrollingContent").removeClass "listView"
 	render: ->
+		console.log "rendering albums"
 		result = AlbumsView.__super__.render
 			leftAccessory: "sprite-menu"
 			rightAccessory: "sprite-play-queue"
 			pageTitle: "Albums"
 			searchBarClass: ""
 
-		result.find(".page-content").addClass("scroll").append @albumListing.render().el
+		$content = result.find(".page-content").addClass("scroll")
+		
+		view = new CoverListView collection: @collection
+		$content.append view.render().el
 
 		@$el.empty().append(result)
-		@$el.find(".main-scrollingContent").addClass("noCollectionActions")
 		this
 	
 module.exports = AlbumsView

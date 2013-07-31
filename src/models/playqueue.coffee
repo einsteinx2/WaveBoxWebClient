@@ -36,6 +36,19 @@ class PlayQueue extends Backbone.Model
 	addNext: (track) ->
 		@tracks.add track, {at: @nowPlayingIndex + 1}
 		@trigger "change"
+
+	move: (track, toIndex) ->
+		oldIndex = _.indexOf(@tracks.models, track)
+		if @nowPlayingIndex is oldIndex
+			@nowPlayingIndex = toIndex
+		console.log oldIndex, toIndex
+		@tracks.models.splice(toIndex, 0, @tracks.models.splice(oldIndex, 1)[0])
+		console.log "moved!"
+		@trigger "change"
+	
+	clear: =>
+		@tracks = new TrackList
+		@trigger "change"
 	
 	currentSong: ->
 		if @nowPlayingIndex?

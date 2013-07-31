@@ -5,7 +5,6 @@ module.exports = Backbone.Collection.extend
 
 	sync: (method, model, options) ->
 		if method is "read"
-			console.log "Fetching albums list..."
 			wavebox.apiClient.getAlbumList (success, data) =>
 				if success
 					@set data
