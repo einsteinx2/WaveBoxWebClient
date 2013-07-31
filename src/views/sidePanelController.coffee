@@ -26,12 +26,14 @@ class SidePanelController extends Backbone.View
 		if not wavebox.isMobile()
 			@rightActive = true
 			@leftActive = true
-			@main.$el.addClass("transitions")
 			@main.$el.css
 				left: @left.$el.width() 
 				width: $(window).width() - @left.$el.width() - @right.$el.width()
 		else
-			@bindTouchEvents()
+			#@bindTouchEvents()
+			# FastClick!
+			FastClick.attach(document.body)
+
 
 		console.log "rendering left"
 
@@ -105,9 +107,7 @@ class SidePanelController extends Backbone.View
 				@rightActive = false
 
 	bindTouchEvents: ->
-		# FastClick!
-		FastClick.attach(document.body)
-
+	
 		###
 		Touch handling for vertical scrolling of center panel
 		###
@@ -118,9 +118,10 @@ class SidePanelController extends Backbone.View
 
 			bottom = if $top[0]? then $top[0].scrollHeight - $top.outerHeight() else -$top.outerHeight()
 
-			if $top.scrollTop() < $top.height() / 2
+			position = $top.scrollTop()
+			if position is 0
 				$top.scrollTop(1)
-			else
+			else if position is bottom
 				$top.scrollTop(bottom - 1)
 			
 		@$el.bind "touchmove", (event) =>

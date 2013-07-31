@@ -3,11 +3,15 @@ SubFolderView = require './subfolderview'
 TrackListView = require '../tracklistview'
 Folder = require '../../models/folder'
 CoverListView = require '../coverList/coverListView'
+Utils = require '../../utils/utils'
 
 class FolderView extends PageView
 	tagName: "div"
+	className: "mediaPage"
 	events:
 		"click .collection-actions-play-all": "playAll"
+	
+	template: _.template($("#template-page-folder").html())
 
 	initialize: (options) ->
 		@contentLoaded = no
@@ -42,10 +46,37 @@ class FolderView extends PageView
 			search: folders.length > 0
 
 		$content = $page.find ".page-content"
-		if @subFolder
-			$content.append $("#template-page-collection-actions").html()
-		$content.addClass("scroll")
+
 		if @contentLoaded
+
+			duration = 0
+			tracks.each (track) ->
+				duration += track.get("duration")
+
+			duration = 
+				if duration > 0
+					Utils.formattedTimeWithSeconds(duration)
+				else
+					null
+
+
+			if @subFolder
+				# add the header
+				header = @template
+					folderName: @folder.get("folderName") or ""
+					folderCount: folders.size() or null
+					trackCount: tracks.size() or null
+					totalDuration: duration or ""
+
+				$content.prepend header
+
+				# add the art to the header
+				artId = @folder.get("artId")
+				neededWidth = if wavebox.isMobile() then $(document.body).width() else 130
+				if artId?
+					$content.find(".page-album-cover").css "background-image", "url(#{wavebox.apiClient.getArtUrl(artId, neededWidth)})"
+			$content.addClass("scroll")
+
 
 			if folders.size() > 0
 				view = new CoverListView collection: folders
@@ -54,7 +85,7 @@ class FolderView extends PageView
 			tracks = @folder.get "tracks"
 			console.log @folder
 			if tracks.length > 0
-				view = new TrackListView collection: tracks, artId: @folder.get("artId")
+				view = new TrackListView collection: tracks
 				$content.append view.render().el
 		@$el.empty().append $page
 		this

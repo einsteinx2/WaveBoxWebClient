@@ -122,18 +122,53 @@
 		</header>
 	</script>
 
+	<!-- Folder page -->
+	<script id="template-page-folder" type="text/template">
+		<header>
+			<div class="page-album-cover"></div>
+			<ul>
+				<li>
+					<h1><%= folderName %></h1>
+				</li>
+				<%
+					if (folderCount !== null) { %>
+						<li>
+							<h3><%=folderCount%> folders</h3>
+						</li>
+
+				<%
+					}
+					if (trackCount !== null) { %>
+						<li>
+							<h3><%= trackCount %> tracks</h3>
+						</li>
+						<li>
+							<h3>play time: <%= totalDuration %></h3>
+						</li>
+				<%
+					}
+				%>
+				
+			</ul>
+			<div class="page-header-collection-actions">
+				<div class="collection-actions-item collection-actions-play-all">Play all</div>
+			</div>
+		</header>
+
+	</script>
+
 		
 	<!-- Cover view items -->
 	<script type='text/template' id='template-cover-item'>
 		<div alt="Album art" /></div>	
 		<div><%= title %></div>
-		<div class="list-cover-item-arrow"></div>
-	</script>
-
-	<script type='text/template' id='template-cover-item-two-lines'>
-		<div src="img/BlankAlbum.png" alt="test image" /></div>	
-		<div><%= albumTitle %></div>
-		<div><%= albumArtist %></div>
+		<%
+			if (artist !== undefined && artist !== null) {
+		%>
+			<div><%= artist %></div>
+		<%
+			}
+		%>
 		<div class="list-cover-item-arrow"></div>
 	</script>
 
@@ -196,7 +231,8 @@
 	<script type="text/javascript" src="script/backbone-min.js"></script>
 	<script type="text/javascript" src="script/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="script/jquery.transit.min.js" ></script>
-	<script type='text/javascript' src='/script/fastclick.js'></script>
+	<script type='text/javascript' src="/script/fastclick.js"></script>
+	<script type='text/javascript' src="/script/infinity.min.js"></script>
 	<script type="text/javascript" src="script/wavebox.js"></script>
 	
 </body>

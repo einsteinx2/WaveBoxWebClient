@@ -5,7 +5,7 @@ ActionSheetItem = require "../../models/actionSheetItem"
 module.exports = Backbone.View.extend
 
 	tagName: "ul"
-	className: "ActionSheet"
+	className: "action-sheet"
 
 	initialize: (options) ->
 		@options = options

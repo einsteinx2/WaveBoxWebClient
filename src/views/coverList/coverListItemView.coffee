@@ -4,15 +4,13 @@ class CoverListItemView extends Backbone.View
 	tagName: 'div'
 	className: 'list-cover-item albumItem'
 	template: _.template($("#template-cover-item").html())
+	attributes:
+		"draggable": true
 
 	initialize: (options) ->
 		if options?
-			@model = options
-			@fields = options.coverViewFields()
+			@fields = options.model.coverViewFields()
 	
-	attributes:
-		"draggable": "true"
-
 	events:
 		"click": ->
 			wavebox.router.navigate @model.pageUrl(), trigger: true
@@ -24,12 +22,13 @@ class CoverListItemView extends Backbone.View
 			wavebox.dragDrop.mediaDragEnd()
 
 	render: ->
-		@$el.html @template
+		@$el.append @template
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
+			#		@$el.attr "draggable", "true"
+
 		if @fields.artId? 
-			console.log @fields.artId
 			@art = new Image
 			@art.onload = @artLoaded
 			@art.src = wavebox.apiClient.getArtUrl(@fields.artId, 150)
