@@ -49,19 +49,11 @@ class SidePanelController extends Backbone.View
 		
 	switch: (panel) ->
 		if panel is "right"
-			if wavebox.isMobile() 
-				@left.$el.css "z-index": -10
-				@right.$el.css "z-index": 10
-			else
-				@left.$el.css "display": "none"
-				@right.$el.css "display": "block"
+			@left.$el.css "display": "none"
+			@right.$el.css "display": "block"
 		else if panel is "left"
-			if wavebox.isMobile() 
-				@right.$el.css "z-index": -10
-				@left.$el.css "z-index": 10
-			else
-				@left.$el.css "display": "block"
-				@right.$el.css "display": "none"
+			@left.$el.css "display": "block"
+			@right.$el.css "display": "none"
 	
 	leftToggle: ->
 		if wavebox.isMobile()
