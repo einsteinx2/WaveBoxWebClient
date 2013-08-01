@@ -26,12 +26,10 @@ class CoverListItemView extends Backbone.View
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
-			#		@$el.attr "draggable", "true"
-
 		if @fields.artId? 
 			@art = new Image
 			@art.onload = @artLoaded
-			@art.src = wavebox.apiClient.getArtUrl(@fields.artId, 150)
+			@art.src = wavebox.apiClient.getArtUrl(@fields.artId, 250)
 
 		this
 

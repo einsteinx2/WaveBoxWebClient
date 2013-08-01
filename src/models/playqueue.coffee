@@ -48,6 +48,8 @@ class PlayQueue extends Backbone.Model
 	
 	clear: =>
 		@tracks = new TrackList
+		@nowPlayingIndex = null
+		wavebox.audioPlayer.setPlayerSong null
 		@trigger "change"
 	
 	currentSong: ->
