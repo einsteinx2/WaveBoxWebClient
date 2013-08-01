@@ -28,9 +28,9 @@ module.exports = Backbone.View.extend
 	renderHeader: ->
 		console.log "render header called: #{@title}" 
 		if @title?
-			header = document.createElement "span"
+			header = document.createElement "li"
 			header.innerHTML = @title
-			header.className = "titletabs"
+			header.className = "navigation-section-header"
 			@$el.empty().append header
 
 	render: ->

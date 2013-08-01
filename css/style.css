@@ -69,7 +69,7 @@ input:focus {
     position: absolute;
     top: 0;
 	bottom: 0;
-	background-color:#dadada;
+	background-color:#fff;
 }
 
 #left {
@@ -86,8 +86,7 @@ input:focus {
 #main {
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
-    background-color: rgb(232, 232, 232);
-	box-shadow: 0px 8px 15px rgba(0,0,0,.2);
+    background-color: rgb(233, 233, 233);
     width: 100%;
     height: 100%;
     position: relative;
@@ -428,16 +427,9 @@ input:focus {
 	width:100%;
 	height: 50px;
 	padding: 0;
+	background-color: rgb(224, 224, 224);
 
 	text-align: center;
-
-	background: rgb(220,220,220); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(178,178,178,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(220,220,220,1)), color-stop(100%,rgba(178,178,178,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(220,220,220,1) 0%,rgba(178,178,178,1) 100%); /* W3C */
 }
 	
 .Logo {
@@ -461,7 +453,7 @@ input:focus {
 }
 
 .sidebar {
-	background-color: #bababa;
+	background-color: rgb(246, 246, 246);
 	padding: 16px 0;
 	height: 18px;
 	text-align: center;
@@ -546,7 +538,6 @@ input:focus {
 	text-align: center;
 	font-weight: 700;
 	color: #333;
-	text-shadow: 0 1px 1px #e6e6e6;
 }
 	
 .page-search {
@@ -618,7 +609,7 @@ input:focus {
 	z-index: 1;
 	overflow: auto;
 	margin: 0;
-	padding: 15px 0 0 0;
+	padding: 0;
 	color: #757575;
 	font-weight: 600;
 	font-size: 14px;
@@ -626,6 +617,7 @@ input:focus {
 
 .nav ul {
 	padding: 0;
+	margin: 0 0 15px 0;
 }
 
 .nav li {
@@ -635,22 +627,20 @@ input:focus {
 }
 	
 .MenuText {
-	margin-top:18px;
-	position:absolute;
-	color:#1f1f1f;
-	font-weight:700;
-	font-size:14px;
-	left:45px;
+	margin-top: 18px;
+	position: absolute;
+	color: #1f1f1f;
+	font-weight: 700;
+	font-size: 14px;
+	left: 45px;
 }
 
-.titletabs {
-	position: relative;
-	margin-bottom: -10px;
-	width:50px;
-	font-weight:600;
-	font-size:11px;
-	text-transform:uppercase;
-	left:15px;
+.navigation-section-header {
+	font-weight: 600;
+	font-size: 11px;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	padding: 30px 0 0 15px;
 }		
 
 .SidebarIcons {
@@ -727,8 +717,6 @@ input:focus {
 	right: 0;
 	width: 260px;
 	height: 50px;
-	box-shadow: 0 -1px 2px #aaa;
-	background-color: rgba(226, 226, 226, 1);
 }
 
 .play-queue-footer > div {
@@ -753,7 +741,6 @@ input:focus {
 	width: 260px;
 	z-index: 0;
 	overflow-x: hidden;
-	background-color: rgba(226, 226, 226, 1);
 }
 
 .play-queue-now-playing
@@ -768,7 +755,7 @@ input:focus {
 
 .play-queue-item {
 	-webkit-user-select: none;
-	border-bottom: 1px #ccc solid;
+	/*border-bottom: 1px #ccc solid;*/
 	width:100%;
 	height:50px;
 	color:#7d7d7d;
@@ -789,7 +776,7 @@ input:focus {
 .play-queue-item-artist  {
 	-webkit-user-select: none;
 	font-size: 12px;
-	padding: 0 0 0 10px;
+	padding: 0 45px 0 10px;
 	font-weight: 400;
 }
 	
@@ -797,7 +784,7 @@ input:focus {
 	-webkit-user-select: none;
 	font-weight: 400;
 	float: right;
-	margin-top: -26px;
+	margin-top: -22px;
 	font-size: 12px;
 	padding: 0 10px 0 0;
 }	
@@ -815,15 +802,11 @@ input:focus {
 	
 #mini-player {
 	position: absolute;
-	background-color: rgba(226, 226, 226, 1);
+	background-color: rgb(238, 238, 238);
 	height: 50px;
 	width: 100%;
 	z-index: 1;
 	top: 0px;
- 
-	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);
-	-moz-box-shadow: 0 0 4px rgba(0,0,0,.3);
-	box-shadow: 0 0 4px rgba(0,0,0,.3);
 }
 
 #mini-player .Play {

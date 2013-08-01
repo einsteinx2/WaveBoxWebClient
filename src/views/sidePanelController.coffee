@@ -29,6 +29,7 @@ class SidePanelController extends Backbone.View
 			@main.$el.css
 				left: @left.$el.width() 
 				width: $(window).width() - @left.$el.width() - @right.$el.width()
+			@main.$el.addClass "transitions"
 		else
 			#@bindTouchEvents()
 			# FastClick!
@@ -49,19 +50,13 @@ class SidePanelController extends Backbone.View
 		
 	switch: (panel) ->
 		if panel is "right"
-			if wavebox.isMobile() 
-				@left.$el.css "z-index": -10
-				@right.$el.css "z-index": 10
-			else
+			if wavebox.isMobile()
 				@left.$el.css "display": "none"
-				@right.$el.css "display": "block"
+			@right.$el.css "display": "block"
 		else if panel is "left"
-			if wavebox.isMobile() 
-				@right.$el.css "z-index": -10
-				@left.$el.css "z-index": 10
-			else
-				@left.$el.css "display": "block"
+			if wavebox.isMobile()
 				@right.$el.css "display": "none"
+			@left.$el.css "display": "block"
 	
 	leftToggle: ->
 		if wavebox.isMobile()
@@ -74,7 +69,6 @@ class SidePanelController extends Backbone.View
 		else
 			leftwidth = @left.$el.width()
 			if not @leftActive
-				console.log "do it son #{@constructor.name}"
 				@main.$el.css
 					left: leftwidth
 					width: @main.$el.width() - leftwidth

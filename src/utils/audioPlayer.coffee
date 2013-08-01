@@ -76,6 +76,11 @@ module.exports = Backbone.Model.extend
 			@jPlayer.jPlayer "volume", newLevel
 
 	setPlayerSong: (song, shouldPlay) ->
+		if song is null
+			@jPlayer.jPlayer "stop"
+			@trigger "newSong"
+			return
+
 		incomingCodec = @preferredFormatForSong song
 		console.log "New song type: #{incomingCodec}"
 
