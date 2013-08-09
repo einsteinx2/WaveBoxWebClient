@@ -2,7 +2,7 @@
 #      Author: Justin Hill
 #        Date: 5/8/2013
 
-module.exports = Backbone.View.extend
+class NavSidebarItemView extends Backbone.View
 	tagName: "a"
 	template: _.template($("#template-sidebar-item").html())
 
@@ -28,3 +28,5 @@ module.exports = Backbone.View.extend
 
 		@$el.append $temp.children()
 		this
+	
+module.exports = NavSidebarItemView

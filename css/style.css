@@ -519,6 +519,10 @@ input:focus {
 	background-position: -100px -250px;
 }
 
+.sprite-new-playlist {
+	background-position: -150px -100px;
+}
+
 
 
 /* Page chrome */
@@ -621,13 +625,11 @@ input:focus {
 }
 	
 .MenuText {
-	margin-top: 18px;
-	position: absolute;
 	color: #1f1f1f;
+	line-height: 50px;
 	font-weight: 700;
 	font-size: 14px;
-	left: 45px;
-	width: 175px;
+	max-width: 175px;
 	box-sizing: border-box;
 	padding-right: 15px;
 }
@@ -639,6 +641,22 @@ input:focus {
 	box-sizing: border-box;
 	padding: 30px 0 0 15px;
 }		
+
+.navigation-item-input {
+	height: 50px;
+	border: none;
+	padding: 0 15px 0 0; 
+	margin: 0;
+	width: 155px;
+	background: transparent;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Helvetica";
+}
+
+.navigation-item-input::-webkit-input-placeholder {
+
+}
 
 .SidebarIcons {
 	opacity: .6;

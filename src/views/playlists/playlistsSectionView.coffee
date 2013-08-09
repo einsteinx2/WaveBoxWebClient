@@ -1,6 +1,7 @@
 Playlists = require "../../collections/playlists"
 SidebarSectionView = require "../navsidebarsectionview"
 PlaylistSidebarItemView = require "./playlistSidebarItemView"
+CreatePlaylistSidebarItemView = require '../createPlaylistSidebarItemView'
 
 class PlaylistSectionView extends SidebarSectionView
 
@@ -14,6 +15,7 @@ class PlaylistSectionView extends SidebarSectionView
 			@render()
 		@listenTo wavebox.dragDrop, "mediaDragStart", @mediaDragStart
 		@listenTo wavebox.dragDrop, "mediaDragEnd", @mediaDragEnd
+		@create = new CreatePlaylistSidebarItemView
 
 	#className: "main-scrollingContent artistsMain scroll listView"
 	render: ->
@@ -26,6 +28,7 @@ class PlaylistSectionView extends SidebarSectionView
 			if playlist.get("name") isnt "jukeboxQPbjnbh2JPU5NGxhXiiQ"
 				view = new PlaylistSidebarItemView model: playlist
 				$temp.append view.render().el
+		$temp.append @create.render().el
 		@$el.append $temp.children()
 		this
 	

@@ -174,10 +174,16 @@
 	<!-- Sidebar -->
 	<script type='text/template' id='template-sidebar-item'>
 		<li class="SidebarIcons">
-			<span class="sprite sprite-container <%= itemClass %>"></span>
+			<span class="sprite sprite-container float-left <%= itemClass %>"></span>
 			<span class="MenuText truncate-ellipsis"><%= itemTitle %></span>
 	    </li>
 	</script>
+
+	<script type='text/template' id='template-create-playlist-sidebar-item'>
+		<span class="sprite sprite-container float-left sprite-new-playlist"></span>
+		<input type="text" class="navigation-item-input" placeholder="New playlist"/>
+	</script>
+
 
 	<!-- Action sheet -->
 	<script type='text/template' id='template-action-sheet-item'>
