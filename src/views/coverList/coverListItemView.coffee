@@ -2,7 +2,7 @@ Utils = require "../../utils/utils"
 
 class CoverListItemView extends Backbone.View
 	tagName: 'div'
-	className: 'list-cover-item albumItem'
+	className: 'list-cover-item'
 	template: _.template($("#template-cover-item").html())
 	attributes:
 		"draggable": true
@@ -26,7 +26,7 @@ class CoverListItemView extends Backbone.View
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
-		if @fields.artId? 
+		if @fields.artId?
 			@art = new Image
 			@art.onload = @artLoaded
 			@art.src = wavebox.apiClient.getArtUrl(@fields.artId, 250)

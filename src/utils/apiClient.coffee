@@ -194,6 +194,22 @@ class ApiClient
 			async: true
 			type: "POST"
 
+	getGenreList: (callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/genres"
+			data: "s=#{@SESSION_ID}"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data.genres
+			error: (XHR, status, error) ->
+				console.log "error getting genre list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+
 	getSongList: (id, forItemType = "albums", callback) ->
 		return if not id?
 

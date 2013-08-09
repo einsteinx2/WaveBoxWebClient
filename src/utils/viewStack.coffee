@@ -11,6 +11,7 @@ module.exports = class ViewStack
 	constructor: (containerSelector) ->
 		@views = []
 		@resetNext = no
+		@animateNext = no
 		@$el = $(containerSelector)
 
 	push: (newView, animate = yes, reset = no) ->

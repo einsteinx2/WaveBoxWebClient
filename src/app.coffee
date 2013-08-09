@@ -13,6 +13,7 @@ $ ->
 	window.wavebox = {}
 	
 	wavebox.isMobile = -> if screen.width < 769 then true else false
+	#wavebox.isMobile = -> yes
 	wavebox.apiClient = new ApiClient
 	wavebox.dragDrop = new DragDrop
 

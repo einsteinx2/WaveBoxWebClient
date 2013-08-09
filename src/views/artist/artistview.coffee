@@ -24,16 +24,17 @@ class ArtistView extends PageView
 			rightAccessory: "sprite-play-queue"
 			artUrl: ""
 			pageTitle: @artist.get("artistName") or ""
+			search: no
 		document.title = "Wave - " + (@artist.get("artistName") or "")
 
 
 		$content = $page.find(".page-content")
-		$content.addClass "scrollAnchor"
+		$content.addClass "scroll"
 		$content.append($("#template-page-collection-actions").html())
 		
 		if @contentLoaded
-			covers = new CoverListView collection: @artist.get("albums")
-			$content.append covers.render().el
+			@covers = new CoverListView collection: @artist.get("albums")
+			$content.append @covers.render().el
 		@$el.html $page.children()
 
 		this

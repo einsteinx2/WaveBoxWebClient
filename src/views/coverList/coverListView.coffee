@@ -6,10 +6,6 @@ class CoverListView extends Backbone.View
 	initialize: (options) ->
 		@model = new Backbone.Model
 		@model.set "filter", ""
-
-		if options?
-			@model.set "rows", 
-
 		@listenTo @model, "change", @filter
 
 	className: "list-cover"
@@ -21,14 +17,15 @@ class CoverListView extends Backbone.View
 		filter = @model.get("filter").toLowerCase()
 
 		@collection.each (item) =>
-			view = new CoverListItemView model: item
-			$temp.append view.render().el
+			if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
+				view = new CoverListItemView model: item
+				$temp.append view.render().el
 
 		@$el.empty().append $temp.children()
 		this
 
 	filter: ->
 		clearTimeout @filterTimeout
-		@filterTimeout = setTimeout @render.bind(this), 50
+		@filterTimeout = setTimeout @render.bind(this), 100
 
 module.exports = CoverListView

@@ -10,8 +10,11 @@ class FolderView extends PageView
 	className: "mediaPage"
 	events:
 		"click .collection-actions-play-all": "playAll"
-	
+		"input .page-search-textbox": "search"
 	template: _.template($("#template-page-folder").html())
+
+	search: ->
+		@covers.model.set "filter", $(event.target).val()
 
 	initialize: (options) ->
 		@contentLoaded = no
@@ -53,7 +56,7 @@ class FolderView extends PageView
 			tracks.each (track) ->
 				duration += track.get("duration")
 
-			duration = 
+			duration =
 				if duration > 0
 					Utils.formattedTimeWithSeconds(duration)
 				else
@@ -79,15 +82,15 @@ class FolderView extends PageView
 
 
 			if folders.size() > 0
-				view = new CoverListView collection: folders
-				$content.append view.render().el
+				@covers = new CoverListView collection: folders
+				$content.append @covers.render().el
 
 			tracks = @folder.get "tracks"
 			console.log @folder
 			if tracks.length > 0
 				view = new TrackListView collection: tracks
 				$content.append view.render().el
-		@$el.empty().append $page
+		@$el.empty().append $page.children()
 		this
 	
 	playAll: (e) ->

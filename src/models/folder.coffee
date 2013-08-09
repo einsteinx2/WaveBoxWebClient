@@ -37,8 +37,8 @@ class Folder extends Backbone.Model
 					new Folder item
 
 				theFolder = data.containingFolder or {}
-				theFolder.folders = new FolderList(folderModels)
-				theFolder.tracks = new TrackList(data.songs)
+				theFolder.folders = new Backbone.Collection(folderModels)
+				theFolder.tracks = new TrackList data.songs, comparator: "trackNumber"
 				@set theFolder
 							
 module.exports = Folder
