@@ -13,6 +13,7 @@ class CoverListItemView extends Backbone.View
 	
 	events:
 		"click": ->
+			console.log @model
 			wavebox.router.navigate @model.pageUrl(), trigger: true
 
 		"dragstart": (e) ->

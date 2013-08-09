@@ -6,4 +6,6 @@ class FolderList extends Backbone.Collection
 		console.log "hello world"
 		console.log @models
 
+window.FolderList = FolderList
+
 module.exports = FolderList
