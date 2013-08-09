@@ -6,8 +6,7 @@ class PageView extends Backbone.View
 		$page = $("<div>")
 		$page.append @template(options)
 		if options.search is yes
-			$page.find(".page-content").addClass("page-content-search")
-			$page.append @search()
+			$page.find(".page-content").addClass("page-content-search").before @search()
 
 		return $page
 

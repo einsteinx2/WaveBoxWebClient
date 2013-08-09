@@ -11,9 +11,8 @@ class AlbumsView extends PageView
 		@collection.fetch reset: yes
 					
 	events:
-		"input .searchBar-textbox": (event) ->
-			@albumListing.filter = $(event.currentTarget).val()
-			@albumListing.trigger "filterChanged"
+		"input .page-search-textbox": (event) ->
+			@covers.model.set "filter", $(event.target).val()
 
 		"click .DirectoryViewIcon": (event) ->
 			console.log "dv click"
@@ -32,8 +31,8 @@ class AlbumsView extends PageView
 
 		$content = result.find(".page-content").addClass("scroll")
 		
-		view = new CoverListView collection: @collection
-		$content.append view.render().el
+		@covers = new CoverListView collection: @collection
+		$content.append @covers.render().el
 
 		@$el.empty().append(result)
 		this

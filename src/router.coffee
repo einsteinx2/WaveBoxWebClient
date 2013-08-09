@@ -1,7 +1,8 @@
 ArtistsView = require './views/artists/artistsview'
+ArtistView = require './views/artist/artistview'
 AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
-ArtistView = require './views/artist/artistview'
+GenresView = require './views/genresView'
 FolderView = require './views/folder/folderview'
 PlaylistListingView = require './views/playlists/playlistListingView'
 
@@ -10,6 +11,7 @@ module.exports = Backbone.Router.extend
 		"artists(/:artistId)":		"artists"
 		"folders(/:folderId)":		"folders"
 		"albums(/:albumId)":		"albums"
+		"genres(/:genreId)":		"genres"
 		"playlists/:playlistId":	"playlists"
 		"favorites":				"favorites"
 		"settings":					"settings"
@@ -46,6 +48,16 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new AlbumListingView albumId: albumId)
 		else
 			wavebox.appController.mainView.push(new AlbumsView)
+
+		if wavebox.isMobile()
+			wavebox.appController.panels.focusMain()
+
+	genres: (genreId) ->
+		@sendSelectionNotification "Genres"
+		if genreId?
+			#wavebox.appController.mainView.push(new Gen
+		else
+			wavebox.appController.mainView.push(new GenresView)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()

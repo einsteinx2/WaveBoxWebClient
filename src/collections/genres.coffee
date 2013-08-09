@@ -1,18 +1,17 @@
-Album = require '../models/album'
+Genre = require '../models/genre'
 
-class Albums extends Backbone.Collection
-	model: Album
-
+class Genres extends Backbone.Collection
+	model: Genre
 	sync: (method, model, options) ->
 		if method is "read"
-			wavebox.apiClient.getAlbumList (success, data) =>
+			wavebox.apiClient.getGenreList (success, data) =>
 				if success
 					@set data
 					options.success data
 				else
 					options.error data
-		
+
 		else
 			console.log "Method '#{method}' is undefined"
 
-module.exports = Albums
+module.exports = Genres

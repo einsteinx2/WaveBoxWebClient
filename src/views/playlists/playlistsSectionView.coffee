@@ -23,9 +23,9 @@ class PlaylistSectionView extends SidebarSectionView
 		# Create the rows
 		$temp = $('<div>')
 		@collection.each (playlist) =>
-			view = new PlaylistSidebarItemView model: playlist
-			view.parent = this
-			$temp.append view.render().el
+			if playlist.get("name") isnt "jukeboxQPbjnbh2JPU5NGxhXiiQ"
+				view = new PlaylistSidebarItemView model: playlist
+				$temp.append view.render().el
 		@$el.append $temp.children()
 		this
 	

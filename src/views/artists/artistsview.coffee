@@ -5,23 +5,25 @@ CoverListView = require "../coverList/coverListView"
 class ArtistsView extends PageView
 	tagName: "div"
 	filter: ""
-	initialize: ->
-		@collection = new Artists
+	initialize: (options) ->
+		if options? and options.genreId?
+			@collection = new Genre
+		else
+			@collection = new Artists
+
 		@listenToOnce @collection, "reset", @render
 		@collection.fetch reset: true
+		@el.addEventListener "input", @search, yes
 
-					
 	events:
-		"input .searchBar-textbox": (event) ->
-			@artistListing.filter = $(event.currentTarget).val()
-			@artistListing.trigger "filterChanged"
-
 		"click .DirectoryViewIcon": (event) ->
 			@$el.find(".main-scrollingContent").addClass "listView"
 
 		"click .AlbumSortIcon": (event) ->
 			@$el.find(".main-scrollingContent").removeClass "listView"
 
+		"input .page-search-textbox": (event) ->
+			@covers.model.set "filter", $(event.target).val()
 			
 	render: ->
 		result = ArtistsView.__super__.render
@@ -31,10 +33,10 @@ class ArtistsView extends PageView
 			search: yes
 		$content = result.find(".page-content").addClass("scroll")
 
-		covers = new CoverListView collection: @collection
-		$content.append covers.render().el
+		@covers = new CoverListView collection: @collection
+		$content.append @covers.render().el
 
-		@$el.empty().append(result)
+		@$el.empty().append(result.children())
 		this
-	
+
 module.exports = ArtistsView

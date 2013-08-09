@@ -39,13 +39,14 @@ class AlbumView extends PageView
 			totalDuration = Utils.formattedTimeWithSeconds duration
 			trackCount = tracks.size()
 
-		$temp.append AlbumView.__super__.render
+		$page = AlbumView.__super__.render
 			leftAccessory: "sprite-back-arrow"
 			rightAccessory: "sprite-play-queue"
 			artUrl: artUrl or ""
 			pageTitle: albumTitle or ""
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
+		$temp.append $page.children()
 		document.title = "Wave - " + (albumTitle or "")
 
 		$content = $temp.find(".page-content")
@@ -64,7 +65,6 @@ class AlbumView extends PageView
 			console.log @album
 
 			$content.append(trackList.render().el)
-			$temp.find(".searchBar").remove()
 			$content.addClass "scroll"
 			if wavebox.isMobile()
 				trackList.$el.css "top", "#{screen.width}px"
