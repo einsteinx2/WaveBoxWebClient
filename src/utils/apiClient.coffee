@@ -51,6 +51,20 @@ class ApiClient
 				type: "POST"
 		else
 			if callback? then callback false
+	
+	createPlaylist: (name, callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/playlists"
+			data: "action=create&name=#{encodeURIComponent(name)}&s=#{@SESSION_ID}"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true
+
+			error: (XHR, status, error) ->
+				console.log "error getting playlist list: #{status}"
+				callback false, error
 
 	addToPlaylist: (playlistId, itemIds, callback) ->
 		itemIdString = ""

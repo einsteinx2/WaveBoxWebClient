@@ -10,12 +10,13 @@ class PlaylistSectionView extends SidebarSectionView
 		@title = options.title
 		@filter = ""
 		@collection = new Playlists
-		@collection.fetch reset: true
+		@create = new CreatePlaylistSidebarItemView
 		@listenToOnce @collection, "reset", =>
 			@render()
 		@listenTo wavebox.dragDrop, "mediaDragStart", @mediaDragStart
 		@listenTo wavebox.dragDrop, "mediaDragEnd", @mediaDragEnd
-		@create = new CreatePlaylistSidebarItemView
+		@listenTo @create.model, "changed", @newPlaylist
+		@collection.fetch reset: yes
 
 	#className: "main-scrollingContent artistsMain scroll listView"
 	render: ->
@@ -31,6 +32,10 @@ class PlaylistSectionView extends SidebarSectionView
 		$temp.append @create.render().el
 		@$el.append $temp.children()
 		this
+
+	newPlaylist: ->
+		@listenTo @collection, "reset", @render
+		@collection.fetch reset: yes
 	
 	mediaDragStart: =>
 		@$el.append($("<div>").addClass("dropzone-callout"))

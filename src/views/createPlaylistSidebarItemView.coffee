@@ -9,17 +9,25 @@ class CreatePlaylistSidebarItemView extends Backbone.View
 	className: 'SidebarIcons'
 	template: _.template($("#template-create-playlist-sidebar-item").html())
 	events:
-		"input input": "input"
+		"click": "input"
+		"keydown": "keydown"
 		"dragover": (e) ->
 			return no
 
+	initialize: ->
+		@model = new Backbone.Model
+
 	render: ->
 		@$el.empty().append @template()
-		console.log "OMG OMG OMG OMG"
-		console.log @template()
+		@delegateEvents()
 		this
 
-	input: (e) ->
-		console.log e.keyCode
+	keydown: (e) ->
+		if e.keyCode is 13
+			wavebox.apiClient.createPlaylist $(e.target).val(), (success, error) =>
+				if error?
+					console.log error
+				else
+					@model.trigger "changed"
 
 module.exports = CreatePlaylistSidebarItemView
