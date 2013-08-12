@@ -165,6 +165,7 @@ input:focus {
 }
 
 .list-track-row {
+	position: relative;
 	height: 44px;
 	padding: 0;
 	list-style: none;

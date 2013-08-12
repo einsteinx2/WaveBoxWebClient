@@ -23,7 +23,6 @@ class PlaylistListingView extends PageView
 			@playlist.fetch()
 
 	render: ->
-		$temp = $("<div>")
 		if @contentLoaded
 			artId = @playlist.get "artId"
 
@@ -45,7 +44,7 @@ class PlaylistListingView extends PageView
 			totalDuration = Utils.formattedTimeWithSeconds @playlist.get "duration"
 			trackCount = tracks.size()
 
-		$temp.append PlaylistListingView.__super__.render
+		$temp = PlaylistListingView.__super__.render
 			leftAccessory: "sprite-menu"
 			rightAccessory: "sprite-play-queue"
 			artUrl: artUrl or ""
@@ -68,6 +67,7 @@ class PlaylistListingView extends PageView
 				albumName: playlistName or ""
 
 			$content.append trackListView.render().el
+			$content.addClass "scroll"
 		else
 			console.log "playlistListingView content not loaded"
 			$temp.append "Loading"

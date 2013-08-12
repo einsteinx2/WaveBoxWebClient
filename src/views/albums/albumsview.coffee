@@ -34,7 +34,7 @@ class AlbumsView extends PageView
 		@covers = new CoverListView collection: @collection
 		$content.append @covers.render().el
 
-		@$el.empty().append(result)
+		@$el.empty().append(result.children())
 		this
 	
 module.exports = AlbumsView
