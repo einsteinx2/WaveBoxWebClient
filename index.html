@@ -115,9 +115,11 @@
 				<li>
 					<h3>play time: <%= totalDuration %></h3>
 				</li>
+				<% if (typeof releaseYear !== "undefined" && releaseYear != null) { %>
 				<li>
 					<h3>released: <%= releaseYear %></h3>
 				</li>
+				<% } %>
 			</ul>
 			<div class="page-header-collection-actions">
 				<div class="collection-actions-item collection-actions-play-all">Play all</div>

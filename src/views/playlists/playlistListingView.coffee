@@ -1,11 +1,17 @@
 TrackListView = require '../tracklistview'
 Playlist = require '../../models/playlist'
 Utils = require '../../utils/utils'
+PageView = require '../pageView'
 
-module.exports = Backbone.View.extend
+class PlaylistListingView extends PageView
 	tagName: "div"
+	className: "mediaPage"
 	# should the name of this template be changed?
 	template: _.template($("#template-page-album").html())
+
+	events:
+		"click .collection-actions-play-all": "playAll"
+
 	initialize: (options) ->
 		if options.playlistId?
 			@contentLoaded = no
@@ -39,36 +45,39 @@ module.exports = Backbone.View.extend
 			totalDuration = Utils.formattedTimeWithSeconds @playlist.get "duration"
 			trackCount = tracks.size()
 
-		$temp.append wavebox.views.pageView
-			leftAccessory: "MenuIcon"
-			rightAccessory: "PlaylistIcon"
+		$temp.append PlaylistListingView.__super__.render
+			leftAccessory: "sprite-menu"
+			rightAccessory: "sprite-play-queue"
 			artUrl: artUrl or ""
 			pageTitle: playlistName or ""
 			totalDuration: totalDuration or ""
 			trackCount: trackCount or ""
-		document.title = if playlistName? then "Wave - #{playlistName}" else "Wave - Playlist"
-			
+
+		$content = $temp.find('.page-content')
 		if @contentLoaded
 			console.log "playlistListingView tracks: "
 			console.log tracks
 			trackListView = new TrackListView
 				collection: tracks
 				artUrl: artUrl
-			$temp.append @template
+			$content.append @template
 				artUrl: artUrl or ""
 				totalDuration: Utils.formattedTimeWithSeconds duration
 				trackCount: tracks.size()
 				artistName: ""
 				albumName: playlistName or ""
 
-			$temp.find(".albumListingContent").append trackListView.render().el
+			$content.append trackListView.render().el
 		else
 			console.log "playlistListingView content not loaded"
 			$temp.append "Loading"
 		@$el.empty().append $temp.children()
 
-		# HACK: in the future, we should be adding this to views
-		# that need it instead of removing it from views that don't
-		# need it.
-		@$el.find(".DirectoryViewIcon, .AlbumSortIcon").remove()
 		this
+
+	playAll: (e) ->
+		e.preventDefault()
+		@playlist.get("tracks").each (track) ->
+			wavebox.audioPlayer.playQueue.add track
+
+module.exports = PlaylistListingView
