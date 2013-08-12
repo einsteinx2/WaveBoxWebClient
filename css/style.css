@@ -625,6 +625,7 @@ input:focus {
 }
 	
 .MenuText {
+	display: block;
 	color: #1f1f1f;
 	line-height: 50px;
 	font-weight: 700;
