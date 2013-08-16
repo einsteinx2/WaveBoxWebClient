@@ -14,9 +14,17 @@ module.exports = class ViewStack
 		@animateNext = no
 		@$el = $(containerSelector)
 
-	push: (newView, animate = yes, reset = no) ->
+	push: (newView, animate, reset = no) ->
+
 		# push a view onto the stack and render it
 		return if not newView?
+
+		if not animate?
+			animate =
+				if wavebox.isMobile()
+					yes
+				else
+					no
 		
 		bury = @views[@views.length - 1]
 		@views.push newView
@@ -25,33 +33,37 @@ module.exports = class ViewStack
 		newView.render()
 		console.log "render time: #{Date.now() - a}"
 
-		if animate and bury?
+		if bury? and animate
 			bury.$el.addClass "viewstack-animate"
 			newView.$el.addClass "viewstack-animate viewstack-offscreen-right"
 
-		a = Date.now()
 		@$el.append newView.el
-		console.log "append time: #{Date.now() - a}"
 
-		a = Date.now()
-		Utils.delay 20, ->
-			if animate and bury?
+		if animate and bury?
+			Utils.delay 20, ->
 				newView.$el.addClass("viewstack-onscreen")
 				bury.$el.addClass "viewstack-offscreen-left"
-				
-		Utils.delay 600, =>
-			if animate and bury?
+					
+			Utils.delay 600, =>
 				newView.$el.removeClass "viewstack-animate viewstack-offscreen-right viewstack-onscreen"
 				bury.$el.hide()
 
-			if reset or @resetNext then @reset()
+		else if bury?
+			bury.$el.hide()
 
-			console.log "animate time: #{Date.now() - a}"
+		if reset or @resetNext then @reset()
 
-	pop: (animate = yes) ->
+	pop: (animate) ->
 		# pop a view off the stack
 		top = @views.pop()
 		next = @views[@views.length - 1]
+
+		if not animate?
+			animate =
+				if wavebox.isMobile()
+					yes
+				else
+					no
 
 		if animate
 			top.$el.addClass "viewstack-animate"
@@ -59,12 +71,15 @@ module.exports = class ViewStack
 
 		next.$el.show()
 
-		Utils.delay 20, ->
-			top.$el.addClass "viewstack-offscreen-right"
-			next.$el.removeClass "viewstack-offscreen-left"
+		if animate
+			Utils.delay 20, ->
+				top.$el.addClass "viewstack-offscreen-right"
+				next.$el.removeClass "viewstack-offscreen-left"
 
-			Utils.delay 600, ->
-				top.$el.remove()
+				Utils.delay 600, ->
+					top.$el.remove()
+		else
+			top.$el.remove()
 	
 		h = Backbone.history
 		h.navigate h[h.length - 2], no
