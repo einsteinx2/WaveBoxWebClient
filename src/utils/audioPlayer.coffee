@@ -26,7 +26,7 @@ module.exports = Backbone.Model.extend
 		not @jPlayer.data().jPlayer.status.paused
 		
 	next: ->
-		index = @playQueue.nowPlayingIndex + 1
+		index = @playQueue.get("nowPlayingIndex") + 1
 		if index > @playQueue.tracks.length - 1
 			if @playQueue.get("repeat") is "all"
 				index = 0
@@ -34,12 +34,12 @@ module.exports = Backbone.Model.extend
 				index = null
 
 		if @playQueue.get("repeat") is "one"
-			index = @playQueue.nowPlayingIndex
+			index = @playQueue.get("nowPlayingIndex")
 
 		@playAt index
 
 	previous: ->
-		index = @playQueue.nowPlayingIndex - 1
+		index = @playQueue.get("nowPlayingIndex") - 1
 		@playAt index
 
 	playAt: (index) ->
@@ -47,7 +47,7 @@ module.exports = Backbone.Model.extend
 			@stop()
 			return
 
-		@playQueue.nowPlayingIndex = index
+		@playQueue.set("nowPlayingIndex", index)
 		song = @playQueue.tracks.at(index)
 		if song?
 			@setPlayerSong song, yes

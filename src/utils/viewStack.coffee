@@ -11,7 +11,7 @@ module.exports = class ViewStack
 	constructor: (containerSelector) ->
 		@views = []
 		@resetNext = no
-		@animateNext = no
+		@animateNext = yes
 		@$el = $(containerSelector)
 
 	push: (newView, animate, reset = no) ->
@@ -21,7 +21,10 @@ module.exports = class ViewStack
 
 		if not animate?
 			animate =
-				if wavebox.isMobile()
+				if not @animateNext
+					console.log "nope nope nope nope"
+					no
+				else if wavebox.isMobile()
 					yes
 				else
 					no
@@ -52,6 +55,7 @@ module.exports = class ViewStack
 			bury.$el.hide()
 
 		if reset or @resetNext then @reset()
+		@animateNext = yes
 
 	pop: (animate) ->
 		# pop a view off the stack
@@ -60,7 +64,9 @@ module.exports = class ViewStack
 
 		if not animate?
 			animate =
-				if wavebox.isMobile()
+				if not @animateNext
+					no
+				else if wavebox.isMobile()
 					yes
 				else
 					no

@@ -9,6 +9,8 @@ class NavSidebarItemView extends Backbone.View
 	events:
 		"click": (e) ->
 			wavebox.appController.mainView.resetNext = yes
+			wavebox.appController.mainView.animateNext = no
+			return yes
 
 	initialize: ->
 		@listenTo wavebox.appController, "sidebarItemSelected", @itemSelected

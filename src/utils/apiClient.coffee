@@ -95,7 +95,6 @@ class ApiClient
 	getPlaylistList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error

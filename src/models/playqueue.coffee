@@ -3,44 +3,47 @@ TrackList = require '../collections/tracklist'
 class PlayQueue extends Backbone.Model
 	initialize: ->
 		console.log "Readying the play queue..."
-#		if localStorage?
-#			normalTracks = localStorage.getItem "wbNormalPlaylist"
-#			shuffleTracks = localStorage.getItem "wbShufflePlaylist"
-#			nowPlayingIndex = localStorage.getItem "wbNowPlayingIndex"
-#			if shuffleTracks?
-#				@tracks = new Playlist shuffleTracks
-#				@toggleTracks = new Playlist normalTracks
-#				@shuffle = yes
-#
-#			else if normalTracks?
-#				@tracks = new Playlist normalTracks
-#				@shuffle = no
-#			else
-#				@tracks = new Playlist
-#				@shuffle = no
-#
-#			if nowPlayingIndex?
-#				@nowPlayingIndex = nowPlayingIndex
-#			else
-#				@nowPlayingIndex = 0
-#		else
-		@tracks = new TrackList
-		@set "shuffle", no
-		@set "repeat", no
-		@nowPlayingIndex = 0
+		if localStorage?
+			normalTracks = JSON.parse(localStorage.getItem("wbNormalTracks"))
+			shuffleTracks = JSON.parse(localStorage.getItem "wbShuffleTracks")
+			nowPlayingIndex = parseInt(localStorage.getItem("wbNowPlayingIndex"))
+			if shuffleTracks?
+				@tracks = new TrackList shuffleTracks
+				@toggleTracks = new TrackList normalTracks
+				@shuffle = yes
+
+			else if normalTracks?
+				@tracks = new TrackList normalTracks
+				@shuffle = no
+			else
+				@tracks = new TrackList
+				@shuffle = no
+
+			if nowPlayingIndex?
+				@set("nowPlayingIndex", nowPlayingIndex)
+			else
+				@set("nowPlayingIndex", 0)
+		else
+			@tracks = new TrackList
+			@set "shuffle", no
+			@set "repeat", no
+			@set("nowPlayingIndex", 0)
+		
+		console.log "REGISTERING"
+		@on "change", @localSave
 	
 	add: (track) ->
 		@tracks.add track
 		@trigger "change"
 
 	addNext: (track) ->
-		@tracks.add track, {at: @nowPlayingIndex + 1}
+		@tracks.add track, {at: @get("nowPlayingIndex") + 1}
 		@trigger "change"
 
 	move: (track, toIndex) ->
 		oldIndex = _.indexOf(@tracks.models, track)
-		if @nowPlayingIndex is oldIndex
-			@nowPlayingIndex = toIndex
+		if @get("nowPlayingIndex") is oldIndex
+			@set("nowPlayingIndex", toIndex)
 		console.log oldIndex, toIndex
 		@tracks.models.splice(toIndex, 0, @tracks.models.splice(oldIndex, 1)[0])
 		console.log "moved!"
@@ -48,13 +51,13 @@ class PlayQueue extends Backbone.Model
 	
 	clear: =>
 		@tracks = new TrackList
-		@nowPlayingIndex = null
+		@unset("nowPlayingIndex")
 		wavebox.audioPlayer.setPlayerSong null
 		@trigger "change"
 	
 	currentSong: ->
-		if @nowPlayingIndex?
-			@tracks.at @nowPlayingIndex
+		if @get("nowPlayingIndex")?
+			@tracks.at @get("nowPlayingIndex")
 		else
 			null
 
@@ -65,13 +68,13 @@ class PlayQueue extends Backbone.Model
 		if shuffle
 			@set "normalOrder", _.clone(@tracks)
 			shuffled = _.shuffle @tracks.models
-			current = @tracks.at @nowPlayingIndex
+			current = @tracks.at @get("nowPlayingIndex")
 			@tracks = new TrackList(shuffled)
-			@nowPlayingIndex = @tracks.indexOf current
+			@set("nowPlayingIndex", @tracks.indexOf current)
 		else
-			current = @tracks.at @nowPlayingIndex
+			current = @tracks.at @get("nowPlayingIndex")
 			@tracks = @get "normalOrder"
-			@nowPlayingIndex = @tracks.indexOf current
+			@set("nowPlayingIndex", @tracks.indexOf current)
 			@unset "normalOrder"
 
 		@trigger "change"
@@ -84,5 +87,16 @@ class PlayQueue extends Backbone.Model
 				"all"
 			else
 				no
+
+	localSave: ->
+		console.log JSON.stringify(@tracks)
+		if @shuffle
+			localStorage.setItem "wbNormalTracks", JSON.stringify(@get("normalOrder"))
+			localStorage.setItem "wbShuffleTracks", JSON.stringify(@tracks)
+			localStorage.setItem "wbNowPlayingIndex", @get("nowPlayingIndex")
+		else
+			localStorage.clear "wbShuffleTracks"
+			localStorage.setItem "wbNormalTracks", JSON.stringify(@tracks)
+			localStorage.setItem "wbNowPlayingIndex", @get("nowPlayingIndex")
 
 module.exports = PlayQueue

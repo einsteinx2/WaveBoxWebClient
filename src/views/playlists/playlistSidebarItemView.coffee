@@ -1,4 +1,5 @@
 NavSidebarItemView = require '../navsidebaritemview'
+ActionSheetView = require '../actionSheet/actionSheetView'
 
 module.exports = class extends NavSidebarItemView
 	events:
@@ -17,11 +18,13 @@ module.exports = class extends NavSidebarItemView
 				# remove loading spinner and stuff
 			wavebox.dragDrop.mediaDragEnd()
 
+		"contextmenu": "contextmenu"
+
 	initialize: ->
 		@listenTo wavebox.appController, "sidebarItemSelected", @itemSelected
 
 	itemSelected: (playlistId) ->
-		if playlistId == "playlist #{@model.get "id"}" then @$el.addClass("SidebarIconsActive") else @$el.removeClass("SidebarIconsActive")
+		if playlistId is "playlist #{@model.get "id"}" then @$el.addClass("SidebarIconsActive") else @$el.removeClass("SidebarIconsActive")
 
 	render: ->
 		@model.set "href", "#playlists/#{@model.get "id"}"
@@ -30,3 +33,21 @@ module.exports = class extends NavSidebarItemView
 			"itemClass": "sprite-playlist"
 		super
 		this
+
+	contextmenu: ->
+		console.log "showing action sheet"
+		sheet = new ActionSheetView({
+			"song": @model
+			"items":
+				[{
+					"itemTitle": "Delete playlist"
+					"action": @delete
+				}]
+			}).render()
+		wavebox.appController.mainView.$el.append sheet.el
+		sheet.show()
+		return no
+
+	delete: =>
+		@model.destroy()
+		@remove()

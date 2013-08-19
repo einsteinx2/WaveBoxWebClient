@@ -1,8 +1,11 @@
 TrackList = require '../collections/tracklist'
 
 class Playlist extends Backbone.Model
+	url: -> "/api/playlists/#{@get("id")}"
+	pageUrl: -> "/playlists/#{@get("id")}"
+
 	defaults:
-		playlistId: null
+		id: null
 		name: null
 		count: null
 		duration: null
@@ -11,28 +14,19 @@ class Playlist extends Backbone.Model
 		tracks: null
 
 	initialize: (options) ->
-		@playlistId = if options.id? then options.id else null
-		console.log "Playlist INIT called for #{@playlistId} with options:"
-		console.log options
-
-	pageUrl: ->
-		"/playlists/#{@get("playlistId")}"
+		if options?
+			@set "id", options.id or null
 
 	coverViewFields: ->
 		title: @get "playlistName"
 		artId: @get "artId"
 
-	sync: (method, model, options) ->
-		if method is "read"
-			console.log "Playlist SYNC called for #{@playlistId}"
-			wavebox.apiClient.getPlaylist @playlistId, (success, data) =>
-				if success
-					hash = data.playlists[0]
-
-					hash.tracks = new TrackList data.mediaItems
-					@set hash
-				else
-					console.log "artistInfo!"
-					console.log data
+	parse: (response, options) ->
+		if response.playlists? and response.mediaItems?
+			hash = response.playlists[0]
+			hash.tracks = new TrackList response.mediaItems
+			return hash
+		else
+			return response
 
 module.exports = Playlist
