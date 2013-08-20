@@ -376,7 +376,6 @@ input:focus {
 .list-cover-item > div
 {
 	padding-top: 5px;
-	max-width: -webkit-calc(100% - 85px);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1067,6 +1066,10 @@ input:focus {
 		border-bottom: 1px solid #cfcfcf;
 		overflow: hidden;
 	}
+
+	.list-cover-item > div {
+		max-width: -webkit-calc(100% - 85px);
+	}	  
 
 	.list-cover-item :first-child
 	{
