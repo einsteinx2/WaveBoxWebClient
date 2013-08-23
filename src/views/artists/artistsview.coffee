@@ -1,18 +1,24 @@
 PageView = require "../pageView"
 Artists = require "../../collections/artists"
 CoverListView = require "../coverList/coverListView"
+Genre = require '../../models/genre'
 
 class ArtistsView extends PageView
 	tagName: "div"
 	filter: ""
 	initialize: (options) ->
 		if options? and options.genreId?
-			@collection = new Genre
+			@collection = new Genre null, genreId: options.genreId
 		else
 			@collection = new Artists
 
-		@listenToOnce @collection, "reset", @render
-		@collection.fetch reset: true
+		console.log @collection
+
+		@collection.fetch reset: yes
+		
+		@listenToOnce @collection, "sync", =>
+			@fetched = yes
+			@render()
 		@el.addEventListener "input", @search, yes
 
 	events:
@@ -33,8 +39,16 @@ class ArtistsView extends PageView
 			search: yes
 		$content = result.find(".page-content").addClass("scroll")
 
-		@covers = new CoverListView collection: @collection
-		$content.append @covers.render().el
+		if @fetched
+			artists =
+				if @collection.constructor.name is "Artists"
+					@collection
+				else if @collection.constructor.name is "Genre"
+					@collection.get("artists")
+
+			console.log @collection
+			@covers = new CoverListView collection: artists
+			$content.append @covers.render().el
 
 		@$el.empty().append(result.children())
 		this

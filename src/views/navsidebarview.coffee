@@ -42,6 +42,11 @@ module.exports = Backbone.View.extend
 					itemTitle: "Folders",
 					itemClass: "sprite-folder",
 					href: "#folders"
+				},
+				{
+					itemTitle: "Genres",
+					itemClass: "sprite-folder",
+					href: "#genres"
 				}
 			]
 		@playlistSectionView = new PlaylistsSectionView

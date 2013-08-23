@@ -1,6 +1,6 @@
 Artist = require "../models/artist"
 
-module.exports = Backbone.Collection.extend
+class Artists extends Backbone.Collection
 	model: Artist
 
 	sync: (method, model, options) ->
@@ -14,3 +14,5 @@ module.exports = Backbone.Collection.extend
 					options.error data
 		else
 			console.log "Method '#{method}' is undefined"
+
+module.exports = Artists

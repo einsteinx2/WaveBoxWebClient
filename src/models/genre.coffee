@@ -12,26 +12,32 @@ class Genre extends Backbone.Model
 		Albums: null
 		Tracks: null
 
-	initialize: (options) ->
+	initialize: (attributes, options) ->
 		if options.genreId?
 			@set "GenreId", options.genreId
+			@set "id", options.genreId
+		@fetched = no
+		@on "request", =>
+			@fetched = yes
 
+	url: ->
+		"/api/genres/#{@get("GenreId")}"
 	pageUrl: ->
 		"/genres/#{@get("GenreId")}"
 
 	coverViewFields: ->
-		title: @get "GenreName"
-		artId: null
+		return title: @get "GenreName", artId: null
 
-	sync: (method, model, options) ->
-		if method is "read"
-			wavebox.apiClient.getGenre @get("GenreId"), (success, data) ->
-				if success
-					hash = {}
-					hash.folders = new Folders(data.folders)
-					hash.artists = new Artists(data.artists)
-					hash.albums = new Albums(data.albums)
-					hash.tracks = new TrackList(data.songs)
-					@set hash
+	parse: (response, options) ->
+		hash = {}
+		if @fetched
+			hash.folders = new Folders(response.folders)
+			hash.artists = new Artists(response.artists)
+			hash.albums = new Albums(response.albums)
+			hash.tracks = new TrackList(response.songs)
+		else
+			hash = response
+
+		return hash
 
 module.exports = Genre

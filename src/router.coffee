@@ -54,8 +54,9 @@ module.exports = Backbone.Router.extend
 
 	genres: (genreId) ->
 		@sendSelectionNotification "Genres"
+		console.log genreId
 		if genreId?
-			#wavebox.appController.mainView.push(new Gen
+			wavebox.appController.mainView.push(new ArtistsView genreId: genreId)
 		else
 			wavebox.appController.mainView.push(new GenresView)
 

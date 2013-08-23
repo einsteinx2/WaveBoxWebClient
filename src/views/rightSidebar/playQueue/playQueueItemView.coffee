@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend
 		@$el.addClass "play-queue-drag-position-indicator"
 
 	drop: ->
-		item = wavebox.dragDrop.dropObject	
+		item = wavebox.dragDrop.dropObject
 		console.log item
 		wavebox.audioPlayer.playQueue.move(item.model, _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model))
 
