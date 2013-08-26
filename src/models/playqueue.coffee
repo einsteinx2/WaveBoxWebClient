@@ -32,8 +32,8 @@ class PlayQueue extends Backbone.Model
 		console.log "REGISTERING"
 		@on "change", @localSave
 	
-	add: (track) ->
-		@tracks.add track
+	add: (track, at = undefined) ->
+		@tracks.add track, at: at
 		@trigger "change"
 
 	addNext: (track) ->
@@ -89,7 +89,6 @@ class PlayQueue extends Backbone.Model
 				no
 
 	localSave: ->
-		console.log JSON.stringify(@tracks)
 		if @shuffle
 			localStorage.setItem "wbNormalTracks", JSON.stringify(@get("normalOrder"))
 			localStorage.setItem "wbShuffleTracks", JSON.stringify(@tracks)

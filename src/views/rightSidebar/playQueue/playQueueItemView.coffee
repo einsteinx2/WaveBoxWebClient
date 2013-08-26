@@ -2,7 +2,7 @@ Track = require '../../../models/track'
 Utils = require '../../../utils/utils'
 ActionSheetView = require '../../actionSheet/actionSheetView'
 
-module.exports = Backbone.View.extend
+class PlayQueueItemView extends Backbone.View
 	model: Track
 	tagName: "div"
 	className: "play-queue-item"
@@ -55,6 +55,11 @@ module.exports = Backbone.View.extend
 		@$el.addClass "play-queue-drag-position-indicator"
 
 	drop: ->
+		if wavebox.dragDrop.dropObject.constructor.name isnt "PlayQueueItemView"
+			console.log this.model
+			wavebox.dragDrop.dropIndex = _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model)
+			return
+
 		item = wavebox.dragDrop.dropObject
 		console.log item
 		wavebox.audioPlayer.playQueue.move(item.model, _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model))
@@ -63,7 +68,7 @@ module.exports = Backbone.View.extend
 		console.log "showing action sheet"
 		sheet = new ActionSheetView
 			"song": @model
-			"items": 
+			"items":
 				[{
 					"itemTitle": "Clear play queue"
 					"action": ->
@@ -92,3 +97,4 @@ module.exports = Backbone.View.extend
 	endPress: ->
 		clearTimeout @longPressTimer
 
+module.exports = PlayQueueItemView

@@ -33,7 +33,6 @@ module.exports = Backbone.View.extend
 		console.log "Drag over play queue"
 	
 	drop: (e) ->
-		window.b = wavebox.dragDrop.dropObject
 		item = wavebox.dragDrop.dropObject
 		if item?
 			switch item.constructor.name
@@ -50,8 +49,11 @@ module.exports = Backbone.View.extend
 						console.log "invalid drop item type: #{item.constructor.name}"
 						return
 
+			addIndex = wavebox.dragDrop.dropIndex
+			console.log "addIndex: #{addIndex}"
 			@listenToOnce item, "change", =>
 				item.get("tracks").each (track) ->
-					wavebox.audioPlayer.playQueue.add track
+					wavebox.audioPlayer.playQueue.add track, addIndex
+					addIndex += 1
 			item.fetch()
 
