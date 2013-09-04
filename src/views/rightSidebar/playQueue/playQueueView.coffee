@@ -42,7 +42,7 @@ module.exports = Backbone.View.extend
 				when "Artist"
 					item.shouldRetrieveSongs = yes
 				when "Track"
-					wavebox.audioPlayer.playQueue.add item
+					wavebox.audioPlayer.playQueue.add item, wavebox.dragDrop.dropIndex
 					return
 				else
 					if item.constructor.name isnt "Album"
