@@ -447,10 +447,96 @@ input:focus {
 }
 
 .sidebar {
-	background-color: rgb(246, 246, 246);
+	background-color: rgba(246, 246, 246, .6);
 	padding: 16px 0;
 	height: 18px;
 	text-align: center;
+}
+
+@-webkit-keyframes color-fade-animation-1 {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0;
+	};
+}
+
+@-webkit-keyframes color-fade-animation-2 {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	};
+}
+
+@-webkit-keyframes color-fade-animation-3 {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	};
+}
+
+.color-fade-layer-1, .color-fade-layer-2, .color-fade-layer-3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.color-fade-layer-1 {
+	background: rgb(148,166,200);
+	background: -moz-linear-gradient(45deg,  rgba(148,166,200,1) 0%, rgba(169,164,205,1) 48%, rgba(219,147,197,1) 100%);
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(148,166,200,1)), color-stop(48%,rgba(169,164,205,1)), color-stop(100%,rgba(219,147,197,1)));
+	background: -webkit-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: -o-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: -ms-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94a6c8', endColorstr='#db93c5',GradientType=1 );
+	-webkit-animation: color-fade-animation-1 25s infinite;
+}
+
+.color-fade-layer-2 {
+	background: rgb(219,147,197);
+	background: -moz-linear-gradient(45deg,  rgba(219,147,197,1) 0%, rgba(169,164,205,1) 48%, rgba(148,166,200,1) 100%);
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(219,147,197,1)), color-stop(48%,rgba(169,164,205,1)), color-stop(100%,rgba(148,166,200,1)));
+	background: -webkit-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: -o-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: -ms-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db93c5', endColorstr='#94a6c8',GradientType=1 );
+	-webkit-animation: color-fade-animation-2 25s infinite;
+}
+
+.color-fade-layer-3 {
+	background: rgb(148,166,200);
+	background: -moz-linear-gradient(45deg,  rgba(148,166,200,1) 0%, rgba(169,164,205,1) 48%, rgba(219,147,197,1) 100%);
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(148,166,200,1)), color-stop(48%,rgba(169,164,205,1)), color-stop(100%,rgba(219,147,197,1)));
+	background: -webkit-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: -o-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: -ms-linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	background: linear-gradient(45deg,  rgba(148,166,200,1) 0%,rgba(169,164,205,1) 48%,rgba(219,147,197,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94a6c8', endColorstr='#db93c5',GradientType=1 );
+	-webkit-animation: color-fade-animation-3 25s infinite;
 }
 
 /* Sprite mappings */
@@ -461,7 +547,6 @@ input:focus {
 	background-size: 400px 900px;
 	width: 50px;
 	height: 50px;
-	opacity: .6;
 }
 
 .sprite-music-note {
@@ -521,6 +606,14 @@ input:focus {
 
 .sprite-new-playlist {
 	background-position: -150px -100px;
+}
+
+.sprite-plus {
+	background-position: -150px -200px;
+}
+
+.sprite-pencil {
+	background-position: -150px -250px;
 }
 
 
@@ -623,12 +716,35 @@ input:focus {
 	width:220px;
 	list-style: none;
 }
+
+.nav-sidebar-footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 220px;
+	height: 50px;
+}
+
+.nav-sidebar-footer > div {
+	line-height: 38px;
+	cursor: pointer;
+}
+
+.nav-sidebar-footer > div:first-child
+{
+	float: left;
+}
+	
+.nav-sidebar-footer > div:first-child
+{
+	float: right;
+}
 	
 .MenuText {
 	display: block;
-	color: #1f1f1f;
+	color: #fff;
 	line-height: 50px;
-	font-weight: 700;
+	font-weight: 400;
 	font-size: 14px;
 	max-width: 175px;
 	box-sizing: border-box;
@@ -636,6 +752,7 @@ input:focus {
 }
 
 .navigation-section-header {
+	color: #fff;
 	font-weight: 600;
 	font-size: 11px;
 	text-transform: uppercase;
@@ -651,26 +768,21 @@ input:focus {
 	width: 155px;
 	background: transparent;
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: 400;
 	font-family: "Helvetica";
+	color: #fff;
 }
 
 .navigation-item-input::-webkit-input-placeholder {
-
+	color: rgba(255, 255, 255, .6);
 }
 
-.SidebarIcons {
-	opacity: .6;
-}
-	
 .SidebarIcons:hover {
-	opacity:0.7;
-	background-color:#e8e8e8;
+	background-color: rgba(255, 255, 255, .3);
 }
 	
 .SidebarIconsActive li {
-	opacity:1  !important;
-	background-color:#e8e8e8 !important;	
+	background-color: rgba(255, 255, 255, .4) !important;	
 }
 
 .RepeatIcon {
@@ -761,8 +873,7 @@ input:focus {
 
 .play-queue-now-playing
 {
-	color: #1f1f1f;
-	background-color: #f2f2f2;
+	background-color: rgba(255, 255, 255, .3);
 }
 
 .play-queue-drag-position-indicator {
@@ -772,9 +883,9 @@ input:focus {
 .play-queue-item {
 	-webkit-user-select: none;
 	/*border-bottom: 1px #ccc solid;*/
-	width:100%;
-	height:50px;
-	color:#7d7d7d;
+	width: 100%;
+	height: 50px;
+	color: #fff;
 	-webkit-transition: padding-top .25s ease-in-out;
 }
 	
@@ -785,15 +896,15 @@ input:focus {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding: 9px 0 0 10px;
-	font-weight:600;
-	font-size:14px;
+	font-weight: 400;
+	font-size: 14px;
 }
 	
 .play-queue-item-artist  {
 	-webkit-user-select: none;
-	font-size: 12px;
+	font-size: 11px;
 	padding: 0 45px 0 10px;
-	font-weight: 400;
+	font-weight: 300;
 }
 	
 .play-queue-item-duration {
