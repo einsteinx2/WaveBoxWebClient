@@ -70,10 +70,17 @@ class PlayQueueItemView extends Backbone.View
 			song: @model
 			items:
 				[{
-					"itemTitle": "Clear play queue"
-					"action": ->
+					itemTitle: "Clear play queue"
+					action: ->
 						wavebox.audioPlayer.playQueue.clear()
 						wavebox.audioPlayer.setPlayerSong null, no
+				},
+				{
+					itemTitle: "Remove"
+					action: =>
+						index = @el.offsetTop / 50
+						console.log index
+						wavebox.audioPlayer.playQueue.remove(index)
 				}]
 			origin: origin
 		$(document.body).append sheet.render().el

@@ -33,9 +33,15 @@ class PlayQueue extends Backbone.Model
 		@on "change", @localSave
 	
 	add: (track, at = undefined) ->
+		if not track? then return
 		@tracks.add track, at: at
 		@trigger "change"
 
+	remove: (index) ->
+		if not index? then return
+		@tracks.remove(@tracks.at(index))
+		@trigger "change"
+		
 	addNext: (track) ->
 		@tracks.add track, {at: @get("nowPlayingIndex") + 1}
 		@trigger "change"
