@@ -18,7 +18,7 @@ class TrackListItemView extends Backbone.View
 			wavebox.dragDrop.mediaDragStart(@model)
 		"dragend": ->
 			wavebox.dragDrop.mediaDragEnd()
-		"click": "addToQueue"
+		"click": "click"
 		"touchstart": "beginPress"
 		"touchmove": "touchmove"
 		"touchend": "endPress"
@@ -42,6 +42,11 @@ class TrackListItemView extends Backbone.View
 			@$el.addClass "list-track-now-playing"
 		else if @$el.hasClass "list-track-now-playing"
 			@$el.removeClass "list-track-now-playing"
+
+	click: ->
+		@addToQueue()
+		@highlight()
+		return no
 
 	addToQueue: =>
 		wavebox.audioPlayer.playQueue.add @model
@@ -117,5 +122,11 @@ class TrackListItemView extends Backbone.View
 
 	endPress: ->
 		clearTimeout @longPressTimer
+
+	highlight: ->
+		$marker = $("<div class='list-track-row-highlight'>")
+		@$el.append $marker
+		$marker.transit {x: $marker.width(), opacity: 0}, ->
+			$marker.remove()
 
 module.exports = TrackListItemView
