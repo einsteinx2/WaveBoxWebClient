@@ -31,7 +31,7 @@ class SidePanelController extends Backbone.View
 				width: $(window).width() - @left.$el.width() - @right.$el.width()
 			@main.$el.addClass "transitions"
 		else
-			#@bindTouchEvents()
+			@bindTouchEvents()
 			# FastClick!
 			FastClick.attach(document.body)
 
