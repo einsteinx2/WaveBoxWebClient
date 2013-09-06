@@ -271,6 +271,34 @@ input:focus {
 	width: 100%;
 }
 
+.context-menu {
+	background-color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 10px 0;
+	line-height: 2.5em;
+	list-style: none;
+	font-weight: 400;
+	font-size: .8em;
+	box-shadow: 0 1px 2px #777;
+	border-radius: 1px;
+	z-index: 100000;
+}
+
+.context-menu a, .context-menu a:hover, .context-menu a:visited, .context-menu a:active {
+	color: #333;
+}
+
+.context-menu li {
+	padding: 0 10px;
+}
+
+.context-menu li:hover {
+	background-color: #f2f2f2;
+}
+
 /* Media page - generally contains a tracklist and some additional information
  * about those tracks */
 .mediaPage .page-album-cover {
@@ -464,7 +492,7 @@ input:focus {
 
 	100% {
 		opacity: 0;
-	};
+	}
 }
 
 @-webkit-keyframes color-fade-animation-2 {
@@ -478,7 +506,7 @@ input:focus {
 
 	100% {
 		opacity: 0;
-	};
+	}
 }
 
 @-webkit-keyframes color-fade-animation-3 {
@@ -492,7 +520,7 @@ input:focus {
 
 	100% {
 		opacity: 1;
-	};
+	}
 }
 
 .color-fade-layer-1, .color-fade-layer-2, .color-fade-layer-3 {
@@ -672,23 +700,6 @@ input:focus {
 	
 .DirectoryViewIcon {
 	background-image:url(../img/ListView.png);
-}
-
-/* Action sheet */
-.ActionSheet {
-	background-color: white;
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	z-index: 1;
-	overflow-x: hidden;
-	margin: 0;
-	padding: 0;
-}
-
-.ActionSheet li {
-	height:50px;
-	width:100%;
 }
 
 /* Sidebar Menu */

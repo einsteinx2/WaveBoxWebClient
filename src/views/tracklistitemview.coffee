@@ -78,28 +78,29 @@ class TrackListItemView extends Backbone.View
 		wavebox.apiClient.addToPlaylist playlist.get("id"), @model.get("itemId"), (success, data) ->
 			console.log "added item with success #{success} and data #{data}"
 
-	showActionSheet: ->
+	showActionSheet: (origin) ->
 		console.log "showing action sheet"
 		sheet = new ActionSheetView({
-			"song": @model
-			"items": 
-				[{
-					"itemTitle": "Add to play queue"
-					"action": @addToQueue
-				}, {
-					"itemTitle": "Play next"
-					"action": @addNextToQueue
-				}, {
-					"itemTitle": "Add to playlist"
-					"action": @addToPlaylist
-				}]
+				song: @model
+				items:
+					[{
+						"itemTitle": "Add to play queue"
+						"action": @addToQueue
+					}, {
+						"itemTitle": "Play next"
+						"action": @addNextToQueue
+					}, {
+						"itemTitle": "Add to playlist"
+						"action": @addToPlaylist
+					}]
+				origin: origin
 			}).render()
-		wavebox.appController.mainView.$el.append sheet.el
+		$(document.body).append sheet.el
 		sheet.show()
 		return
 
-	rightClick: ->
-		@showActionSheet()
+	rightClick: (e) ->
+		@showActionSheet(x: e.pageX, y: e.pageY)
 		return false
 
 	beginPress: (e) ->

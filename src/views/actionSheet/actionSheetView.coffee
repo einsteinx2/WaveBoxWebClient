@@ -5,7 +5,8 @@ ActionSheetItem = require "../../models/actionSheetItem"
 module.exports = Backbone.View.extend
 
 	tagName: "ul"
-	className: "action-sheet"
+	className: ->
+		if wavebox.isMobile() then "action-sheet" else "context-menu"
 
 	initialize: (options) ->
 		@options = options
@@ -18,24 +19,16 @@ module.exports = Backbone.View.extend
 		"reset": "render"
 
 	show: ->
-		@$el.transit { y: 0, "opacity": "1" }, 300, "ease-in-out"
-		###
-		$.transit {
-			"-webkit-transform": "translateY(#{-@$el.height()})"
-			"-moz-transform": "translateY(#{-@$el.height()})"
-		}, 300, "ease-in-out"
-		###
+		if wavebox.isMobile()
+			@$el.transit { y: 0, "opacity": "1" }, 300, "ease-in-out"
 		this
 
 	hide: ->
-		@$el.transit { y: 50 * (@collection.length + 1), "opacity": "0" }, 300, "ease-in-out", =>
+		if wavebox.isMobile()
+			@$el.transit { y: 50 * (@collection.length + 1), "opacity": "0" }, 300, "ease-in-out", =>
+				@remove()
+		else
 			@remove()
-		###
-		$.transit {
-			"-webkit-transform": "translateY(#{-@$el.height()})"
-			"-moz-transform": "translateY(#{-@$el.height()})"
-		}, 300, "ease-in-out"
-		###
 		this
 
 	render: ->
@@ -49,15 +42,18 @@ module.exports = Backbone.View.extend
 				@listenTo view, "clicked", @hide
 				$temp.append view.render().el
 
-		# Add the cancel button
-		cancelItem = new ActionSheetItem {
-					"itemTitle": "Cancel"
-				}
-		view = new ActionSheetItemView model: cancelItem
-		@listenTo view, "clicked", @hide
-		$temp.append view.render().el
+		cancel = new ActionSheetItemView(model: new ActionSheetItem(itemTitle: "Cancel"))
+		@listenToOnce cancel, "clicked", @hide
+		$temp.append cancel.render().el
 
 		@$el.append $temp.children()
-		# start hidden
-		@$el.css "-webkit-transform", "translate(0px, #{50 * @collection.length}px)"
+
+		console.log @options
+		if @options.origin? and not wavebox.isMobile()
+			@$el.css "-webkit-transform", "translate(#{@options.origin.x}px, #{@options.origin.y}px)"
+
+		if wavebox.isMobile()
+			# start hidden
+			@$el.css "-webkit-transform", "translate(0px, #{50 * @collection.length}px)"
 		this
+

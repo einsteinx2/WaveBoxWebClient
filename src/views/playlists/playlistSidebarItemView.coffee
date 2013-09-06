@@ -34,17 +34,20 @@ module.exports = class extends NavSidebarItemView
 		super
 		this
 
-	contextmenu: ->
+	contextmenu: (e) ->
 		console.log "showing action sheet"
 		sheet = new ActionSheetView({
-			"song": @model
-			"items":
-				[{
-					"itemTitle": "Delete playlist"
-					"action": @delete
-				}]
+				song: @model
+				items:
+					[{
+						"itemTitle": "Delete playlist"
+						"action": @delete
+					}]
+				origin:
+					x: e.pageX
+					y: e.pageY
 			}).render()
-		wavebox.appController.mainView.$el.append sheet.el
+		$(document.body).append sheet.el
 		sheet.show()
 		return no
 

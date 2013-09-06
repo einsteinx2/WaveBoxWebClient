@@ -64,22 +64,24 @@ class PlayQueueItemView extends Backbone.View
 		console.log item
 		wavebox.audioPlayer.playQueue.move(item.model, _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model))
 
-	showActionSheet: ->
+	showActionSheet: (origin) ->
 		console.log "showing action sheet"
 		sheet = new ActionSheetView
-			"song": @model
-			"items":
+			song: @model
+			items:
 				[{
 					"itemTitle": "Clear play queue"
 					"action": ->
 						wavebox.audioPlayer.playQueue.clear()
 						wavebox.audioPlayer.setPlayerSong null, no
 				}]
+			origin: origin
 		$(document.body).append sheet.render().el
 		sheet.show()
 
-	rightClick: ->
-		@showActionSheet()
+	rightClick: (e) ->
+		console.log e
+		@showActionSheet(x: e.pageX, y: e.pageY)
 		return false
 
 	beginPress: (e) ->
