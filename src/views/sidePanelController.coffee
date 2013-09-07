@@ -136,7 +136,7 @@ class SidePanelController extends Backbone.View
 		Touch handling for horizontal scrolling of panels
 		###
 
-		@main.$el.bind "touchstart", (event) =>
+		$('body').bind "touchstart", (event) =>
 			return if event.originalEvent.touches.length isnt 1
 			$this = @main.$el
 
@@ -146,7 +146,7 @@ class SidePanelController extends Backbone.View
 			@newTouch = true
 			@scrollType = "none"
 
-		@main.$el.bind "touchmove", (event) =>
+		$('body').bind "touchmove", (event) =>
 			return if event.originalEvent.touches.length isnt 1
 			$this = @main.$el
 
@@ -200,7 +200,7 @@ class SidePanelController extends Backbone.View
 			@previousX = x
 			@previousTime = event.timeStamp
 
-		@main.$el.bind "touchend", (event) =>
+		$('body').bind "touchend", (event) =>
 			return if event.originalEvent.touches.length isnt 0 or @scrollType isnt "x"
 
 			width = @main.$el.width()
