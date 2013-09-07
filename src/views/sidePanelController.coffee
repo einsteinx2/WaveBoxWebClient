@@ -140,8 +140,9 @@ class SidePanelController extends Backbone.View
 			return if event.originalEvent.touches.length isnt 1
 			$this = @main.$el
 
+			@originalTimeStamp = event.timeStamp;
 			@touchStartX = event.originalEvent.touches[0].pageX - $this.offset().left
-			#@touchStartY = event.originalEvent.touches[0].pageY - $this.offset().top
+			@touchStartY = event.originalEvent.touches[0].pageY
 			@newTouch = true
 			@scrollType = "none"
 
@@ -151,9 +152,24 @@ class SidePanelController extends Backbone.View
 
 			if @newTouch
 				# Determine the direction
-				difference = event.originalEvent.touches[0].pageX - $this.offset().left - @touchStartX
-				if difference > 6 or difference < -4
+				differenceX = event.originalEvent.touches[0].pageX - $this.offset().left - @touchStartX
+				differenceY = event.originalEvent.touches[0].pageY - @touchStartY
+				timeDiff = event.timeStamp - @originalTimeStamp
+
+				# The velocity is the difference per second
+				multiplier = 1000 / timeDiff
+				velX = Math.abs(multiplier * differenceX)
+				velY = Math.abs(multiplier * differenceY)
+
+				if velX > velY
 					@scrollType = "x"
+
+				###console.log("time between events: " + (event.timeStamp - @originalTimeStamp))
+				console.log("velX: " + velX)
+				console.log("velY: " + velY)
+				console.log("@touchStartY: " + @touchStartY)
+				console.log("event.originalEvent.touches[0].pageY: " + event.originalEvent.touches[0].pageY)
+				console.log("difference Y: " + (event.originalEvent.touches[0].pageY - @touchStartY))###
 
 				# Mark @newTouch as false so next time we start we do the transform or ignore
 				@newTouch = false
