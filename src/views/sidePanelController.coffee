@@ -141,19 +141,24 @@ class SidePanelController extends Backbone.View
 			$this = @main.$el
 
 			@touchStartX = event.originalEvent.touches[0].pageX - $this.offset().left
-			@scrollType = if @touchStartX < 10 or @touchStartX > $this.width() - 10 then "x" else "y"
-
-			# If we're on mobile, and either panel is open, only allow panel dragging
-			@scrollType = if wavebox.isMobile() and @toggledPanel isnt null then "x" else @scrollType
-			@previousX = @touchStartX
-			@previousTime = event.timeStamp
-			@pixelsPerSecond = 0
+			#@touchStartY = event.originalEvent.touches[0].pageY - $this.offset().top
+			@newTouch = true
+			@scrollType = "none"
 
 		@main.$el.bind "touchmove", (event) =>
 			return if event.originalEvent.touches.length isnt 1
 			$this = @main.$el
 
-			if @scrollType is "x"
+			if @newTouch
+				# Determine the direction
+				difference = event.originalEvent.touches[0].pageX - $this.offset().left - @touchStartX
+				if difference > 6 or difference < -4
+					@scrollType = "x"
+
+				# Mark @newTouch as false so next time we start we do the transform or ignore
+				@newTouch = false
+			
+			else if @scrollType is "x"
 				event.preventDefault()
 				x = event.originalEvent.touches[0].pageX
 
@@ -180,7 +185,7 @@ class SidePanelController extends Backbone.View
 			@previousTime = event.timeStamp
 
 		@main.$el.bind "touchend", (event) =>
-			return if event.originalEvent.touches.length isnt 0 or @scrollType is "y"
+			return if event.originalEvent.touches.length isnt 0 or @scrollType isnt "x"
 
 			width = @main.$el.width()
 			left = @main.$el.offset().left
