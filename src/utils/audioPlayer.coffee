@@ -22,6 +22,17 @@ module.exports = Backbone.Model.extend
 		# initialize jPlayer
 		@createJPlayerInstanceWithSupplyString "mp3, oga"
 
+		# initialize state saving
+		@playQueue.listenTo this, "timeUpdate", @playQueue.timeUpdate
+
+		# Start the player if we were playing when we shutdown
+		if localStorage.getItem("wbPlayState") is "true"
+			setTimeout ( =>
+				nowPlayingIndex = @playQueue.get "nowPlayingIndex"
+				@playAt(nowPlayingIndex, parseFloat(localStorage.getItem("wbElapsed")))
+				return
+			), 1000
+
 	playing: ->
 		not @jPlayer.data().jPlayer.status.paused
 		
@@ -42,7 +53,7 @@ module.exports = Backbone.Model.extend
 		index = @playQueue.get("nowPlayingIndex") - 1
 		@playAt index
 
-	playAt: (index) ->
+	playAt: (index, secondsOffset) ->
 		if index is null
 			@stop()
 			return
@@ -50,7 +61,7 @@ module.exports = Backbone.Model.extend
 		@playQueue.set("nowPlayingIndex", index)
 		song = @playQueue.tracks.at(index)
 		if song?
-			@setPlayerSong song, yes
+			@setPlayerSong song, yes, secondsOffset
 
 	playPause: ->
 		console.log "playPause triggered #{@playing()}"
@@ -58,6 +69,7 @@ module.exports = Backbone.Model.extend
 			@jPlayer.jPlayer "pause"
 		else
 			@jPlayer.jPlayer "play"
+		@playQueue.localSavePlayState()
 
 	stop: ->
 		@jPlayer.jPlayer "stop"
@@ -65,8 +77,8 @@ module.exports = Backbone.Model.extend
 	seek: (percent) ->
 		seekable = @jPlayer.data().jPlayer.status.seekPercent
 		percent = if percent > seekable then seekable else percent
-		console.log "seekable: " + seekable + " percent: " + percent
 		@jPlayer.jPlayer "playHead", percent
+		@playQueue.localSavePlayState percent
 
 	volume: (newLevel) ->
 		if not newLevel?
@@ -75,11 +87,13 @@ module.exports = Backbone.Model.extend
 		else
 			@jPlayer.jPlayer "volume", newLevel
 
-	setPlayerSong: (song, shouldPlay) ->
+	setPlayerSong: (song, shouldPlay, secondsOffset) ->
 		if song is null
 			@jPlayer.jPlayer "stop"
 			@trigger "newSong"
 			return
+
+		@secondsOffset = if secondsOffset? then secondsOffset else 0
 
 		incomingCodec = @preferredFormatForSong song
 		console.log "New song type: #{incomingCodec}"
@@ -93,7 +107,7 @@ module.exports = Backbone.Model.extend
 				supplyString = if incomingCodec is "mp3" then "mp3, oga" else "oga, mp3"
 				@createJPlayerInstanceWithSupplyString supplyString
 
-			urlObject = wavebox.apiClient.getSongUrlObject song
+			urlObject = wavebox.apiClient.getSongUrlObject song, secondsOffset
 			console.log shouldPlay
 			@jPlayer.jPlayer "setMedia", urlObject
 			if shouldPlay
@@ -151,7 +165,7 @@ module.exports = Backbone.Model.extend
 				that.trigger "downloadUpdate"
 			timeupdate: (e) ->
 				#console.log "timeupdate called"
-				that.set "elapsed", e.jPlayer.status.currentTime
+				that.set "elapsed", (e.jPlayer.status.currentTime + that.secondsOffset)
 				that.set "duration", e.jPlayer.status.duration
 				that.trigger "timeUpdate"
 			volumechange: (e) ->

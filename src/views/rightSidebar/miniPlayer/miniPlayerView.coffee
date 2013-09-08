@@ -5,7 +5,7 @@ module.exports = Backbone.View.extend
 	template: _.template($("#template-mini-player").html())
 	events:
 		"click #PlayBtn": "playButtonAction"
-		"click .PlayerDisplay": "seek"
+		"click .mini-player-text-area": "seek"
 		#"click .PlayerDisplaySongTimeLeft": "switchElapsedMode"
 
 	initialize: ->
@@ -35,6 +35,7 @@ module.exports = Backbone.View.extend
 
 		if not song?
 			@playMarker.hide()
+
 	playButtonAction: ->
 		console.log "playBtn"
 		wavebox.audioPlayer.playPause()
@@ -76,9 +77,10 @@ module.exports = Backbone.View.extend
 		@playMarker.css "left", Math.round((elapsed / duration) * @playerWidth)
 
 	seek: (e) ->
-		percent = (e.pageX - $(".PlayerDisplay").offset().left) / $(".PlayerDisplay").width()
+		percent = (e.pageX - $(".mini-player-text-area").offset().left) / $(".mini-player-text-area").width()
 		percent = percent * 100
 		console.log "seek percent: " + percent
 		wavebox.audioPlayer.seek percent
+
 
 

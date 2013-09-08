@@ -103,5 +103,24 @@ class PlayQueue extends Backbone.Model
 			localStorage.clear "wbShuffleTracks"
 			localStorage.setItem "wbNormalTracks", JSON.stringify(@tracks)
 			localStorage.setItem "wbNowPlayingIndex", @get("nowPlayingIndex")
+		@localSavePlayState()
+
+	localSavePlayState: (percent) ->
+		if percent?
+			localStorage.setItem "wbElapsed", (@currentSong().get("duration") * (percent / 100))
+		else
+			localStorage.setItem "wbElapsed", wavebox.audioPlayer.get "elapsed"
+		localStorage.setItem "wbPlayState", wavebox.audioPlayer.playing()
+
+	timeUpdate: ->
+		elapsed = wavebox.audioPlayer.get "elapsed"
+		if not @lastElapsed?
+			@lastElapsed = elapsed
+
+		# Save the state every 5 seconds
+		if Math.abs(elapsed - @lastElapsed) > 5
+			@localSavePlayState()
+			@lastElapsed = elapsed
+
 
 module.exports = PlayQueue

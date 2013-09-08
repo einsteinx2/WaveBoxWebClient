@@ -264,23 +264,26 @@ class ApiClient
 			async: true
 			type: "POST"
 
-	getSongUrlObject: (song) ->
+	getSongUrlObject: (song, offsetSeconds) ->
 		return if not song?
 		urlObj = {}
 
 		itemId = song.get "itemId"
 		fileType = song.get "fileType"
+		seconds = if offsetSeconds? then offsetSeconds else 0 
 
 		if fileType is 2
-			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
+			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}&seconds=#{seconds}"
 		else
-			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=192&estimateContentLength=true"
+			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=192&estimateContentLength=true&seconds=#{seconds}"
 
 		if fileType is 4
-			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}"
+			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}&seconds=#{seconds}"
 		else
-			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=192&estimateContentLength=true"
+			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=192&estimateContentLength=true&seconds=#{seconds}"
 		
+		console.log("url: " + urlObj.mp3)
+
 		return urlObj
 
 	getArtUrl: (artId, size) ->
