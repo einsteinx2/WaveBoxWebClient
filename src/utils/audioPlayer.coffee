@@ -76,9 +76,12 @@ module.exports = Backbone.Model.extend
 
 	seek: (percent) ->
 		seekable = @jPlayer.data().jPlayer.status.seekPercent
-		percent = if percent > seekable then seekable else percent
-		@jPlayer.jPlayer "playHead", percent
-		@playQueue.localSavePlayState percent
+		if percent > seekable
+			secondsOffset = @playQueue.currentSong().get("duration") * (percent / 100)
+			@playAt @playQueue.get("nowPlayingIndex"), secondsOffset
+		else
+			@jPlayer.jPlayer "playHead", percent
+			@playQueue.localSavePlayState percent
 
 	volume: (newLevel) ->
 		if not newLevel?
