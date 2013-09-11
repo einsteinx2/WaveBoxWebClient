@@ -52,6 +52,55 @@ input:focus {
 	text-overflow: ellipsis;
 }
 
+.login-form {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+}
+
+.login-form-centered {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 320px;
+	height: 280px;
+	text-align: right;
+}
+
+.login-form input {
+	display: block;
+	width: 300px;
+	padding: 8px;
+	border-radius: 3px;
+	border: 1px solid #aaa;
+	-webkit-transition: .1s box-shadow ease-out, .1s border ease-out;
+}
+
+.login-form input:focus {
+	box-shadow: inset 0 1px 3px #ccc;
+	border: 1px solid rgb(226, 45, 152);
+}
+
+.login-form-button {
+	margin: 10px 0;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	background-color: #f7f7f7;
+	font-family: "Helvetica Neue", "Helvetica";
+	font-weight: 500;
+	padding: 8px;
+}
+
+.login-form-button:active {
+	background-color: white;
+}
+
 /* 	
  *  This class is also targeted by javascript as an indicator that
  *  elements having it should scroll instead of the body.
@@ -88,7 +137,7 @@ input:focus {
     height: 100%;
     position: relative;
 	overflow: hidden;
-	z-index: 9999;
+	z-index: 2;
 }
 
 .main-scrollingContent {
@@ -594,6 +643,16 @@ input:focus {
 	background-size: 400px 900px;
 	width: 50px;
 	height: 50px;
+}
+
+.sprite-double-wide {
+	display: block;
+	margin: 40px auto;
+	width: 100px;
+}
+
+.sprite-logo-colored {
+	background-position: -50px -50px;
 }
 
 .sprite-music-note {

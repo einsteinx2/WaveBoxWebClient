@@ -5,6 +5,7 @@ Router = require './router'
 AppController = require './views/appView'
 KeyboardShortcuts = require './utils/keyboardShortcuts'
 DragDrop = require './utils/dragDrop'
+LoginView = require './loginView'
 
 $ ->
 	if window.navigator.standalone
@@ -26,15 +27,22 @@ $ ->
 		
 		Backbone.history.start()
 		wavebox.appController.render()
-	
-	wavebox.apiClient.clientIsAuthenticated (answer, error) =>
-		if answer is yes
-			console.log "using already-valid session"
-			launch()
-		else
-			console.log "authenticating..."
-			wavebox.apiClient.authenticate "test", "test", (successful, error) =>
-				if successful is yes
-					console.log "success!"
-					launch()
-				else console.log error
+
+	login = new LoginView
+		success: launch
+		error: ->
+			console.log "an error happened"
+
+	login.render()
+
+	#wavebox.apiClient.clientIsAuthenticated (answer, error) =>
+	#	if answer is yes
+	#		console.log "using already-valid session"
+	#		launch()
+	#	else
+	#		console.log "authenticating..."
+	#		wavebox.apiClient.authenticate "test", "test", (successful, error) =>
+	#			if successful is yes
+	#				console.log "success!"
+	#				launch()
+	#			else console.log error

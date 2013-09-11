@@ -49,11 +49,23 @@
 	<![endif]-->
 
 	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/ladda-themeless.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 	<div id="main"></div>
+	<div id="login" class="login-form"></div>
 	<div id="jPlayer"></div>
+
+	<!-- Login page -->
+	<script id="template-login" type="text/template">
+		<div class="login-form-centered">
+			<div class="sprite sprite-double-wide sprite-logo-colored"></div>
+			<input id="login-username" required type="text" placeholder="Username" />
+			<input id="login-password" required type="password" placeholder="Password" />
+			<button id="login-submit" class="login-form-button ladda-button" data-style="slide-down" data-spinner-color="#333" data-spinner-size="20">LOG IN</button>
+		</div>
+	</script>
 
 	<!-- Side panels -->
 	<script id="template-side-panels" type="text/template">
@@ -248,6 +260,8 @@
 	<script type="text/javascript" src="script/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="script/jquery.transit.min.js" ></script>
 	<script type='text/javascript' src="/script/fastclick.js"></script>
+	<script type="text/javascript" src="script/spin.min.js"></script>
+	<script type="text/javascript" src="script/ladda.min.js"></script>
 	<script type="text/javascript" src="script/wavebox.js"></script>
 </body>
 </html>
