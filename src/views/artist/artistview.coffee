@@ -1,5 +1,4 @@
 PageView = require '../pageView'
-AlbumItemView = require './albumitemview'
 Artist = require '../../models/artist'
 CoverListView = require '../coverList/coverListView'
 
