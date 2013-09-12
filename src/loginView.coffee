@@ -12,10 +12,24 @@ class LoginView extends Backbone.View
 		if options.error?
 			@error = options.error
 
+
 		console.log "Login initialized"
 
 	render: ->
-		console.log @template()
+		if wavebox.apiClient.SESSION_ID?
+			@$el.append("<div class='login-checking'>Checking session...</div>")
+			wavebox.apiClient.clientIsAuthenticated (authenticated) =>
+				if authenticated
+					@remove()
+					@success()
+				else
+					@renderLogin()
+
+		else
+			@renderLogin()
+
+		
+	renderLogin: ->
 		@$el.empty().append(@template())
 		@$el.show()
 		@$el.find("#login-username").focus()
@@ -38,6 +52,5 @@ class LoginView extends Backbone.View
 				@error error
 				l.stop()
 				@$el.append("nope nope nope")
-		console.log "LOGIN"
 
 module.exports = LoginView
