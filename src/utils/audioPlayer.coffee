@@ -7,9 +7,7 @@ module.exports = Backbone.Model.extend
 
 		# playlist state
 		@playQueue = new PlayQueue
-		@listenTo @playQueue, "change", ->
-			if @playQueue.tracks.size() is 1
-				@playAt 0
+
 		# progress
 		@elapsed = 0
 		@duration = 0
@@ -90,7 +88,7 @@ module.exports = Backbone.Model.extend
 		else
 			@jPlayer.jPlayer "volume", newLevel
 
-	setPlayerSong: (song, shouldPlay, secondsOffset) ->
+	setPlayerSong: (song, shouldPlay, secondsOffset = null) ->
 		if song is null
 			@jPlayer.jPlayer "stop"
 			@trigger "newSong"
@@ -102,20 +100,25 @@ module.exports = Backbone.Model.extend
 		console.log "New song type: #{incomingCodec}"
 
 		if incomingCodec isnt "INCOMPATIBLE"
+
+			setJplayerMedia = =>
+				urlObject = wavebox.apiClient.getSongUrlObject song, secondsOffset
+				@jPlayer.jPlayer "setMedia", urlObject
+				if shouldPlay
+					@jPlayer.jPlayer "play"
+
 			# if jPlayer isn't init'd with the proper incoming codec, we need to re-init it
 			if @preferredCodec isnt incomingCodec
 				console.log "Destroying jPlayer"
 				@jPlayer.jPlayer "destroy"
 				@preferredCodec = incomingCodec
 				supplyString = if incomingCodec is "mp3" then "mp3, oga" else "oga, mp3"
-				@createJPlayerInstanceWithSupplyString supplyString
+				@createJPlayerInstanceWithSupplyString supplyString, setJplayerMedia
+			else
+				setJplayerMedia()
 
-			urlObject = wavebox.apiClient.getSongUrlObject song, secondsOffset
-			console.log shouldPlay
-			@jPlayer.jPlayer "setMedia", urlObject
-			if shouldPlay
-				@jPlayer.jPlayer "play"
 
+			
 			# @saveToLocalStorage()
 			@trigger "newSong"
 
@@ -123,16 +126,18 @@ module.exports = Backbone.Model.extend
 			console.log "unable to play\n #{song}"
 			@next()
 	
-	createJPlayerInstanceWithSupplyString: (supplyString) ->
+	createJPlayerInstanceWithSupplyString: (supplyString, callback) ->
 		that = this
 		@jPlayer.jPlayer
-			error: (e) -> 
+			error: (e) ->
 				#console.log "jPlayer error event: "
 				#console.log e.jPlayer
-			warning: (e) -> 
+			warning: (e) ->
 				#console.log "jPlayer warning event: "
 				#console.log e.jPlayer
-			ready: (e) -> 
+			ready: (e) ->
+				if callback?
+					callback()
 				#console.log "jPlayer ready event: "
 				#console.log e.jPlayer
 			ended: (e) ->
@@ -176,7 +181,7 @@ module.exports = Backbone.Model.extend
 				that.trigger "volumeChange"
 			swfPath: "/swf/"
 			supplied: supplyString
-			solution: "flash, html"
+			solution: "html, flash"
 
 	preferredFormatForSong: (song) ->
 		switch song.get "fileType"

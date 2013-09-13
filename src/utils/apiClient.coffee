@@ -273,17 +273,15 @@ class ApiClient
 		seconds = if offsetSeconds? then offsetSeconds else 0 
 
 		if fileType is 2
-			urlObj.mp3 = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}&seconds=#{seconds}"
+			urlObj.mp3 = "/api/stream/#{itemId}?seconds=#{seconds}"
 		else
-			urlObj.mp3 = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=MP3&transQuality=192&estimateContentLength=true&seconds=#{seconds}"
+			urlObj.mp3 = "/api/transcode/#{itemId}?transType=MP3&transQuality=192&seconds=#{seconds}"
 
 		if fileType is 4
-			urlObj.ogg = "#{@API_ADDRESS}/stream?s=#{@SESSION_ID}&id=#{itemId}&seconds=#{seconds}"
+			urlObj.oga = "/api/stream/#{itemId}?seconds=#{seconds}"
 		else
-			urlObj.ogg = "#{@API_ADDRESS}/transcode?s=#{@SESSION_ID}&id=#{itemId}&transType=OGG&transQuality=192&estimateContentLength=true&seconds=#{seconds}"
+			urlObj.oga = "/api/transcode/#{itemId}?transType=OGG&transQuality=192&seconds=#{seconds}"
 		
-		console.log("url: " + urlObj.mp3)
-
 		return urlObj
 
 	getArtUrl: (artId, size) ->

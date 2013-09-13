@@ -44,6 +44,8 @@ class ArtistView extends PageView
 			console.log "got tracks"
 			@artist.get("tracks").each (track) ->
 				wavebox.audioPlayer.playQueue.add track
+			if @artist.get("tracks").size() is wavebox.audioPlayer.playQueue.tracks.size()
+				wavebox.audioPlayer.playAt 0
 		@artist.retrieveSongs()
 
 module.exports = ArtistView

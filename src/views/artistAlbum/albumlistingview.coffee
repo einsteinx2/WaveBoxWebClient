@@ -83,6 +83,9 @@ class AlbumView extends PageView
 		e.preventDefault()
 		@album.get("tracks").each (track) ->
 			wavebox.audioPlayer.playQueue.add track
+		if @album.get("tracks").size() is wavebox.audioPlayer.playQueue.tracks.size()
+			wavebox.audioPlayer.playAt 0
+
 
 
 module.exports = AlbumView

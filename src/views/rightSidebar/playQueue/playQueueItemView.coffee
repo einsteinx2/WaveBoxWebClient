@@ -22,7 +22,8 @@ class PlayQueueItemView extends Backbone.View
 		"touchend": "endPress"
 
 	initialize: ->
-		if wavebox.audioPlayer.playQueue.currentSong().get("itemId") is @model.get("itemId")
+		current = wavebox.audioPlayer.playQueue.currentSong()
+		if current? and current.get("itemId") is @model.get("itemId")
 			@playing = yes
 		else
 			@playing = no
@@ -73,7 +74,6 @@ class PlayQueueItemView extends Backbone.View
 					itemTitle: "Clear play queue"
 					action: ->
 						wavebox.audioPlayer.playQueue.clear()
-						wavebox.audioPlayer.setPlayerSong null, no
 				},
 				{
 					itemTitle: "Remove"

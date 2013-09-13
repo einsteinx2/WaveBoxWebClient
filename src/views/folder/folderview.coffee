@@ -98,6 +98,8 @@ class FolderView extends PageView
 		@listenToOnce @folder, "change", =>
 			@folder.get("tracks").each (track) ->
 				wavebox.audioPlayer.playQueue.add track
+			if @folder.get("tracks").size() is wavebox.audioPlayer.playQueue.tracks.size()
+				wavebox.audioPlayer.playAt 0
 		@folder.recursive = yes
 		@folder.fetch()
 
