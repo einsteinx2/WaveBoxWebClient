@@ -59,6 +59,16 @@ input:focus {
 	width: 100%;
 	height: 100%;
 	z-index: 3;
+
+	background: rgb(219,147,197);
+	background: -moz-linear-gradient(45deg,  rgba(219,147,197,1) 0%, rgba(169,164,205,1) 48%, rgba(148,166,200,1) 100%);
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(219,147,197,1)), color-stop(48%,rgba(169,164,205,1)), color-stop(100%,rgba(148,166,200,1)));
+	background: -webkit-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: -o-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: -ms-linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	background: linear-gradient(45deg,  rgba(219,147,197,1) 0%,rgba(169,164,205,1) 48%,rgba(148,166,200,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db93c5', endColorstr='#94a6c8',GradientType=1 );
+
 }
 
 .login-form-centered {
@@ -75,26 +85,37 @@ input:focus {
 
 .login-form input {
 	display: block;
-	width: 300px;
+	width: 304px;
+	height: 25px;
 	padding: 8px;
+	margin: 0 0 4px 0;
 	border-radius: 3px;
-	border: 1px solid #aaa;
-	-webkit-transition: .1s box-shadow ease-out, .1s border ease-out;
+	border: none;
+	background-color: rgba(255, 255, 255, .2);
+	color: rgba(255, 255, 255, 1);
+	font-size: .9em;
+	font-weight: 400;
+	-webkit-transition: .1s background-color ease-out;
 }
 
-.login-form input:focus {
-	box-shadow: inset 0 1px 3px #ccc;
-	border: 1px solid rgb(226, 45, 152);
+.login-form ::-webkit-input-placeholder {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	color: rgba(255, 255, 255, .7);
 }
 
 .login-form-button {
-	margin: 10px 0;
-	border: 1px solid #aaa;
+	width: 100%;
+	height: 41px;
+	margin: 0;
+	border: none;
 	border-radius: 3px;
-	background-color: #f7f7f7;
+	background-color: rgba(255, 255, 255, .25);
+	text-align: right;
 	font-family: "Helvetica Neue", "Helvetica";
+	color: #fff;
 	font-weight: 500;
-	padding: 8px;
+	padding: 0 8px 0 0;
+	box-sizing: border-box;
 }
 
 .login-form-button:active {
@@ -653,6 +674,10 @@ input:focus {
 
 .sprite-logo-colored {
 	background-position: -50px -50px;
+}
+
+.sprite-logo {
+	background-position: -50px 0;
 }
 
 .sprite-music-note {
