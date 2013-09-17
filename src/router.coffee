@@ -31,7 +31,7 @@ module.exports = Backbone.Router.extend
 			console.log "new view push submit #{Date.now()}"
 		else
 			wavebox.appController.mainView.push(new ArtistsView)
-			
+
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()
 
@@ -84,7 +84,7 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.panels.focusMain()
 
 	login: ->
-		localStorage.clear("waveBoxSessionKey")
+		wavebox.apiClient.logOut()
 		wavebox.apiClient.SESSION_ID = null
 		view = new LoginView
 			success: ->
@@ -95,16 +95,15 @@ module.exports = Backbone.Router.extend
 
 		view.render()
 
-
 	home: ->
 		@artists()
 
 	sendSelectionNotification: (name) ->
 		wavebox.appController.trigger "sidebarItemSelected", name
-		
+
 		# Hack for first page load
 		setTimeout(->
-			wavebox.appController.trigger "sidebarItemSelected", name 
+			wavebox.appController.trigger "sidebarItemSelected", name
 			return
 		,1000)
 

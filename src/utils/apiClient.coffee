@@ -11,9 +11,22 @@ class ApiClient
 	getCachedItem: (itemId) ->
 		@itemCache[parseInt(itemId, 10)]
 
-	logOut: ->
+	logOut: (callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/logout"
+			data: "s=#{@SESSION_ID}"
+			success: (data) =>
+				if not data.error?
+					if callback? then callback true
+				else
+					if callback? then callback false, data.error
+			error: (XHR, status, error) ->
+				console.log "logOut failed with error code: #{JSON.stringify(XHR)}"
+				if callback? then callback false
+			async: true
+			type: 'POST'
 		localStorage.clear()
-	
+
 	authenticate: (username, password, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/login"
@@ -51,7 +64,7 @@ class ApiClient
 				type: "POST"
 		else
 			if callback? then callback false
-	
+
 	createPlaylist: (name, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists"
@@ -270,7 +283,7 @@ class ApiClient
 
 		itemId = song.get "itemId"
 		fileType = song.get "fileType"
-		seconds = if offsetSeconds? then offsetSeconds else 0 
+		seconds = if offsetSeconds? then offsetSeconds else 0
 
 		if fileType is 2
 			urlObj.mp3 = "/api/stream/#{itemId}?seconds=#{seconds}"
@@ -281,7 +294,7 @@ class ApiClient
 			urlObj.oga = "/api/stream/#{itemId}?seconds=#{seconds}"
 		else
 			urlObj.oga = "/api/transcode/#{itemId}?transType=OGG&transQuality=192&seconds=#{seconds}"
-		
+
 		return urlObj
 
 	getArtUrl: (artId, size) ->
@@ -321,7 +334,7 @@ class ApiClient
 			data: "s=#{@SESSION_ID}&event=#{song.itemId},#{timestamp}&action=SUBMIT"
 			success: (data) ->
 				if data.error?
-					if data.error is "LFMNotAuthenticated" 
+					if data.error is "LFMNotAuthenticated"
 						window.open data.authUrl
 						if callback? then callback context, false, data.error
 				else
