@@ -5,6 +5,8 @@ AlbumListingView = require './views/artistAlbum/albumlistingview'
 GenresView = require './views/genresView'
 FolderView = require './views/folder/folderview'
 PlaylistListingView = require './views/playlists/playlistListingView'
+SettingsView = require './views/settingsView'
+LoginView = require './loginView'
 
 module.exports = Backbone.Router.extend
 	routes:
@@ -15,6 +17,7 @@ module.exports = Backbone.Router.extend
 		"playlists/:playlistId":	"playlists"
 		"favorites":				"favorites"
 		"settings":					"settings"
+		"login":					"login"
 		"*path":					"home"
 
 	artists: (artistId) ->
@@ -75,7 +78,23 @@ module.exports = Backbone.Router.extend
 	favorites: ->
 		return null
 	settings: ->
-		return null
+		@sendSelectionNotification "Settings"
+		wavebox.appController.mainView.push(new SettingsView)
+		if wavebox.isMobile()
+			wavebox.appController.panels.focusMain()
+
+	login: ->
+		localStorage.clear("waveBoxSessionKey")
+		wavebox.apiClient.SESSION_ID = null
+		view = new LoginView
+			success: ->
+				wavebox.router.navigate("/home")
+				view.$el.hide()
+			error: =>
+				console.log "login failed"
+
+		view.render()
+
 
 	home: ->
 		@artists()
