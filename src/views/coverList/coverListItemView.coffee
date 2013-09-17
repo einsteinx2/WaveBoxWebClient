@@ -27,12 +27,21 @@ class CoverListItemView extends Backbone.View
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
-		if @fields.artId?
-			@art = new Image
-			@art.onload = @artLoaded
-			@art.src = wavebox.apiClient.getArtUrl(@fields.artId, 250)
+		@preloadArt()
 
 		this
+
+	preloadArt: =>
+		if @fields.artId?
+			# If there is associated art in WaveBox, load that
+			@art = new Image
+			@art.onload = @artLoaded
+			@art.src = wavebox.apiClient.getArtUrl(@fields.artId)
+		else if @fields.itemId?
+			# Otherwise, if it has an item id, try to load a fanart thumbnail
+			@art = new Image
+			@art.onload = @artLoaded
+			@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
 
 	artLoaded: =>
 		@$el.children().first().css "background-image", "url(#{@art.src})"

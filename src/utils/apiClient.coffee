@@ -293,6 +293,9 @@ class ApiClient
 
 		return "#{@API_ADDRESS}/art?id=#{artId}#{aSize}"
 
+	getFanArtThumbUrl: (itemId, size) ->
+		return "#{@API_ADDRESS}/fanartthumb?id=#{itemId}"
+
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/scrobble"

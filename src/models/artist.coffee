@@ -20,7 +20,7 @@ class Artist extends Backbone.Model
 	coverViewFields: ->
 		title: @get "artistName"
 		artId: @get "artId"
-
+		itemId: @get "artistId"
 
 	sync: (method, model, options) ->
 		if method is "read"
