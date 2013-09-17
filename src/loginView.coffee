@@ -20,13 +20,15 @@ class LoginView extends Backbone.View
 			@$el.append("<div class='login-checking'>Checking session...</div>")
 			wavebox.apiClient.clientIsAuthenticated (authenticated) =>
 				if authenticated
-					@remove()
+					@$el.hide()
+					@undelegateEvents()
 					@success()
 				else
 					@renderLogin()
 
 		else
 			@renderLogin()
+		this
 
 		
 	renderLogin: ->
@@ -46,7 +48,8 @@ class LoginView extends Backbone.View
 
 		wavebox.apiClient.authenticate username, password, (success, error) =>
 			if success
-				@remove()
+				@$el.hide()
+				@undelegateEvents()
 				@success()
 			else
 				@error error

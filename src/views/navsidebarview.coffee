@@ -55,14 +55,14 @@ module.exports = Backbone.View.extend
 			title: "Settings"
 			items: [
 				{
-					itemTitle: "Airplane Mode",
-					itemClass: "sprite-airplane",
-					href: "#airplane"
-				},
-				{
 					itemTitle: "Settings",
 					itemClass: "sprite-cog",
 					href: "#settings"
+				},
+				{
+					itemTitle: "Log out",
+					itemClass: "",
+					href: "#login"
 				}
 			]
 		#@listenTo @playlistSectionView.collection, "reset", "render"
@@ -74,5 +74,5 @@ module.exports = Backbone.View.extend
 		#$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
 		$temp.append @playlistSectionView.render().el
-		#$temp.append @settingSectionView.render().el
+		$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.children()
