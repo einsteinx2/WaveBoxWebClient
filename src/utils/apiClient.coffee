@@ -12,22 +12,22 @@ class ApiClient
 		@itemCache[parseInt(itemId, 10)]
 
 	logOut: (callback) ->
-		if @SESSION_ID?
-			$.ajax
-				url: "#{@API_ADDRESS}/logout"
-				data: "s=#{@SESSION_ID}"
-				success: (data) =>
-					if not data.error?
-						if callback? then callback true
-					else
-						if callback? then callback false, data.error
-				error: (XHR, status, error) ->
-					console.log "logOut failed with error code: #{JSON.stringify(XHR)}"
-					if callback? then callback false
-				async: true
-				type: 'POST'
-		else
-			if callback? then callback false
+		# Make server explicitly clear session from database
+		$.ajax
+			url: "#{@API_ADDRESS}/logout"
+			success: (data) =>
+				if not data.error?
+					if callback? then callback true
+				else
+					if callback? then callback false, data.error
+			error: (XHR, status, error) ->
+				console.log "logOut failed with error code: #{JSON.stringify(XHR)}"
+				if callback? then callback false
+			async: true
+			type: 'POST'
+
+		# Clear web client's ID storage
+		@SESSION_ID = null
 		localStorage.clear()
 
 	authenticate: (username, password, callback) ->
