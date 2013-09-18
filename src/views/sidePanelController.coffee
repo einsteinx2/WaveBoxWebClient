@@ -164,12 +164,18 @@ class SidePanelController extends Backbone.View
 				if velX > velY
 					@scrollType = "x"
 
-				###console.log("time between events: " + (event.timeStamp - @originalTimeStamp))
+					# Fix for Android touchmove event bug
+					event.preventDefault()
+
+				###
+				console.log("time between events: " + (event.timeStamp - @originalTimeStamp))
 				console.log("velX: " + velX)
 				console.log("velY: " + velY)
+				console.log("scrollType " + @scrollType)
 				console.log("@touchStartY: " + @touchStartY)
 				console.log("event.originalEvent.touches[0].pageY: " + event.originalEvent.touches[0].pageY)
-				console.log("difference Y: " + (event.originalEvent.touches[0].pageY - @touchStartY))###
+				console.log("difference Y: " + (event.originalEvent.touches[0].pageY - @touchStartY))
+				###
 
 				# Mark @newTouch as false so next time we start we do the transform or ignore
 				@newTouch = false
@@ -193,7 +199,8 @@ class SidePanelController extends Backbone.View
 
 				if $this.offset().left < 0
 					@switch "right"
-				else @switch "left"
+				else 
+					@switch "left"
 
 				$this.css "-webkit-transform": "translate3d(#{x - @touchStartX}px, 0, 0)"
 
