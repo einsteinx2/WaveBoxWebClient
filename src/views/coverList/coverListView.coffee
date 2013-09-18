@@ -10,18 +10,39 @@ class CoverListView extends Backbone.View
 
 	className: "list-cover"
 	render: ->
-		if not wavebox.isMobile
+		if not wavebox.isMobile()
 			@$el.addClass "scroll"
 
-		$temp = $('<div>')
 		filter = @model.get("filter").toLowerCase()
 
-		@collection.each (item) =>
-			if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
-				view = new CoverListItemView model: item
-				$temp.append view.render().el
+		# Only enable infinity on mobile for now
+		console.log "is mobile: " + wavebox.isMobile()
+		if wavebox.isMobile()
+			setTimeout =>
 
-		@$el.empty().append $temp.children()
+				@infinityView = new infinity.ListView @$el.parent(), {
+					useElementScroll: true#,
+					lazy: ($element) ->
+						# Preload the art for the covers
+						for child in $element.children
+							$(child).data("backbone-view").preloadArt()
+				}
+
+				@collection.each (item) =>
+					if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
+						view = new CoverListItemView model: item
+						view.render()
+						@infinityView.append view.$el
+			, 0
+		else
+			$temp = $('<div>')
+			@collection.each (item) =>
+				if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
+					view = new CoverListItemView model: item
+					$temp.append view.render().el
+
+			@$el.empty().append $temp.children()
+		
 		this
 
 	filter: ->

@@ -10,6 +10,8 @@ class CoverListItemView extends Backbone.View
 	initialize: (options) ->
 		if options?
 			@fields = options.model.coverViewFields()
+
+		@$el.data "backbone-view", this
 	
 	events:
 		"click": ->
@@ -27,24 +29,50 @@ class CoverListItemView extends Backbone.View
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
-		@preloadArt()
+		if not wavebox.isMobile
+			@preloadArt()
 
 		this
 
+	cancelPreloadArt: =>
+		# Cancel the timer if exists
+		if @preloadArtTimer
+			clearTimeout @preloadArtTimer
+			@preloadArtTimer = null
+
+		return
+
 	preloadArt: =>
-		if @fields.artId?
-			# If there is associated art in WaveBox, load that
-			@art = new Image
-			@art.onload = @artLoaded
-			@art.src = wavebox.apiClient.getArtUrl(@fields.artId)
-		else if @fields.itemId?
-			# Otherwise, if it has an item id, try to load a fanart thumbnail
-			@art = new Image
-			@art.onload = @artLoaded
-			@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
+		# If the image already exists, do nothing
+		if @art?
+			return
+
+		# Cancel any existing timer so we don't load more than once
+		@cancelPreloadArt()
+
+		# Add a 200ms delay for fast scrolling
+		@preloadArtTimer = setTimeout =>
+			if @fields.artId?
+				# If there is associated art in WaveBox, load that
+				@art = new Image
+				@art.onload = @artLoaded
+				@art.src = wavebox.apiClient.getArtUrl(@fields.artId)
+				console.log("Preloading art for art id " + @fields.artId)
+			else if @fields.itemId?
+				# Otherwise, if it has an item id, try to load a fanart thumbnail
+				@art = new Image
+				@art.onload = @artLoaded
+				@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
+				console.log("Preloading art for art id " + @fields.itemId)
+
+			@preloadArtTimer = null
+		, 200
+
+		return
 
 	artLoaded: =>
 		@$el.children().first().css "background-image", "url(#{@art.src})"
+		return
 	
 	
 
