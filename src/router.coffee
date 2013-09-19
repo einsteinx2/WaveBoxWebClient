@@ -1,7 +1,5 @@
 ArtistsView = require './views/artists/artistsview'
 ArtistView = require './views/artist/artistview'
-AlbumArtistsView = require './views/albumArtists/albumartistsview'
-AlbumArtistView = require './views/albumArtist/albumartistview'
 AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
 GenresView = require './views/genresView'
@@ -28,11 +26,11 @@ module.exports = Backbone.Router.extend
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if albumArtistId?
-			wavebox.appController.mainView.push(new AlbumArtistView albumArtistId: albumArtistId)
+			wavebox.appController.mainView.push(new ArtistView albumArtistId: albumArtistId)
 			console.log "new view push submit #{Date.now()}"
 		else
 			@sendSelectionNotification "Artists"
-			wavebox.appController.mainView.push(new AlbumArtistsView isAlbumArtists: true)
+			wavebox.appController.mainView.push(new ArtistsView isAlbumArtists: true)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()
