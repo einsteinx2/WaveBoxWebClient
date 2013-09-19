@@ -1092,7 +1092,7 @@ input:focus {
 	
 #mini-player {
 	position: absolute;
-	background-color: rgb(238, 238, 238);
+	background-color: rgba(238, 238, 238, 0.6);
 	height: 50px;
 	width: 100%;
 	z-index: 1;
@@ -1205,18 +1205,19 @@ input:focus {
 
 .mini-player-playhead {
 	height: 50px;
-	width:5px;
-	background: rgb(255,119,67);
-	background: -moz-linear-gradient(left,  rgba(255,119,67,1) 50%, rgba(255,83,33,1) 51%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(50%,rgba(255,119,67,1)), color-stop(51%,rgba(255,83,33,1)));
-	background: -webkit-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
-	background: -o-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
-	background: -ms-linear-gradient(left,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
-	background: linear-gradient(to right,  rgba(255,119,67,1) 50%,rgba(255,83,33,1) 51%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7743', endColorstr='#ff5321',GradientType=1 );
+	width:3px;
+	background: #fff
+	background: -moz-linear-gradient(left,  #fff 50%, #fff 51%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(50%,#fff), color-stop(51%,#fff));
+	background: -webkit-linear-gradient(left,  #fff 50%,#fff 51%);
+	background: -o-linear-gradient(left,  #fff 50%, #fff 51%);
+	background: -ms-linear-gradient(left,  #fff 50%,#fff 51%);
+	background: linear-gradient(to right,  #fff 50%,#fff 51%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#fff',GradientType=1 );
 	position:absolute;
 	bottom:0px;
 	left: 0;
+	z-index: -1;
 }
 
 
