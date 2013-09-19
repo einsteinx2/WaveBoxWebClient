@@ -10,7 +10,7 @@ LoginView = require './loginView'
 
 module.exports = Backbone.Router.extend
 	routes:
-		"albumartists(/:artistId)":		"albumartists"
+		"albumartists(/:artistId)":		"albumArtists"
 		"artists(/:artistId)":			"artists"
 		"folders(/:folderId)":			"folders"
 		"albums(/:albumId)":			"albums"
@@ -21,7 +21,7 @@ module.exports = Backbone.Router.extend
 		"login":						"login"
 		"*path":						"home"
 
-	albumartists: (albumArtistId) ->
+	albumArtists: (albumArtistId) ->
 		console.log "nav albumartists #{Date.now()}"
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
@@ -110,7 +110,7 @@ module.exports = Backbone.Router.extend
 		view.render()
 
 	home: ->
-		@artists()
+		@albumArtists()
 
 	sendSelectionNotification: (name) ->
 		wavebox.appController.trigger "sidebarItemSelected", name
