@@ -38,7 +38,7 @@ class ArtistView extends PageView
 		
 		if @contentLoaded
 			@$el.append @template
-				artistName: @artist.get("artistName")
+				artistName: @artistName
 				counts: @artist.get("counts")
 			@$el.find(".page-artist-header").css("background-image", "url('http://herpderp.me:8000?action=art&type=artist&id=#{@artist.get("musicBrainzId")}')")
 			@covers = new CoverListView collection: @artist.get("albums")

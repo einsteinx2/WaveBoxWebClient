@@ -58,12 +58,12 @@ class CoverListItemView extends Backbone.View
 				@art.onload = @artLoaded
 				@art.src = wavebox.apiClient.getArtUrl(@fields.artId)
 				console.log("Preloading art for art id " + @fields.artId)
-			else if @fields.itemId?
-				# Otherwise, if it has an item id, try to load a fanart thumbnail
-				@art = new Image
-				@art.onload = @artLoaded
-				@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
-				console.log("Preloading art for art id " + @fields.itemId)
+				#else if @fields.itemId?
+				#	# Otherwise, if it has an item id, try to load a fanart thumbnail
+				#	@art = new Image
+				#	@art.onload = @artLoaded
+				#	@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
+				#	console.log("Preloading art for art id " + @fields.itemId)
 
 			@preloadArtTimer = null
 		, 200

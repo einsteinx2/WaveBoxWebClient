@@ -1495,7 +1495,8 @@ input:focus {
 	}
 
 	/* artist page */
-	.page-artist-header-overlay li {
+	.page-artist-header-button {
+		margin: 0;
 		width: 33.3%;
 	}
 }
