@@ -11,7 +11,9 @@ class AlbumArtist extends Backbone.Model
 		tracks: null
 
 	initialize: (options) ->
-		@albumArtistId = if options.albumArtistId? then options.albumArtistId else null
+		artistId = if options.albumArtistId? then options.albumArtistId else options.artistId
+		@albumArtistId = if artistId? then artistId else null
+		@set "albumArtistName", @albumArtistId
 		@shouldRetrieveSongs = if options.retrieveSongs? then options.retrieveSongs else no
 
 	pageUrl: ->
@@ -29,7 +31,7 @@ class AlbumArtist extends Backbone.Model
 			wavebox.apiClient.getAlbumArtist @albumArtistId, @shouldRetrieveSongs, (success, data) =>
 				console.log "TEST album artist loaded"
 				if success
-					hash = data.artists[0]
+					hash = data.albumArtists[0]
 					hash.albums = new AlbumList data.albums
 					hash.tracks = new TrackList data.songs
 					console.log data

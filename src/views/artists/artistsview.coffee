@@ -10,7 +10,7 @@ class ArtistsView extends PageView
 	initialize: (options) ->
 		if options? and options.genreId?
 			@collection = new Genre null, genreId: options.genreId
-		else if options? and options.isAlbumArtists? and options.isAlbumArtists
+		else if options? and options.isAlbumArtist? and options.isAlbumArtist
 			@collection = new AlbumArtists
 		else
 			@collection = new Artists

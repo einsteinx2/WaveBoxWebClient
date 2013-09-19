@@ -26,11 +26,11 @@ module.exports = Backbone.Router.extend
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
 		if albumArtistId?
-			wavebox.appController.mainView.push(new ArtistView albumArtistId: albumArtistId)
+			wavebox.appController.mainView.push(new ArtistView artistId: albumArtistId, isAlbumArtist: true)
 			console.log "new view push submit #{Date.now()}"
 		else
 			@sendSelectionNotification "Artists"
-			wavebox.appController.mainView.push(new ArtistsView isAlbumArtists: true)
+			wavebox.appController.mainView.push(new ArtistsView isAlbumArtist: true)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()

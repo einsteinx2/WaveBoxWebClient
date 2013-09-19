@@ -8,11 +8,11 @@ class ArtistView extends PageView
 	events:
 		"click .collection-actions-play-all": "playAll"
 
-	initialize: (artistId, isAlbumArtist) ->
+	initialize: (options) ->
 		@contentLoaded = no
-		@isAlbumArtist = isAlbumArtist? and isAlbumArtist
-		if artistId?
-			@artist = if isAlbumArtist? new AlbumArtist artistId else new Artist artistId
+		@isAlbumArtist = options.isAlbumArtist? and options.isAlbumArtist
+		if options.artistId?
+			@artist = if @isAlbumArtist then new AlbumArtist options else new Artist options
 			@listenToOnce @artist, "change", =>
 				@contentLoaded = yes
 				@render()
