@@ -119,6 +119,30 @@
 		</div>
 	</script>
 
+	<script id="template-page-artist" type="text/template">
+		<div class="page-artist-header">
+			<div class="page-artist-header-overlay">
+				<div class="page-artist-header-name"><%= artistName %></div>
+				<ul class="page-artist-tabs">
+					<li class="page-artist-header-button">
+						<div><%= counts.songs %></div>
+						<div>Songs</div>
+					</li>
+					<li class="page-artist-header-button">
+						<div><%= counts.albums %></div>
+						<div>Albums</div>
+					</li>
+					<li class="page-artist-header-button">
+						<div><%= counts.favorites %></div>
+						<div>Favorites</div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</script>
+
+
 	<!-- page collection actions -->
 	<script type="text/template" id="template-page-collection-actions">
 		<div class="collection-actions">

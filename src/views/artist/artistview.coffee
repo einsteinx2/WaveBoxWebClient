@@ -4,6 +4,7 @@ CoverListView = require '../coverList/coverListView'
 
 class ArtistView extends PageView
 	tagName: "div"
+	template: _.template($("#template-page-artist").html())
 	events:
 		"click .collection-actions-play-all": "playAll"
 
@@ -11,30 +12,21 @@ class ArtistView extends PageView
 		@contentLoaded = no
 		if artistId?
 			@artist = new Artist artistId
+			console.log @artist
 			@listenToOnce @artist, "change", =>
+				console.log @artist
 				@contentLoaded = yes
 				@render()
 			@artist.fetch()
 	
 	render: ->
-		
-		$page = ArtistView.__super__.render
-			leftAccessory: "sprite-back-arrow"
-			rightAccessory: "sprite-play-queue"
-			artUrl: ""
-			pageTitle: @artist.get("artistName") or ""
-			search: no
-		document.title = "Wave - " + (@artist.get("artistName") or "")
-
-
-		$content = $page.find(".page-content")
-		$content.addClass "scroll"
-		$content.append($("#template-page-collection-actions").html())
-		
 		if @contentLoaded
+			@$el.append @template
+				artistName: @artist.get("artistName")
+				counts: @artist.get("counts")
+			@$el.find(".page-artist-header").css("background-image", "url('http://herpderp.me:8000?action=art&type=artist&id=#{@artist.get("musicBrainzId")}')")
 			@covers = new CoverListView collection: @artist.get("albums")
-			$content.append @covers.render().el
-		@$el.html $page.children()
+			@$el.append @covers.render().el
 
 		this
 	

@@ -94,8 +94,8 @@ class ApiClient
 			itemIdString = itemIds
 
 		$.ajax
-			url: "#{@API_ADDRESS}/playlists"
-			data: "action=add&id=#{playlistId}&itemIds=#{itemIdString}&s=#{@SESSION_ID}"
+			url: "#{@API_ADDRESS}/playlists/#{playlistId}"
+			data: "action=add&itemIds=#{itemIdString}&s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -126,8 +126,8 @@ class ApiClient
 		return if not playlistId?
 
 		$.ajax
-			url: "#{@API_ADDRESS}/playlists"
-			data: "id=#{playlistId}&s=#{@SESSION_ID}"
+			url: "#{@API_ADDRESS}/playlists/#{playlistId}"
+			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				console.log "dunnit"
 				if data.error?
@@ -159,8 +159,8 @@ class ApiClient
 		return if not artistId?
 
 		$.ajax
-			url: "#{@API_ADDRESS}/artists"
-			data: "id=#{artistId}&includeSongs=#{retrieveSongs}&s=#{@SESSION_ID}"
+			url: "#{@API_ADDRESS}/artists/#{artistId}"
+			data: "includeSongs=#{retrieveSongs}&s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -192,8 +192,8 @@ class ApiClient
 		return if not albumId?
 
 		$.ajax
-			url: "#{@API_ADDRESS}/albums"
-			data: "id=#{albumId}&s=#{@SESSION_ID}"
+			url: "#{@API_ADDRESS}/albums/#{albumId}"
+			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -209,8 +209,8 @@ class ApiClient
 		return if not artistId?
 
 		$.ajax
-			url: "#{@API_ADDRESS}/artists"
-			data: "s=#{@SESSION_ID}&id=#{artistId}"
+			url: "#{@API_ADDRESS}/artists/#{artistId}"
+			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -243,8 +243,8 @@ class ApiClient
 		return if not id?
 
 		$.ajax
-			url: "#{@API_ADDRESS}/#{forItemType}"
-			data: "s=#{@SESSION_ID}&id=#{id}"
+			url: "#{@API_ADDRESS}/#{forItemType}/#{id}"
+			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -259,9 +259,10 @@ class ApiClient
 
 	getFolder: (folderId, recursive = false, callback) ->
 
-		url = "s=#{@SESSION_ID}"
+		url = "/"
 		if folderId?
-			url += "&id=#{folderId}"
+			url += folderId
+		url += "?s=#{@SESSION_ID}"
 		if recursive
 			url += "&recursiveMedia=1"
 
@@ -304,18 +305,18 @@ class ApiClient
 		if size?
 			if window.devicePixelRatio?
 				size *= window.devicePixelRatio
-			aSize = "&size=#{size}"
+			aSize = "?size=#{size}"
 		else aSize = ""
 
-		return "#{@API_ADDRESS}/art?id=#{artId}#{aSize}"
+		return "#{@API_ADDRESS}/art/#{artId}#{aSize}"
 
 	getFanArtThumbUrl: (itemId, size) ->
-		return "#{@API_ADDRESS}/fanartthumb?id=#{itemId}"
+		return "#{@API_ADDRESS}/fanartthumb/#{itemId}"
 
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
-			url: "#{@API_ADDRESS}/scrobble"
-			data: "s=#{@SESSION_ID}&id=#{song.itemId}&action=NOWPLAYING"
+			url: "#{@API_ADDRESS}/scrobble/#{song.itemId}"
+			data: "s=#{@SESSION_ID}&action=NOWPLAYING"
 			success: (data) ->
 				if data.error?
 					if data.error is "LFMNotAuthenticated"

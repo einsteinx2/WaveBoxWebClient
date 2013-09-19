@@ -9,6 +9,7 @@ class Artist extends Backbone.Model
 		itemTypeId: null
 		albums: null
 		tracks: null
+		counts: null
 
 	initialize: (options) ->
 		@artistId = if options.artistId? then options.artistId else null
@@ -24,19 +25,16 @@ class Artist extends Backbone.Model
 
 	sync: (method, model, options) ->
 		if method is "read"
+			console.log "ARTISTID: #{@artistId}"
 			console.log @shouldRetrieveSongs
 			wavebox.apiClient.getArtist @artistId, @shouldRetrieveSongs, (success, data) =>
 				if success
 					hash = data.artists[0]
 					hash.albums = new AlbumList data.albums
 					hash.tracks = new TrackList data.songs
-					console.log data
-					console.log hash.tracks
+					hash.counts = data.counts
 					@set hash
 					
-				else
-					console.log "artistInfo!"
-					console.log data
 	
 	retrieveSongs: ->
 		@shouldRetrieveSongs = yes
