@@ -34,6 +34,7 @@ class AlbumArtist extends Backbone.Model
 					hash = data.artists[0]
 					hash.albums = new AlbumList data.albums
 					hash.tracks = new TrackList data.songs
+					hash.counts = data.counts
 					console.log data
 					console.log hash.tracks
 					@set hash
