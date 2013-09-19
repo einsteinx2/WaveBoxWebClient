@@ -29,7 +29,7 @@ class CoverListItemView extends Backbone.View
 			title: _.escape(@fields.title)
 			artist: _.escape(@fields.artist)
 
-		if not wavebox.isMobile
+		if not wavebox.isMobile()
 			@preloadArt()
 
 		this

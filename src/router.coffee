@@ -1,5 +1,7 @@
 ArtistsView = require './views/artists/artistsview'
 ArtistView = require './views/artist/artistview'
+AlbumArtistsView = require './views/albumArtists/albumartistsview'
+AlbumArtistView = require './views/albumArtist/albumartistview'
 AlbumsView = require './views/albums/albumsview'
 AlbumListingView = require './views/artistAlbum/albumlistingview'
 GenresView = require './views/genresView'
@@ -10,19 +12,32 @@ LoginView = require './loginView'
 
 module.exports = Backbone.Router.extend
 	routes:
-		"artists(/:artistId)":		"artists"
-		"folders(/:folderId)":		"folders"
-		"albums(/:albumId)":		"albums"
-		"genres(/:genreId)":		"genres"
-		"playlists/:playlistId":	"playlists"
-		"favorites":				"favorites"
-		"settings":					"settings"
-		"login":					"login"
-		"*path":					"home"
+		"albumartists(/:artistId)":		"albumartists"
+		"artists(/:artistId)":			"artists"
+		"folders(/:folderId)":			"folders"
+		"albums(/:albumId)":			"albums"
+		"genres(/:genreId)":			"genres"
+		"playlists/:playlistId":		"playlists"
+		"favorites":					"favorites"
+		"settings":						"settings"
+		"login":						"login"
+		"*path":						"home"
+
+	albumartists: (albumArtistId) ->
+		console.log "nav albumartists #{Date.now()}"
+
+		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
+		if albumArtistId?
+			wavebox.appController.mainView.push(new AlbumArtistView albumArtistId: albumArtistId)
+			console.log "new view push submit #{Date.now()}"
+		else
+			@sendSelectionNotification "Artists"
+			wavebox.appController.mainView.push(new AlbumArtistsView)
+
+		if wavebox.isMobile()
+			wavebox.appController.panels.focusMain()
 
 	artists: (artistId) ->
-		@sendSelectionNotification "Artists"
-
 		console.log "nav artists #{Date.now()}"
 
 		#if wavebox.appController.mainView? then wavebox.appController.mainView.undelegateEvents()
@@ -30,26 +45,27 @@ module.exports = Backbone.Router.extend
 			wavebox.appController.mainView.push(new ArtistView artistId: artistId)
 			console.log "new view push submit #{Date.now()}"
 		else
+			@sendSelectionNotification "Artists"
 			wavebox.appController.mainView.push(new ArtistsView)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()
 
 	folders: (folderId) ->
-		@sendSelectionNotification "Folders"
 		if folderId?
 			wavebox.appController.mainView.push(new FolderView(folderId: folderId, isSubFolder: yes))
 		else
+			@sendSelectionNotification "Folders"
 			wavebox.appController.mainView.push(new FolderView)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()
 
 	albums: (albumId) ->
-		@sendSelectionNotification "Albums"
 		if albumId?
 			wavebox.appController.mainView.push(new AlbumListingView albumId: albumId)
 		else
+			@sendSelectionNotification "Albums"
 			wavebox.appController.mainView.push(new AlbumsView)
 
 		if wavebox.isMobile()

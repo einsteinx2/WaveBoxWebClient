@@ -169,6 +169,38 @@ class ApiClient
 			async: true
 			type: "POST"
 
+	getAlbumArtist: (albumArtistId, retrieveSongs, callback) ->
+		return if not albumArtistId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/albumartists/#{albumArtistId}"
+			data: "includeSongs=#{retrieveSongs}"
+			success: (data) ->
+				console.log "Retrieved album artist: " + albumArtistId
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting albumArtist: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+	getAlbumArtistList: (callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/albumartists"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data.artists
+			error: (XHR, status, error) ->
+				console.log "error getting albumArtist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
 	getAlbumList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/albums"
