@@ -1,5 +1,6 @@
 PageView = require '../pageView'
 Artist = require '../../models/artist'
+AlbumArtist = require '../../models/albumArtist'
 CoverListView = require '../coverList/coverListView'
 
 class ArtistView extends PageView
@@ -7,24 +8,27 @@ class ArtistView extends PageView
 	events:
 		"click .collection-actions-play-all": "playAll"
 
-	initialize: (artistId) ->
+	initialize: (artistId, isAlbumArtist) ->
 		@contentLoaded = no
+		@isAlbumArtist = isAlbumArtist? and isAlbumArtist
 		if artistId?
-			@artist = new Artist artistId
+			@artist = if isAlbumArtist? new AlbumArtist artistId else new Artist artistId
 			@listenToOnce @artist, "change", =>
 				@contentLoaded = yes
 				@render()
 			@artist.fetch()
 	
 	render: ->
+
+		@artistName = @artist.get(if @isAlbumArtist then "albumArtistName" else "artistName")
 		
 		$page = ArtistView.__super__.render
 			leftAccessory: "sprite-back-arrow"
 			rightAccessory: "sprite-play-queue"
 			artUrl: ""
-			pageTitle: @artist.get("artistName") or ""
+			pageTitle: @artistName or ""
 			search: no
-		document.title = "Wave - " + (@artist.get("artistName") or "")
+		document.title = "Wave - " + (@artistName or "")
 
 
 		$content = $page.find(".page-content")

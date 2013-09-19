@@ -32,7 +32,7 @@ module.exports = Backbone.Router.extend
 			console.log "new view push submit #{Date.now()}"
 		else
 			@sendSelectionNotification "Artists"
-			wavebox.appController.mainView.push(new AlbumArtistsView)
+			wavebox.appController.mainView.push(new AlbumArtistsView isAlbumArtists: true)
 
 		if wavebox.isMobile()
 			wavebox.appController.panels.focusMain()
