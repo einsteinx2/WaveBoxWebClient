@@ -1,5 +1,6 @@
 PageView = require "../pageView"
 Artists = require "../../collections/artists"
+AlbumArtists = require "../../collections/albumArtists"
 CoverListView = require "../coverList/coverListView"
 Genre = require '../../models/genre'
 
@@ -9,6 +10,8 @@ class ArtistsView extends PageView
 	initialize: (options) ->
 		if options? and options.genreId?
 			@collection = new Genre null, genreId: options.genreId
+		else if options? and options.isAlbumArtist? and options.isAlbumArtist
+			@collection = new AlbumArtists
 		else
 			@collection = new Artists
 
@@ -41,10 +44,10 @@ class ArtistsView extends PageView
 
 		if @fetched
 			artists =
-				if @collection.constructor.name is "Artists"
-					@collection
-				else if @collection.constructor.name is "Genre"
+				if @collection.constructor.name is "Genre"
 					@collection.get("artists")
+				else
+					@collection
 
 			console.log @collection
 			@covers = new CoverListView collection: artists

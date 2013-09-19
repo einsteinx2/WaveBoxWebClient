@@ -5,6 +5,8 @@ class Track extends Backbone.Model
 		itemTypeId: null
 		artistId: null
 		artistName: null
+		albumArtistId: null
+		albumArtistName: null
 		albumId: null
 		songName: null
 		trackNumber: null

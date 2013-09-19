@@ -52,7 +52,6 @@ class ApiClient
 			console.log "Verifying sessionId"
 			$.ajax
 				url: "#{@API_ADDRESS}/status"
-				data: "s=#{@SESSION_ID}"
 				success: (data) ->
 					if data.error?
 						console.log "sessionId not valid, error: #{data.error}"
@@ -71,7 +70,7 @@ class ApiClient
 	createPlaylist: (name, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists"
-			data: "action=create&name=#{encodeURIComponent(name)}&s=#{@SESSION_ID}"
+			data: "action=create&name=#{encodeURIComponent(name)}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -95,7 +94,7 @@ class ApiClient
 
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists/#{playlistId}"
-			data: "action=add&itemIds=#{itemIdString}&s=#{@SESSION_ID}"
+			data: "action=add&itemIds=#{itemIdString}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -127,7 +126,6 @@ class ApiClient
 
 		$.ajax
 			url: "#{@API_ADDRESS}/playlists/#{playlistId}"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				console.log "dunnit"
 				if data.error?
@@ -143,7 +141,6 @@ class ApiClient
 	getArtistList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/artists"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -160,7 +157,7 @@ class ApiClient
 
 		$.ajax
 			url: "#{@API_ADDRESS}/artists/#{artistId}"
-			data: "includeSongs=#{retrieveSongs}&s=#{@SESSION_ID}"
+			data: "includeSongs=#{retrieveSongs}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -172,10 +169,41 @@ class ApiClient
 			async: true
 			type: "POST"
 
+	getAlbumArtist: (albumArtistId, retrieveSongs, callback) ->
+		return if not albumArtistId?
+
+		$.ajax
+			url: "#{@API_ADDRESS}/albumartists/#{albumArtistId}"
+			data: "includeSongs=#{retrieveSongs}"
+			success: (data) ->
+				console.log "Retrieved album artist: " + albumArtistId
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data
+			error: (XHR, status, error) ->
+				console.log "error getting albumArtist: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
+	getAlbumArtistList: (callback) ->
+		$.ajax
+			url: "#{@API_ADDRESS}/albumartists"
+			success: (data) ->
+				if data.error?
+					if callback? then callback false, data.error
+				else
+					if callback? then callback true, data.artists
+			error: (XHR, status, error) ->
+				console.log "error getting albumArtist list: #{status}"
+				callback false, error
+			async: true
+			type: "POST"
+
 	getAlbumList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/albums"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -187,13 +215,11 @@ class ApiClient
 			async: true
 			type: "POST"
 
-
 	getAlbum: (albumId, callback) ->
 		return if not albumId?
 
 		$.ajax
 			url: "#{@API_ADDRESS}/albums/#{albumId}"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -210,7 +236,6 @@ class ApiClient
 
 		$.ajax
 			url: "#{@API_ADDRESS}/artists/#{artistId}"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -226,7 +251,6 @@ class ApiClient
 	getGenreList: (callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/genres"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -244,7 +268,6 @@ class ApiClient
 
 		$.ajax
 			url: "#{@API_ADDRESS}/#{forItemType}/#{id}"
-			data: "s=#{@SESSION_ID}"
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -259,16 +282,18 @@ class ApiClient
 
 	getFolder: (folderId, recursive = false, callback) ->
 
-		url = "/"
+		url = "#{@API_ADDRESS}/folders"
 		if folderId?
-			url += folderId
-		url += "?s=#{@SESSION_ID}"
+			url += "/#{folderId}"
+
+		data = ""
+
 		if recursive
-			url += "&recursiveMedia=1"
+			data += "recursiveMedia=1"
 
 		$.ajax
-			url: "#{@API_ADDRESS}/folders"
-			data: url
+			url: url
+			data: data
 			success: (data) ->
 				if data.error?
 					if callback? then callback false, data.error
@@ -316,7 +341,7 @@ class ApiClient
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
 			url: "#{@API_ADDRESS}/scrobble/#{song.itemId}"
-			data: "s=#{@SESSION_ID}&action=NOWPLAYING"
+			data: "action=NOWPLAYING"
 			success: (data) ->
 				if data.error?
 					if data.error is "LFMNotAuthenticated"
@@ -335,7 +360,7 @@ class ApiClient
 		timestamp = new Date().getTime() / 1000
 		$.ajax
 			url: "#{@API_ADDRESS}/scrobble"
-			data: "s=#{@SESSION_ID}&event=#{song.itemId},#{timestamp}&action=SUBMIT"
+			data: "event=#{song.itemId},#{timestamp}&action=SUBMIT"
 			success: (data) ->
 				if data.error?
 					if data.error is "LFMNotAuthenticated"

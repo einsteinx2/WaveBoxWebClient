@@ -5,8 +5,8 @@ class Album extends Backbone.Model
 		albumId: null
 		albumName: null
 		artId: null
-		artistId: null
-		artistName: null
+		albumArtistId: null
+		albumArtistName: null
 		itemTypeId: null
 		releaseYear: null
 		tracks: null

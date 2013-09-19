@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend
 				{
 					itemTitle: "Artists",
 					itemClass: "sprite-music-note",
-					href: "#artists"
+					href: "#albumartists"
 				},
 				{
 					itemTitle: "Albums",

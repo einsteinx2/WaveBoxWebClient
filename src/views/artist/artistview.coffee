@@ -1,5 +1,6 @@
 PageView = require '../pageView'
 Artist = require '../../models/artist'
+AlbumArtist = require '../../models/albumArtist'
 CoverListView = require '../coverList/coverListView'
 
 class ArtistView extends PageView
@@ -8,11 +9,11 @@ class ArtistView extends PageView
 	events:
 		"click .collection-actions-play-all": "playAll"
 
-	initialize: (artistId) ->
+	initialize: (options) ->
 		@contentLoaded = no
-		if artistId?
-			@artist = new Artist artistId
-			console.log @artist
+		@isAlbumArtist = options.isAlbumArtist? and options.isAlbumArtist
+		if options.artistId?
+			@artist = if @isAlbumArtist then new AlbumArtist options else new Artist options
 			@listenToOnce @artist, "change", =>
 				console.log @artist
 				@contentLoaded = yes
@@ -20,6 +21,21 @@ class ArtistView extends PageView
 			@artist.fetch()
 	
 	render: ->
+		@artistName = @artist.get(if @isAlbumArtist then "albumArtistName" else "artistName")
+		
+		$page = ArtistView.__super__.render
+			leftAccessory: "sprite-back-arrow"
+			rightAccessory: "sprite-play-queue"
+			artUrl: ""
+			pageTitle: @artistName or ""
+			search: no
+		document.title = "Wave - " + (@artistName or "")
+
+
+		$content = $page.find(".page-content")
+		$content.addClass "scroll"
+		$content.append($("#template-page-collection-actions").html())
+		
 		if @contentLoaded
 			@$el.append @template
 				artistName: @artist.get("artistName")
