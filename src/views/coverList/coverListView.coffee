@@ -21,14 +21,18 @@ class CoverListView extends Backbone.View
 				useElementScroll: true#,
 				lazy: ($element) ->
 					# Preload the art for the covers
-					children = if wavebox.isMobile() then $element.children else $element.children[0].children
+					children =
+						if wavebox.isMobile() or (@collection? and not @collection.positions)
+							$element.children
+						else $element.children[0].children
+
 					for child in children
 						backboneView = $(child).data("backbone-view")
 						if backboneView?
 							backboneView.preloadArt()
 			}
 
-			if wavebox.isMobile()
+			if wavebox.isMobile() or not @collection.positions?
 				# If mobile, just add all the covers directly
 				@collection.each (item) =>
 					if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
