@@ -67,14 +67,17 @@ class ArtistView extends PageView
 		console.log "songs"
 		view = new TrackListView collection: @artist.get("tracks")
 		@$content.empty().append view.render().el
+		return no
 		
 	showAlbums: ->
 		console.log "albums"
 		view = new CoverListView collection: @artist.get("albums")
 		@$content.empty().append view.render().el
+		return no
 
 	showFavorites: ->
 		console.log "favorites"
+		return no
 	
 	playAll: (e) ->
 		e.preventDefault()

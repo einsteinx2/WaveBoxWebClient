@@ -18,6 +18,8 @@ class TrackList extends Backbone.View
 			@collection.each (track) =>
 				wavebox.audioPlayer.playQueue.add track
 
+		"click .list-track-header": "switchSortKey"
+
 	render: ->
 		$temp = $("<div>")
 		
@@ -51,5 +53,21 @@ class TrackList extends Backbone.View
 					.children()
 					.css("opacity", 0)
 			art.src = artUrl
+
+	switchSortKey: (e) ->
+		console.log $(e.target).text()
+		@collection.comparator = switch $(e.target).text()
+			when "Title"
+				"songName"
+			when "Artist"
+				"artistName"
+			when "Time"
+				"duration"
+			when "#"
+				"trackNumber"
+
+		@collection.sort()
+		@render()
+
 
 module.exports = TrackList
