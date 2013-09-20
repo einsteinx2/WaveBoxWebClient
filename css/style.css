@@ -1273,6 +1273,14 @@ input:focus {
 		box-sizing: border-box;
 	}
 
+	.list-cover-item {
+		width: 127px;
+		height: 127px;
+		float: none;
+		display: inline-block;
+		margin: 10px;
+	}
+
     .transitions {
         -moz-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;
         -o-transition: left 0.2s ease-out, right 0.2s ease-out, width 0.2s ease-out;
@@ -1283,19 +1291,31 @@ input:focus {
 
 @media (min-device-width: 769px and min-width: 1400px) {
 	.list-cover-item {
-		width: 14.285%;
+		width: 127px;
+		height: 127px;
+		float: none;
+		display: inline-block;
+		margin: 10px;
 	}
 }
 
 @media (min-device-width: 769px and max-width: 1200px) {
 	.list-cover-item {
-		width: 16.66667%;
+		width: 127px;
+		height: 127px;
+		float: none;
+		display: inline-block;
+		margin: 10px;
 	}
 }
 
 @media (min-device-width: 769px and max-width: 1000px) {
 	.list-cover-item {
-		width: 20%;
+		width: 127px;
+		height: 127px;
+		float: none;
+		display: inline-block;
+		margin: 10px;
 	}
 }
 

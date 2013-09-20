@@ -5,9 +5,10 @@ class Albums extends Backbone.Collection
 
 	sync: (method, model, options) ->
 		if method is "read"
-			wavebox.apiClient.getAlbumList (success, data) =>
+			wavebox.apiClient.getAlbumList (success, data, positions) =>
 				if success
 					@set data
+					@positions = positions
 					options.success data
 				else
 					options.error data

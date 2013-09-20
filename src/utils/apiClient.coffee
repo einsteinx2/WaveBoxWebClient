@@ -194,7 +194,7 @@ class ApiClient
 				if data.error?
 					if callback? then callback false, data.error
 				else
-					if callback? then callback true, data.artists
+					if callback? then callback true, data.artists, data.sectionPositions
 			error: (XHR, status, error) ->
 				console.log "error getting albumArtist list: #{status}"
 				callback false, error
@@ -208,7 +208,7 @@ class ApiClient
 				if data.error?
 					if callback? then callback false, data.error
 				else
-					if callback? then callback true, data.albums
+					if callback? then callback true, data.albums, data.sectionPositions
 			error: (XHR, status, error) ->
 				console.log "error getting artist list: #{status}"
 				callback false, error
@@ -241,7 +241,7 @@ class ApiClient
 					if callback? then callback false, data.error
 				else
 					console.log "sessionId is valid"
-					if callback? then callback true, data.albums
+					if callback? then callback true, data.albums, data.sectionPositions
 			error: (XHR, status, error) ->
 				console.log "error getting artist albums list: #{status}"
 				if callback? then callback false, error
@@ -255,7 +255,7 @@ class ApiClient
 				if data.error?
 					if callback? then callback false, data.error
 				else
-					if callback? then callback true, data.genres
+					if callback? then callback true, data.genres, data.sectionPositions
 			error: (XHR, status, error) ->
 				console.log "error getting genre list: #{status}"
 				callback false, error

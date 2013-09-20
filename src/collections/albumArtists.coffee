@@ -6,9 +6,10 @@ class AlbumArtists extends Backbone.Collection
 	sync: (method, model, options) ->
 		if method is "read"
 			console.log "Fetching albumArtists list..."
-			wavebox.apiClient.getAlbumArtistList (success, data) =>
+			wavebox.apiClient.getAlbumArtistList (success, data, positions) =>
 				if success
 					@set data
+					@positions = positions
 					options.success data
 				else
 					options.error data
