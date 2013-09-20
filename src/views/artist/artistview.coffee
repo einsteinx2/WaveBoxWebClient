@@ -2,17 +2,23 @@ PageView = require '../pageView'
 Artist = require '../../models/artist'
 AlbumArtist = require '../../models/albumArtist'
 CoverListView = require '../coverList/coverListView'
+TrackListView = require '../tracklistview'
 
 class ArtistView extends PageView
 	tagName: "div"
 	template: _.template($("#template-page-artist").html())
 	events:
 		"click .collection-actions-play-all": "playAll"
+		"click .page-artist-tab-songs": "showSongs"
+		"click .page-artist-tab-albums": "showAlbums"
+		"click .page-artist-tab-favorites": "showFavorites"
+
 
 	initialize: (options) ->
 		@contentLoaded = no
 		@isAlbumArtist = options.isAlbumArtist? and options.isAlbumArtist
 		if options.artistId?
+			options.retrieveSongs = yes
 			@artist = if @isAlbumArtist then new AlbumArtist options else new Artist options
 			@listenToOnce @artist, "change", =>
 				console.log @artist
@@ -23,28 +29,43 @@ class ArtistView extends PageView
 	render: ->
 		@artistName = @artist.get(if @isAlbumArtist then "albumArtistName" else "artistName")
 		
-		$page = ArtistView.__super__.render
-			leftAccessory: "sprite-back-arrow"
-			rightAccessory: "sprite-play-queue"
-			artUrl: ""
-			pageTitle: @artistName or ""
-			search: no
-		document.title = "Wave - " + (@artistName or "")
+		# $page = ArtistView.__super__.render
+		# 	leftAccessory: "sprite-back-arrow"
+		# 	rightAccessory: "sprite-play-queue"
+		# 	artUrl: ""
+		# 	pageTitle: @artistName or ""
+		# 	search: no
+		# document.title = "Wave - " + (@artistName or "")
 
 
-		$content = $page.find(".page-content")
-		$content.addClass "scroll"
-		$content.append($("#template-page-collection-actions").html())
+		# @$content = $page.find(".page-content")
+		# 	.addClass("scroll")
+		# 	.append($("#template-page-collection-actions").html())
 		
 		if @contentLoaded
 			@$el.append @template
 				artistName: @artistName
 				counts: @artist.get("counts")
+			@$content = @$el.find(".page-content")
 			@$el.find(".page-artist-header").css("background-image", "url('http://herpderp.me:8000?action=art&type=artist&id=#{@artist.get("musicBrainzId")}')")
-			@covers = new CoverListView collection: @artist.get("albums")
-			@$el.append @covers.render().el
+			# @covers = new CoverListView collection: @artist.get("albums")
+			# @$el.append @covers.render().el
+			@showAlbums()
 
 		this
+
+	showSongs: ->
+		console.log "songs"
+		view = new TrackListView collection: @artist.get("tracks")
+		@$content.empty().append view.render().el
+		
+	showAlbums: ->
+		console.log "albums"
+		view = new CoverListView collection: @artist.get("albums")
+		@$content.empty().append view.render().el
+
+	showFavorites: ->
+		console.log "favorites"
 	
 	playAll: (e) ->
 		e.preventDefault()

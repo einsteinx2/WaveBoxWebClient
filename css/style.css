@@ -579,6 +579,7 @@ input:focus {
 	font-size: .9em;
 	text-align: center;
 	margin-right: 18px;
+	cursor: pointer;
 }
 
 .page-artist-header-button :first-child {

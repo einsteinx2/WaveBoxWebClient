@@ -1,4 +1,6 @@
 Track = require '../models/track'
 
-module.exports = Backbone.Collection.extend
+class TrackList extends Backbone.Collection
 	model: Track
+
+module.exports = TrackList
