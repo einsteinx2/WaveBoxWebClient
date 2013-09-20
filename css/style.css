@@ -560,6 +560,7 @@ input:focus {
 	padding: 15px 25px;
 	overflow: auto;
 	color: #fff;
+	-webkit-transition: opacity .15s ease-in-out;
 }
 
 .page-artist-header-overlay ul {

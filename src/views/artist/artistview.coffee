@@ -6,9 +6,11 @@ TrackListView = require '../tracklistview'
 
 class ArtistView extends PageView
 	tagName: "div"
+	className: "scroll"
 	template: _.template($("#template-page-artist").html())
 	events:
 		"click .collection-actions-play-all": "playAll"
+		"click .page-artist-header": "toggleHeader"
 		"click .page-artist-tab-songs": "showSongs"
 		"click .page-artist-tab-albums": "showAlbums"
 		"click .page-artist-tab-favorites": "showFavorites"
@@ -16,6 +18,7 @@ class ArtistView extends PageView
 
 	initialize: (options) ->
 		@contentLoaded = no
+		@headerEnabled = yes
 		@isAlbumArtist = options.isAlbumArtist? and options.isAlbumArtist
 		if options.artistId?
 			options.retrieveSongs = yes
@@ -53,6 +56,12 @@ class ArtistView extends PageView
 			@showAlbums()
 
 		this
+
+	toggleHeader: ->
+		$header = @$el.find(".page-artist-header-overlay")
+		opacity = if @headerEnabled then 0 else 1
+		@headerEnabled = not @headerEnabled
+		$header.css("opacity", opacity)
 
 	showSongs: ->
 		console.log "songs"
