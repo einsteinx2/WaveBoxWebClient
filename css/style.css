@@ -96,6 +96,7 @@ input:focus {
 	font-size: .9em;
 	font-weight: 400;
 	-webkit-transition: .1s background-color ease-out;
+	-moz-transition: opacity .15s ease-in-out;
 }
 
 .login-form ::-webkit-input-placeholder {
@@ -116,6 +117,7 @@ input:focus {
 	font-weight: 500;
 	padding: 0 8px 0 0;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 .login-form-button:active {
@@ -179,6 +181,7 @@ input:focus {
     top: 100px;
     bottom: 0;
     box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	overflow: auto;
 }
 
@@ -199,6 +202,7 @@ input:focus {
 .collection-actions {
 	text-align: right;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 15px 15px 0 0;
 }
 
@@ -224,6 +228,7 @@ input:focus {
 .list-cover {
 	padding: 15px 0 0 15px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 /* Track list */
@@ -263,6 +268,7 @@ input:focus {
 
 .list-track-row > div {
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	line-height: 43px;
 	float: left;
 }
@@ -417,6 +423,7 @@ input:focus {
 	position: relative;
 	height: 145px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 15px 15px 0 15px;
 }
 
@@ -467,6 +474,7 @@ input:focus {
 /* Media collection list */
 .list-cover-item {
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	float: left;
 	width: 16.666%;
 	padding: 0 15px 15px 0;
@@ -481,6 +489,7 @@ input:focus {
 	width: 100%;
 	border: 1px solid #848484;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 /* OH MY GOD EQUAL WIDTH/HEIGHT BOX */
@@ -554,6 +563,7 @@ input:focus {
 .page-artist-header-overlay {
 	position: absolute;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	background-color: rgba(0, 0, 0, .4);
 	width: 100%;
 	height: 100%;
@@ -561,6 +571,7 @@ input:focus {
 	overflow: auto;
 	color: #fff;
 	-webkit-transition: opacity .15s ease-in-out;
+	-moz-transition: opacity .15s ease-in-out;
 }
 
 .page-artist-header-overlay ul {
@@ -807,6 +818,7 @@ input:focus {
 	left: 50px;
 	right: 50px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	line-height: 50px;
 	text-align: center;
 	font-weight: 700;
@@ -913,6 +925,7 @@ input:focus {
 	font-size: 14px;
 	max-width: 175px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding-right: 15px;
 }
 
@@ -922,6 +935,7 @@ input:focus {
 	font-size: 11px;
 	text-transform: uppercase;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 30px 0 0 15px;
 }		
 
@@ -983,6 +997,7 @@ input:focus {
 	height: 35px;
 	padding: 0 10px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-shadow: 0 -1px 2px #aaa;
 	background-color: rgba(226, 226, 226, 1);
 }
@@ -1052,6 +1067,7 @@ input:focus {
 	height: 50px;
 	color: #fff;
 	-webkit-transition: padding-top .25s ease-in-out;
+	-moz-transition: opacity .15s ease-in-out;
 }
 	
 .play-queue-item-title {
@@ -1136,6 +1152,7 @@ input:focus {
 	background-color: rgba(255, 255, 255, .5);
 	padding: 5px;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	font-size: 10px;
 	line-height: 20px;
 	text-shadow: 0px 1px 1px #ffffff;
@@ -1237,6 +1254,7 @@ input:focus {
 .viewstack-animate
 {
 	-webkit-transition: -webkit-transform .3s ease-in-out;
+	-moz-transition: opacity .15s ease-in-out;
 }
 
 .viewstack-onscreen
@@ -1258,6 +1276,7 @@ input:focus {
 
     #left, #right {
         -webkit-transition: width .4s ease-out;
+		-moz-transition: opacity .15s ease-in-out;
     }
 
     #left {
@@ -1273,6 +1292,7 @@ input:focus {
 		height: 100%;
 		overflow: visible;
 		box-sizing: border-box;
+		-moz-box-sizing: border-box;
 	}
 
 	.list-cover-item {
@@ -1380,6 +1400,7 @@ input:focus {
 	.list-cover-item > :nth-child(2)
 	{
 		box-sizing: border-box;
+		-moz-box-sizing: border-box;
 		padding: 0 25px 0 10px;
 		line-height: 60px;
 		float: left;
@@ -1437,6 +1458,7 @@ input:focus {
 		width: 100%;
 		height: auto;
 		-webkit-transition: opacity .2s ease-out;
+		-moz-transition: opacity .15s ease-in-out;
 	}
 
 	/* TrackList */
@@ -1487,6 +1509,7 @@ input:focus {
 
 	.list-track-row-middle-column > div:first-child {
 		box-sizing: border-box;
+		-moz-box-sizing: border-box;
 		font-weight: 600;
 		width: 100%;
 	}
@@ -1515,6 +1538,7 @@ input:focus {
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 		box-sizing: border-box;
+		-moz-box-sizing: border-box;
 	}
 
 	/* artist page */

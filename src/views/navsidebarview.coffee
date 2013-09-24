@@ -5,7 +5,7 @@
 SidebarSectionView = require "./navsidebarsectionview"
 PlaylistsSectionView = require "./playlists/playlistsSectionView"
 
-module.exports = Backbone.View.extend
+class NavSidebarView extends Backbone.View
 	
 	el: "#nav"
 
@@ -76,3 +76,5 @@ module.exports = Backbone.View.extend
 		$temp.append @playlistSectionView.render().el
 		$temp.append @settingSectionView.render().el
 		@$el.empty().append $temp.children()
+
+module.exports = NavSidebarView
