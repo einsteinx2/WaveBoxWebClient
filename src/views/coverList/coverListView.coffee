@@ -15,9 +15,19 @@ class CoverListView extends Backbone.View
 
 		filter = @model.get("filter").toLowerCase()
 
+		# Set the infinity options (currently set to defaults of 3 and 350)
+		infinity.config.PAGE_TO_SCREEN_RATIO = 3
+		infinity.config.SCROLL_THROTTLE = 350
+
+		# Choose how many covers to load at a time
+		@amountToLoad = 25
+
 		# Setup inifinity scrolling
 		setTimeout =>
-			@infinityView = new infinity.ListView @$el.parent(), {
+			@infinityDiv = @$el.parent()
+			@infinityDiv.scroll @scrolled
+
+			@infinityView = new infinity.ListView @infinityDiv, {
 				useElementScroll: true#,
 				lazy: ($element) ->
 					# Preload the art for the covers
@@ -34,11 +44,7 @@ class CoverListView extends Backbone.View
 
 			if wavebox.isMobile() or not @collection.positions?
 				# If mobile, just add all the covers directly
-				@collection.each (item) =>
-					if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
-						view = new CoverListItemView model: item
-						view.render()
-						@infinityView.append view.$el
+				@loadCoversMobile 0, @amountToLoad
 			else
 				# If desktop, separate the items by letter index
 				@sectionKeyIndex = 0
@@ -78,6 +84,56 @@ class CoverListView extends Backbone.View
 		, 0
 
 		this
+
+	scrolled: (e) =>
+		if @initialLoadScrollHeight?
+			console.log "scrollTop + innerHeight = " + (@infinityDiv.scrollTop() + @infinityDiv.innerHeight()) + " scrollHeight = " + (@infinityDiv[0].scrollHeight - (@initialLoadScrollHeight / 2))
+			if @infinityDiv.scrollTop() + @infinityDiv.innerHeight() >= @infinityDiv[0].scrollHeight - (@initialLoadScrollHeight / 2)
+				# Load more covers
+				console.log "half way!"
+				@loadCoversMobile @lastLoadedIndex, @amountToLoad, @milliToWait
+
+	loadCoversMobile: (index, amount, delay) =>
+		# Set some sane defaults
+		if not amount?
+			amount = 50
+
+		console.log "loadCoversMobile called, index = " + index + " @collection.length = " + @collection.length
+		length = @collection.length
+		
+		# If there are no more records to process, return
+		if index >= length
+			return
+		
+		# Only process #{amount} at a time
+		remaining = length - index
+		if remaining > amount
+			max = amount + index
+		else
+			max = remaining + index
+
+		# Create the cover views and add to the infinite view
+		console.log "loadCoversMobile processing from " + index + " to " + max
+		filter = @model.get("filter").toLowerCase()
+		for x in [index...max] by 1
+			item = @collection.at x
+			if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
+				view = new CoverListItemView model: item
+				view.render()
+				@infinityView.append view.$el
+
+		# Save the last max
+		@lastLoadedIndex = max
+
+		# If this was the first load, save the scroll height
+		if index is 0
+			@initialLoadScrollHeight = @infinityDiv[0].scrollHeight
+
+		# Process more if a delay was set
+		if delay?
+			setTimeout =>
+				@loadCoversMobile max, amount, delay
+			, delay
 
 	createContainer: (letter) ->
 		@container = $(document.createElement('div'))
