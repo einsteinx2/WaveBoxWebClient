@@ -552,6 +552,15 @@ input:focus {
 	text-align: center;
 }
 
+.page-header-float-transparent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: transparent;
+	color: #fff;
+}
+
 .page-artist-header {
 	position: relative;
 	width: 100%;
@@ -567,20 +576,19 @@ input:focus {
 	background-color: rgba(0, 0, 0, .4);
 	width: 100%;
 	height: 100%;
-	padding: 15px 25px;
 	overflow: auto;
 	color: #fff;
 	-webkit-transition: opacity .15s ease-in-out;
 	-moz-transition: opacity .15s ease-in-out;
 }
 
-.page-artist-header-overlay ul {
+.page-artist-tabs{
 	position: absolute;
 	bottom: 0;
-	left: 25px;
+	left: 15px;
 	list-style: none;
 	border-top: 1px solid #ccc;
-	width: calc(100% - 50px);
+	width: calc(100% - 30px);
 	padding: 15px 0;
 	margin: 0;
 }
@@ -601,7 +609,7 @@ input:focus {
 
 .page-artist-header-name {
 	position: absolute;
-	left: 25px;
+	left: 15px;
 	bottom: 82px;
 }
 	
