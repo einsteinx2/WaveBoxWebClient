@@ -31,39 +31,23 @@ class CoverListItemView extends Backbone.View
 
 		this
 
-	cancelPreloadArt: =>
-		# Cancel the timer if exists
-		if @preloadArtTimer
-			clearTimeout @preloadArtTimer
-			@preloadArtTimer = null
-
-		return
-
 	preloadArt: =>
 		# If the image already exists, do nothing
 		if @art?
 			return
 
-		# Cancel any existing timer so we don't load more than once
-		@cancelPreloadArt()
-
-		# Add a 200ms delay for fast scrolling
-		@preloadArtTimer = setTimeout =>
-			if @fields.artId?
+		if @fields.artId?
 				# If there is associated art in WaveBox, load that
 				@art = new Image
 				@art.onload = @artLoaded
 				@art.src = wavebox.apiClient.getArtUrl(@fields.artId)
 				console.log("Preloading art for art id " + @fields.artId)
-		#	else if @fields.itemId?
-		#		# Otherwise, if it has an item id, try to load a fanart thumbnail
-		#		@art = new Image
-		#		@art.onload = @artLoaded
-		#		@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.itemId)
-		#		console.log("Preloading art for item id " + @fields.itemId)###
-
-			@preloadArtTimer = null
-		, 200
+			else if @fields.musicBrainzId?
+				# Otherwise, if it has a musicBrainzId, try to load a fanart thumbnail
+				@art = new Image
+				@art.onload = @artLoaded
+				@art.src = wavebox.apiClient.getFanArtThumbUrl(@fields.musicBrainzId)
+				console.log("Preloading art for musicBrainzId " + @fields.musicBrainzId)
 
 		return
 

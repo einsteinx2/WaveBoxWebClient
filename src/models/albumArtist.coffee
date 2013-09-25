@@ -22,7 +22,7 @@ class AlbumArtist extends Backbone.Model
 	coverViewFields: ->
 		title: @get "albumArtistName"
 		artId: @get "artId"
-		itemId: @get "albumArtistId"
+		musicBrainzId: @get "musicBrainzId"
 
 	sync: (method, model, options) ->
 		console.log "TEST sync called with method " + method

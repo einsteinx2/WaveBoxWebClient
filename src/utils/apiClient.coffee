@@ -336,7 +336,7 @@ class ApiClient
 		return "#{@API_ADDRESS}/art/#{artId}#{aSize}"
 
 	getFanArtThumbUrl: (itemId, size) ->
-		return "#{@API_ADDRESS}/fanartthumb/#{itemId}"
+		return "#{@API_ADDRESS}/fanartthumb?musicBrainzId=#{itemId}"
 
 	lastfmSetNowPlaying: (song, callback) ->
 		$.ajax
