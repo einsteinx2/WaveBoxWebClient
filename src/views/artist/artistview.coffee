@@ -15,7 +15,6 @@ class ArtistView extends PageView
 		"click .page-artist-tab-albums": "showAlbums"
 		"click .page-artist-tab-favorites": "showFavorites"
 
-
 	initialize: (options) ->
 		@contentLoaded = no
 		@headerEnabled = yes
@@ -57,7 +56,8 @@ class ArtistView extends PageView
 
 		this
 
-	toggleHeader: ->
+	toggleHeader: (e) ->
+		if $(e.target).hasClass("sprite") then return
 		$header = @$el.find(".page-artist-header-overlay")
 		opacity = if @headerEnabled then 0 else 1
 		@headerEnabled = not @headerEnabled
