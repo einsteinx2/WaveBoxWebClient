@@ -194,7 +194,7 @@ class ApiClient
 				if data.error?
 					if callback? then callback false, data.error
 				else
-					if callback? then callback true, data.artists, data.sectionPositions
+					if callback? then callback true, data.albumArtists, data.sectionPositions
 			error: (XHR, status, error) ->
 				console.log "error getting albumArtist list: #{status}"
 				callback false, error
