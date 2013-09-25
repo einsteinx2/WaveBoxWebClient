@@ -14,6 +14,9 @@ class ArtistView extends PageView
 		"click .page-artist-tab-songs": "showSongs"
 		"click .page-artist-tab-albums": "showAlbums"
 		"click .page-artist-tab-favorites": "showFavorites"
+		"click .sprite": (e) ->
+			if not @headerEnabled
+				e.stopPropagation()
 
 	initialize: (options) ->
 		@contentLoaded = no
