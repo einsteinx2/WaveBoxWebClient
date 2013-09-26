@@ -21,21 +21,18 @@ class PlayQueueItemView extends Backbone.View
 		"touchmove": "touchmove"
 		"touchend": "endPress"
 
-	initialize: ->
-		current = wavebox.audioPlayer.playQueue.currentSong()
-		if current? and current.get("itemId") is @model.get("itemId")
-			@playing = yes
-		else
-			@playing = no
-
 	render: ->
 		@$el.append @template
 			songName: @model.get "songName"
 			artistName: @model.get "artistName"
 			duration: Utils.formattedTimeWithSeconds(@model.get "duration")
+			
+		setTimeout =>
+			index = @$el.index()
+			nowPlayingIndex = wavebox.audioPlayer.playQueue.get "nowPlayingIndex"
+			if nowPlayingIndex? and index == nowPlayingIndex then @$el.addClass "play-queue-now-playing"
+ 		, 0
 
-		if @playing
-			@$el.addClass "play-queue-now-playing"
 		this
 
 	click: ->
