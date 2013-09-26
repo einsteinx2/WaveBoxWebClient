@@ -10,6 +10,7 @@ class Artist extends Backbone.Model
 		albums: null
 		tracks: null
 		counts: null
+		musicBrainzId: null
 
 	initialize: (options) ->
 		@artistId = if options.artistId? then options.artistId else null
@@ -21,7 +22,7 @@ class Artist extends Backbone.Model
 	coverViewFields: ->
 		title: @get "artistName"
 		artId: @get "artId"
-		itemId: @get "artistId"
+		musicBrainzId: @get "musicBrainzId"
 
 	sync: (method, model, options) ->
 		if method is "read"

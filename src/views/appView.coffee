@@ -34,6 +34,12 @@ module.exports = Backbone.View.extend
 				@panels.main.pop()
 			else
 				history.back(1)
+		"dragend": "dragend"
+
+	dragend: ->
+		# Make sure that drag end fires for the dragged item
+		wavebox.dragDrop.dropObject.dragend()
+		console.log "app view touch end"
 
 	render: ->
 		@panels.render().el

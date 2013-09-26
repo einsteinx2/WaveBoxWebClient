@@ -13,60 +13,72 @@ class PlayQueueItemView extends Backbone.View
 	events:
 		"click": "click"
 		"dragstart": "dragstart"
+		"dragenter": "dragenter"
 		"dragover": "dragover"
-		"dragleave": "dragleave"
 		"drop": "drop"
 		"contextmenu": "rightClick"
 		"touchstart": "beginPress"
 		"touchmove": "touchmove"
 		"touchend": "endPress"
 
-	initialize: ->
-		current = wavebox.audioPlayer.playQueue.currentSong()
-		if current? and current.get("itemId") is @model.get("itemId")
-			@playing = yes
-		else
-			@playing = no
-
 	render: ->
 		@$el.append @template
 			songName: @model.get "songName"
 			artistName: @model.get "artistName"
 			duration: Utils.formattedTimeWithSeconds(@model.get "duration")
+			
+		setTimeout =>
+			index = @$el.index()
+			nowPlayingIndex = wavebox.audioPlayer.playQueue.get "nowPlayingIndex"
+			if nowPlayingIndex? and index == nowPlayingIndex then @$el.addClass "play-queue-now-playing"
+ 		, 0
 
-		if @playing
-			@$el.addClass "play-queue-now-playing"
 		this
 
 	click: ->
 		wavebox.audioPlayer.playAt wavebox.audioPlayer.playQueue.tracks.indexOf(@model)
 		console.log this
 
-	dragstart: ->
-		@$el.addClass "play-queue-dragged-item"
-		wavebox.dragDrop.dropObject = this
-		console.log "drag started: #{@model.get("songTitle")}"
+	dragstart: (e) ->
+		# Must be done on the next run loop iteration or it will affect the clone
+		setTimeout =>
+			wavebox.dragDrop.dropObject = this
+			@$el.addClass "play-queue-dragged-item"
+		, 0
 
-	dragend: ->
-		@$el.removeClass("play-queue-dragged-item").css("display", "block")
+	dragend: (e) ->
+		# Clear all applied styles at the end of dragging
+		# Note: This method is also called by AppView in it's dragend callback, otherwise this won't always be called
+		@$el.removeClass("play-queue-dragged-item")
+		@$el.parent().find(".play-queue-drag-position-indicator-top").removeClass("play-queue-drag-position-indicator-top")
+		@$el.parent().find(".play-queue-drag-position-indicator-bottom").removeClass("play-queue-drag-position-indicator-bottom")
 
 	dragover: (e) ->
-		@$el.parent().find(".dragged-item").css "display", "none"
-		@$el.parent().find(".play-queue-drag-position-indicator").removeClass("play-queue-drag-position-indicator")
-		@$el.addClass "play-queue-drag-position-indicator"
+		@$el.parent().find(".play-queue-drag-position-indicator-top").removeClass("play-queue-drag-position-indicator-top")
+		@$el.parent().find(".play-queue-drag-position-indicator-bottom").removeClass("play-queue-drag-position-indicator-bottom")
+
+		index = @$el.index()
+		dragIndex = wavebox.dragDrop.dropObject.$el.index()
+		playQueueCount = wavebox.audioPlayer.playQueue.tracks.length
+
+		if index == playQueueCount - 1 and index != dragIndex 
+			# Last item, add a spacer after to allow dragging past the end
+			@$el.addClass "play-queue-drag-position-indicator-bottom"
+
+		if index != dragIndex and index != dragIndex + 1
+			# If this is the item being dragged or the one after the item being dragged, do nothing since it's faded out
+			# For all others, just extend the top
+			@$el.addClass "play-queue-drag-position-indicator-top"
 
 	drop: ->
 		if wavebox.dragDrop.dropObject.constructor.name isnt "PlayQueueItemView"
-			console.log this.model
 			wavebox.dragDrop.dropIndex = _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model)
 			return
 
 		item = wavebox.dragDrop.dropObject
-		console.log item
 		wavebox.audioPlayer.playQueue.move(item.model, _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model))
 
 	showActionSheet: (origin) ->
-		console.log "showing action sheet"
 		sheet = new ActionSheetView
 			song: @model
 			items:
@@ -87,7 +99,6 @@ class PlayQueueItemView extends Backbone.View
 		sheet.show()
 
 	rightClick: (e) ->
-		console.log e
 		@showActionSheet(x: e.pageX, y: e.pageY)
 		return false
 
