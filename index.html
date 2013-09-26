@@ -69,7 +69,7 @@
 
 	<!-- Settings page -->
 	<script id="template-settings" type="text/template">
-		<h1>hello world</h1>		
+		<h1>hello world</h1>
 	</script>
 
 	<!-- Side panels -->
@@ -79,7 +79,7 @@
 			<div class="color-fade-layer-1"></div>
 			<div class="color-fade-layer-2"></div>
 			<div class="color-fade-layer-3"></div>
-			<div class="sidebar sidebar-left"></div>
+			<div class="server-search-container"></div>
 			<div id="nav" class='nav scroll'></div>
 			<div class="nav-sidebar-footer">
 				<div class="sprite sprite-pencil shuffle off"></div>
@@ -233,6 +233,19 @@
 	</script>
 
 	<!-- Sidebar -->
+	<script id="template-server-search" type="text/template">
+		<input class="server-search-input" type="text" placeholder="Search"/>
+		<div class="server-search-results"></div>
+	</script>
+
+	<script id="template-server-search-result-item" type="text/template">
+		<div class="server-search-result-item-image"</div>
+		<div class="server-search-result-item title"><%= itemTitle %></div>
+		<% if(typeof(itemSubtitle) != "undefined" && itemSubtitle != null) {
+			console.log(itemSubtitle); %>
+			<div class="server-search-result-item-subtitle"><%= itemSubtitle %></div>
+		<% } %>
+	</script>
 	<script type='text/template' id='template-sidebar-item'>
 		<li class="SidebarIcons">
 			<span class="sprite sprite-container float-left <%= itemClass %>"></span>

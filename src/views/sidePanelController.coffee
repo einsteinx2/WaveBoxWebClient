@@ -20,14 +20,14 @@ class SidePanelController extends Backbone.View
 				.css({ left: leftWidth, width: $(window).width() - leftWidth - rightWidth})
 				.addClass("transitions")
 
-		
+
 	render: ->
-		
+
 		if not wavebox.isMobile()
 			@rightActive = true
 			@leftActive = true
 			@main.$el.css
-				left: @left.$el.width() 
+				left: @left.$el.width()
 				width: $(window).width() - @left.$el.width() - @right.$el.width()
 			@main.$el.addClass "transitions"
 		else
@@ -47,7 +47,7 @@ class SidePanelController extends Backbone.View
 	focusMain: (callback) ->
 		@main.$el.transition({x: 0}, 200, "ease-out", callback)
 		@toggledPanel = null
-		
+
 	switch: (panel) ->
 		if panel is "right"
 			if wavebox.isMobile()
@@ -57,7 +57,7 @@ class SidePanelController extends Backbone.View
 			if wavebox.isMobile()
 				@right.$el.css "display": "none"
 			@left.$el.css "display": "block"
-	
+
 	leftToggle: ->
 		if wavebox.isMobile()
 			if @toggledPanel is null
@@ -101,11 +101,11 @@ class SidePanelController extends Backbone.View
 				@rightActive = false
 
 	bindTouchEvents: ->
-	
+
 		###
 		Touch handling for vertical scrolling of center panel
 		###
-		
+
 		@$el.bind "touchstart", (event) =>
 			$target = $(event.target)
 			$top = $target.parents(".scroll").first()
@@ -117,7 +117,7 @@ class SidePanelController extends Backbone.View
 				$top.scrollTop(1)
 			else if position is bottom
 				$top.scrollTop(bottom - 1)
-			
+
 		@$el.bind "touchmove", (event) =>
 			$target = $(event.target)
 			$parents = $target.parents ".scroll"
@@ -179,7 +179,7 @@ class SidePanelController extends Backbone.View
 
 				# Mark @newTouch as false so next time we start we do the transform or ignore
 				@newTouch = false
-			
+
 			else if @scrollType is "x"
 				event.preventDefault()
 				x = event.originalEvent.touches[0].pageX
@@ -199,7 +199,7 @@ class SidePanelController extends Backbone.View
 
 				if $this.offset().left < 0
 					@switch "right"
-				else 
+				else
 					@switch "left"
 
 				$this.css "-webkit-transform": "translate3d(#{x - @touchStartX}px, 0, 0)"
@@ -214,7 +214,7 @@ class SidePanelController extends Backbone.View
 			left = @main.$el.offset().left
 			futurePosition = left + @pixelsPerSecond
 
-			left = 
+			left =
 				if futurePosition > @left.$el.width() * .75 and left > 30
 					@toggledPanel = "left"
 					@left.$el.width()
@@ -227,4 +227,4 @@ class SidePanelController extends Backbone.View
 
 			@main.$el.transition({x: left}, 200, "ease-out")
 
-module.exports = SidePanelController 
+module.exports = SidePanelController

@@ -30,4 +30,9 @@ class Track extends Backbone.Model
 		else
 			null
 
+	coverViewFields: ->
+		itemTitle: @get("songName")
+		itemSubtitle: @get("artistName")
+		artId: @get("artId")
+
 module.exports = Track

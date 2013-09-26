@@ -4,12 +4,14 @@
 
 SidebarSectionView = require "./navsidebarsectionview"
 PlaylistsSectionView = require "./playlists/playlistsSectionView"
+ServerSearchView = require "./serverSearchView"
 
 class NavSidebarView extends Backbone.View
-	
-	el: "#nav"
+
+	el: "#left"
 
 	initialize: ->
+		@serverSearch = new ServerSearchView
 		@serverSectionView = new SidebarSectionView
 			items: [
 				{
@@ -32,12 +34,6 @@ class NavSidebarView extends Backbone.View
 					itemClass: "sprite-cd",
 					href: "#albums"
 				},
-
-					#		{
-					#			itemTitle: "Discover",
-					#			itemClass: "Discover sprite",
-					#			href: "#discover"
-					#		},
 				{
 					itemTitle: "Folders",
 					itemClass: "sprite-folder",
@@ -65,16 +61,33 @@ class NavSidebarView extends Backbone.View
 					href: "#login"
 				}
 			]
+
+		@listenTo(@serverSearch, "serverSearchResultsToggle", @toggleSearch)
 		#@listenTo @playlistSectionView.collection, "reset", "render"
 		#@playlistSectionView.collection.fetch reset: yes
-	
+
 	render: ->
+
 		console.log "rendering dat navsidebarview"
 		$temp = $("<div>")
 		#$temp.append @serverSectionView.render().el
 		$temp.append @browseSectionView.render().el
 		$temp.append @playlistSectionView.render().el
 		$temp.append @settingSectionView.render().el
-		@$el.empty().append $temp.children()
+
+		if !@$nav?
+			@$nav = $("#nav")
+		@$nav.empty().append $temp.children()
+
+		@$el.find(".server-search-container").append(@serverSearch.render().$el)
+		this
+
+	toggleSearch: =>
+		if @serverSearch.visible
+			@serverSearch.hide()
+			@$nav.css("-webkit-transform", "none")
+		else
+			@serverSearch.show()
+			@$nav.css("-webkit-transform", "translateY(#{window.innerHeight}px")
 
 module.exports = NavSidebarView

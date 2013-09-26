@@ -12,7 +12,7 @@ body, html {
 	font-family: Helvetica, "Helvetica Neue Light", "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 	font-weight: 600;
 	background-color: #5c6367;
-	color: #666;	
+	color: #666;
 	overflow: hidden;
 }
 
@@ -124,7 +124,7 @@ input:focus {
 	background-color: white;
 }
 
-/* 	
+/*
  *  This class is also targeted by javascript as an indicator that
  *  elements having it should scroll instead of the body.
  */
@@ -192,7 +192,7 @@ input:focus {
 
 .albumListingContent {
 	position: absolute;
-	top: 100px; 
+	top: 100px;
 	left: 190px;
 	bottom: 0;
 	right: 0;
@@ -347,7 +347,7 @@ input:focus {
 .list-track-row-middle-column > div:last-child {
 	float: left;
 	width: 35%;
-} 
+}
 
 /* Action sheet */
 .action-sheet {
@@ -539,13 +539,13 @@ input:focus {
     margin: 3px;
 }
 
-	
-	
+
+
 .page-header {
 	position: relative;
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
-	width:100%;
+	width: 100%;
 	height: 50px;
 	padding: 0;
 	background-color: rgb(224, 224, 224);
@@ -612,32 +612,51 @@ input:focus {
 	left: 15px;
 	bottom: 82px;
 }
-	
+
 .Logo {
 	background-image:url(../img/logoColored.png);
 	background-position:center;
 	background-size:56px 16px;
 	background-repeat:no-repeat;
 }
-	
+
 #LogoArea {
 	height: 50px;
 	width: 220px;
 	position: absolute;
-}	
+}
 
-.sidebar-left {
+.server-search-container {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
+	background-color: rgba(246, 246, 246, .6);
+	height: 40px;
+
 }
 
-.sidebar {
-	background-color: rgba(246, 246, 246, .6);
-	padding: 16px 0;
-	height: 18px;
-	text-align: center;
+.server-search-results {
+	opacity: 0;
+	-webkit-transition: opacity .2s ease-in-out;
+}
+
+.server-search-input {
+	border: none;
+	background-color: transparent;
+	width: 100%;
+	height: 40px;
+	padding: 5px 15px;
+	box-sizing: border-box;
+	margin: 0;
+
+	color: #fff;
+	font-size: .8em;
+	font-weight: 200;
+}
+
+.server-search-input::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, .8);
 }
 
 @-webkit-keyframes color-fade-animation-1 {
@@ -832,7 +851,7 @@ input:focus {
 	font-weight: 700;
 	color: #333;
 }
-	
+
 .page-search {
 	background-color: #fff;
 	width: 100%;
@@ -871,7 +890,7 @@ input:focus {
 .AlbumSortIcon {
 	background-image:url(../img/AlbumView.png);
 }
-	
+
 .DirectoryViewIcon {
 	background-image:url(../img/ListView.png);
 }
@@ -889,6 +908,8 @@ input:focus {
 	color: #757575;
 	font-weight: 600;
 	font-size: 14px;
+
+	transition: -webkit-transform .2s ease-in-out;
 }
 
 .nav ul {
@@ -919,12 +940,12 @@ input:focus {
 {
 	float: left;
 }
-	
+
 .nav-sidebar-footer > div:first-child
 {
 	float: right;
 }
-	
+
 .MenuText {
 	display: block;
 	color: #fff;
@@ -945,12 +966,12 @@ input:focus {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	padding: 30px 0 0 15px;
-}		
+}
 
 .navigation-item-input {
 	height: 50px;
 	border: none;
-	padding: 0 15px 0 0; 
+	padding: 0 15px 0 0;
 	margin: 0;
 	width: 155px;
 	background: transparent;
@@ -967,9 +988,9 @@ input:focus {
 .SidebarIcons:hover {
 	background-color: rgba(255, 255, 255, .3);
 }
-	
+
 .SidebarIconsActive li {
-	background-color: rgba(255, 255, 255, .4) !important;	
+	background-color: rgba(255, 255, 255, .4) !important;
 }
 
 .RepeatIcon {
@@ -1019,7 +1040,7 @@ input:focus {
 {
 	float: left;
 }
-	
+
 .menuStickyFooter > div:first-child
 {
 	float: right;
@@ -1044,7 +1065,7 @@ input:focus {
 {
 	float: left;
 }
-	
+
 .play-queue-footer > div:first-child
 {
 	float: right;
@@ -1077,7 +1098,7 @@ input:focus {
 	-webkit-transition: padding-top .25s ease-in-out;
 	-moz-transition: opacity .15s ease-in-out;
 }
-	
+
 .play-queue-item-title {
 	-webkit-user-select: none;
 	width: 200px;
@@ -1088,14 +1109,14 @@ input:focus {
 	font-weight: 400;
 	font-size: 14px;
 }
-	
+
 .play-queue-item-artist  {
 	-webkit-user-select: none;
 	font-size: 11px;
 	padding: 0 45px 0 10px;
 	font-weight: 300;
 }
-	
+
 .play-queue-item-duration {
 	-webkit-user-select: none;
 	font-weight: 400;
@@ -1103,7 +1124,7 @@ input:focus {
 	margin-top: -22px;
 	font-size: 12px;
 	padding: 0 10px 0 0;
-}	
+}
 
 .AlbumsIcons {
 	float: left;
@@ -1115,7 +1136,7 @@ input:focus {
 	width: 25.33px;
 	height: 26px;
 }
-	
+
 #mini-player {
 	position: absolute;
 	background-color: rgba(238, 238, 238, 0.6);
@@ -1133,7 +1154,7 @@ input:focus {
 	background: url('../img/sprite.png') no-repeat -45px -258px;
 	background-size: 315px 435px;
 	width: 13px;
-	height: 15px; 
+	height: 15px;
 	opacity: .6;
 }
 
@@ -1177,18 +1198,18 @@ input:focus {
 	color: #333;
 	font-weight: 600;
 }
-	
+
 .playlistDragOver {
 	border-top: 1px solid blue;
 	border-bottom: 1px solid blue;
 }
-	
+
 .PlayerDisplay {
 	height: 50px;
 	width:232px;
 	position:absolute;
 	left: 50px;
-	
+
 	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%);
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.5)));
 	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 100%);
@@ -1214,7 +1235,7 @@ input:focus {
 	color:#6e6e6e;
 	bottom:4px;
 }
-	
+
 .PlayerDisplaySongTime {
 	float: right;
 	font-weight: 400;
@@ -1386,7 +1407,7 @@ input:focus {
 		clear: both;
 		width: 100%;
 		height: 60px;
-		padding: 0; 
+		padding: 0;
 		margin: 0;
 		border-bottom: 1px solid #cfcfcf;
 		overflow: hidden;
@@ -1394,7 +1415,7 @@ input:focus {
 
 	.list-cover-item > div {
 		max-width: -webkit-calc(100% - 85px);
-	}	  
+	}
 
 	.list-cover-item :first-child
 	{
@@ -1524,7 +1545,7 @@ input:focus {
 
 	.list-track-row-middle-column > div:last-child {
 		display: none;
-	}	
+	}
 
 	.nowPlaying
 	{
