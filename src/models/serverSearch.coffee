@@ -9,7 +9,7 @@ class window.ServerSearch extends Backbone.Model
 	search: ->
 		query = @get("query")
 		unless query is "" or query is null
-			@fetch(data: query: query)
+			@fetch(data: query: query, limit: 5)
 		else
 			@set("results", null)
 
