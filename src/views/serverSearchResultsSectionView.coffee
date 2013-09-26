@@ -1,6 +1,6 @@
 Artists = require '../collections/artists'
 Albums = require '../collections/albums'
-TrackList = require '../collections/trackList'
+TrackList = require '../collections/tracklist'
 ServerSearchResultsItemView = require './serverSearchResultsItemView'
 
 class ServerSearchResultsSectionView extends Backbone.View
