@@ -1025,8 +1025,6 @@ input:focus {
 	float: right;
 }
 
-
-
 .play-queue-footer {
 	position: fixed;
 	bottom: 0;
@@ -1064,8 +1062,17 @@ input:focus {
 	background-color: rgba(255, 255, 255, .3);
 }
 
-.play-queue-drag-position-indicator {
+.play-queue-dragged-item {
+	opacity:0.25;
+	filter:alpha(opacity=25); /* For IE8 and earlier */
+}
+
+.play-queue-drag-position-indicator-top {
 	padding-top: 50px;
+}
+
+.play-queue-drag-position-indicator-bottom {
+	padding-bottom: 100px;
 }
 
 .play-queue-item {
