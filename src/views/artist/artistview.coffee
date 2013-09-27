@@ -30,10 +30,10 @@ class ArtistView extends PageView
 				@contentLoaded = yes
 				@render()
 			@artist.fetch()
-	
+
 	render: ->
 		@artistName = @artist.get(if @isAlbumArtist then "albumArtistName" else "artistName")
-		
+
 		# $page = ArtistView.__super__.render
 		# 	leftAccessory: "sprite-back-arrow"
 		# 	rightAccessory: "sprite-play-queue"
@@ -46,13 +46,13 @@ class ArtistView extends PageView
 		# @$content = $page.find(".page-content")
 		# 	.addClass("scroll")
 		# 	.append($("#template-page-collection-actions").html())
-		
+
 		if @contentLoaded
 			@$el.append @template
 				artistName: @artistName
 				counts: @artist.get("counts")
 			@$content = @$el.find(".page-content")
-			@$el.find(".page-artist-header").css("background-image", "url('http://herpderp.me:8000?action=art&type=artist&id=#{@artist.get("musicBrainzId")}')")
+			@$el.find(".page-artist-header").css("background-image", "url(#{wavebox.apiClient.getArtistArtUrl(@artist.get("musicBrainzId"))})")
 			# @covers = new CoverListView collection: @artist.get("albums")
 			# @$el.append @covers.render().el
 			@showAlbums()
@@ -71,7 +71,7 @@ class ArtistView extends PageView
 		view = new TrackListView collection: @artist.get("tracks")
 		@$content.empty().append view.render().el
 		return no
-		
+
 	showAlbums: ->
 		console.log "albums"
 		view = new CoverListView collection: @artist.get("albums")
@@ -81,7 +81,7 @@ class ArtistView extends PageView
 	showFavorites: ->
 		console.log "favorites"
 		return no
-	
+
 	playAll: (e) ->
 		e.preventDefault()
 		@listenToOnce @artist, "change", ->

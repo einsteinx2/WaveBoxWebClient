@@ -13,10 +13,17 @@ class ServerSearchResultsItemView extends Backbone.View
 			itemTitle: fields.title
 			itemSubtitle: fields.subtitle
 
+		$image = @$el.find(".server-search-result-item-image")
 		if fields.artId?
-			console.log "assigning art for result: #{fields.title}"
-			@$el.find(".server-search-result-item-image").css
+			$image.css
 				"background-image": "url(#{wavebox.apiClient.getArtUrl(fields.artId, 50)})"
+
+		else if fields.musicBrainzId?
+			console.log "assigning art for #{fields.title}"
+			$image.css
+				"background-image": "url(#{wavebox.apiClient.getArtistArtUrl(fields.musicBrainzId, true)})"
+
+
 
 		this
 

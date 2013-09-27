@@ -335,6 +335,12 @@ class ApiClient
 
 		return "#{@API_ADDRESS}/art/#{artId}#{aSize}"
 
+	getArtistArtUrl: (musicBrainzId, preview = no) ->
+		url = "http://herpderp.me:8000?action=art&type=artist&id=#{musicBrainzId}"
+		if preview
+			url += "&preview=true"
+		console.log url
+		return url
 	getFanArtThumbUrl: (itemId, size) ->
 		return "#{@API_ADDRESS}/fanartthumb?musicBrainzId=#{itemId}"
 
