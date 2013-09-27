@@ -85,9 +85,9 @@ class NavSidebarView extends Backbone.View
 	toggleSearch: =>
 		if @serverSearch.visible
 			@serverSearch.hide()
-			@$nav.css("-webkit-transform", "none")
+			@$nav.transit({ y: 0 }, 250, "ease-out")
 		else
 			@serverSearch.show()
-			@$nav.css("-webkit-transform", "translateY(#{window.innerHeight}px")
+			@$nav.transit({ y: window.innerHeight }, 250, "ease-out")
 
 module.exports = NavSidebarView

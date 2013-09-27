@@ -3,7 +3,6 @@ class KeyboardShortcuts
 		$(document).on "keydown", @mapKeypress
 
 	mapKeypress: (e) =>
-		console.log e.keyCode
 		if document.activeElement.tagName isnt "INPUT"
 			if e.keyCode is 32
 				@spacebar()
@@ -21,9 +20,6 @@ class KeyboardShortcuts
 					@cmdShiftF()
 				else
 					@cmdF()
-		else
-			if e.keyCode is 27
-				document.activeElement.blur()
 
 	spacebar: ->
 		wavebox.audioPlayer.playPause()

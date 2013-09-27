@@ -19,7 +19,6 @@ class ServerSearchResultsItemView extends Backbone.View
 				"background-image": "url(#{wavebox.apiClient.getArtUrl(fields.artId, 50)})"
 
 		else if fields.musicBrainzId?
-			console.log "assigning art for #{fields.title}"
 			$image.css
 				"background-image": "url(#{wavebox.apiClient.getArtistArtUrl(fields.musicBrainzId, true)})"
 
@@ -32,7 +31,9 @@ class ServerSearchResultsItemView extends Backbone.View
 			# add the song to the playlist
 			wavebox.audioPlayer.playQueue.add(@model)
 			return no
-
+		else
+			wavebox.appController.mainView.resetNext = yes
+			wavebox.appController.mainView.animateNext = no
 
 		return yes
 
