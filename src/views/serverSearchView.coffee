@@ -21,7 +21,7 @@ class ServerSearchView extends Backbone.View
 		@$results.empty()
 		if value?
 			for key of value
-				if key is "error" or key is "videos"
+				if key in ["error", "videos", "artists"]
 					continue
 				else
 					if not @visible

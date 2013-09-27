@@ -10,18 +10,18 @@ class Album extends Backbone.Model
 		itemTypeId: null
 		releaseYear: null
 		tracks: null
-	
+
 	initialize: (options) ->
 		@albumId = options.albumId
 
 	pageUrl: ->
-		"/albums/#{@get("albumId")}"
+		"/#albums/#{@get("albumId")}"
 
 	coverViewFields: ->
 		title: @get "albumName"
 		artist: @get "artistName"
 		artId: @get "artId"
-	
+
 	sync: (method, model, options) ->
 		if method is "read"
 			wavebox.apiClient.getAlbum @albumId, (success, data) =>

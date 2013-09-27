@@ -1,6 +1,7 @@
 Artists = require '../collections/artists'
 Albums = require '../collections/albums'
 TrackList = require '../collections/tracklist'
+AlbumArtists = require '../collections/albumArtists'
 ServerSearchResultsItemView = require './serverSearchResultsItemView'
 
 class ServerSearchResultsSectionView extends Backbone.View
@@ -17,11 +18,12 @@ class ServerSearchResultsSectionView extends Backbone.View
 					@collection = new Albums(options.collection)
 				when "artists"
 					@collection = new Artists(options.collection)
+				when "albumArtists"
+					@collection = new AlbumArtists(options.collection)
 				#when "videos"
 
 	render: ->
 		$temp = $("<div>")
-		console.log @collection
 		@collection.each (item) ->
 			view = new ServerSearchResultsItemView(model: item)
 			$temp.append(view.render().el)

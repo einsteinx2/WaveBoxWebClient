@@ -16,8 +16,9 @@ class AlbumArtist extends Backbone.Model
 		@set "albumArtistId", @albumArtistId
 		@shouldRetrieveSongs = if options.retrieveSongs? then options.retrieveSongs else no
 
-	pageUrl: ->
-		"/albumartists/#{@get("albumArtistId")}"
+	url: -> "/api/albumartists/#{@get("albumArtistId")}"
+
+	pageUrl: -> "/#albumartists/#{@get("albumArtistId")}"
 
 	coverViewFields: ->
 		title: @get "albumArtistName"
@@ -38,13 +39,13 @@ class AlbumArtist extends Backbone.Model
 					console.log data
 					console.log hash.tracks
 					@set hash
-					
+
 				else
 					console.log "artistInfo!"
 					console.log data
-	
+
 	retrieveSongs: ->
 		@shouldRetrieveSongs = yes
 		@fetch()
-	
+
 module.exports = AlbumArtist

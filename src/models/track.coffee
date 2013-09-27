@@ -24,6 +24,8 @@ class Track extends Backbone.Model
 		genreName: null
 		artId: null
 
+	url: -> "/api/songs/#{@get("itemId")}"
+
 	formattedDuration: ->
 		if (@get "duration")?
 			return Utils.formattedTimeWithSeconds(@get "duration")
@@ -31,8 +33,8 @@ class Track extends Backbone.Model
 			null
 
 	coverViewFields: ->
-		itemTitle: @get("songName")
-		itemSubtitle: @get("artistName")
+		title: @get("songName")
+		subtitle: @get("artistName")
 		artId: @get("artId")
 
 module.exports = Track

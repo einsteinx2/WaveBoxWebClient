@@ -239,13 +239,15 @@
 	</script>
 
 	<script id="template-server-search-result-item" type="text/template">
-		<div class="server-search-result-item-image"</div>
-		<div class="server-search-result-item title"><%= itemTitle %></div>
-		<% if(typeof(itemSubtitle) != "undefined" && itemSubtitle != null) {
-			console.log(itemSubtitle); %>
-			<div class="server-search-result-item-subtitle"><%= itemSubtitle %></div>
-		<% } %>
+		<li class="server-search-results-item">
+			<div class="server-search-result-item-image"></div>
+			<div class="server-search-result-item-title truncate-ellipsis"><%= itemTitle %></div>
+			<% if(typeof(itemSubtitle) != "undefined" && itemSubtitle != null) { %>
+				<div class="server-search-result-item-subtitle truncate-ellipsis"><%= itemSubtitle %></div>
+			<% } %>
+		</li>
 	</script>
+
 	<script type='text/template' id='template-sidebar-item'>
 		<li class="SidebarIcons">
 			<span class="sprite sprite-container float-left <%= itemClass %>"></span>
