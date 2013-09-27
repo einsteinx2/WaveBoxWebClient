@@ -3,6 +3,7 @@ class KeyboardShortcuts
 		$(document).on "keydown", @mapKeypress
 
 	mapKeypress: (e) =>
+		console.log e.keyCode
 		if document.activeElement.tagName isnt "INPUT"
 			if e.keyCode is 32
 				@spacebar()
@@ -14,9 +15,12 @@ class KeyboardShortcuts
 				@rightArrow()
 			if e.keyCode is 40
 				@downArrow()
-			if e.keyCode is 70 and (e.metaKey or e.ctrlKey) and e.shiftKey
+			if e.keyCode is 70 and (e.metaKey or e.ctrlKey)
 				e.preventDefault()
-				@cmdShiftF()
+				if e.shiftKey
+					@cmdShiftF()
+				else
+					@cmdF()
 		else
 			if e.keyCode is 27
 				document.activeElement.blur()
@@ -38,5 +42,8 @@ class KeyboardShortcuts
 
 	cmdShiftF: ->
 		wavebox.appController.mainView.$el.find(".page-search-textbox").last().focus()
+
+	cmdF: ->
+		$(".server-search-input").focus()
 
 module.exports = KeyboardShortcuts
