@@ -37,6 +37,10 @@ class PlayQueue extends Backbone.Model
 		@tracks.add track, at: at
 		@trigger "change"
 
+		# If this is the first song added, play it
+		if @tracks.length == 1
+			wavebox.audioPlayer.playAt 0, 0
+
 	remove: (index) ->
 		if not index? then return
 		@tracks.remove(@tracks.at(index))
