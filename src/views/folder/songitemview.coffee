@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend
 	render: ->
 		@$el.html @template
 			trackNumber: if not @playing then @model.get "trackNumber" else "<div></div>"
-			songName: @model.get "songName"
+			songName: if @model.get("songName")? then @model.get("songName") else @model.get("fileName")
 			artistName: @model.get "artistName"
 			duration: @model.formattedDuration()
 		@adjustNowPlaying()
