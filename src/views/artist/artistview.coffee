@@ -55,7 +55,7 @@ class ArtistView extends PageView
 			@$el.find(".page-artist-header").css("background-image", "url(#{wavebox.apiClient.getArtistArtUrl(@artist.get("musicBrainzId"))})")
 			# @covers = new CoverListView collection: @artist.get("albums")
 			# @$el.append @covers.render().el
-			@showAlbums()
+			@showSongs()
 
 		this
 
@@ -70,6 +70,7 @@ class ArtistView extends PageView
 		console.log "songs"
 		view = new TrackListView collection: @artist.get("tracks")
 		@$content.empty().append view.render().el
+		view.switchSortKey "Title"
 		return no
 
 	showAlbums: ->

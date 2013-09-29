@@ -231,11 +231,24 @@ input:focus {
 	-moz-box-sizing: border-box;
 }
 
+.list-index {
+	position: absolute;
+	right: 0;
+	padding-right: 20px;
+	cursor: pointer;
+}
+
+.list-index > p {
+	font-size: 10px;
+	color: #757575;
+	margin: 3px;
+	display: block;
+}
+
 /* Track list */
 .list-track {
 	font-size: 12px;
 	color: #757575;
-	padding-top: 15px;
 	overflow: auto;
 	clear: both;
 }
@@ -247,6 +260,7 @@ input:focus {
 	list-style: none;
 	width: 100%;
 	clear: both;
+	cursor: pointer;
 }
 
 .list-track-row-highlight {
@@ -1193,6 +1207,7 @@ input:focus {
 	width: 100%;
 	z-index: 1;
 	top: 0px;
+	cursor: pointer;
 }
 
 #mini-player .Play {
@@ -1379,6 +1394,7 @@ input:focus {
 		float: none;
 		display: inline-block;
 		margin: 10px;
+		cursor: pointer;
 	}
 
     .transitions {
@@ -1567,6 +1583,7 @@ input:focus {
 	.list-track-row {
 		position: relative;
 		height: 50px;
+		cursor: pointer;
 	}
 
 	.list-track-row-highlight {

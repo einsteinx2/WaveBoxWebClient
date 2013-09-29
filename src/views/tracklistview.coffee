@@ -55,8 +55,9 @@ class TrackList extends Backbone.View
 			art.src = artUrl
 
 	switchSortKey: (e) ->
-		console.log $(e.target).text()
-		@collection.comparator = switch $(e.target).text()
+		text = if typeof e is 'string' then e else $(e.target).text()
+		console.log text
+		@collection.comparator = switch text
 			when "Title"
 				"songName"
 			when "Artist"

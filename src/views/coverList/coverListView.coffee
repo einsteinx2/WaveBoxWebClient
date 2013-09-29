@@ -24,6 +24,17 @@ class CoverListView extends Backbone.View
 
 		# Setup inifinity scrolling
 		setTimeout =>
+
+			# Add the right side index
+			if @collection.positions?
+				$sideIndex = $('<div>')
+				$sideIndex.addClass "list-index"
+				for index in @collection.positions
+					$indexItem = $("<p>" + index.Key + "</p>")
+					$indexItem.data "index", index.Value
+					$sideIndex.append $indexItem
+				@$el.parent().append $sideIndex
+
 			@infinityDiv = @$el.parent()
 			@infinityDiv.scroll @scrolled
 
@@ -79,7 +90,6 @@ class CoverListView extends Backbone.View
 				@container.height (rows * 148 + 35)
 				console.log("key: " + @currentPair.Key + " count: " + @count + " rows: " + rows + " height: " + @container.height())
 				@infinityView.append @container
-
 
 		, 0
 
