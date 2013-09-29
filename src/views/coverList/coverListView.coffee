@@ -10,9 +10,6 @@ class CoverListView extends Backbone.View
 
 	className: "list-cover"
 	render: ->
-		if not wavebox.isMobile()
-			@$el.addClass "scroll"
-
 		filter = @model.get("filter").toLowerCase()
 
 		# Set the infinity options (currently set to defaults of 3 and 350)
@@ -29,10 +26,15 @@ class CoverListView extends Backbone.View
 			if @collection.positions?
 				$sideIndex = $('<div>')
 				$sideIndex.addClass "list-index"
+				i = 0
 				for index in @collection.positions
 					$indexItem = $("<p>" + index.Key + "</p>")
+					$indexItem.data "position", i
 					$indexItem.data "index", index.Value
+					$indexItem.data "key", index.Key
+					$indexItem.click @clickedIndex
 					$sideIndex.append $indexItem
+					i++
 				@$el.parent().append $sideIndex
 
 			@infinityDiv = @$el.parent()
@@ -61,8 +63,11 @@ class CoverListView extends Backbone.View
 				@sectionKeyIndex = 0
 				@sectionCount = 0
 				@currentPair = @collection.positions[@sectionKeyIndex]
+				@currentPair.scrollTop = 0
 				@createContainer(@currentPair.Key)
 
+				@count = 0
+				@totalHeight = 0
 				@collection.each (item) =>
 					if item.coverViewFields().title.toLowerCase().indexOf(filter) > -1
 
@@ -70,14 +75,18 @@ class CoverListView extends Backbone.View
 							# We're in a different section now, so size and append the previous container
 							rows = Math.ceil(@count / 5)
 							rows = 1 if rows is 0
-							@container.height (rows * 148 + 35)
-							console.log("key: " + @currentPair.Key + " count: " + @count + " rows: " + rows + " height: " + @container.height())
+							height = rows * 148 + 35
+							@container.height height
+							console.log "key: " + @currentPair.Key + "  height: " + height
 							@infinityView.append @container
+							if not isNaN height
+								@totalHeight = @totalHeight + height + 2
 
 							# Grab the next section pair and create a new container
 							@count = 0
 							@sectionKeyIndex++
 							@currentPair = @collection.positions[@sectionKeyIndex]
+							@currentPair.scrollTop = @totalHeight
 							@createContainer(@currentPair.Key)
 
 						view = new CoverListItemView model: item
@@ -88,7 +97,6 @@ class CoverListView extends Backbone.View
 				rows = Math.ceil(@count / 5)
 				rows = 1 if rows is 0
 				@container.height (rows * 148 + 35)
-				console.log("key: " + @currentPair.Key + " count: " + @count + " rows: " + rows + " height: " + @container.height())
 				@infinityView.append @container
 
 		, 0
@@ -153,5 +161,14 @@ class CoverListView extends Backbone.View
 	filter: ->
 		clearTimeout @filterTimeout
 		@filterTimeout = setTimeout @render.bind(this), 100
+
+	clickedIndex: (e) =>
+		if wavebox.isMobile()
+			console.log "not implemented yet"
+		else
+			position = $(e.target).data "position"
+			scrollTop = @collection.positions[position].scrollTop
+			@infinityDiv.scrollTop(scrollTop)
+
 
 module.exports = CoverListView

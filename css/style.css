@@ -226,15 +226,12 @@ input:focus {
 
 /* Cover list */
 .list-cover {
-	padding: 15px 0 0 15px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
+
 }
 
 .list-index {
 	position: absolute;
 	right: 0;
-	padding-right: 20px;
 	cursor: pointer;
 }
 
@@ -242,6 +239,8 @@ input:focus {
 	font-size: 10px;
 	color: #757575;
 	margin: 3px;
+	padding-right: 20px;
+	padding-left: 20px;
 	display: block;
 }
 
