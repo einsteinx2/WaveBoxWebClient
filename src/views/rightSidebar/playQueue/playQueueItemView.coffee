@@ -78,7 +78,8 @@ class PlayQueueItemView extends Backbone.View
 		item = wavebox.dragDrop.dropObject
 		wavebox.audioPlayer.playQueue.move(item.model, _.indexOf(wavebox.audioPlayer.playQueue.tracks.models, this.model))
 
-	showActionSheet: (origin) ->
+	showActionSheet: (origin) =>
+		@actionSheetShown = true
 		sheet = new ActionSheetView
 			song: @model
 			items:
@@ -103,18 +104,27 @@ class PlayQueueItemView extends Backbone.View
 		return false
 
 	beginPress: (e) ->
+		@touchStartX = e.originalEvent.pageX
 		@touchStartY = e.originalEvent.pageY
 		@longPressTimer = setTimeout @showActionSheet, 500
+		return yes
 
 	touchmove: (e) ->
-		showSheet = not (Math.abs(e.originalEvent.pageY - @touchStartY) > 10)
-		console.log "showSheet: #{showSheet}"
-		if not showSheet
-			clearTimeout @longPressTimer
+		if not @cancelSheet
+			didMoveX = Math.abs(e.originalEvent.pageX - @touchStartX) > 10
+			didMoveY = Math.abs(e.originalEvent.pageY - @touchStartY) > 10
+			@cancelSheet = didMoveX or didMoveY
+			console.log "cancelSheet: #{@cancelSheet}"
+			if @cancelSheet
+				clearTimeout @longPressTimer
 
 		return yes
 
-	endPress: ->
+	endPress: (e) ->
 		clearTimeout @longPressTimer
+		@cancelSheet = false
+		wasShown = @actionSheetShown
+		@actionSheetShown = false
+		return not wasShown
 
 module.exports = PlayQueueItemView

@@ -23,12 +23,9 @@ class TrackListItemView extends Backbone.View
 		"touchmove": "touchmove"
 		"touchend": "endPress"
 		"touchcancel": "endPress"
-		"contextmenu": "rightClick"
-
-	initialize: ->
-		@listenTo wavebox.audioPlayer, "newSong", @adjustNowPlaying
+		"contextmenu": "rightClick"		
 	
-	render: ->
+	render: ->	
 		@$el.empty().append @template
 			trackNumber: @model.get "trackNumber"
 			songName: @model.get "songName"
@@ -83,8 +80,8 @@ class TrackListItemView extends Backbone.View
 		wavebox.apiClient.addToPlaylist playlist.get("id"), @model.get("itemId"), (success, data) ->
 			console.log "added item with success #{success} and data #{data}"
 
-	showActionSheet: (origin) ->
-		console.log "showing action sheet"
+	showActionSheet: (origin) =>
+		@actionSheetShown = true
 		sheet = new ActionSheetView({
 				song: @model
 				items:
@@ -109,19 +106,28 @@ class TrackListItemView extends Backbone.View
 		return false
 
 	beginPress: (e) ->
+		@touchStartX = e.originalEvent.pageX
 		@touchStartY = e.originalEvent.pageY
 		@longPressTimer = setTimeout @showActionSheet, 500
+		return yes
 
 	touchmove: (e) ->
-		showSheet = not (Math.abs(e.originalEvent.pageY - @touchStartY) > 10)
-		console.log "showSheet: #{showSheet}"
-		if not showSheet
-			clearTimeout @longPressTimer
+		if not @cancelSheet
+			didMoveX = Math.abs(e.originalEvent.pageX - @touchStartX) > 10
+			didMoveY = Math.abs(e.originalEvent.pageY - @touchStartY) > 10
+			@cancelSheet = didMoveX or didMoveY
+			console.log "cancelSheet: #{@cancelSheet}"
+			if @cancelSheet
+				clearTimeout @longPressTimer
 
 		return yes
 
-	endPress: ->
+	endPress: (e) ->
 		clearTimeout @longPressTimer
+		@cancelSheet = false
+		wasShown = @actionSheetShown
+		@actionSheetShown = false
+		return not wasShown
 
 	highlight: ->
 		$marker = $("<div class='list-track-row-highlight'>")

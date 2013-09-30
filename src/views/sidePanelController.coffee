@@ -227,4 +227,6 @@ class SidePanelController extends Backbone.View
 
 			@main.$el.transition({x: left}, 200, "ease-out")
 
+			return false
+
 module.exports = SidePanelController
