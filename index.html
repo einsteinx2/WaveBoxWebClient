@@ -260,7 +260,14 @@
 		<input type="text" class="navigation-item-input" placeholder="New playlist"/>
 	</script>
 
-	<!-- Ordered table view -->
+	<!-- Ordered table -->
+	<script id="template-ordered-table-item-new" type="text/template">
+		<div class="ordered-table-item clear-fix">
+			<input class="ordered-table-item-input" placeholder="New image name..." type="text" />
+			<div class="ordered-table-item-image sprite sprite-tiny sprite-check-mark"></div>
+		</div>
+	</script>
+
 	<script id="template-ordered-table-item" type="text/template">
 		<div class="ordered-table-item clear-fix" data-index="<%= index %>">
 			<div class="ordered-table-item-title"><%= title %></div>

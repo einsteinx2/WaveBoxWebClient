@@ -10,6 +10,7 @@ class SettingsView extends PageView
 		@listenToOnce @model, "change", @render
 		@model.fetch()
 	render: ->
+		console.log @model.attributes
 		table = new OrderedTableView items: @model.get("folderArtNames")
 		$page = SettingsView.__super__.render
 			leftAccessory: "sprite-menu"
