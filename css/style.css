@@ -439,6 +439,7 @@ input:focus {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	padding: 15px 15px 0 15px;
+	margin-bottom: 15px;
 }
 
 .mediaPage header ul {
@@ -640,6 +641,34 @@ input:focus {
 	position: absolute;
 }
 
+/* Ordered table */
+.ordered-table {
+	padding: 15px;
+}
+
+.ordered-table-item-title {
+	height: 21px;
+	font-weight: 400;
+	padding-top: 4px;
+	font-size: 16px;
+	float: left;
+}
+
+.ordered-table-item-image {
+	float: right;
+}
+
+.ordered-table-item-input {
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	padding: 5px 0;
+	font-family: "Helvetica";
+	font-size: 16px;
+	font-weight: 300;
+}
+
+/* Server search */
 .server-search-container {
 	position: absolute;
 	top: 0;
@@ -653,6 +682,16 @@ input:focus {
 	opacity: 0;
 	-webkit-transition: opacity .2s ease-in-out;
 	color: #fff;
+}
+
+.server-search-results-section-header {
+	border-top: 1px solid rgba(255, 255, 255, .7);
+	border-bottom: 1px solid rgba(255, 255, 255, .7);
+	padding: 3px 5px;
+	margin-bottom: 5px;
+	background-color: rgba(255, 255, 255, .3);
+	font-size: .75em;
+	font-weight: 500;
 }
 
 .server-search-results a:link, .server-search-results a:visited, .server-search-results a:active {
@@ -828,6 +867,16 @@ input:focus {
 	width: 100px;
 }
 
+.sprite-tiny {
+	width: 25px;
+	height: 25px;
+	background-size: 200px 450px;
+}
+
+.sprite-check-mark {
+	cursor: pointer;
+}
+
 .sprite-logo-colored {
 	background-position: -50px -50px;
 }
@@ -897,6 +946,15 @@ input:focus {
 
 .sprite-plus {
 	background-position: -150px -200px;
+}
+
+.sprite-plus-tiny {
+	cursor: pointer;
+	background-position: -75px -100px;
+}
+
+.sprite-minus-tiny {
+	cursor: pointer;
 }
 
 .sprite-pencil {

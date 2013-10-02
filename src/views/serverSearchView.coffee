@@ -32,8 +32,9 @@ class ServerSearchView extends Backbone.View
 				else
 					if not @visible
 						@trigger("serverSearchResultsToggle")
+
 					view = new ServerSearchResultsSectionView
-						title: key
+						type: key
 						collection: value[key]
 					@$results.append(view.render().el)
 		else if @visible

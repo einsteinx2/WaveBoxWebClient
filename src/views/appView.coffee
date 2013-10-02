@@ -43,4 +43,4 @@ module.exports = Backbone.View.extend
 
 	render: ->
 		@panels.render().el
-	
+
