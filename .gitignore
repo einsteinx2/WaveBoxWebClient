@@ -1,7 +1,5 @@
 node_modules
-script/wavebox.js
 script/pagebehavior.js
 .lib
 *.swp
 *.swo
-node_modules
