@@ -5,28 +5,29 @@ Folders = require '../collections/folderlist'
 
 class Genre extends Backbone.Model
 	defaults:
-		GenreId: null
-		GenreName: null
-		Folders: null
-		Artists: null
-		Albums: null
-		Tracks: null
+		genreId: null
+		genreName: null
+		folders: null
+		artists: null
+		albums: null
+		tracks: null
 
 	initialize: (attributes, options) ->
 		if options.genreId?
-			@set "GenreId", options.genreId
+			@set "genreId", options.genreId
 			@set "id", options.genreId
 		@fetched = no
 		@on "request", =>
 			@fetched = yes
 
 	url: ->
-		"/api/genres/#{@get("GenreId")}"
+		"/api/genres/#{@get("genreId")}"
 	pageUrl: ->
-		"/genres/#{@get("GenreId")}"
+		"/genres/#{@get("genreId")}"
 
 	coverViewFields: ->
-		return title: @get "GenreName", artId: null
+		title: @get "genreName"
+		artId: null
 
 	parse: (response, options) ->
 		hash = {}

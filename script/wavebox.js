@@ -782,18 +782,18 @@ Genre = (function(_super) {
   }
 
   Genre.prototype.defaults = {
-    GenreId: null,
-    GenreName: null,
-    Folders: null,
-    Artists: null,
-    Albums: null,
-    Tracks: null
+    genreId: null,
+    genreName: null,
+    folders: null,
+    artists: null,
+    albums: null,
+    tracks: null
   };
 
   Genre.prototype.initialize = function(attributes, options) {
     var _this = this;
     if (options.genreId != null) {
-      this.set("GenreId", options.genreId);
+      this.set("genreId", options.genreId);
       this.set("id", options.genreId);
     }
     this.fetched = false;
@@ -803,18 +803,17 @@ Genre = (function(_super) {
   };
 
   Genre.prototype.url = function() {
-    return "/api/genres/" + (this.get("GenreId"));
+    return "/api/genres/" + (this.get("genreId"));
   };
 
   Genre.prototype.pageUrl = function() {
-    return "/genres/" + (this.get("GenreId"));
+    return "/genres/" + (this.get("genreId"));
   };
 
   Genre.prototype.coverViewFields = function() {
     return {
-      title: this.get("GenreName", {
-        artId: null
-      })
+      title: this.get("genreName"),
+      artId: null
     };
   };
 
